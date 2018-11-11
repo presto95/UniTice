@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B6470219728CC005E5CE6 /* AppDelegate.swift */; };
-		191B6473219728CC005E5CE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B6472219728CC005E5CE6 /* ViewController.swift */; };
+		191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B6472219728CC005E5CE6 /* MainViewController.swift */; };
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
+		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
+		19C6BBBC2197F8D4002FC39C /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* School.swift */; };
+		BFED3BDCD5CFF8AE0204194A /* Pods_SchoolNoticeNotifier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6C0B2F6AAA84FF3E410F34 /* Pods_SchoolNoticeNotifier.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		089357ABA2BA0DDD96EADD67 /* Pods-SchoolNoticeNotifier.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolNoticeNotifier.debug.xcconfig"; path = "Target Support Files/Pods-SchoolNoticeNotifier/Pods-SchoolNoticeNotifier.debug.xcconfig"; sourceTree = "<group>"; };
 		191B646D219728CC005E5CE6 /* SchoolNoticeNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolNoticeNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191B6470219728CC005E5CE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		191B6472219728CC005E5CE6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		191B6472219728CC005E5CE6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		191B6475219728CC005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		191B6477219728CD005E5CE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		19C6BBBB2197F8D4002FC39C /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
+		3A6C0B2F6AAA84FF3E410F34 /* Pods_SchoolNoticeNotifier.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SchoolNoticeNotifier.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F426E474B061444034E34869 /* Pods-SchoolNoticeNotifier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolNoticeNotifier.release.xcconfig"; path = "Target Support Files/Pods-SchoolNoticeNotifier/Pods-SchoolNoticeNotifier.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFED3BDCD5CFF8AE0204194A /* Pods_SchoolNoticeNotifier.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +49,8 @@
 			children = (
 				191B646F219728CC005E5CE6 /* SchoolNoticeNotifier */,
 				191B646E219728CC005E5CE6 /* Products */,
+				CCA741B89CEFB0D6DF343890 /* Pods */,
+				D28A8B54E183E327858CCF1C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +65,49 @@
 		191B646F219728CC005E5CE6 /* SchoolNoticeNotifier */ = {
 			isa = PBXGroup;
 			children = (
-				191B6470219728CC005E5CE6 /* AppDelegate.swift */,
-				191B6472219728CC005E5CE6 /* ViewController.swift */,
-				191B6474219728CC005E5CE6 /* Main.storyboard */,
-				191B6477219728CD005E5CE6 /* Assets.xcassets */,
-				191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */,
+				19C6BBBA2197F8C6002FC39C /* Model */,
 				191B647C219728CD005E5CE6 /* Info.plist */,
+				191B6474219728CC005E5CE6 /* Main.storyboard */,
+				191B6472219728CC005E5CE6 /* MainViewController.swift */,
+				196499A32197F1F500BEE6C1 /* Supporting Files */,
 			);
 			path = SchoolNoticeNotifier;
+			sourceTree = "<group>";
+		};
+		196499A32197F1F500BEE6C1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */,
+				191B6470219728CC005E5CE6 /* AppDelegate.swift */,
+				191B6477219728CD005E5CE6 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19C6BBBA2197F8C6002FC39C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19C6BBBB2197F8D4002FC39C /* School.swift */,
+				19AF276521983127009488C8 /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CCA741B89CEFB0D6DF343890 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				089357ABA2BA0DDD96EADD67 /* Pods-SchoolNoticeNotifier.debug.xcconfig */,
+				F426E474B061444034E34869 /* Pods-SchoolNoticeNotifier.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D28A8B54E183E327858CCF1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A6C0B2F6AAA84FF3E410F34 /* Pods_SchoolNoticeNotifier.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +117,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 191B647F219728CD005E5CE6 /* Build configuration list for PBXNativeTarget "SchoolNoticeNotifier" */;
 			buildPhases = (
+				3CA93D7283319873BB24B1FE /* [CP] Check Pods Manifest.lock */,
 				191B6469219728CC005E5CE6 /* Sources */,
 				191B646A219728CC005E5CE6 /* Frameworks */,
 				191B646B219728CC005E5CE6 /* Resources */,
+				CB26F57C235BA60185148622 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,13 +178,72 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3CA93D7283319873BB24B1FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SchoolNoticeNotifier-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB26F57C235BA60185148622 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SchoolNoticeNotifier/Pods-SchoolNoticeNotifier-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SchoolNoticeNotifier/Pods-SchoolNoticeNotifier-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		191B6469219728CC005E5CE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				191B6473219728CC005E5CE6 /* ViewController.swift in Sources */,
+				191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */,
+				19C6BBBC2197F8D4002FC39C /* School.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
+				19AF276621983127009488C8 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,12 +387,13 @@
 		};
 		191B6480219728CD005E5CE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 089357ABA2BA0DDD96EADD67 /* Pods-SchoolNoticeNotifier.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = SchoolNoticeNotifier/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,12 +407,13 @@
 		};
 		191B6481219728CD005E5CE6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F426E474B061444034E34869 /* Pods-SchoolNoticeNotifier.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = SchoolNoticeNotifier/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

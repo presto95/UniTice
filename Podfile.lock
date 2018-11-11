@@ -1,0 +1,42 @@
+PODS:
+  - Alamofire (4.7.3)
+  - Kanna (4.0.2)
+  - MarqueeLabel/Swift (3.2.0)
+  - Realm (3.11.0):
+    - Realm/Headers (= 3.11.0)
+  - Realm/Headers (3.11.0)
+  - RealmSwift (3.11.0):
+    - Realm (= 3.11.0)
+  - SVProgressHUD (2.2.5)
+  - SwiftLint (0.27.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7)
+  - Kanna (~> 4.0.0)
+  - MarqueeLabel/Swift
+  - RealmSwift
+  - SVProgressHUD
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Kanna
+    - MarqueeLabel
+    - Realm
+    - RealmSwift
+    - SVProgressHUD
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Kanna: c60b61d72554bf04ed1ee074f9b379855cab4892
+  MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
+  Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
+  RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+
+PODFILE CHECKSUM: 8cedb824a33bf55bd83debb7a5bffb2d858ea544
+
+COCOAPODS: 1.6.0.beta.1
