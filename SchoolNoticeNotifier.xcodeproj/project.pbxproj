@@ -13,6 +13,7 @@
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
+		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
 		19C6BBBC2197F8D4002FC39C /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* School.swift */; };
 		BFED3BDCD5CFF8AE0204194A /* Pods_SchoolNoticeNotifier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6C0B2F6AAA84FF3E410F34 /* Pods_SchoolNoticeNotifier.framework */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		19C6BBBB2197F8D4002FC39C /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
 		3A6C0B2F6AAA84FF3E410F34 /* Pods_SchoolNoticeNotifier.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SchoolNoticeNotifier.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F426E474B061444034E34869 /* Pods-SchoolNoticeNotifier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolNoticeNotifier.release.xcconfig"; path = "Target Support Files/Pods-SchoolNoticeNotifier/Pods-SchoolNoticeNotifier.release.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		191B6464219728CC005E5CE6 = {
 			isa = PBXGroup;
 			children = (
+				19AF276821983A85009488C8 /* .swiftlint.yml */,
 				191B646F219728CC005E5CE6 /* SchoolNoticeNotifier */,
 				191B646E219728CC005E5CE6 /* Products */,
 				CCA741B89CEFB0D6DF343890 /* Pods */,
@@ -122,6 +125,7 @@
 				191B646A219728CC005E5CE6 /* Frameworks */,
 				191B646B219728CC005E5CE6 /* Resources */,
 				CB26F57C235BA60185148622 /* [CP] Embed Pods Frameworks */,
+				19AF276721983822009488C8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -170,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19AF276921983A85009488C8 /* .swiftlint.yml in Resources */,
 				191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */,
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
@@ -179,6 +184,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19AF276721983822009488C8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		3CA93D7283319873BB24B1FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
