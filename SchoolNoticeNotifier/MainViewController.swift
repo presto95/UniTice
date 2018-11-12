@@ -15,16 +15,28 @@ import SVProgressHUD
 class MainViewController: UIViewController {
 
     var posts: [Post] = []
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
+        return control
+    }()
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.show()
-        kanna()
+        kannaTest()
     }
     
-    func kanna() {
+    @objc func didRefreshControlActivate(_ sender: UIRefreshControl) {
+        posts.removeAll()
+        kannaTest()
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
+    func kannaTest() {
+        SVProgressHUD.show()
         guard let url = URL(string: "http://www.seoultech.ac.kr/service/info/notice/?bidx=4691&bnum=4691&allboard=false&page=\(1)&size=9&searchtype=1&searchtext=") else { return }
         guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
         // 글번호 / 타이틀 / 빈칸 / 조회수 / 날짜 / 작성자
@@ -39,7 +51,7 @@ class MainViewController: UIViewController {
             let title = rows[titleIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
             let date = rows[dateIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
             let link = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-            let post = Post(number: number, title: title, date: date, link: link)
+            let post = Post(number: number, type: "", title: title, date: date, link: link)
             posts.append(post)
         }
         tableView.reloadData()
@@ -80,6 +92,7 @@ extension MainViewController: UITableViewDelegate {
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
         let viewController = SFSafariViewController(url: url, configuration: config)
+        viewController.dismissButtonStyle = .close
         present(viewController, animated: true, completion: nil)        
     }
 }

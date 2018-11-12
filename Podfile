@@ -10,6 +10,13 @@ target 'SchoolNoticeNotifier' do
   pod 'SwiftLint'
   pod 'MarqueeLabel/Swift'
   pod 'SVProgressHUD'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Carte'
   # Pods for SchoolNoticeNotifier
 
+post_install do |installer|
+  pods_dir = File.dirname(installer.pods_project.path)
+  at_exit { `ruby /Users/presto/Xcode/SchoolNoticeNotifier/Pods/Carte/Sources/Carte/carte.rb configure` }
+end
 end

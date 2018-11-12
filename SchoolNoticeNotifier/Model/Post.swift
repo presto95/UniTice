@@ -8,6 +8,7 @@
 
 struct Post: CustomStringConvertible {
     let number: Int
+    let category: String
     let title: String
     let date: String
     let link: String
@@ -15,6 +16,7 @@ struct Post: CustomStringConvertible {
         return """
         -----
         글번호 : \(number)
+        카테고리 : \(category)
         제목 : \(title)
         날짜 : \(date)
         링크 : \(link)
