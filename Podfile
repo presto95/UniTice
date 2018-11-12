@@ -13,6 +13,7 @@ target 'SchoolNoticeNotifier' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Carte'
+  pod 'SnapKit', '~> 4.0.0'
   # Pods for SchoolNoticeNotifier
 
 post_install do |installer|

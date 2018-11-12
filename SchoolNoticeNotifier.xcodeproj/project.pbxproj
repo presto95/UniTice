@@ -12,6 +12,7 @@
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
+		1983A9FB2199A7850075252E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1983A9FA2199A7850075252E /* GoogleService-Info.plist */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
 		19C6BBBC2197F8D4002FC39C /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* School.swift */; };
@@ -27,6 +28,7 @@
 		191B6477219728CD005E5CE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1983A9FA2199A7850075252E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		19AF276A21990874009488C8 /* SchoolNoticeNotifier.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SchoolNoticeNotifier.entitlements; sourceTree = "<group>"; };
@@ -69,9 +71,10 @@
 		191B646F219728CC005E5CE6 /* SchoolNoticeNotifier */ = {
 			isa = PBXGroup;
 			children = (
+				191B647C219728CD005E5CE6 /* Info.plist */,
+				1983A9FA2199A7850075252E /* GoogleService-Info.plist */,
 				19AF276A21990874009488C8 /* SchoolNoticeNotifier.entitlements */,
 				19C6BBBA2197F8C6002FC39C /* Model */,
-				191B647C219728CD005E5CE6 /* Info.plist */,
 				191B6474219728CC005E5CE6 /* Main.storyboard */,
 				191B6472219728CC005E5CE6 /* MainViewController.swift */,
 				196499A32197F1F500BEE6C1 /* Supporting Files */,
@@ -151,6 +154,9 @@
 					191B646C219728CC005E5CE6 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -183,6 +189,7 @@
 			files = (
 				19AF276921983A85009488C8 /* .swiftlint.yml in Resources */,
 				191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */,
+				1983A9FB2199A7850075252E /* GoogleService-Info.plist in Resources */,
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 			);
@@ -248,6 +255,7 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -263,6 +271,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

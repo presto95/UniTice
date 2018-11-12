@@ -67,6 +67,7 @@ PODS:
   - Realm/Headers (3.11.0)
   - RealmSwift (3.11.0):
     - Realm (= 3.11.0)
+  - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.27.0)
 
@@ -78,6 +79,7 @@ DEPENDENCIES:
   - Kanna (~> 4.0.0)
   - MarqueeLabel/Swift
   - RealmSwift
+  - SnapKit (~> 4.0.0)
   - SVProgressHUD
   - SwiftLint
 
@@ -98,6 +100,7 @@ SPEC REPOS:
     - Protobuf
     - Realm
     - RealmSwift
+    - SnapKit
     - SVProgressHUD
     - SwiftLint
 
@@ -117,9 +120,10 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 6a12e6843ab6944abae4490682c6400a752cba58
+PODFILE CHECKSUM: 86d0d69137f4fdca99b96435f5bc72e6890c41ce
 
 COCOAPODS: 1.6.0.beta.1
