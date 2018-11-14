@@ -156,4 +156,5 @@ iOSInjectionProject/
 *.p12
 *.certSigningRequest
 *.cer
+GoogleService-Info.plist
 # End of https://www.gitignore.io/api/swift,xcode,cocoapods
