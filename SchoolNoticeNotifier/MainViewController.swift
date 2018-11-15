@@ -20,11 +20,20 @@ class MainViewController: UIViewController {
         control.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
         return control
     }()
-    @IBOutlet weak var searchBar: UISearchBar!
+    lazy var searchController: UISearchController? = {
+        guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultTableViewController") as? SearchResultTableViewController else { return nil }
+        let searchController = UISearchController(searchResultsController: searchResultController)
+        searchController.delegate = self
+        searchController.searchResultsUpdater = searchResultController
+        return searchController
+    }()
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "서울과학기술대학교"
+        //searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
         kannaTest()
     }
     
@@ -57,10 +66,8 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-    }
+extension MainViewController: UISearchControllerDelegate {
+    
 }
 
 extension MainViewController: UITableViewDataSource {
