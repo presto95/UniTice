@@ -10,6 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Bookmark View Controller-->
+        <scene sceneID="Mbe-k2-JEg">
+            <objects>
+                <viewController storyboardIdentifier="BookmarkViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JR4-4h-2fV" customClass="BookmarkViewController" customModule="SchoolNoticeNotifier" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EEW-ns-y2c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="2oc-eg-r4v"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pDD-90-fmF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3727" y="-548"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -63,7 +78,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="2Xg-Ya-eGW">
-                        <barButtonItem key="rightBarButtonItem" title="나" id="jiM-v9-mS9"/>
+                        <barButtonItem key="leftBarButtonItem" title="북마크" id="fPd-wX-0KY">
+                            <connections>
+                                <segue destination="JR4-4h-2fV" kind="show" id="069-K5-AM3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="설정" id="jiM-v9-mS9">
+                            <connections>
+                                <segue destination="RzL-mM-dxY" kind="show" id="aeM-nh-Jyg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ilf-a8-9zZ" id="9kA-l3-HqE"/>
@@ -72,6 +96,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3727.1999999999998" y="133.00492610837438"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="vgf-PI-jlH">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RzL-mM-dxY" customClass="SettingViewController" customModule="SchoolNoticeNotifier" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GiE-Ip-MEF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="KEh-H9-EIt"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pw0-sl-MNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3727" y="836"/>
         </scene>
         <!--Search Result Table View Controller-->
         <scene sceneID="fa4-Zq-DhH">
@@ -99,7 +138,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXf-m7-e0S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4626" y="133"/>
+            <point key="canvasLocation" x="4545" y="133"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ScS-y6-SQZ">

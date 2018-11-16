@@ -13,6 +13,8 @@
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
 		194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */; };
+		194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */; };
+		194BF41C219DBF7600FA6124 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41B219DBF7600FA6124 /* SettingViewController.swift */; };
 		1983A9FB2199A7850075252E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1983A9FA2199A7850075252E /* GoogleService-Info.plist */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
@@ -30,6 +32,8 @@
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
+		194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		194BF41B219DBF7600FA6124 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		1983A9FA2199A7850075252E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 			children = (
 				191B6472219728CC005E5CE6 /* MainViewController.swift */,
 				194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */,
+				194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */,
+				194BF41B219DBF7600FA6124 /* SettingViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -311,6 +317,8 @@
 				19C6BBBC2197F8D4002FC39C /* School.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
 				19AF276621983127009488C8 /* Post.swift in Sources */,
+				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
+				194BF41C219DBF7600FA6124 /* SettingViewController.swift in Sources */,
 				194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
