@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.7.3)
   - Carte (2.1.6)
+  - DZNEmptyDataSet (1.8.1)
   - Firebase/Core (5.10.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.2.0)
@@ -62,33 +63,27 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.6.1)
-  - Realm (3.11.0):
-    - Realm/Headers (= 3.11.0)
-  - Realm/Headers (3.11.0)
-  - RealmSwift (3.11.0):
-    - Realm (= 3.11.0)
   - SkeletonView (1.4.1)
   - SnapKit (4.0.1)
-  - SVProgressHUD (2.2.5)
   - SwiftLint (0.27.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - Carte
+  - DZNEmptyDataSet
   - Firebase/Core
   - Firebase/Messaging
   - Kanna (~> 4.0.0)
   - MarqueeLabel/Swift
-  - RealmSwift
   - SkeletonView
   - SnapKit (~> 4.0.0)
-  - SVProgressHUD
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Carte
+    - DZNEmptyDataSet
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -100,16 +95,14 @@ SPEC REPOS:
     - MarqueeLabel
     - nanopb
     - Protobuf
-    - Realm
-    - RealmSwift
     - SkeletonView
     - SnapKit
-    - SVProgressHUD
     - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Carte: c8200bfb59b77336aa2f02e84cc4ac0fa820034d
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 6691d47562a780c26281ce8464518faafc90c610
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
   FirebaseCore: c6079de64c1a87000e52e9b408dddcadc901177f
@@ -121,13 +114,10 @@ SPEC CHECKSUMS:
   MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
-  RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 4c6deb2ae61c0dbff4289b0bcb8337732c6c6af9
+PODFILE CHECKSUM: 2a04f7c9221f449ad307ae8d19019901196b7c74
 
 COCOAPODS: 1.6.0.beta.1

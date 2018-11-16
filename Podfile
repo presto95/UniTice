@@ -4,17 +4,16 @@
 target 'SchoolNoticeNotifier' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'RealmSwift'
   pod 'Kanna', '~> 4.0.0'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftLint'
   pod 'MarqueeLabel/Swift'
-  pod 'SVProgressHUD'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Carte'
   pod 'SnapKit', '~> 4.0.0'
   pod 'SkeletonView'
+  pod 'DZNEmptyDataSet'
   # Pods for SchoolNoticeNotifier
 
 post_install do |installer|
