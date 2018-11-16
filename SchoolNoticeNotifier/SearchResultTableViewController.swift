@@ -10,7 +10,7 @@ import UIKit
 
 class SearchResultTableViewController: UITableViewController {
 
-    var results: [Any] = []
+    private var results: [Any] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

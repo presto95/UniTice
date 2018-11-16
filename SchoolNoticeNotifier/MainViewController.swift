@@ -14,37 +14,38 @@ import SVProgressHUD
 
 class MainViewController: UIViewController {
 
-    var posts: [Post] = []
-    lazy var refreshControl: UIRefreshControl = {
+    private var posts: [Post] = []
+    lazy private var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
         return control
     }()
-    lazy var searchController: UISearchController? = {
+    lazy private var searchController: UISearchController? = {
         guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultTableViewController") as? SearchResultTableViewController else { return nil }
         let searchController = UISearchController(searchResultsController: searchResultController)
         searchController.delegate = self
         searchController.searchResultsUpdater = searchResultController
         return searchController
     }()
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "서울과학기술대학교"
         //searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+        registerForPreviewing(with: self, sourceView: tableView)
         kannaTest()
     }
     
-    @objc func didRefreshControlActivate(_ sender: UIRefreshControl) {
+    @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
         posts.removeAll()
         kannaTest()
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
     
-    func kannaTest() {
+    private func kannaTest() {
         guard let url = URL(string: "http://www.seoultech.ac.kr/service/info/notice/?bidx=4691&bnum=4691&allboard=false&page=\(1)&size=9&searchtype=1&searchtext=") else { return }
         guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
         // 글번호 / 타이틀 / 빈칸 / 조회수 / 날짜 / 작성자
@@ -78,13 +79,11 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let post = posts[indexPath.row]
-        if post.number == 0 {
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        } else {
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        }
+        let weight: UIFont.Weight = post.number == 0 ? .bold : .regular
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: weight)
         cell.textLabel?.text = post.title
         cell.detailTextLabel?.text = post.date
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 13, weight: .light)
         return cell
     }
 }
@@ -99,5 +98,41 @@ extension MainViewController: UITableViewDelegate {
         let viewController = SFSafariViewController(url: url, configuration: config)
         viewController.dismissButtonStyle = .close
         present(viewController, animated: true, completion: nil)        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "북마크") { action, view, isPerformed in
+            print("북마크")
+        }
+        let config = UISwipeActionsConfiguration(actions: [action])
+        return config
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let config = UISwipeActionsConfiguration(actions: [])
+        return config
+    }
+}
+
+extension MainViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            let link = posts[indexPath.row].link
+            guard let url = URL(string: "http://www.seoultech.ac.kr/service/info/notice\(link)") else { return nil }
+            let config = SFSafariViewController.Configuration()
+            config.barCollapsingEnabled = true
+            let viewController = SFSafariViewController(url: url, configuration: config)
+            viewController.dismissButtonStyle = .close
+            return viewController
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        present(viewControllerToCommit, animated: true, completion: nil)
     }
 }
