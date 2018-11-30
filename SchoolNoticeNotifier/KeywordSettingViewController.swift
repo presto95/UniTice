@@ -1,4 +1,4 @@
-    //
+//
 //  KeywordSettingViewController.swift
 //  SchoolNoticeNotifier
 //
@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import DZNEmptyDataSet
 
 class KeywordSettingViewController: UIViewController {
 
@@ -18,17 +19,18 @@ class KeywordSettingViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.emptyDataSetSource = self
         return tableView
     }()
-    lazy var editButton: UIBarButtonItem! = {
-        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(touchUpEditButton(_:)))
+    lazy var addButton: UIBarButtonItem! = {
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(touchUpAddButton(_:)))
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "키워드 설정"
-        navigationItem.setRightBarButton(editButton, animated: false)
+        navigationItem.setRightBarButton(addButton, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,8 +40,26 @@ class KeywordSettingViewController: UIViewController {
         }
     }
     
-    @objc func touchUpEditButton(_ sender: UIBarButtonItem) {
-        tableView.setEditing(!tableView.isEditing, animated: true)
+    @objc func touchUpAddButton(_ sender: UIBarButtonItem) {
+        if keywords.count >= 3 {
+            UIAlertController
+                .alert(title: "", message: "no more 3 keywords")
+                .action(title: "확인")
+                .present(to: self)
+        } else {
+            let alert = UIAlertController(title: "", message: "keyword", preferredStyle: .alert)
+            alert.addTextField { _ in }
+            let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+                if let text = alert.textFields?.first?.text {
+                    self.keywords.insert(text, at: 0)
+                    self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
+                }
+            }
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -62,5 +82,24 @@ extension KeywordSettingViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "삭제") { _, _, _ in
+            self.keywords.remove(at: indexPath.row)
+            if self.keywords.count == 0 {
+                tableView.reloadData()
+            } else {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        let config = UISwipeActionsConfiguration(actions: [action])
+        return config
+    }
+}
+
+extension KeywordSettingViewController: DZNEmptyDataSetSource {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "Add Keywords")
     }
 }

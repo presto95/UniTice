@@ -15,7 +15,6 @@ class ChangeSchoolViewController: UIViewController {
     lazy private var pickerView: UIPickerView! = {
         let pickerView = UIPickerView()
         view.addSubview(pickerView)
-        pickerView.showsSelectionIndicator = false
         pickerView.delegate = self
         return pickerView
     }()
@@ -35,17 +34,22 @@ class ChangeSchoolViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         pickerView.snp.makeConstraints { maker in
             maker.height.equalTo(300)
-            maker.leading.equalTo(view.snp.leading).offset(16)
-            maker.trailing.equalTo(view.snp.trailing).offset(-16)
+            maker.leading.equalTo(view.snp.leading)
+            maker.trailing.equalTo(view.snp.trailing)
             maker.center.equalTo(view.snp.center)
+        }
+        button.snp.makeConstraints { maker in
+            maker.height.equalTo(50)
+            maker.centerX.equalToSuperview()
+            maker.top.equalTo(pickerView.snp.bottom).offset(32)
         }
     }
     
     @objc func touchUpButton(_ sender: UIButton) {
-        
+        // 학교 변경
+        navigationController?.popViewController(animated: true)
     }
 }
 

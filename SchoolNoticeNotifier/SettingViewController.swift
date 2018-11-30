@@ -8,10 +8,11 @@
 
 import UIKit
 import Carte
+import MessageUI
 
 class SettingViewController: UIViewController {
 
-    let cellTitles = [["학교 변경", "키워드 설정"], ["오픈소스 라이센스"]]
+    let cellTitles = [["학교 변경", "키워드 설정"], ["문의하기", "리뷰 작성하기"], ["오픈소스 라이센스"]]
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -33,6 +34,8 @@ extension SettingViewController: UITableViewDataSource {
         case 0:
             return 2
         case 1:
+            return 2
+        case 2:
             return 1
         default:
             return 0
@@ -40,7 +43,7 @@ extension SettingViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 }
 
@@ -56,14 +59,30 @@ extension SettingViewController: UITableViewDelegate {
             let next = KeywordSettingViewController()
             navigationController?.pushViewController(next, animated: true)
         case 1 where row == 0:
+            if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self
+                mail.setToRecipients(["yoohan95@gmail.com"])
+                present(mail, animated: true)
+            }
+        case 1 where row == 1:
+            break
+        case 2 where row == 0:
             let controller: CarteViewController = {
                 let controller = CarteViewController(style: .plain)
                 controller.items.sort { $0.name < $1.name }
                 return controller
             }()
+            print(Carte.items)
             navigationController?.pushViewController(controller, animated: true)
         default:
             break
         }
+    }
+}
+
+extension SettingViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }
