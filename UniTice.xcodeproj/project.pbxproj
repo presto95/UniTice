@@ -12,6 +12,7 @@
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
+		193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */; };
 		194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */; };
 		194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */; };
 		194BF41C219DBF7600FA6124 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41B219DBF7600FA6124 /* SettingViewController.swift */; };
@@ -35,6 +36,7 @@
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		193005E821B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		193005E921B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		194BF41B219DBF7600FA6124 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				191B647C219728CD005E5CE6 /* Info.plist */,
+				193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */,
 				19AF276A21990874009488C8 /* UniTice.entitlements */,
 				194BF44E219F069700FA6124 /* Core Data */,
 				19C6BBBA2197F8C6002FC39C /* Model */,
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */,
 				19AF276921983A85009488C8 /* .swiftlint.yml in Resources */,
 				191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */,
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
