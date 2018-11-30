@@ -1,4 +1,4 @@
-# SchoolNoticeNotifier
+# UniTice
 
 **대학교 공지사항 알리미**
 
