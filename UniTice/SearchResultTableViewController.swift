@@ -55,6 +55,7 @@ extension SearchResultTableViewController {
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "북마크") { action, view, isPerformed in
+            // 저장
             print("북마크")
         }
         action.backgroundColor = .orange

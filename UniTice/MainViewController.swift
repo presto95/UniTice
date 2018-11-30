@@ -15,12 +15,14 @@ import SkeletonView
 class MainViewController: UIViewController {
 
     private var posts: [Post] = []
-    lazy private var refreshControl: UIRefreshControl = {
+    
+    private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
         return control
     }()
-    lazy private var searchController: UISearchController? = {
+    
+    private lazy var searchController: UISearchController? = {
         guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultTableViewController") as? SearchResultTableViewController else { return nil }
         let searchController = UISearchController(searchResultsController: searchResultController)
         searchController.searchBar.placeholder = "검색"
@@ -28,6 +30,7 @@ class MainViewController: UIViewController {
         definesPresentationContext = true
         return searchController
     }()
+    
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -123,6 +126,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "북마크") { action, view, isPerformed in
+            // 저장
             print("북마크")
         }
         action.backgroundColor = .orange

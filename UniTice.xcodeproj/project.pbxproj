@@ -13,9 +13,9 @@
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
 		193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */; };
+		193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193005EC21B14658003C9DBB /* SettingTableViewController.swift */; };
 		194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */; };
 		194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */; };
-		194BF41C219DBF7600FA6124 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41B219DBF7600FA6124 /* SettingViewController.swift */; };
 		194BF41F219EA54E00FA6124 /* ChangeSchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */; };
 		194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */; };
 		194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF426219EE73200FA6124 /* UIAlertController+.swift */; };
@@ -37,9 +37,9 @@
 		193005E821B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		193005E921B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		193005EC21B14658003C9DBB /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
-		194BF41B219DBF7600FA6124 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSchoolViewController.swift; sourceTree = "<group>"; };
 		194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSettingViewController.swift; sourceTree = "<group>"; };
 		194BF426219EE73200FA6124 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 				191B6472219728CC005E5CE6 /* MainViewController.swift */,
 				194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */,
 				194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */,
-				194BF41B219DBF7600FA6124 /* SettingViewController.swift */,
+				193005EC21B14658003C9DBB /* SettingTableViewController.swift */,
 				194BF41D219EA53900FA6124 /* Setting */,
 			);
 			name = Controller;
@@ -346,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */,
 				194BF41F219EA54E00FA6124 /* ChangeSchoolViewController.swift in Sources */,
 				191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */,
 				19C6BBBC2197F8D4002FC39C /* School.swift in Sources */,
@@ -353,7 +354,6 @@
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
 				19AF276621983127009488C8 /* Post.swift in Sources */,
 				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
-				194BF41C219DBF7600FA6124 /* SettingViewController.swift in Sources */,
 				194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */,
 				194BF459219F072500FA6124 /* Model.xcdatamodeld in Sources */,
 				194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */,

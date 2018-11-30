@@ -14,7 +14,10 @@ target 'UniTice' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'SkeletonView'
   pod 'DZNEmptyDataSet'
-
   # Pods for UniTice
+end
 
+post_install do |installer|
+  pods_dir = File.dirname(installer.pods_project.path)
+  at_exit { `ruby /Users/presto/Xcode/UniTice/Pods/Carte/Sources/Carte/carte.rb configure` }
 end
