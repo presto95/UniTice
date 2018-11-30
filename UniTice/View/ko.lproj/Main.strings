@@ -1,0 +1,24 @@
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "A4k-9j-ZuI"; */
+"A4k-9j-ZuI.title" = " ";
+
+/* Class = "UILabel"; text = "SubtitleSubtitle"; ObjectID = "LJw-n8-SIT"; */
+"LJw-n8-SIT.text" = "SubtitleSubtitle";
+
+/* Class = "UILabel"; text = "TitleTitleTitleTitleTitleTitleTitleTitleTitleTitle"; ObjectID = "UYW-OS-sVS"; */
+"UYW-OS-sVS.text" = "TitleTitleTitleTitleTitleTitleTitleTitleTitleTitle";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "X2u-JA-Moe"; */
+"X2u-JA-Moe.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "cNd-rM-1Qj"; */
+"cNd-rM-1Qj.text" = "Title";
+
+/* Class = "UIBarButtonItem"; title = "북마크"; ObjectID = "fPd-wX-0KY"; */
+"fPd-wX-0KY.title" = "북마크";
+
+/* Class = "UIBarButtonItem"; title = "설정"; ObjectID = "jiM-v9-mS9"; */
+"jiM-v9-mS9.title" = "설정";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "olS-lw-Mop"; */
+"olS-lw-Mop.text" = "Title";
