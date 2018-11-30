@@ -12,6 +12,14 @@
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
+		194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */; };
+		194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */; };
+		194BF41C219DBF7600FA6124 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41B219DBF7600FA6124 /* SettingViewController.swift */; };
+		194BF41F219EA54E00FA6124 /* ChangeSchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */; };
+		194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */; };
+		194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF426219EE73200FA6124 /* UIAlertController+.swift */; };
+		194BF459219F072500FA6124 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 194BF457219F072500FA6124 /* Model.xcdatamodeld */; };
+		1983A9FB2199A7850075252E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1983A9FA2199A7850075252E /* GoogleService-Info.plist */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
 		19C6BBBC2197F8D4002FC39C /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* School.swift */; };
@@ -27,8 +35,17 @@
 		191B6477219728CD005E5CE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
+		194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		194BF41B219DBF7600FA6124 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSchoolViewController.swift; sourceTree = "<group>"; };
+		194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSettingViewController.swift; sourceTree = "<group>"; };
+		194BF426219EE73200FA6124 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		194BF458219F072500FA6124 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		1983A9FA2199A7850075252E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		19AF276A21990874009488C8 /* SchoolNoticeNotifier.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SchoolNoticeNotifier.entitlements; sourceTree = "<group>"; };
 		19C6BBBB2197F8D4002FC39C /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
 		3A6C0B2F6AAA84FF3E410F34 /* Pods_SchoolNoticeNotifier.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SchoolNoticeNotifier.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F426E474B061444034E34869 /* Pods-SchoolNoticeNotifier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolNoticeNotifier.release.xcconfig"; path = "Target Support Files/Pods-SchoolNoticeNotifier/Pods-SchoolNoticeNotifier.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,13 +85,62 @@
 		191B646F219728CC005E5CE6 /* SchoolNoticeNotifier */ = {
 			isa = PBXGroup;
 			children = (
-				19C6BBBA2197F8C6002FC39C /* Model */,
 				191B647C219728CD005E5CE6 /* Info.plist */,
-				191B6474219728CC005E5CE6 /* Main.storyboard */,
-				191B6472219728CC005E5CE6 /* MainViewController.swift */,
+				1983A9FA2199A7850075252E /* GoogleService-Info.plist */,
+				19AF276A21990874009488C8 /* SchoolNoticeNotifier.entitlements */,
+				194BF44E219F069700FA6124 /* Core Data */,
+				19C6BBBA2197F8C6002FC39C /* Model */,
+				194BF418219D495400FA6124 /* View */,
+				194BF417219D494A00FA6124 /* Controller */,
+				194BF425219EE72400FA6124 /* Extension */,
 				196499A32197F1F500BEE6C1 /* Supporting Files */,
 			);
 			path = SchoolNoticeNotifier;
+			sourceTree = "<group>";
+		};
+		194BF417219D494A00FA6124 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				191B6472219728CC005E5CE6 /* MainViewController.swift */,
+				194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */,
+				194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */,
+				194BF41B219DBF7600FA6124 /* SettingViewController.swift */,
+				194BF41D219EA53900FA6124 /* Setting */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		194BF418219D495400FA6124 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				191B6474219728CC005E5CE6 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		194BF41D219EA53900FA6124 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */,
+				194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		194BF425219EE72400FA6124 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				194BF426219EE73200FA6124 /* UIAlertController+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		194BF44E219F069700FA6124 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				194BF457219F072500FA6124 /* Model.xcdatamodeld */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 		196499A32197F1F500BEE6C1 /* Supporting Files */ = {
@@ -148,6 +214,14 @@
 				TargetAttributes = {
 					191B646C219728CC005E5CE6 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -176,6 +250,7 @@
 			files = (
 				19AF276921983A85009488C8 /* .swiftlint.yml in Resources */,
 				191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */,
+				1983A9FB2199A7850075252E /* GoogleService-Info.plist in Resources */,
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 			);
@@ -228,27 +303,31 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SchoolNoticeNotifier/Pods-SchoolNoticeNotifier-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Carte/Carte.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Carte.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -262,10 +341,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194BF41F219EA54E00FA6124 /* ChangeSchoolViewController.swift in Sources */,
 				191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */,
 				19C6BBBC2197F8D4002FC39C /* School.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
+				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
 				19AF276621983127009488C8 /* Post.swift in Sources */,
+				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
+				194BF41C219DBF7600FA6124 /* SettingViewController.swift in Sources */,
+				194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */,
+				194BF459219F072500FA6124 /* Model.xcdatamodeld in Sources */,
+				194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -397,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -412,6 +498,7 @@
 			baseConfigurationReference = 089357ABA2BA0DDD96EADD67 /* Pods-SchoolNoticeNotifier.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SchoolNoticeNotifier/SchoolNoticeNotifier.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = SchoolNoticeNotifier/Info.plist;
@@ -420,7 +507,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = presto.SchoolNoticeNotifier;
+				PRODUCT_BUNDLE_IDENTIFIER = com.presto.SchoolNoticeNotifier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -432,6 +519,7 @@
 			baseConfigurationReference = F426E474B061444034E34869 /* Pods-SchoolNoticeNotifier.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SchoolNoticeNotifier/SchoolNoticeNotifier.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = SchoolNoticeNotifier/Info.plist;
@@ -440,7 +528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = presto.SchoolNoticeNotifier;
+				PRODUCT_BUNDLE_IDENTIFIER = com.presto.SchoolNoticeNotifier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -469,6 +557,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		194BF457219F072500FA6124 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				194BF458219F072500FA6124 /* Model.xcdatamodel */,
+			);
+			currentVersion = 194BF458219F072500FA6124 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 191B6465219728CC005E5CE6 /* Project object */;
 }
