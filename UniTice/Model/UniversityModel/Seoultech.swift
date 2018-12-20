@@ -9,7 +9,7 @@
 import Foundation
 
 struct Seoultech {
-    var category: [String : String] {
+    var category: [String: String] {
         return [
             "notice": "대학공지사항",
             "matters": "학사공지",
