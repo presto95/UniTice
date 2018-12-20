@@ -40,6 +40,17 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         registerForPreviewing(with: self, sourceView: tableView)
         kannaTest()
+        
+        // 알림 등록
+        // 노티피케이션 델리게이트는 AppDelegate에 정의됨
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
+            if isGranted {
+                print("알림 등록 허용함")
+            } else {
+                print("알림 등록 거부함")
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,22 +60,22 @@ class MainViewController: UIViewController {
          이후에는 설정 앱을 열어서 알림을 허용하도록 사용자에게 유도해야 한다
          알맞는 디자인이 있어도 좋고, 걍 스트링으로 안내해도 되고
         */
-        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-            switch settings.authorizationStatus {
-            case .authorized:
-                print("알림 허용됨")
-            case .denied:
-                print("알림 거부됨")
-                let url = URL(string: UIApplication.openSettingsURLString)!
-                DispatchQueue.main.async {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            case .notDetermined:
-                print("리퀘스트 한적 없음")
-            default:
-                break
-            }
-        }
+//        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+//            switch settings.authorizationStatus {
+//            case .authorized:
+//                print("알림 허용됨")
+//            case .denied:
+//                print("알림 거부됨")
+//                let url = URL(string: UIApplication.openSettingsURLString)!
+//                DispatchQueue.main.async {
+//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                }
+//            case .notDetermined:
+//                print("리퀘스트 한적 없음")
+//            default:
+//                break
+//            }
+//        }
         // 레이팅 요청
     }
     

@@ -10,12 +10,32 @@ import UIKit
 
 class HeaderView: UIView {
     
-    @IBOutlet private weak var keywordAddButton: UIButton! {
+    var touchUpAddButtonHandler: ((String) -> Void)?
+    
+    @IBOutlet private weak var keywordTextField: UITextField! {
         didSet {
-            keywordAddButton.imageView?.contentMode = .scaleAspectFit
-            keywordAddButton.layer.cornerRadius = keywordAddButton.bounds.height / 2
-            keywordAddButton.layer.borderWidth = 1
-            keywordAddButton.layer.borderColor = UIColor.black.cgColor
+            keywordTextField.delegate = self
         }
+    }
+    
+    @IBOutlet private weak var addButton: UIButton! {
+        didSet {
+            addButton.imageView?.contentMode = .scaleAspectFit
+            addButton.addTarget(self, action: #selector(touchUpAddButton(_:)), for: .touchUpInside)
+        }
+    }
+    
+    @objc private func touchUpAddButton(_ sender: UIButton) {
+        if let text = keywordTextField.text {
+            touchUpAddButtonHandler?(text)
+            keywordTextField.text = nil
+        }
+    }
+}
+
+extension HeaderView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

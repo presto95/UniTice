@@ -22,14 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         // 알림 권한 얻기
         UNUserNotificationCenter.current().delegate = self
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
-            if isGranted {
-                print("알림 등록 허용함")
-            } else {
-                print("알림 등록 거부함")
-            }
-        }
+//        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
+//            if isGranted {
+//                print("알림 등록 허용함")
+//            } else {
+//                print("알림 등록 거부함")
+//            }
+//        }
         // 원격 알림 등록
         application.registerForRemoteNotifications()
         // 파이어베이스 등록 토큰 접근. 메세지 델리게이트 설정
@@ -37,7 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 첫 화면 설정
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UIViewController.instantiate(from: "Start", identifier: "StartNavigationController")
+        if let result = try? persistentContainer.viewContext.fetch(User.fetchRequest()).last as? User {
+            if result?.university == nil {
+                window?.rootViewController = UIViewController.instantiate(from: "Start", identifier: "StartNavigationController")
+            } else {
+                window?.rootViewController = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
+            }
+        }
         window?.makeKeyAndVisible()
         return true
     }
@@ -92,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        let container = NSPersistentContainer(name: "fasd")
+        let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

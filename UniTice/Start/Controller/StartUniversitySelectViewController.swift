@@ -12,28 +12,38 @@ class StartUniversitySelectViewController: UIViewController {
 
     private let universities = University.allCases
     
-    @IBOutlet weak var pickerView: UIPickerView! {
+    @IBOutlet private weak var pickerView: UIPickerView! {
         didSet {
             pickerView.delegate = self
             pickerView.dataSource = self
         }
     }
     
-    @IBOutlet weak var confirmButton: StartConfirmButton! {
+    @IBOutlet private weak var noneButton: UIButton! {
+        didSet {
+            noneButton.addTarget(self, action: #selector(touchUpNoneButton(_:)), for: .touchUpInside)
+        }
+    }
+    
+    @IBOutlet private weak var confirmButton: StartConfirmButton! {
         didSet {
             confirmButton.addTarget(self, action: #selector(touchUpConfirmButton(_:)), for: .touchUpInside)
         }
     }
     
-    @IBOutlet weak var backButton: StartBackButton! {
+    @IBOutlet private weak var backButton: StartBackButton! {
         didSet {
             backButton.addTarget(self, action: #selector(touchUpBackButton(_:)), for: .touchUpInside)
         }
     }
     
+    @objc private func touchUpNoneButton(_ sender: UIButton) {
+        // 공식계정으로 메일 보내게끔 해서 학교 수요 알아볼수도?
+    }
+    
     @objc private func touchUpConfirmButton(_ sender: UIButton) {
         let universityIndex = pickerView.selectedRow(inComponent: 0)
-        print(universityIndex, universities[universityIndex])
+        StartInfo.shared.university = universities[universityIndex]
         let next = UIViewController.instantiate(from: "Start", identifier: StartKeywordRegisterViewController.classNameToString)
         navigationController?.pushViewController(next, animated: true)
     }

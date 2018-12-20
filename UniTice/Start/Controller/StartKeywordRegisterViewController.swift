@@ -11,7 +11,7 @@ import SnapKit
 
 class StartKeywordRegisterViewController: UIViewController {
 
-    private var keywords: [String] = ["학점", "장학", "철회"]
+    private var keywords: [String] = []
     
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -32,7 +32,17 @@ class StartKeywordRegisterViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchUpSuperView(_:))))
+    }
+    
+    @objc private func touchUpSuperView(_ recognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     @objc private func touchUpConfirmButton(_ sender: UIButton) {
+        StartInfo.shared.keywords = keywords
         let next = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
         navigationController?.pushViewController(next, animated: true)
     }
@@ -56,7 +66,18 @@ extension StartKeywordRegisterViewController: UITableViewDataSource {
 
 extension StartKeywordRegisterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.instantiate(fromXib: "HeaderView")
+        let headerView = UIView.instantiate(fromXib: "HeaderView") as? HeaderView
+        headerView?.touchUpAddButtonHandler = { text in
+            if self.keywords.count < 3 {
+                self.keywords.insert(text, at: 0)
+                tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            } else {
+                UIAlertController
+                    .alert(title: "", message: "최대 3개까지 등록 가능합니다.")
+                    .action(title: "확인")
+                    .present(to: self)
+            }
+        }
         return headerView
     }
     

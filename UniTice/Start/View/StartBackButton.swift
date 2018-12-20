@@ -25,7 +25,7 @@ class StartBackButton: UIButton {
         layer.cornerRadius = bounds.height / 2
         layer.borderWidth = 1
         layer.borderColor = UIColor.red.cgColor
-        titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .light)
         setTitle("뒤로", for: [])
         setTitleColor(.red, for: [])
     }
