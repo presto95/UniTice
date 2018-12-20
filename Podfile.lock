@@ -67,7 +67,7 @@ PODS:
   - Protobuf (3.6.1)
   - SkeletonView (1.4.1)
   - SnapKit (4.0.1)
-  - SwiftLint (0.28.2)
+  - Then (2.4.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
@@ -79,7 +79,7 @@ DEPENDENCIES:
   - MarqueeLabel/Swift
   - SkeletonView
   - SnapKit (~> 4.0.0)
-  - SwiftLint
+  - Then
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -100,7 +100,7 @@ SPEC REPOS:
     - Protobuf
     - SkeletonView
     - SnapKit
-    - SwiftLint
+    - Then
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -120,8 +120,8 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
-  SwiftLint: f1629ae733b64e9cad20052de01d1debd5b640e7
+  Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: 5bb175bb237a8ba4273088e332d50bef1b58b9f9
+PODFILE CHECKSUM: 57c03457b1d97eb942db1a0b14c97d95395d1fef
 
 COCOAPODS: 1.6.0.beta.1

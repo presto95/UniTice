@@ -11,7 +11,7 @@ import SnapKit
 
 class ChangeSchoolViewController: UIViewController {
     
-    private var schools = School.allCases
+    private var schools = University.allCases
     lazy private var pickerView: UIPickerView! = {
         let pickerView = UIPickerView()
         view.addSubview(pickerView)

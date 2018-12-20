@@ -23,7 +23,20 @@
 		194BF459219F072500FA6124 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 194BF457219F072500FA6124 /* Model.xcdatamodeld */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
-		19C6BBBC2197F8D4002FC39C /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* School.swift */; };
+		19C6BBBC2197F8D4002FC39C /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* University.swift */; };
+		19ED806F21CA5FA000BA6529 /* Seoultech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED806E21CA5FA000BA6529 /* Seoultech.swift */; };
+		19ED807321CA63C200BA6529 /* StartMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807221CA63C200BA6529 /* StartMainViewController.swift */; };
+		19ED807521CA63CB00BA6529 /* StartUniversitySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */; };
+		19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */; };
+		19ED807921CA63DC00BA6529 /* StartFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */; };
+		19ED807B21CB63E600BA6529 /* StartConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */; };
+		19ED807D21CB67C400BA6529 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807C21CB67C400BA6529 /* UIViewController+.swift */; };
+		19ED807F21CB6A8100BA6529 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807E21CB6A8100BA6529 /* NSObject+.swift */; };
+		19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808021CB6E9400BA6529 /* StartBackButton.swift */; };
+		19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808221CB72D800BA6529 /* KeywordCell.swift */; };
+		19ED808721CB78B700BA6529 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19ED808621CB78B700BA6529 /* HeaderView.xib */; };
+		19ED808921CB7C7600BA6529 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808821CB7C7600BA6529 /* UIView+.swift */; };
+		19ED808B21CB7CF400BA6529 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808A21CB7CF400BA6529 /* HeaderView.swift */; };
 		8992C80A88030DEB544A8F15 /* Pods_UniTice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72581DA59CEA8965CF3C2034 /* Pods_UniTice.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +62,20 @@
 		194BF458219F072500FA6124 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		19C6BBBB2197F8D4002FC39C /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
+		19C6BBBB2197F8D4002FC39C /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
+		19ED806E21CA5FA000BA6529 /* Seoultech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seoultech.swift; sourceTree = "<group>"; };
+		19ED807221CA63C200BA6529 /* StartMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainViewController.swift; sourceTree = "<group>"; };
+		19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUniversitySelectViewController.swift; sourceTree = "<group>"; };
+		19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordRegisterViewController.swift; sourceTree = "<group>"; };
+		19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartFinishViewController.swift; sourceTree = "<group>"; };
+		19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartConfirmButton.swift; sourceTree = "<group>"; };
+		19ED807C21CB67C400BA6529 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		19ED807E21CB6A8100BA6529 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
+		19ED808021CB6E9400BA6529 /* StartBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBackButton.swift; sourceTree = "<group>"; };
+		19ED808221CB72D800BA6529 /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
+		19ED808621CB78B700BA6529 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		19ED808821CB7C7600BA6529 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		19ED808A21CB7CF400BA6529 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		44803E144585D9995DBF0F72 /* Pods-UniTice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.release.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.release.xcconfig"; sourceTree = "<group>"; };
 		55B681C006DAD892F87CBBFF /* Pods-UniTice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.debug.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.debug.xcconfig"; sourceTree = "<group>"; };
 		72581DA59CEA8965CF3C2034 /* Pods_UniTice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniTice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +133,8 @@
 			children = (
 				191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */,
 				1930D34E21BFFCD700424FBF /* Start.storyboard */,
+				19ED808521CB786700BA6529 /* View */,
+				19ED808421CB786100BA6529 /* Controller */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -136,6 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				194BF426219EE73200FA6124 /* UIAlertController+.swift */,
+				19ED807C21CB67C400BA6529 /* UIViewController+.swift */,
+				19ED807E21CB6A8100BA6529 /* NSObject+.swift */,
+				19ED808821CB7C7600BA6529 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -153,10 +184,42 @@
 			isa = PBXGroup;
 			children = (
 				194BF457219F072500FA6124 /* Model.xcdatamodeld */,
-				19C6BBBB2197F8D4002FC39C /* School.swift */,
+				19ED806D21CA5F8E00BA6529 /* UniversityModel */,
+				19C6BBBB2197F8D4002FC39C /* University.swift */,
 				19AF276521983127009488C8 /* Post.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		19ED806D21CA5F8E00BA6529 /* UniversityModel */ = {
+			isa = PBXGroup;
+			children = (
+				19ED806E21CA5FA000BA6529 /* Seoultech.swift */,
+			);
+			path = UniversityModel;
+			sourceTree = "<group>";
+		};
+		19ED808421CB786100BA6529 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19ED807221CA63C200BA6529 /* StartMainViewController.swift */,
+				19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */,
+				19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */,
+				19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		19ED808521CB786700BA6529 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */,
+				19ED808021CB6E9400BA6529 /* StartBackButton.swift */,
+				19ED808221CB72D800BA6529 /* KeywordCell.swift */,
+				19ED808621CB78B700BA6529 /* HeaderView.xib */,
+				19ED808A21CB7CF400BA6529 /* HeaderView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		CCA741B89CEFB0D6DF343890 /* Pods */ = {
@@ -250,6 +313,7 @@
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 				1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */,
+				19ED808721CB78B700BA6529 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +335,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		220C9224912B9175145F7CE4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -291,6 +355,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -306,6 +371,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,15 +409,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */,
+				19ED807321CA63C200BA6529 /* StartMainViewController.swift in Sources */,
 				194BF41F219EA54E00FA6124 /* ChangeSchoolViewController.swift in Sources */,
 				191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */,
-				19C6BBBC2197F8D4002FC39C /* School.swift in Sources */,
+				19C6BBBC2197F8D4002FC39C /* University.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
+				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
+				19ED808921CB7C7600BA6529 /* UIView+.swift in Sources */,
+				19ED806F21CA5FA000BA6529 /* Seoultech.swift in Sources */,
 				19AF276621983127009488C8 /* Post.swift in Sources */,
+				19ED807921CA63DC00BA6529 /* StartFinishViewController.swift in Sources */,
+				19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */,
+				19ED807B21CB63E600BA6529 /* StartConfirmButton.swift in Sources */,
 				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
+				19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */,
 				194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */,
+				19ED807521CA63CB00BA6529 /* StartUniversitySelectViewController.swift in Sources */,
 				194BF459219F072500FA6124 /* Model.xcdatamodeld in Sources */,
+				19ED807F21CB6A8100BA6529 /* NSObject+.swift in Sources */,
+				19ED807D21CB67C400BA6529 /* UIViewController+.swift in Sources */,
+				19ED808B21CB7CF400BA6529 /* HeaderView.swift in Sources */,
 				194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

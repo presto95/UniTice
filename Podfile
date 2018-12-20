@@ -6,7 +6,6 @@ target 'UniTice' do
   use_frameworks!
   pod 'Kanna', '~> 4.0.0'
   pod 'Alamofire', '~> 4.7'
-  pod 'SwiftLint'
   pod 'MarqueeLabel/Swift'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
@@ -14,6 +13,8 @@ target 'UniTice' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'SkeletonView'
   pod 'DZNEmptyDataSet'
+  pod 'Then'
+  pod 'XLPagerTabStrip', '~> 8.1'
   # Pods for UniTice
 end
 

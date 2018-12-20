@@ -34,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         // 파이어베이스 등록 토큰 접근. 메세지 델리게이트 설정
         Messaging.messaging().delegate = self
+        
+        // 첫 화면 설정
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UIViewController.instantiate(from: "Start", identifier: "StartNavigationController")
+        window?.makeKeyAndVisible()
         return true
     }
     

@@ -322,7 +322,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ScS-y6-SQZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ngk-WP-tbW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ngk-WP-tbW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="XNN-4z-rD5">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
