@@ -13,8 +13,8 @@ target 'UniTice' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'SkeletonView'
   pod 'DZNEmptyDataSet'
-  pod 'Then'
   pod 'XLPagerTabStrip', '~> 8.1'
+  pod 'KeychainAccess'
   # Pods for UniTice
 end
 
