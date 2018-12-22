@@ -16,7 +16,6 @@ class SearchResultTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("result table view did load")
     }
     
     private func safariViewController(at row: Int) -> SFSafariViewController {

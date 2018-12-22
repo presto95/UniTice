@@ -14,17 +14,21 @@ class MainContentTableViewController: UITableViewController {
 
     private var posts: [Post] = []
     
-    var pageIndex: Int!
+    var categoryIndex: Int!
+    
+    var page: Int = 1
     
     var universityModel: UniversityModel!
     
     var category: (name: String, description: String) {
-        return universityModel?.categories[pageIndex] ?? ("", "")
+        return universityModel?.categories[categoryIndex] ?? ("", "")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = category.description
         registerForPreviewing(with: self, sourceView: tableView)
+        tableView.separatorStyle = .none
         tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
     }
     
@@ -34,7 +38,7 @@ class MainContentTableViewController: UITableViewController {
     }
     
     private func requestPosts() {
-        universityModel?.requestPosts(inCategory: category, inPage: 1, completion: { posts in
+        universityModel?.requestPosts(inCategory: category, inPage: page, completion: { posts in
             self.posts = posts
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -44,7 +48,7 @@ class MainContentTableViewController: UITableViewController {
     
     private func safariViewController(at row: Int) -> SFSafariViewController {
         let link = posts[row].link
-        guard let url = URL(string: universityModel.postURL(inCategory: category, link: link)) else { fatalError("wrong url format") }
+        guard let url = URL(string: universityModel.postURL(inCategory: category, link: link)) else { fatalError("invalid url format") }
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
@@ -58,9 +62,11 @@ extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
         if posts.count == 0 {
+            tableView.allowsSelection = false
             cell.textLabel?.showAnimatedGradientSkeleton()
             cell.detailTextLabel?.showAnimatedGradientSkeleton()
         } else {
+            tableView.allowsSelection = true
             cell.textLabel?.hideSkeleton()
             cell.detailTextLabel?.hideSkeleton()
             cell.detailTextLabel?.backgroundColor = .clear
@@ -82,27 +88,28 @@ extension MainContentTableViewController {
 extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        // 북마크에 저장
         present(safariViewController(at: indexPath.row), animated: true)
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "북마크") { action, view, isPerformed in
-            // 저장
-            print("북마크")
-        }
-        action.backgroundColor = .orange
-        let config = UISwipeActionsConfiguration(actions: [action])
-        config.performsFirstActionWithFullSwipe = false
-        return config
-    }
-    
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        return UISwipeActionsConfiguration(actions: [])
-    }
+//
+//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let action = UIContextualAction(style: .normal, title: "북마크") { action, view, isPerformed in
+//            // 저장
+//            print("북마크")
+//        }
+//        action.backgroundColor = .orange
+//        let config = UISwipeActionsConfiguration(actions: [action])
+//        config.performsFirstActionWithFullSwipe = false
+//        return config
+//    }
+//
+//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        return UISwipeActionsConfiguration(actions: [])
+//    }
 }
 
 extension MainContentTableViewController: UIViewControllerPreviewingDelegate {

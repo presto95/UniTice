@@ -91,7 +91,7 @@
                                 <cells/>
                             </collectionView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6S-KS-TVT">
-                                <rect key="frame" x="0.0" y="202" width="375" height="610"/>
+                                <rect key="frame" x="0.0" y="194" width="375" height="618"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -99,7 +99,7 @@
                             <constraint firstItem="Z6S-KS-TVT" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" id="FMA-3q-lNG"/>
                             <constraint firstItem="yJF-tP-xtG" firstAttribute="top" secondItem="3eh-di-0hX" secondAttribute="top" constant="8" id="GGT-MQ-b2I"/>
                             <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="Z6S-KS-TVT" secondAttribute="trailing" id="MeR-fI-0fZ"/>
-                            <constraint firstItem="Z6S-KS-TVT" firstAttribute="top" secondItem="yJF-tP-xtG" secondAttribute="bottom" constant="16" id="Rmm-de-o45"/>
+                            <constraint firstItem="Z6S-KS-TVT" firstAttribute="top" secondItem="yJF-tP-xtG" secondAttribute="bottom" constant="8" id="aBh-5t-i3L"/>
                             <constraint firstAttribute="bottom" secondItem="Z6S-KS-TVT" secondAttribute="bottom" id="lzs-aW-w8k"/>
                             <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="yJF-tP-xtG" secondAttribute="trailing" constant="16" id="oWN-cr-ZJZ"/>
                             <constraint firstItem="yJF-tP-xtG" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" constant="16" id="qsK-cv-RMf"/>
@@ -112,11 +112,14 @@
                                 <segue destination="aYK-Cs-m6d" kind="show" id="fzD-Ej-XLU"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="북마크" id="LlO-HG-yCY">
-                            <connections>
-                                <segue destination="JR4-4h-2fV" kind="show" id="qf1-9G-nV4"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="bookmarks" id="LlO-HG-yCY">
+                                <connections>
+                                    <segue destination="JR4-4h-2fV" kind="show" id="qf1-9G-nV4"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="search" id="R24-Z8-hF6"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="yJF-tP-xtG" id="gKu-aI-cje"/>
@@ -125,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="otm-8f-I5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3726" y="132"/>
+            <point key="canvasLocation" x="3725.5999999999999" y="131.52709359605913"/>
         </scene>
         <!--Setting Table View Controller-->
         <scene sceneID="5aR-DK-yuv">

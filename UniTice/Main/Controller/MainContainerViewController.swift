@@ -13,28 +13,32 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
     private var universityModel: UniversityModel = University.generateModel()
     
-    private lazy var searchController: UISearchController? = {
-        guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultTableViewController") as? SearchResultTableViewController else { return nil }
-        let searchController = UISearchController(searchResultsController: searchResultController)
-        searchController.searchBar.placeholder = "검색"
-        searchController.searchResultsUpdater = searchResultController
-        definesPresentationContext = true
-        return searchController
-    }()
+//    private lazy var searchController: UISearchController? = {
+//        guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultTableViewController") as? SearchResultTableViewController else { return nil }
+//        let searchController = UISearchController(searchResultsController: searchResultController)
+//        searchController.searchBar.placeholder = "검색"
+//        searchController.searchResultsUpdater = searchResultController
+//        definesPresentationContext = true
+//        return searchController
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = universityModel.name
-        navigationItem.searchController = searchController
+        //navigationItem.searchController = searchController
         setupButtonBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        universityModel = University.generateModel()
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         var viewControllers = [UITableViewController]()
         for index in universityModel.categories.indices {
             let contentViewController = MainContentTableViewController()
-            contentViewController.pageIndex = index
-            contentViewController.universityModel = self.universityModel
+            contentViewController.categoryIndex = index
+            contentViewController.universityModel = universityModel
             viewControllers.append(contentViewController)
         }
         return viewControllers
