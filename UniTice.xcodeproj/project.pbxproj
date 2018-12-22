@@ -265,9 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				1959D57821CE212000F6182F /* UniversityModel.swift */,
-				19ED806E21CA5FA000BA6529 /* Seoultech.swift */,
 				1959D57A21CE2A5600F6182F /* Dongduk.swift */,
 				1959D57C21CE2A5D00F6182F /* Mju.swift */,
+				19ED806E21CA5FA000BA6529 /* Seoultech.swift */,
 			);
 			path = UniversityModel;
 			sourceTree = "<group>";

@@ -11,7 +11,11 @@ import XLPagerTabStrip
 
 class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
-    private var universityModel: UniversityModel = University.generateModel()
+    private var universityModel: UniversityModel = University.generateModel() {
+        didSet {
+            navigationItem.title = universityModel.name
+        }
+    }
     
 //    private lazy var searchController: UISearchController? = {
 //        guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultTableViewController") as? SearchResultTableViewController else { return nil }
@@ -24,7 +28,6 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = universityModel.name
         //navigationItem.searchController = searchController
         setupButtonBar()
     }

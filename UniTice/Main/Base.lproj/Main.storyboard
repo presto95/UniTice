@@ -107,6 +107,7 @@
                         <viewLayoutGuide key="safeArea" id="3eh-di-0hX"/>
                     </view>
                     <navigationItem key="navigationItem" id="RO6-cF-u9F">
+                        <barButtonItem key="backBarButtonItem" title=" " id="MWm-im-XVR"/>
                         <barButtonItem key="leftBarButtonItem" title="설정" id="vs6-F7-N0u">
                             <connections>
                                 <segue destination="aYK-Cs-m6d" kind="show" id="fzD-Ej-XLU"/>

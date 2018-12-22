@@ -36,7 +36,7 @@ enum University: String, CaseIterable {
             case .dongduk:
                 return Seoultech()
             case .mju:
-                return Seoultech()
+                return Mju()
             case .seoultech:
                 return Seoultech()
             }

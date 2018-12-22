@@ -45,7 +45,7 @@ struct Seoultech: UniversityModel {
                 let title = rows[titleIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
                 let date = rows[dateIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
                 let link = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let post = Post(number: number, category: "", title: title, date: date, link: link)
+                let post = Post(number: number, title: title, date: date, link: link)
                 posts.append(post)
             }
             completion(posts)
