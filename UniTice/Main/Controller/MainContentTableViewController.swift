@@ -8,11 +8,22 @@
 
 import UIKit
 import XLPagerTabStrip
+import SnapKit
 import SafariServices
 
 class MainContentTableViewController: UITableViewController {
 
     private var posts: [Post] = []
+    
+    private var fixedPosts: [Post] {
+        return posts.filter { $0.number == 0 }
+    }
+    
+    private var standardPosts: [Post] {
+        return posts.filter { $0.number != 0 }
+    }
+    
+    private var isFixedNoticeFolded: Bool = true
     
     var categoryIndex: Int!
     
@@ -61,27 +72,47 @@ class MainContentTableViewController: UITableViewController {
 extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-        if posts.count == 0 {
-            tableView.allowsSelection = false
-            cell.textLabel?.showAnimatedGradientSkeleton()
-            cell.detailTextLabel?.showAnimatedGradientSkeleton()
-        } else {
-            tableView.allowsSelection = true
-            cell.textLabel?.hideSkeleton()
-            cell.detailTextLabel?.hideSkeleton()
-            cell.detailTextLabel?.backgroundColor = .clear
-            let post = posts[indexPath.row]
-            let weight: UIFont.Weight = post.number == 0 ? .bold : .regular
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: weight)
+        if indexPath.section == 0 {
+            let post = fixedPosts[indexPath.row]
             cell.textLabel?.text = post.title
-            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 13, weight: .light)
+            cell.detailTextLabel?.text = post.date
+        } else {
+            let post = standardPosts[indexPath.row]
+            cell.textLabel?.text = post.title
             cell.detailTextLabel?.text = post.date
         }
+//        if posts.count == 0 {
+//            tableView.allowsSelection = false
+//            cell.textLabel?.showAnimatedGradientSkeleton()
+//            cell.detailTextLabel?.showAnimatedGradientSkeleton()
+//        } else {
+//            tableView.allowsSelection = true
+//            cell.textLabel?.hideSkeleton()
+//            cell.detailTextLabel?.hideSkeleton()
+//            cell.detailTextLabel?.backgroundColor = .clear
+//            let post = posts[indexPath.row]
+//            let weight: UIFont.Weight = post.number == 0 ? .bold : .regular
+//            cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: weight)
+//            cell.textLabel?.text = post.title
+//            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 13, weight: .light)
+//            cell.detailTextLabel?.text = post.date
+//        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count == 0 ? 15 : posts.count
+        if section == 0 {
+            if isFixedNoticeFolded {
+                return 0
+            } else {
+                return fixedPosts.count
+            }
+        }
+        return standardPosts.count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
 }
 
@@ -90,6 +121,51 @@ extension MainContentTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         // 북마크에 저장
         present(safariViewController(at: indexPath.row), animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            guard let headerView = UIView.instantiate(fromXib: "MainNoticeHeaderView") as? MainNoticeHeaderView else { return nil }
+            headerView.state = isFixedNoticeFolded
+            headerView.foldingHandler = {
+                self.isFixedNoticeFolded = !self.isFixedNoticeFolded
+                self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
+            }
+            return headerView
+        }
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 0 {
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 2))
+            let label = UILabel(frame: .zero)
+            label.backgroundColor = .black
+            label.text = nil
+            footerView.addSubview(label)
+            label.snp.makeConstraints { maker in
+                maker.leading.equalToSuperview().offset(16)
+                maker.trailing.equalToSuperview().offset(-16)
+                maker.centerY.equalToSuperview()
+                maker.height.equalTo(1)
+            }
+            return footerView
+        }
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 60
+        }
+        return .leastNonzeroMagnitude
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 2
+        }
+        return .leastNonzeroMagnitude
     }
 //
 //    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

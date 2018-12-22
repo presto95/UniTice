@@ -31,6 +31,7 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         universityModel = University.generateModel()
+        reloadPagerTabStripView()
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {

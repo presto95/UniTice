@@ -66,7 +66,7 @@ extension StartKeywordRegisterViewController: UITableViewDataSource {
 
 extension StartKeywordRegisterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.instantiate(fromXib: "HeaderView") as? HeaderView
+        let headerView = UIView.instantiate(fromXib: "HeaderView") as? StartKeywordHeaderView
         headerView?.touchUpAddButtonHandler = { text in
             if self.keywords.count < 3 {
                 self.keywords.insert(text, at: 0)

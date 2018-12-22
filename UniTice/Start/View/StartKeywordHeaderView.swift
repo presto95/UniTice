@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeaderView: UIView {
+class StartKeywordHeaderView: UIView {
     
     var touchUpAddButtonHandler: ((String) -> Void)?
     
@@ -33,7 +33,7 @@ class HeaderView: UIView {
     }
 }
 
-extension HeaderView: UITextFieldDelegate {
+extension StartKeywordHeaderView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
