@@ -11,13 +11,14 @@ import Kanna
 import StoreKit
 import SafariServices
 import SkeletonView
+import XLPagerTabStrip
 import UserNotifications
 
 class MainViewController: UIViewController {
 
     private var posts: [Post] = []
     
-    var university = Seoultech()
+    private var universityModel: UniversityModel = University.generateModel()
     
     private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
@@ -34,98 +35,63 @@ class MainViewController: UIViewController {
         return searchController
     }()
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "서울과학기술대학교"
+        navigationItem.title = universityModel.name
         navigationItem.searchController = searchController
         registerForPreviewing(with: self, sourceView: tableView)
-        university.requestPostList(inCategory: university.categories[0], inPage: 1) { posts in
+        requestPostList()
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            if !isGranted {
+                // 알림 권한을 줘야 키워드 알림을 받을 수 있다는 커스텀 얼러트 띄우기
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        universityModel = University.generateModel()
+    }
+
+//    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+//        let viewControllers = [UITableViewController]()
+//        university.categories.forEach { category in
+//            let tableViewController = UITableViewController()
+//
+//
+//        }
+//        return []
+//    }
+    
+    private func requestPostList() {
+        universityModel.requestPosts(inCategory: universityModel.categories[0], inPage: 1) { posts in
             self.posts = posts
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        //kannaTest()
-        
-        // 알림 등록
-        // 노티피케이션 델리게이트는 AppDelegate에 정의됨
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
-            if isGranted {
-                print("알림 등록 허용함")
-            } else {
-                print("알림 등록 거부함")
-            }
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        /*
-         알림 권한 얻는 얼러트는 requestAuthorization 메소드 최초 호출시에만 뜬다
-         이후에는 설정 앱을 열어서 알림을 허용하도록 사용자에게 유도해야 한다
-         알맞는 디자인이 있어도 좋고, 걍 스트링으로 안내해도 되고
-        */
-//        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-//            switch settings.authorizationStatus {
-//            case .authorized:
-//                print("알림 허용됨")
-//            case .denied:
-//                print("알림 거부됨")
-//                let url = URL(string: UIApplication.openSettingsURLString)!
-//                DispatchQueue.main.async {
-//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                }
-//            case .notDetermined:
-//                print("리퀘스트 한적 없음")
-//            default:
-//                break
-//            }
-//        }
-        // 레이팅 요청
     }
     
     @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
         posts.removeAll()
-        university.requestPostList(inCategory: university.categories[0], inPage: 1) { posts in
-            self.posts = posts
-            self.tableView.reloadData()
-        }
-        //kannaTest()
-        //tableView.reloadData()
+        requestPostList()
         refreshControl.endRefreshing()
-    }
-    
-    private func kannaTest() {
-        DispatchQueue.global().async {
-            guard let url = URL(string: "http://www.seoultech.ac.kr/service/info/notice/?bidx=4691&bnum=4691&allboard=false&page=\(1)&size=9&searchtype=1&searchtext=") else { return }
-            guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
-            // 글번호 / 타이틀 / 빈칸 / 조회수 / 날짜 / 작성자
-            let rows = doc.xpath("//div[@class='wrap_list']//tr[@class='body_tr']//td")
-            // 링크
-            let links = doc.xpath("//div[@class='wrap_list']//tr[@class='body_tr']//td[@class='tit']//a/@href")
-            for (index, element) in links.enumerated() {
-                let numberIndex = index * 6
-                let titleIndex = index * 6 + 1
-                let dateIndex = index * 6 + 4
-                let number = Int(rows[numberIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let date = rows[dateIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let link = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let post = Post(number: number, category: "", title: title, date: date, link: link)
-                self.posts.append(post)
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     private func safariViewController(at row: Int) -> SFSafariViewController {
         let link = posts[row].link
-        guard let url = URL(string: "http://www.seoultech.ac.kr/service/info/notice\(link)") else { fatalError("wrong url format") }
+        guard let url = URL(string: universityModel.postURL(inCategory: universityModel.categories[0], link: link)) else { fatalError("wrong url format") }
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
         let viewController = SFSafariViewController(url: url, configuration: config)

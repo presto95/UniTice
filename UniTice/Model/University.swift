@@ -6,8 +6,30 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
+import UIKit
+
 enum University: String, CaseIterable {
+    
     case dongduk = "동덕여자대학교"
+    
     case mju = "명지대학교"
+    
     case seoultech = "서울과학기술대학교"
+    
+    static func generateModel() -> UniversityModel {
+        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+        if let universityString = try? (context?.fetch(User.fetchRequest()).last as? User)?.university {
+            let university = University(rawValue: universityString ?? "") ?? .dongduk
+            switch university {
+            case .dongduk:
+                return Seoultech()
+            case .mju:
+                return Seoultech()
+            case .seoultech:
+                return Seoultech()
+            }
+        } else {
+            return Seoultech()
+        }
+    }
 }

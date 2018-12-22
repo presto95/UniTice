@@ -18,20 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.message_id"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // 앱에서 파이어베이스 초기화
         FirebaseApp.configure()
-        // 알림 권한 얻기
+        
+        // 노티피케이션 델리게이트 설정
         UNUserNotificationCenter.current().delegate = self
-//        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
-//            if isGranted {
-//                print("알림 등록 허용함")
-//            } else {
-//                print("알림 등록 거부함")
-//            }
-//        }
+        
         // 원격 알림 등록
         application.registerForRemoteNotifications()
+        
         // 파이어베이스 등록 토큰 접근. 메세지 델리게이트 설정
         Messaging.messaging().delegate = self
         
