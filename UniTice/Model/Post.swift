@@ -7,11 +7,17 @@
 //
 
 struct Post: CustomStringConvertible {
+    
     let number: Int
+    
     let category: String
+    
     let title: String
+    
     let date: String
+    
     let link: String
+    
     var description: String {
         return """
         -----

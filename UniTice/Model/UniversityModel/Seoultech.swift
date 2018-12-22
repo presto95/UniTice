@@ -6,7 +6,6 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
-import Foundation
 import Kanna
 
 struct Seoultech: UniversityModel {
@@ -28,7 +27,7 @@ struct Seoultech: UniversityModel {
     }
     
     func postURL(inCategory category: Seoultech.Category, link: String) -> String {
-        return "\(url1)\(category.description)\(link)"
+        return "\(url1)\(category.name)\(link)"
     }
     
     func requestPosts(inCategory category: Seoultech.Category, inPage page: Int, completion: @escaping (([Post]) -> Void)) {

@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class MainBaseViewController: ButtonBarPagerTabStripViewController {
+class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

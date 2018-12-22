@@ -47,7 +47,7 @@ class MainViewController: UIViewController {
         navigationItem.title = universityModel.name
         navigationItem.searchController = searchController
         registerForPreviewing(with: self, sourceView: tableView)
-        requestPostList()
+        requestPosts()
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
             if let error = error {
@@ -74,7 +74,7 @@ class MainViewController: UIViewController {
 //        return []
 //    }
     
-    private func requestPostList() {
+    private func requestPosts() {
         universityModel.requestPosts(inCategory: universityModel.categories[0], inPage: 1) { posts in
             self.posts = posts
             DispatchQueue.main.async {
@@ -85,7 +85,7 @@ class MainViewController: UIViewController {
     
     @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
         posts.removeAll()
-        requestPostList()
+        requestPosts()
         refreshControl.endRefreshing()
     }
     
@@ -94,6 +94,7 @@ class MainViewController: UIViewController {
         guard let url = URL(string: universityModel.postURL(inCategory: universityModel.categories[0], link: link)) else { fatalError("wrong url format") }
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
+        config.entersReaderIfAvailable = true
         let viewController = SFSafariViewController(url: url, configuration: config)
         viewController.dismissButtonStyle = .close
         return viewController

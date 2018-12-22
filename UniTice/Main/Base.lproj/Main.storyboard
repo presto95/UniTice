@@ -146,6 +146,22 @@
             </objects>
             <point key="canvasLocation" x="3727.1999999999998" y="133.00492610837438"/>
         </scene>
+        <!--Main Content Table View Controller-->
+        <scene sceneID="XOE-6w-OcT">
+            <objects>
+                <viewController storyboardIdentifier="MainContentTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kps-ix-Omz" customClass="MainContentTableViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z0R-dg-L6F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="3eh-di-0hX"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RO6-cF-u9F"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="otm-8f-I5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2785" y="873"/>
+        </scene>
         <!--Setting Table View Controller-->
         <scene sceneID="5aR-DK-yuv">
             <objects>
@@ -320,7 +336,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="PCd-3A-X1n"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Ykp-Hw-hdN"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qxd-LY-TyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
