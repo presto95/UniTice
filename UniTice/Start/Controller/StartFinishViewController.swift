@@ -53,6 +53,11 @@ class StartFinishViewController: UIViewController {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             if let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as? User {
                 user.university = StartInfo.shared.university.rawValue
+                StartInfo.shared.keywords.forEach { text in
+                    let keyword = Keyword(context: context)
+                    keyword.keyword = text
+                    user.addToKeyword(keyword)
+                }
             }
             do {
                 try context.save()

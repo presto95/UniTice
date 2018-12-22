@@ -17,7 +17,7 @@
 		1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1930D34E21BFFCD700424FBF /* Start.storyboard */; };
 		194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */; };
 		194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */; };
-		194BF41F219EA54E00FA6124 /* ChangeSchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */; };
+		194BF41F219EA54E00FA6124 /* ChangeUniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */; };
 		194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */; };
 		194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF426219EE73200FA6124 /* UIAlertController+.swift */; };
 		194BF459219F072500FA6124 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 194BF457219F072500FA6124 /* Model.xcdatamodeld */; };
@@ -27,6 +27,7 @@
 		1959D57B21CE2A5600F6182F /* Dongduk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57A21CE2A5600F6182F /* Dongduk.swift */; };
 		1959D57D21CE2A5D00F6182F /* Mju.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57C21CE2A5D00F6182F /* Mju.swift */; };
 		1959D57F21CE34D200F6182F /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57E21CE34D200F6182F /* PostCell.swift */; };
+		1959D58321CE52E300F6182F /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1959D58221CE52E300F6182F /* Setting.storyboard */; };
 		19A88DC221CBC65400A3F81C /* StartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* StartInfo.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
@@ -63,8 +64,8 @@
 		1930D34E21BFFCD700424FBF /* Start.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
 		194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
-		194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSchoolViewController.swift; sourceTree = "<group>"; };
-		194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSettingViewController.swift; sourceTree = "<group>"; };
+		194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeUniversityViewController.swift; path = Setting/ChangeUniversityViewController.swift; sourceTree = "<group>"; };
+		194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeywordSettingViewController.swift; path = Setting/KeywordSettingViewController.swift; sourceTree = "<group>"; };
 		194BF426219EE73200FA6124 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		194BF458219F072500FA6124 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		1959D57221CE13D400F6182F /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		1959D57A21CE2A5600F6182F /* Dongduk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dongduk.swift; sourceTree = "<group>"; };
 		1959D57C21CE2A5D00F6182F /* Mju.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mju.swift; sourceTree = "<group>"; };
 		1959D57E21CE34D200F6182F /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		1959D58221CE52E300F6182F /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* StartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfo.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -166,8 +168,9 @@
 		194BF41D219EA53900FA6124 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				194BF41E219EA54E00FA6124 /* ChangeSchoolViewController.swift */,
-				194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */,
+				1959D58221CE52E300F6182F /* Setting.storyboard */,
+				1959D58121CE52CA00F6182F /* View */,
+				1959D58021CE52C400F6182F /* Controller */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -202,6 +205,22 @@
 				193005EC21B14658003C9DBB /* SettingTableViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		1959D58021CE52C400F6182F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */,
+				194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		1959D58121CE52CA00F6182F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		196499A32197F1F500BEE6C1 /* Supporting Files */ = {
@@ -351,6 +370,7 @@
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 				1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */,
 				19ED808721CB78B700BA6529 /* HeaderView.xib in Resources */,
+				1959D58321CE52E300F6182F /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +469,7 @@
 			files = (
 				193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */,
 				19ED807321CA63C200BA6529 /* StartMainViewController.swift in Sources */,
-				194BF41F219EA54E00FA6124 /* ChangeSchoolViewController.swift in Sources */,
+				194BF41F219EA54E00FA6124 /* ChangeUniversityViewController.swift in Sources */,
 				191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */,
 				1959D57D21CE2A5D00F6182F /* Mju.swift in Sources */,
 				19C6BBBC2197F8D4002FC39C /* University.swift in Sources */,

@@ -23,10 +23,10 @@ class SettingTableViewController: UITableViewController {
         let row = indexPath.row
         switch indexPath.section {
         case 0 where row == 0:
-            let next = ChangeSchoolViewController()
+            let next = UIViewController.instantiate(from: "Setting", identifier: ChangeUniversityViewController.classNameToString)
             navigationController?.pushViewController(next, animated: true)
         case 0 where row == 1:
-            let next = KeywordSettingViewController()
+            let next = UIViewController.instantiate(from: "Setting", identifier: KeywordSettingViewController.classNameToString)
             navigationController?.pushViewController(next, animated: true)
         case 1 where row == 0:
             if MFMailComposeViewController.canSendMail() {
