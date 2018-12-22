@@ -145,10 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				191B6474219728CC005E5CE6 /* Main.storyboard */,
-				191B6472219728CC005E5CE6 /* MainViewController.swift */,
-				194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */,
-				194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */,
-				193005EC21B14658003C9DBB /* SettingTableViewController.swift */,
+				1959D57021CE12B800F6182F /* View */,
+				1959D57121CE12C600F6182F /* Controller */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -171,6 +169,24 @@
 				19ED808821CB7C7600BA6529 /* UIView+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		1959D57021CE12B800F6182F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1959D57121CE12C600F6182F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				191B6472219728CC005E5CE6 /* MainViewController.swift */,
+				194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */,
+				194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */,
+				193005EC21B14658003C9DBB /* SettingTableViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		196499A32197F1F500BEE6C1 /* Supporting Files */ = {

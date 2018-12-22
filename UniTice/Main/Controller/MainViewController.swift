@@ -17,6 +17,8 @@ class MainViewController: UIViewController {
 
     private var posts: [Post] = []
     
+    var university = Seoultech()
+    
     private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
@@ -39,7 +41,13 @@ class MainViewController: UIViewController {
         navigationItem.title = "서울과학기술대학교"
         navigationItem.searchController = searchController
         registerForPreviewing(with: self, sourceView: tableView)
-        kannaTest()
+        university.requestPostList(inCategory: university.categories[0], inPage: 1) { posts in
+            self.posts = posts
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        //kannaTest()
         
         // 알림 등록
         // 노티피케이션 델리게이트는 AppDelegate에 정의됨
@@ -81,8 +89,12 @@ class MainViewController: UIViewController {
     
     @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
         posts.removeAll()
-        kannaTest()
-        tableView.reloadData()
+        university.requestPostList(inCategory: university.categories[0], inPage: 1) { posts in
+            self.posts = posts
+            self.tableView.reloadData()
+        }
+        //kannaTest()
+        //tableView.reloadData()
         refreshControl.endRefreshing()
     }
     
