@@ -26,6 +26,7 @@
 		1959D57921CE212000F6182F /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57821CE212000F6182F /* UniversityModel.swift */; };
 		1959D57B21CE2A5600F6182F /* Dongduk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57A21CE2A5600F6182F /* Dongduk.swift */; };
 		1959D57D21CE2A5D00F6182F /* Mju.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57C21CE2A5D00F6182F /* Mju.swift */; };
+		1959D57F21CE34D200F6182F /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57E21CE34D200F6182F /* PostCell.swift */; };
 		19A88DC221CBC65400A3F81C /* StartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* StartInfo.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
@@ -71,6 +72,7 @@
 		1959D57821CE212000F6182F /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		1959D57A21CE2A5600F6182F /* Dongduk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dongduk.swift; sourceTree = "<group>"; };
 		1959D57C21CE2A5D00F6182F /* Mju.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mju.swift; sourceTree = "<group>"; };
+		1959D57E21CE34D200F6182F /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* StartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfo.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		1959D57021CE12B800F6182F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1959D57E21CE34D200F6182F /* PostCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				19ED807D21CB67C400BA6529 /* UIViewController+.swift in Sources */,
 				19ED808B21CB7CF400BA6529 /* HeaderView.swift in Sources */,
 				194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */,
+				1959D57F21CE34D200F6182F /* PostCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
