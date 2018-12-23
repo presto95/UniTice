@@ -26,11 +26,11 @@
 		1959D57921CE212000F6182F /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57821CE212000F6182F /* UniversityModel.swift */; };
 		1959D57B21CE2A5600F6182F /* Dongduk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57A21CE2A5600F6182F /* Dongduk.swift */; };
 		1959D57D21CE2A5D00F6182F /* Mju.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57C21CE2A5D00F6182F /* Mju.swift */; };
-		1959D57F21CE34D200F6182F /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57E21CE34D200F6182F /* PostCell.swift */; };
 		1959D58321CE52E300F6182F /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1959D58221CE52E300F6182F /* Setting.storyboard */; };
 		1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */; };
 		1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */; };
 		1976CE3121CE6FD100897E39 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE3021CE6FD100897E39 /* CoreDataHelper.swift */; };
+		1976CE3521CF61B200897E39 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE3321CF61B200897E39 /* PostCell.xib */; };
 		19A88DC221CBC65400A3F81C /* StartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* StartInfo.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
@@ -76,11 +76,11 @@
 		1959D57821CE212000F6182F /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		1959D57A21CE2A5600F6182F /* Dongduk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dongduk.swift; sourceTree = "<group>"; };
 		1959D57C21CE2A5D00F6182F /* Mju.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mju.swift; sourceTree = "<group>"; };
-		1959D57E21CE34D200F6182F /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		1959D58221CE52E300F6182F /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		1976CE3021CE6FD100897E39 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		1976CE3321CF61B200897E39 /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* StartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfo.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -196,9 +196,9 @@
 		1959D57021CE12B800F6182F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1959D57E21CE34D200F6182F /* PostCell.swift */,
 				1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */,
 				1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */,
+				1976CE3321CF61B200897E39 /* PostCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -387,6 +387,7 @@
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 				1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */,
 				19ED808721CB78B700BA6529 /* StartKeywordHeaderView.xib in Resources */,
+				1976CE3521CF61B200897E39 /* PostCell.xib in Resources */,
 				1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */,
 				1959D58321CE52E300F6182F /* Setting.storyboard in Resources */,
 			);
@@ -516,7 +517,6 @@
 				19ED807D21CB67C400BA6529 /* UIViewController+.swift in Sources */,
 				19ED808B21CB7CF400BA6529 /* StartKeywordHeaderView.swift in Sources */,
 				194BF416219D45B100FA6124 /* SearchResultTableViewController.swift in Sources */,
-				1959D57F21CE34D200F6182F /* PostCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

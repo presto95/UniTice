@@ -9,22 +9,23 @@
 import UIKit
 import XLPagerTabStrip
 import SnapKit
+import SkeletonView
 import SafariServices
 
 class MainContentTableViewController: UITableViewController {
 
     private var posts: [Post] = []
     
-    private var fixedPosts: [Post]? {
+    private var fixedPosts: [Post] {
         return posts.filter { $0.number == 0 }
     }
     
-    private var standardPosts: [Post]? {
+    private var standardPosts: [Post] {
         return posts.filter { $0.number != 0 }
     }
     
     private var isFixedNoticeFolded: Bool = false
-    
+
     var categoryIndex: Int!
     
     var page: Int = 1
@@ -39,13 +40,21 @@ class MainContentTableViewController: UITableViewController {
         super.viewDidLoad()
         title = category.description
         registerForPreviewing(with: self, sourceView: tableView)
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
         tableView.separatorStyle = .none
-        tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+        tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestPosts()
+    }
+    
+    @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
+        posts.removeAll()
+        requestPosts()
+        refreshControl?.endRefreshing()
     }
     
     private func requestPosts() {
@@ -78,43 +87,37 @@ extension MainContentTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
         if posts.isEmpty {
             tableView.allowsSelection = false
-            //cell.textLabel?.showAnimatedGradientSkeleton()
-            //cell.detailTextLabel?.showAnimatedGradientSkeleton()
+            cell.textLabel?.showAnimatedGradientSkeleton()
+            cell.detailTextLabel?.showAnimatedGradientSkeleton()
         } else {
             tableView.allowsSelection = true
             cell.textLabel?.hideSkeleton()
             cell.detailTextLabel?.hideSkeleton()
-            if indexPath.section == 0 {
-                let post = fixedPosts?[indexPath.row]
-                cell.textLabel?.text = post?.title
-                cell.detailTextLabel?.text = post?.date
+            cell.detailTextLabel?.backgroundColor = .white
+            if indexPath.section == 0, !fixedPosts.isEmpty {
+                let post = fixedPosts[indexPath.row]
+                cell.textLabel?.text = post.title
+                cell.detailTextLabel?.text = post.date
             } else {
-                let post = standardPosts?[indexPath.row]
-                cell.textLabel?.text = post?.title
-                cell.detailTextLabel?.text = post?.date
+                if !standardPosts.isEmpty {
+                    let post = standardPosts[indexPath.row]
+                    cell.textLabel?.text = post.title
+                    cell.detailTextLabel?.text = post.date
+                }
             }
         }
-//        if posts.count == 0 {
-//            tableView.allowsSelection = false
-//            cell.textLabel?.showAnimatedGradientSkeleton()
-//            cell.detailTextLabel?.showAnimatedGradientSkeleton()
-//        } else {
-//            tableView.allowsSelection = true
-//            cell.textLabel?.hideSkeleton()
-//            cell.detailTextLabel?.hideSkeleton()
-//            cell.detailTextLabel?.backgroundColor = .clear
-//            let post = posts[indexPath.row]
-//            let weight: UIFont.Weight = post.number == 0 ? .bold : .regular
-//            cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: weight)
-//            cell.textLabel?.text = post.title
-//            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 13, weight: .light)
-//            cell.detailTextLabel?.text = post.date
-//        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? (isFixedNoticeFolded ? 0 : fixedPosts?.count ?? 5) : (standardPosts?.count ?? 15)
+        if section == 0 {
+            if isFixedNoticeFolded {
+                return 0
+            } else {
+                return fixedPosts.count
+            }
+        }
+        return standardPosts.count == 0 ? 15 : standardPosts.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -205,6 +208,12 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         present(viewControllerToCommit, animated: true, completion: nil)
+    }
+}
+
+extension MainContentTableViewController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "postCell"
     }
 }
 

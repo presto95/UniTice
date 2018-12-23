@@ -77,10 +77,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yJF-tP-xtG" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="16" y="96" width="343" height="38"/>
+                                <rect key="frame" x="16" y="88" width="343" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="NQY-gd-xKb"/>
+                                    <constraint firstAttribute="height" constant="40" id="NQY-gd-xKb"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vj3-IX-e8A">
                                     <size key="itemSize" width="50" height="50"/>
@@ -91,15 +91,15 @@
                                 <cells/>
                             </collectionView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6S-KS-TVT">
-                                <rect key="frame" x="0.0" y="142" width="375" height="670"/>
+                                <rect key="frame" x="0.0" y="128" width="375" height="684"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Z6S-KS-TVT" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" id="FMA-3q-lNG"/>
-                            <constraint firstItem="yJF-tP-xtG" firstAttribute="top" secondItem="3eh-di-0hX" secondAttribute="top" constant="8" id="GGT-MQ-b2I"/>
+                            <constraint firstItem="yJF-tP-xtG" firstAttribute="top" secondItem="3eh-di-0hX" secondAttribute="top" id="GGT-MQ-b2I"/>
                             <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="Z6S-KS-TVT" secondAttribute="trailing" id="MeR-fI-0fZ"/>
-                            <constraint firstItem="Z6S-KS-TVT" firstAttribute="top" secondItem="yJF-tP-xtG" secondAttribute="bottom" constant="8" id="aBh-5t-i3L"/>
+                            <constraint firstItem="Z6S-KS-TVT" firstAttribute="top" secondItem="yJF-tP-xtG" secondAttribute="bottom" id="aBh-5t-i3L"/>
                             <constraint firstAttribute="bottom" secondItem="Z6S-KS-TVT" secondAttribute="bottom" id="lzs-aW-w8k"/>
                             <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="yJF-tP-xtG" secondAttribute="trailing" constant="16" id="oWN-cr-ZJZ"/>
                             <constraint firstItem="yJF-tP-xtG" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" constant="16" id="qsK-cv-RMf"/>
