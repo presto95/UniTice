@@ -14,7 +14,7 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
     private var universityModel: UniversityModel = University.generateModel() {
         didSet {
-            navigationItem.title = universityModel.name
+            (navigationItem.leftBarButtonItem?.customView as? UILabel)?.text = universityModel.name
         }
     }
     
@@ -38,8 +38,13 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
             }
             if !isGranted {
                 // 알림 권한을 주어야 키워드 알림을 받을 수 있다는 커스텀 얼러트 띄우기
+                UIAlertController
+                    .alert(title: "", message: "알림 권한을 주어야 키워드 알림을 받을 수 있어요.\n설정에서 확인할 수 있어요.")
+                    .action(title: "확인")
+                    .present(to: self)
             }
         }
+        setupUniversityLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +61,14 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
             viewControllers.append(contentViewController)
         }
         return viewControllers
+    }
+    
+    private func setupUniversityLabel() {
+        let universityLabel = UILabel()
+        universityLabel.text = universityModel.name
+        universityLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        let leftBarButtonItem = UIBarButtonItem(customView: universityLabel)
+        navigationItem.setLeftBarButton(leftBarButtonItem, animated: false)
     }
     
     private func setupButtonBar() {

@@ -77,7 +77,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yJF-tP-xtG" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="16" y="148" width="343" height="38"/>
+                                <rect key="frame" x="16" y="96" width="343" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="NQY-gd-xKb"/>
@@ -91,7 +91,7 @@
                                 <cells/>
                             </collectionView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6S-KS-TVT">
-                                <rect key="frame" x="0.0" y="194" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="142" width="375" height="670"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -108,11 +108,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="RO6-cF-u9F">
                         <barButtonItem key="backBarButtonItem" title=" " id="MWm-im-XVR"/>
-                        <barButtonItem key="leftBarButtonItem" title="설정" id="vs6-F7-N0u">
-                            <connections>
-                                <segue destination="aYK-Cs-m6d" kind="show" id="fzD-Ej-XLU"/>
-                            </connections>
-                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="bookmarks" id="LlO-HG-yCY">
                                 <connections>
@@ -120,6 +115,11 @@
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="search" id="R24-Z8-hF6"/>
+                            <barButtonItem title="설정" id="vs6-F7-N0u">
+                                <connections>
+                                    <segue destination="aYK-Cs-m6d" kind="show" id="fzD-Ej-XLU"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -220,8 +220,8 @@
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ngk-WP-tbW" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="XNN-4z-rD5">
-                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XNN-4z-rD5">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

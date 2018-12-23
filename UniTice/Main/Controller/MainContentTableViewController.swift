@@ -15,15 +15,15 @@ class MainContentTableViewController: UITableViewController {
 
     private var posts: [Post] = []
     
-    private var fixedPosts: [Post] {
+    private var fixedPosts: [Post]? {
         return posts.filter { $0.number == 0 }
     }
     
-    private var standardPosts: [Post] {
+    private var standardPosts: [Post]? {
         return posts.filter { $0.number != 0 }
     }
     
-    private var isFixedNoticeFolded: Bool = true
+    private var isFixedNoticeFolded: Bool = false
     
     var categoryIndex: Int!
     
@@ -50,6 +50,10 @@ class MainContentTableViewController: UITableViewController {
     
     private func requestPosts() {
         universityModel?.requestPosts(inCategory: category, inPage: page, completion: { posts in
+            while posts.isEmpty {
+                self.requestPosts()
+                return
+            }
             self.posts = posts
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -72,14 +76,23 @@ class MainContentTableViewController: UITableViewController {
 extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-        if indexPath.section == 0 {
-            let post = fixedPosts[indexPath.row]
-            cell.textLabel?.text = post.title
-            cell.detailTextLabel?.text = post.date
+        if posts.isEmpty {
+            tableView.allowsSelection = false
+            //cell.textLabel?.showAnimatedGradientSkeleton()
+            //cell.detailTextLabel?.showAnimatedGradientSkeleton()
         } else {
-            let post = standardPosts[indexPath.row]
-            cell.textLabel?.text = post.title
-            cell.detailTextLabel?.text = post.date
+            tableView.allowsSelection = true
+            cell.textLabel?.hideSkeleton()
+            cell.detailTextLabel?.hideSkeleton()
+            if indexPath.section == 0 {
+                let post = fixedPosts?[indexPath.row]
+                cell.textLabel?.text = post?.title
+                cell.detailTextLabel?.text = post?.date
+            } else {
+                let post = standardPosts?[indexPath.row]
+                cell.textLabel?.text = post?.title
+                cell.detailTextLabel?.text = post?.date
+            }
         }
 //        if posts.count == 0 {
 //            tableView.allowsSelection = false
@@ -101,14 +114,7 @@ extension MainContentTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            if isFixedNoticeFolded {
-                return 0
-            } else {
-                return fixedPosts.count
-            }
-        }
-        return standardPosts.count
+        return section == 0 ? (isFixedNoticeFolded ? 0 : fixedPosts?.count ?? 5) : (standardPosts?.count ?? 15)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -139,6 +145,7 @@ extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 2))
+            footerView.backgroundColor = .white
             let label = UILabel(frame: .zero)
             label.backgroundColor = .black
             label.text = nil
