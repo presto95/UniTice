@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import UserNotifications
 
 class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
@@ -30,6 +31,15 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
         //navigationItem.searchController = searchController
         setupButtonBar()
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            if !isGranted {
+                // 알림 권한을 주어야 키워드 알림을 받을 수 있다는 커스텀 얼러트 띄우기
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
