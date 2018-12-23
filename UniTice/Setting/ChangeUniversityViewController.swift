@@ -27,8 +27,7 @@ class ChangeUniversityViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "학교 변경"
-        view.backgroundColor = .white
+        title = "학교 변경"
     }
 
     @objc private func touchUpConfirmButton(_ sender: UIButton) {

@@ -15,8 +15,7 @@ class BookmarkViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "북마크"
-        navigationItem.largeTitleDisplayMode = .never
+        title = "북마크"
         registerForPreviewing(with: self, sourceView: tableView)
     }
 }

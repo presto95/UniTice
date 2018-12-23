@@ -30,7 +30,7 @@ class KeywordSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "키워드 설정"
+        title = "키워드 설정"
         navigationItem.setRightBarButton(addButton, animated: false)
         let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         if let user = try? context?.fetch(User.fetchRequest()).last as? User {

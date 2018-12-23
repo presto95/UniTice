@@ -94,10 +94,12 @@ extension MainContentTableViewController {
             cell.textLabel?.hideSkeleton()
             cell.detailTextLabel?.hideSkeleton()
             cell.detailTextLabel?.backgroundColor = .white
-            if indexPath.section == 0, !fixedPosts.isEmpty {
-                let post = fixedPosts[indexPath.row]
-                cell.textLabel?.text = post.title
-                cell.detailTextLabel?.text = post.date
+            if indexPath.section == 0 {
+                if !fixedPosts.isEmpty {
+                    let post = fixedPosts[indexPath.row]
+                    cell.textLabel?.text = post.title
+                    cell.detailTextLabel?.text = post.date
+                }
             } else {
                 if !standardPosts.isEmpty {
                     let post = standardPosts[indexPath.row]

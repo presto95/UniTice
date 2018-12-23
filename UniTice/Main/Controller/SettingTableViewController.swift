@@ -19,8 +19,7 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "설정"
-        navigationItem.largeTitleDisplayMode = .never
+        title = "설정"
     }
     
     override func viewWillAppear(_ animated: Bool) {
