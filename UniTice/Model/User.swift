@@ -43,8 +43,11 @@ class User: Object {
         bookmark.title = post.title
         bookmark.date = post.date
         bookmark.link = post.link
-        try! Realm().write {
-            user.bookmarks.insert(bookmark, at: 0)
+        let filteredCount = user.bookmarks.filter { $0.link == post.link }.count
+        if filteredCount == 0 {
+            try! Realm().write {
+                user.bookmarks.insert(bookmark, at: 0)
+            }
         }
     }
     
