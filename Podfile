@@ -15,6 +15,7 @@ target 'UniTice' do
   pod 'DZNEmptyDataSet'
   pod 'XLPagerTabStrip', '~> 8.1'
   pod 'KeychainAccess'
+  pod 'RealmSwift'
   # Pods for UniTice
 end
 
