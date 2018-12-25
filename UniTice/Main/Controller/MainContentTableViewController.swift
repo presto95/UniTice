@@ -161,18 +161,8 @@ extension MainContentTableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 2))
-            footerView.backgroundColor = .white
-            let label = UILabel(frame: .zero)
-            label.backgroundColor = .black
-            label.text = nil
-            footerView.addSubview(label)
-            label.snp.makeConstraints { maker in
-                maker.leading.equalToSuperview().offset(16)
-                maker.trailing.equalToSuperview().offset(-16)
-                maker.centerY.equalToSuperview()
-                maker.height.equalTo(1)
-            }
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 8))
+            footerView.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
             return footerView
         }
         return nil
@@ -180,14 +170,14 @@ extension MainContentTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 60
+            return 48
         }
         return .leastNonzeroMagnitude
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 2
+            return 8
         }
         return .leastNonzeroMagnitude
     }
