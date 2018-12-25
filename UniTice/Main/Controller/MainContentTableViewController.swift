@@ -44,6 +44,7 @@ class MainContentTableViewController: UITableViewController {
         registerForPreviewing(with: self, sourceView: tableView)
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
+        tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
     }
     
@@ -100,13 +101,13 @@ extension MainContentTableViewController {
                     let post = fixedPosts[indexPath.row]
                     cell.textLabel?.text = post.title
                     // 키워드 뽑아내기. 알고리즘 찾아보기..
-//                    keywords.forEach { keyword in
-//                        let regex = try? NSRegularExpression(pattern: "\\b\(keyword)\\b", options: [])
-//                        let matches = regex?.numberOfMatches(in: post.title, options: [], range: NSRange(location: 0, length: post.title.count))
-//                        if matches != 0 {
-//                            cell.textLabel?.textColor = .blue
-//                        }
-//                    }
+                    keywords.forEach { keyword in
+                        let regex = try? NSRegularExpression(pattern: "\\b\(keyword)\\b", options: [])
+                        let matches = regex?.numberOfMatches(in: post.title, options: [], range: NSRange(location: 0, length: post.title.count))
+                        if matches != 0 {
+                            cell.textLabel?.textColor = .blue
+                        }
+                    }
                     cell.detailTextLabel?.text = post.date
                 }
             } else {
@@ -125,10 +126,20 @@ extension MainContentTableViewController {
             if isFixedNoticeFolded {
                 return 0
             } else {
-                return fixedPosts.count
+                if posts.isEmpty {
+                    return 5
+                } else {
+                    return fixedPosts.count
+                }
+            }
+        } else if section == 1 {
+            if posts.isEmpty {
+                return 15
+            } else {
+                return standardPosts.count
             }
         }
-        return standardPosts.count == 0 ? 15 : standardPosts.count
+        return 0
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
