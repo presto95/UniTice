@@ -16,6 +16,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFi-RF-yh5">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Emu-Mw-N49">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="prominent"/>
+                </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상단 고정 게시물" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9I-3S-SMI">
                     <rect key="frame" x="16" y="19.5" width="112" height="21"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -27,18 +35,23 @@
                     <state key="normal" title="button"/>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="aFi-RF-yh5" secondAttribute="bottom" id="0Vn-P3-tnz"/>
+                <constraint firstItem="aFi-RF-yh5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CzI-yA-eK1"/>
                 <constraint firstItem="L9I-3S-SMI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EmM-zC-Vij"/>
                 <constraint firstItem="L9I-3S-SMI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="hc9-zr-IDV"/>
+                <constraint firstItem="aFi-RF-yh5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="isP-tb-Cig"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SKA-Eg-xSj" secondAttribute="trailing" constant="16" id="r17-DA-mlq"/>
                 <constraint firstItem="SKA-Eg-xSj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tPY-pU-ikc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aFi-RF-yh5" secondAttribute="trailing" id="ybY-FL-Ueb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="foldButton" destination="SKA-Eg-xSj" id="W1L-a6-Vkx"/>
             </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="153.82308845577214"/>
         </view>
     </objects>
 </document>
