@@ -74,6 +74,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        var notificationHasGranted: Bool = false
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus == .authorized {
+                notificationHasGranted = true
+            } else {
+                notificationHasGranted = false
+            }
+            NotificationCenter.default.post(name: NSNotification.Name("willEnterForeground"), object: nil, userInfo: ["notificationHasGranted": notificationHasGranted])
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

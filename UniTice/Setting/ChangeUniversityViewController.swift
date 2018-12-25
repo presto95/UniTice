@@ -28,6 +28,7 @@ class ChangeUniversityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "학교 변경"
+        
     }
 
     @objc private func touchUpConfirmButton(_ sender: UIButton) {

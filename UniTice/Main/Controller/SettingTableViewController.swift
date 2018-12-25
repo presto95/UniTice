@@ -13,26 +13,36 @@ import MessageUI
 
 class SettingTableViewController: UITableViewController {
 
-    private var notificationIsGranted: Bool = false
+    private var notificationHasGranted: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     private let texts = [["학교 변경", "키워드 설정", "알림 설정"], ["문의하기", "앱 평가하기"], ["오픈소스 라이센스"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "설정"
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus != .authorized {
+                self.notificationHasGranted = false
+            } else {
+                self.notificationHasGranted = true
+            }
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveEnterForegroundNotification(_:)), name: NSNotification.Name("willEnterForeground"), object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            if settings.alertSetting != UNNotificationSetting.enabled {
-                self.notificationIsGranted = false
-            } else {
-                self.notificationIsGranted = true
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func didReceiveEnterForegroundNotification(_ notification: Notification) {
+        if let notificationHasGranted = notification.userInfo?["notificationHasGranted"] as? Bool {
+            self.notificationHasGranted = notificationHasGranted
         }
     }
 }
@@ -63,7 +73,7 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 0 {
-            if notificationIsGranted {
+            if notificationHasGranted {
                 return "알림이 활성화되어 있습니다."
             } else {
                 return "알림이 비활성화되어 있습니다. 키워드 알림을 받을 수 없습니다."
