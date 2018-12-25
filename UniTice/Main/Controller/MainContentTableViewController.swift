@@ -10,6 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import SnapKit
 import SkeletonView
+import Highlighter
 import SafariServices
 
 class MainContentTableViewController: UITableViewController {
@@ -100,13 +101,13 @@ extension MainContentTableViewController {
                 if !fixedPosts.isEmpty {
                     let post = fixedPosts[indexPath.row]
                     cell.textLabel?.text = post.title
-                    // 키워드 뽑아내기. 알고리즘 찾아보기..
                     keywords.forEach { keyword in
-                        let regex = try? NSRegularExpression(pattern: "\\b\(keyword)\\b", options: [])
-                        let matches = regex?.numberOfMatches(in: post.title, options: [], range: NSRange(location: 0, length: post.title.count))
-                        if matches != 0 {
-                            cell.textLabel?.textColor = .blue
-                        }
+                        cell.textLabel?.highlight(text: keyword, normal: nil, highlight: [
+                            .foregroundColor: UIColor.purple,
+                            .backgroundColor: UIColor.cyan,
+                            .font: UIFont.systemFont(ofSize: 15, weight: .heavy)
+                            ])
+                        
                     }
                     cell.detailTextLabel?.text = post.date
                 }
