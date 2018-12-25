@@ -24,6 +24,8 @@ extension UIAlertController {
     }
     
     func present(to viewController: UIViewController?, handler: (() -> Void)? = nil) {
-        viewController?.present(self, animated: true, completion: handler)
+        DispatchQueue.main.async {
+            viewController?.present(self, animated: true, completion: handler)
+        }
     }
 }

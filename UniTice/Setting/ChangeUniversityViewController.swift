@@ -32,15 +32,9 @@ class ChangeUniversityViewController: UIViewController {
 
     @objc private func touchUpConfirmButton(_ sender: UIButton) {
         let selectedIndex = pickerView.selectedRow(inComponent: 0)
-        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-        if let user = try? context?.fetch(User.fetchRequest()).last as? User {
-            user?.university = universities[selectedIndex].rawValue
-        }
-        do {
-            try context?.save()
-        } catch {
-            context?.rollback()
-        }
+        User.updateUniversity(universities[selectedIndex].rawValue)
+        User.removeBookmarksAll()
+        User.removeKeywordsAll()
         navigationController?.popViewController(animated: true)
     }
 }

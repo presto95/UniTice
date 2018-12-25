@@ -18,30 +18,16 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
         }
     }
     
-//    private lazy var searchController: UISearchController? = {
-//        guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultTableViewController") as? SearchResultTableViewController else { return nil }
-//        let searchController = UISearchController(searchResultsController: searchResultController)
-//        searchController.searchBar.placeholder = "검색"
-//        searchController.searchResultsUpdater = searchResultController
-//        definesPresentationContext = true
-//        return searchController
-//    }()
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        //navigationItem.searchController = searchController
         setupButtonBar()
+        super.viewDidLoad()
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { isGranted, error in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
             if !isGranted {
-                // 알림 권한을 주어야 키워드 알림을 받을 수 있다는 커스텀 얼러트 띄우기
-                UIAlertController
-                    .alert(title: "", message: "알림 권한을 주어야 키워드 알림을 받을 수 있어요.\n설정에서 확인할 수 있어요.")
-                    .action(title: "확인")
-                    .present(to: self)
+                // 알림 권한 허용 대화상자 띄울 위치는?
             }
         }
         setupUniversityLabel()
@@ -73,11 +59,10 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
     
     private func setupButtonBar() {
         settings.style.selectedBarHeight = 1
-        settings.style.selectedBarBackgroundColor = .black
+        settings.style.selectedBarBackgroundColor = .blue
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14, weight: .medium)
     }
 }

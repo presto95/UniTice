@@ -21,8 +21,14 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7Y-2e-Mq0">
                                 <rect key="frame" x="0.0" y="298" width="375" height="216"/>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학교 변경시 저장된 키워드 및 북마크 정보가 초기화됩니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Hv2-PY-6Ba">
+                                <rect key="frame" x="16" y="514" width="343" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.98039215690000003" green="0.36078431370000003" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tO-8D-7T7">
-                                <rect key="frame" x="32" y="546" width="311" height="40"/>
+                                <rect key="frame" x="32" y="581" width="311" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8bH-9q-AfZ"/>
                                 </constraints>
@@ -32,11 +38,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="c7Y-2e-Mq0" firstAttribute="trailing" secondItem="D03-Nb-XAw" secondAttribute="trailing" id="0GZ-PM-yhg"/>
-                            <constraint firstItem="5tO-8D-7T7" firstAttribute="top" secondItem="c7Y-2e-Mq0" secondAttribute="bottom" constant="32" id="FTr-lO-wLc"/>
+                            <constraint firstItem="5tO-8D-7T7" firstAttribute="top" secondItem="Hv2-PY-6Ba" secondAttribute="bottom" constant="50" id="4Vk-iQ-XFC"/>
                             <constraint firstItem="D03-Nb-XAw" firstAttribute="trailing" secondItem="5tO-8D-7T7" secondAttribute="trailing" constant="32" id="FrY-P3-olt"/>
+                            <constraint firstItem="Hv2-PY-6Ba" firstAttribute="leading" secondItem="D03-Nb-XAw" secondAttribute="leading" constant="16" id="PVG-bd-BmC"/>
                             <constraint firstItem="c7Y-2e-Mq0" firstAttribute="centerY" secondItem="aK1-23-rhY" secondAttribute="centerY" id="Riv-E1-ymn"/>
+                            <constraint firstItem="D03-Nb-XAw" firstAttribute="trailing" secondItem="Hv2-PY-6Ba" secondAttribute="trailing" constant="16" id="XMk-px-Q4Q"/>
                             <constraint firstItem="c7Y-2e-Mq0" firstAttribute="leading" secondItem="D03-Nb-XAw" secondAttribute="leading" id="dUg-ee-F0m"/>
                             <constraint firstItem="5tO-8D-7T7" firstAttribute="leading" secondItem="D03-Nb-XAw" secondAttribute="leading" constant="32" id="olb-ah-nRR"/>
+                            <constraint firstItem="Hv2-PY-6Ba" firstAttribute="top" secondItem="c7Y-2e-Mq0" secondAttribute="bottom" id="wHh-2d-91K"/>
                             <constraint firstItem="c7Y-2e-Mq0" firstAttribute="centerX" secondItem="aK1-23-rhY" secondAttribute="centerX" id="yYe-JQ-Xg9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D03-Nb-XAw"/>
@@ -72,7 +81,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p0o-70-WUw">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

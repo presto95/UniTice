@@ -22,33 +22,10 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Ifq-sH-hN8">
-                                    <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="olS-lw-Mop" style="IBUITableViewCellStyleDefault" id="09c-sq-Ltd">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="09c-sq-Ltd" id="8xj-Gr-F2a">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="olS-lw-Mop">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.666666666666664"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="JR4-4h-2fV" id="sEG-ka-Axa"/>
-                                    <outlet property="delegate" destination="JR4-4h-2fV" id="SJv-0n-oyR"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -77,7 +54,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yJF-tP-xtG" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="16" y="88" width="343" height="40"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="NQY-gd-xKb"/>
@@ -101,8 +78,8 @@
                             <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="Z6S-KS-TVT" secondAttribute="trailing" id="MeR-fI-0fZ"/>
                             <constraint firstItem="Z6S-KS-TVT" firstAttribute="top" secondItem="yJF-tP-xtG" secondAttribute="bottom" id="aBh-5t-i3L"/>
                             <constraint firstAttribute="bottom" secondItem="Z6S-KS-TVT" secondAttribute="bottom" id="lzs-aW-w8k"/>
-                            <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="yJF-tP-xtG" secondAttribute="trailing" constant="16" id="oWN-cr-ZJZ"/>
-                            <constraint firstItem="yJF-tP-xtG" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" constant="16" id="qsK-cv-RMf"/>
+                            <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="yJF-tP-xtG" secondAttribute="trailing" id="oWN-cr-ZJZ"/>
+                            <constraint firstItem="yJF-tP-xtG" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" id="qsK-cv-RMf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3eh-di-0hX"/>
                     </view>

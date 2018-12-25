@@ -16,6 +16,8 @@ class MainContentTableViewController: UITableViewController {
 
     private var posts: [Post] = []
     
+    private lazy var keywords = (User.fetch()?.keywords)!
+    
     private var fixedPosts: [Post] {
         return posts.filter { $0.number == 0 }
     }
@@ -42,7 +44,6 @@ class MainContentTableViewController: UITableViewController {
         registerForPreviewing(with: self, sourceView: tableView)
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
-        tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
     }
     
@@ -98,6 +99,14 @@ extension MainContentTableViewController {
                 if !fixedPosts.isEmpty {
                     let post = fixedPosts[indexPath.row]
                     cell.textLabel?.text = post.title
+                    // 키워드 뽑아내기. 알고리즘 찾아보기..
+                    keywords.forEach { keyword in
+                        let regex = try? NSRegularExpression(pattern: "\\b\(keyword)\\b", options: [])
+                        let matches = regex?.numberOfMatches(in: post.title, options: [], range: NSRange(location: 0, length: post.title.count))
+                        if matches != 0 {
+                            cell.textLabel?.textColor = .blue
+                        }
+                    }
                     cell.detailTextLabel?.text = post.date
                 }
             } else {
@@ -130,7 +139,10 @@ extension MainContentTableViewController {
 extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // 북마크에 저장
+        let post = posts[indexPath.row]
+        let fullLink = universityModel.postURL(inCategory: category, link: post.link)
+        let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLink)
+        User.insertBookmark(bookmark)
         present(safariViewController(at: indexPath.row), animated: true)
     }
     
@@ -179,25 +191,6 @@ extension MainContentTableViewController {
         }
         return .leastNonzeroMagnitude
     }
-//
-//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let action = UIContextualAction(style: .normal, title: "북마크") { action, view, isPerformed in
-//            // 저장
-//            print("북마크")
-//        }
-//        action.backgroundColor = .orange
-//        let config = UISwipeActionsConfiguration(actions: [action])
-//        config.performsFirstActionWithFullSwipe = false
-//        return config
-//    }
-//
-//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        return UISwipeActionsConfiguration(actions: [])
-//    }
 }
 
 extension MainContentTableViewController: UIViewControllerPreviewingDelegate {

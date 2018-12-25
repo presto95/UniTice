@@ -29,18 +29,14 @@ enum University: String, CaseIterable {
     // ㅎ
     
     static func generateModel() -> UniversityModel {
-        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-        if let universityString = try? (context?.fetch(User.fetchRequest()).last as? User)?.university {
-            let university = University(rawValue: universityString ?? "") ?? .dongduk
-            switch university {
-            case .dongduk:
-                return Seoultech()
-            case .mju:
-                return Mju()
-            case .seoultech:
-                return Seoultech()
-            }
-        } else {
+        let user = User.fetch() ?? User()
+        let university = University(rawValue: user.university) ?? .dongduk
+        switch university {
+        case .dongduk:
+            return Seoultech()
+        case .mju:
+            return Mju()
+        case .seoultech:
             return Seoultech()
         }
     }

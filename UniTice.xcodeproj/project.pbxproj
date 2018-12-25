@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B6470219728CC005E5CE6 /* AppDelegate.swift */; };
-		191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B6472219728CC005E5CE6 /* MainViewController.swift */; };
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
@@ -53,7 +52,6 @@
 /* Begin PBXFileReference section */
 		191B646D219728CC005E5CE6 /* UniTice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniTice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191B6470219728CC005E5CE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		191B6472219728CC005E5CE6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		191B6475219728CC005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		191B6477219728CD005E5CE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 		1959D57121CE12C600F6182F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				191B6472219728CC005E5CE6 /* MainViewController.swift */,
 				1959D57221CE13D400F6182F /* MainContainerViewController.swift */,
 				1959D57421CE192000F6182F /* MainContentTableViewController.swift */,
 				194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */,
@@ -482,7 +479,6 @@
 				193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */,
 				19ED807321CA63C200BA6529 /* StartMainViewController.swift in Sources */,
 				194BF41F219EA54E00FA6124 /* ChangeUniversityViewController.swift in Sources */,
-				191B6473219728CC005E5CE6 /* MainViewController.swift in Sources */,
 				19AB910121D21929000CB844 /* User.swift in Sources */,
 				1959D57D21CE2A5D00F6182F /* Mju.swift in Sources */,
 				19C6BBBC2197F8D4002FC39C /* University.swift in Sources */,

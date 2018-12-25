@@ -49,23 +49,12 @@ class StartFinishViewController: UIViewController {
     }
     
     @objc private func touchUpConfirmButton(_ sender: UIButton) {
-        // Core Data에 초기 설정 저장
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            if let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as? User {
-                user.university = InitialInfo.shared.university.rawValue
-                InitialInfo.shared.keywords.forEach { text in
-                    let keyword = Keyword(context: context)
-                    keyword.keyword = text
-                    user.addToKeyword(keyword)
-                }
-            }
-            do {
-                try context.save()
-            } catch {
-                context.rollback()
-            }
-            
-        }
+        let university = InitialInfo.shared.university.rawValue
+        let keywords = InitialInfo.shared.keywords
+        let user = User()
+        user.university = university
+        user.keywords.append(objectsIn: keywords)
+        User.addUser(user)
         let next = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
         next.modalTransitionStyle = .flipHorizontal
         present(next, animated: true, completion: nil)
