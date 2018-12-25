@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = UIViewController.instantiate(from: "Start", identifier: "StartNavigationController")
         } else {
             window?.rootViewController = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
+            addShortcut(to: application)
         }
         window?.makeKeyAndVisible()
         return true
@@ -127,5 +128,30 @@ extension AppDelegate: MessagingDelegate {
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
         print("Received data message: \(remoteMessage.appData)")
+    }
+}
+
+// MARK: - App Shortcut
+extension AppDelegate {
+    private func presentBookmark() {
+        let mainViewController = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
+        let bookmarkViewController = UIViewController.instantiate(from: "Main", identifier: BookmarkViewController.classNameToString)
+        if window?.rootViewController == nil {
+            window?.rootViewController = mainViewController
+            window?.makeKeyAndVisible()
+        } else {
+            (window?.rootViewController as? UINavigationController)?.pushViewController(bookmarkViewController, animated: true)
+        }
+    }
+    
+    private func addShortcut(to application: UIApplication) {
+        let bookmarkShortcut = UIMutableApplicationShortcutItem(type: "Bookmark", localizedTitle: "북마크", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .bookmark), userInfo: nil)
+        application.shortcutItems = [bookmarkShortcut]
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "Bookmark" {
+            presentBookmark()
+        }
     }
 }

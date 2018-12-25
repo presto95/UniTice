@@ -27,10 +27,10 @@ class SettingTableViewController: UITableViewController {
         super.viewDidLoad()
         title = "설정"
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            if settings.authorizationStatus != .authorized {
-                self.notificationHasGranted = false
-            } else {
+            if settings.authorizationStatus == .authorized {
                 self.notificationHasGranted = true
+            } else {
+                self.notificationHasGranted = false
             }
         }
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveEnterForegroundNotification(_:)), name: NSNotification.Name("willEnterForeground"), object: nil)
