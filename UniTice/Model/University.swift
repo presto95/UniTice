@@ -33,7 +33,7 @@ enum University: String, CaseIterable {
         let university = University(rawValue: user.university) ?? .dongduk
         switch university {
         case .dongduk:
-            return Seoultech()
+            return Dongduk()
         case .mju:
             return Mju()
         case .seoultech:

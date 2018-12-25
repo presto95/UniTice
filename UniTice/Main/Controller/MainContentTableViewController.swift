@@ -71,9 +71,7 @@ class MainContentTableViewController: UITableViewController {
         })
     }
     
-    private func safariViewController(at row: Int) -> SFSafariViewController {
-        let link = posts[row].link
-        guard let url = URL(string: universityModel.postURL(inCategory: category, link: link)) else { fatalError("invalid url format") }
+    private func safariViewController(url: URL) -> SFSafariViewController {
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
@@ -139,11 +137,13 @@ extension MainContentTableViewController {
 extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let post = posts[indexPath.row]
+        let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
         let fullLink = universityModel.postURL(inCategory: category, link: post.link)
         let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLink)
         User.insertBookmark(bookmark)
-        present(safariViewController(at: indexPath.row), animated: true)
+        if let url = URL(string: fullLink) {
+            present(safariViewController(url: url), animated: true)
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -186,7 +186,11 @@ extension MainContentTableViewController {
 extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = tableView.indexPathForRow(at: location) {
-            return safariViewController(at: indexPath.row)
+            let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
+            let fullLink = universityModel.postURL(inCategory: category, link: post.link)
+            if let url = URL(string: fullLink) {
+                return safariViewController(url: url)
+            }
         }
         return nil
     }

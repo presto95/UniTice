@@ -79,6 +79,9 @@ extension BookmarkViewController: UITableViewDelegate {
 
 extension BookmarkViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            return safariViewController(at: indexPath.row)
+        }
         return nil
     }
     
