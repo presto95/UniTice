@@ -49,7 +49,9 @@ class MainContentTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestPosts()
+        if posts.isEmpty {
+            requestPosts()
+        }
     }
     
     @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
@@ -98,13 +100,13 @@ extension MainContentTableViewController {
                     let post = fixedPosts[indexPath.row]
                     cell.textLabel?.text = post.title
                     // 키워드 뽑아내기. 알고리즘 찾아보기..
-                    keywords.forEach { keyword in
-                        let regex = try? NSRegularExpression(pattern: "\\b\(keyword)\\b", options: [])
-                        let matches = regex?.numberOfMatches(in: post.title, options: [], range: NSRange(location: 0, length: post.title.count))
-                        if matches != 0 {
-                            cell.textLabel?.textColor = .blue
-                        }
-                    }
+//                    keywords.forEach { keyword in
+//                        let regex = try? NSRegularExpression(pattern: "\\b\(keyword)\\b", options: [])
+//                        let matches = regex?.numberOfMatches(in: post.title, options: [], range: NSRange(location: 0, length: post.title.count))
+//                        if matches != 0 {
+//                            cell.textLabel?.textColor = .blue
+//                        }
+//                    }
                     cell.detailTextLabel?.text = post.date
                 }
             } else {

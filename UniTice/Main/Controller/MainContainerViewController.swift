@@ -53,6 +53,7 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
         let universityLabel = UILabel()
         universityLabel.text = universityModel.name
         universityLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        universityLabel.sizeToFit()
         let leftBarButtonItem = UIBarButtonItem(customView: universityLabel)
         navigationItem.setLeftBarButton(leftBarButtonItem, animated: false)
     }

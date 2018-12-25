@@ -31,7 +31,7 @@ struct Seoultech: UniversityModel {
     }
     
     func requestPosts(inCategory category: Seoultech.Category, inPage page: Int, completion: @escaping (([Post]) -> Void)) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
             guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
             guard let doc = try? HTML(url: url, encoding: .utf8) else { return }

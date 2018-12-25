@@ -41,22 +41,24 @@ struct Dongduk: UniversityModel {
     }
     
     func requestPosts(inCategory category: Dongduk.Category, inPage page: Int, completion: @escaping (([Post]) -> Void)) {
-        var posts = [Post]()
-        guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
-        guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
-        let numbers = doc.xpath("//tbody//td[@class='td-01']")
-        let titles = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a")
-        let links = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a/@href")
-        let dates = doc.xpath("//tbody//td[@class='td-05']")
-        for (index, element) in titles.enumerated() {
-            let number = Int(numbers[index].text ?? "") ?? 0
-            let title = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-            let link = links[index].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-            let date = dates[index].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-            let post = Post(number: number, title: title, date: date, link: link)
-            posts.append(post)
+        DispatchQueue.global(qos: .background).async {
+            var posts = [Post]()
+            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
+            guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
+            let numbers = doc.xpath("//tbody//td[@class='td-01']")
+            let titles = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a")
+            let links = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a/@href")
+            let dates = doc.xpath("//tbody//td[@class='td-05']")
+            for (index, element) in titles.enumerated() {
+                let number = Int(numbers[index].text ?? "") ?? 0
+                let title = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
+                let link = links[index].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
+                let date = dates[index].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
+                let post = Post(number: number, title: title, date: date, link: link)
+                posts.append(post)
+            }
+            completion(posts)
         }
-        completion(posts)
     }
 }
 
