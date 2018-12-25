@@ -8,9 +8,9 @@
 
 import Foundation
 
-class StartInfo {
+class InitialInfo {
     
-    static let shared = StartInfo()
+    static let shared = InitialInfo()
     
     var university: University = .dongduk
     

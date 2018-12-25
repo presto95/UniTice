@@ -42,7 +42,7 @@ class StartKeywordRegisterViewController: UIViewController {
     }
     
     @objc private func touchUpConfirmButton(_ sender: UIButton) {
-        StartInfo.shared.keywords = keywords
+        InitialInfo.shared.keywords = keywords
         let next = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
         navigationController?.pushViewController(next, animated: true)
     }

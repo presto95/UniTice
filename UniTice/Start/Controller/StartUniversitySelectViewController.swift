@@ -43,7 +43,7 @@ class StartUniversitySelectViewController: UIViewController {
     
     @objc private func touchUpConfirmButton(_ sender: UIButton) {
         let universityIndex = pickerView.selectedRow(inComponent: 0)
-        StartInfo.shared.university = universities[universityIndex]
+        InitialInfo.shared.university = universities[universityIndex]
         let next = UIViewController.instantiate(from: "Start", identifier: StartKeywordRegisterViewController.classNameToString)
         navigationController?.pushViewController(next, animated: true)
     }

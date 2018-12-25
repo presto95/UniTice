@@ -13,13 +13,13 @@ class StartFinishViewController: UIViewController {
     
     @IBOutlet weak var universityLabel: UILabel! {
         didSet {
-            universityLabel.text = StartInfo.shared.university.rawValue
+            universityLabel.text = InitialInfo.shared.university.rawValue
         }
     }
     
     @IBOutlet weak var keywordLabel: UILabel! {
         didSet {
-            let keywords = StartInfo.shared.keywords
+            let keywords = InitialInfo.shared.keywords
             if keywords.isEmpty {
                 keywordLabel.text = "없음"
             } else {
@@ -52,8 +52,8 @@ class StartFinishViewController: UIViewController {
         // Core Data에 초기 설정 저장
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             if let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as? User {
-                user.university = StartInfo.shared.university.rawValue
-                StartInfo.shared.keywords.forEach { text in
+                user.university = InitialInfo.shared.university.rawValue
+                InitialInfo.shared.keywords.forEach { text in
                     let keyword = Keyword(context: context)
                     keyword.keyword = text
                     user.addToKeyword(keyword)
