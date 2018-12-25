@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 첫 화면 설정
         window = UIWindow(frame: UIScreen.main.bounds)
+        window?.tintColor = .purple
         if User.fetch() == nil {
             window?.rootViewController = UIViewController.instantiate(from: "Start", identifier: "StartNavigationController")
         } else {
