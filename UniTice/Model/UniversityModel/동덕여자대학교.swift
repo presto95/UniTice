@@ -32,18 +32,18 @@ struct 동덕여자대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 동덕여자대학교.Category, inPage page: Int, searchText: String = "") -> String {
-        return "\(url1)\(url2)\(category.name)\(url3)\(page)\(searchText.percentEncoding)"
+    func pageURL(inCategory category: 동덕여자대학교.Category, inPage page: Int, searchText: String) -> String {
+        return "\(url1)\(url2)\(category.name)\(url3)\(searchText.percentEncoding)\(url4)\(page)"
     }
     
     func postURL(inCategory category: 동덕여자대학교.Category, link: String) -> String {
         return "\(url1)\(link)"
     }
     
-    func requestPosts(inCategory category: 동덕여자대학교.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 동덕여자대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
-            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
+            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: text)) else { return }
             guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
             let numbers = doc.xpath("//tbody//td[@class='td-01']")
             let titles = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a")
@@ -72,6 +72,10 @@ extension 동덕여자대학교 {
     }
     
     private var url3: String {
-        return "&searchField=ALL&searchValue=&currentPage="
+        return "&searchField=TITLE&searchValue="
+    }
+    
+    private var url4: String {
+        return "&currentPage="
     }
 }

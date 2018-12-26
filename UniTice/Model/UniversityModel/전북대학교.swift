@@ -31,7 +31,7 @@ struct 전북대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 전북대학교.Category, inPage page: Int, searchText: String = "") -> String {
+    func pageURL(inCategory category: 전북대학교.Category, inPage page: Int, searchText: String) -> String {
         return "\(url1)\(url2)\(url3)\(category.name.percentEncoding)\(url4)\(page)\(url5)\(searchText.percentEncoding)"
     }
     
@@ -39,10 +39,10 @@ struct 전북대학교: UniversityModel {
         return "\(url1)\(link)"
     }
     
-    func requestPosts(inCategory category: 전북대학교.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 전북대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
-            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
+            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: text)) else { return }
             guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
             let numbers = doc.xpath("//table[@class='ta_bo']//tbody//th[@scope='row']")
             let rows = doc.xpath("//table[@class='ta_bo']//tbody//td")
