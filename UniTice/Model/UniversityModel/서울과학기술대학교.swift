@@ -71,6 +71,16 @@ extension 서울과학기술대학교 {
             return "/?bidx=6112&bnum=6112&allboard=true&page="
         case "janghak":
             return "/?bidx=5233&bnum=5233&allboard=true&page="
+        case "graduate":
+            return "/?bidx=56589&bnum=56589&allboard=false&page="
+        case "bid":
+            return "/?bidx=4694&bnum=4694&allboard=true&page="
+        case "recruit":
+            return "/?bidx=3601&bnum=3601&allboard=false&page="
+        case "committee":
+            return "/?bidx=3606&bnum=3606&allboard=false&page="
+        case "budgetcomm":
+            return "/?bidx=56473&bnum=56473&allboard=false&page="
         default:
             return ""
         }
@@ -84,6 +94,16 @@ extension 서울과학기술대학교 {
             return "&size=5&searchtype=1&searchtext="
         case "janghak":
             return "&size=5&searchtype=1&searchtext="
+        case "graduate":
+            return "&size=9&searchtype=1&searchtext="
+        case "bid":
+            return "&size=9&searchtype=1&searchtext="
+        case "recruit":
+            return "&size=10&searchtype=1&searchtext="
+        case "committee":
+            return "&size=15&searchtype=1&searchtext="
+        case "budgetcomm":
+            return "&size=15&searchtype=1&searchtext="
         default:
             return ""
         }
