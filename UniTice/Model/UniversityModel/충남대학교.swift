@@ -43,10 +43,10 @@ struct 충남대학교: UniversityModel {
                 let numberIndex = index * 6
                 let titleIndex = index * 6 + 1
                 let dateIndex = index * 6 + 3
-                let number = Int(rows[numberIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let date = rows[dateIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                var realLink = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
+                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                let title = rows[titleIndex].text?.trimmed ?? "?"
+                let date = rows[dateIndex].text?.trimmed ?? "?"
+                var realLink = element.text?.trimmed ?? "?"
                 realLink.removeFirst()
                 let post = Post(number: number, title: title, date: date, link: realLink)
                 posts.append(post)

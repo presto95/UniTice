@@ -50,10 +50,10 @@ struct 전북대학교: UniversityModel {
             for (index, element) in links.enumerated() {
                 let titleIndex = index * 6 + 1
                 let dateIndex = index * 6 + 4
-                let number = Int(numbers[index].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let date = rows[dateIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let link = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
+                let number = Int(numbers[index].text?.trimmed ?? "") ?? 0
+                let title = rows[titleIndex].text?.trimmed ?? "?"
+                let date = rows[dateIndex].text?.trimmed ?? "?"
+                let link = element.text?.trimmed ?? "?"
                 let post = Post(number: number, title: title, date: date, link: link)
                 posts.append(post)
             }

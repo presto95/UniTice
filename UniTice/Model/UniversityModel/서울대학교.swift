@@ -39,10 +39,10 @@ struct 서울대학교: UniversityModel {
                 let numberIndex = index * 4
                 let titleIndex = index * 4 + 1
                 let dateIndex = index * 4 + 2
-                let number = Int(rows[numberIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let date = rows[dateIndex].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let link = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
+                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                let title = rows[titleIndex].text?.trimmed ?? "?"
+                let date = rows[dateIndex].text?.trimmed ?? "?"
+                let link = element.text?.trimmed ?? "?"
                 let post = Post(number: number, title: title, date: date, link: link)
                 posts.append(post)
             }

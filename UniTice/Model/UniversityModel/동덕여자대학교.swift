@@ -51,9 +51,9 @@ struct 동덕여자대학교: UniversityModel {
             let dates = doc.xpath("//tbody//td[@class='td-05']")
             for (index, element) in titles.enumerated() {
                 let number = Int(numbers[index].text ?? "") ?? 0
-                let title = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let link = links[index].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
-                let date = dates[index].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "?"
+                let title = element.text?.trimmed ?? "?"
+                let link = links[index].text?.trimmed ?? "?"
+                let date = dates[index].text?.trimmed ?? "?"
                 let post = Post(number: number, title: title, date: date, link: link)
                 posts.append(post)
             }
