@@ -16,7 +16,6 @@ target 'UniTice' do
   pod 'XLPagerTabStrip', '~> 8.1'
   pod 'KeychainAccess'
   pod 'RealmSwift'
-  pod 'Highlighter'
   # Pods for UniTice
 end
 

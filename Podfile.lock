@@ -57,7 +57,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
-  - Highlighter (1.2.0)
   - Kanna (4.0.2)
   - KeychainAccess (3.1.2)
   - MarqueeLabel/Swift (3.2.0)
@@ -82,7 +81,6 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - Firebase/Core
   - Firebase/Messaging
-  - Highlighter
   - Kanna (~> 4.0.0)
   - KeychainAccess
   - MarqueeLabel/Swift
@@ -104,7 +102,6 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleUtilities
-    - Highlighter
     - Kanna
     - KeychainAccess
     - MarqueeLabel
@@ -128,7 +125,6 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 0f14a264b0d7f867e8eff5d3556bc5d0d4e57888
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
-  Highlighter: 60c180dcffaeca3cadcb7a353f9d19345a59ea3f
   Kanna: c60b61d72554bf04ed1ee074f9b379855cab4892
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
@@ -140,6 +136,6 @@ SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: 79cc1256261a1ad189e29d9c027c89e4fbac2628
+PODFILE CHECKSUM: cd81ad848dcec0cc8e7af42d38056a2bd39f2d06
 
 COCOAPODS: 1.6.0.beta.1

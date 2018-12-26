@@ -10,7 +10,6 @@ import UIKit
 import XLPagerTabStrip
 import SnapKit
 import SkeletonView
-import Highlighter
 import SafariServices
 
 class MainContentTableViewController: UITableViewController {
@@ -134,18 +133,32 @@ extension MainContentTableViewController {
             tableView.allowsSelection = true
             cell.textLabel?.hideSkeleton()
             cell.detailTextLabel?.hideSkeleton()
+            cell.textLabel?.backgroundColor = .white
             cell.detailTextLabel?.backgroundColor = .white
             if indexPath.section == 0 {
                 if !fixedPosts.isEmpty {
                     let post = fixedPosts[indexPath.row]
-                    cell.textLabel?.text = post.title
-                    keywords.forEach { keyword in
-                        cell.textLabel?.highlight(text: keyword, normal: nil, highlight: [
-                            .foregroundColor: UIColor.purple,
-                            .backgroundColor: UIColor.cyan,
-                            .font: UIFont.systemFont(ofSize: 15, weight: .heavy)
-                            ])
-                        
+                    let title = post.title
+                    let attributedString = NSMutableAttributedString(string: title)
+                    if !keywords.isEmpty {
+                        for keyword in keywords {
+                            do {
+                                let regex = try NSRegularExpression(pattern: keyword, options: .caseInsensitive)
+                                let range = NSRange(location: 0, length: title.utf16.count)
+                                for match in regex.matches(in: title, options: .withTransparentBounds, range: range) {
+                                    attributedString.addAttributes([
+                                        .backgroundColor: UIColor.cyan,
+                                        .foregroundColor: UIColor.purple,
+                                        .font: UIFont.systemFont(ofSize: 15, weight: .heavy)
+                                        ], range: match.range)
+                                }
+                                cell.textLabel?.attributedText = attributedString
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    } else {
+                        cell.textLabel?.text = post.title
                     }
                     cell.detailTextLabel?.text = post.date
                 }
