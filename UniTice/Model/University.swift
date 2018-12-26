@@ -52,6 +52,8 @@ extension University {
             return 동덕여자대학교()
         case .mju:
             return 명지대학교()
+        case .pusan:
+            return 부산대학교()
         case .snu:
             return 서울대학교()
         case .seoultech:
