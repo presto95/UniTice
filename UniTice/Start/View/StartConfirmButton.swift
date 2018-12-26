@@ -25,7 +25,7 @@ class StartConfirmButton: UIButton {
         layer.cornerRadius = bounds.height / 2
         layer.borderWidth = 1
         layer.borderColor = UIColor.purple.cgColor
-        titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         setTitle("확인", for: [])
         setTitleColor(.purple, for: [])
     }
