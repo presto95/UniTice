@@ -8,13 +8,13 @@
 
 import Kanna
 
-struct Seoultech: UniversityModel {
+struct 서울과학기술대학교: UniversityModel {
     
     var name: String {
         return "서울과학기술대학교"
     }
     
-    var categories: [Seoultech.Category] {
+    var categories: [서울과학기술대학교.Category] {
         return [
             ("notice", "대학공지사항"),
             ("matters", "학사공지"),
@@ -22,15 +22,15 @@ struct Seoultech: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: Seoultech.Category, inPage page: Int, searchText: String = "") -> String {
+    func pageURL(inCategory category: 서울과학기술대학교.Category, inPage page: Int, searchText: String = "") -> String {
         return "\(url1)\(category.name)\(url2(ofCategory: category))\(page)\(url3(ofCategory: category))\(searchText)"
     }
     
-    func postURL(inCategory category: Seoultech.Category, link: String) -> String {
+    func postURL(inCategory category: 서울과학기술대학교.Category, link: String) -> String {
         return "\(url1)\(category.name)\(link)"
     }
     
-    func requestPosts(inCategory category: Seoultech.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 서울과학기술대학교.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
             guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
@@ -53,12 +53,12 @@ struct Seoultech: UniversityModel {
     }
 }
 
-extension Seoultech {
+extension 서울과학기술대학교 {
     private var url1: String {
         return "http://www.seoultech.ac.kr/service/info/"
     }
     
-    private func url2(ofCategory category: Seoultech.Category) -> String {
+    private func url2(ofCategory category: 서울과학기술대학교.Category) -> String {
         switch category.name {
         case "notice":
             return "/?bidx=4691&bnum=4691&allboard=false&page="
@@ -71,7 +71,7 @@ extension Seoultech {
         }
     }
     
-    private func url3(ofCategory category: Seoultech.Category) -> String {
+    private func url3(ofCategory category: 서울과학기술대학교.Category) -> String {
         switch category.name {
         case "notice":
             return "&size=9&searchtype=1&searchtext="

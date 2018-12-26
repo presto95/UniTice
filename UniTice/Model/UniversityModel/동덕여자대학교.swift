@@ -8,13 +8,13 @@
 
 import Kanna
 
-struct Dongduk: UniversityModel {
+struct 동덕여자대학교: UniversityModel {
     
     var name: String {
         return "동덕여자대학교"
     }
     
-    var categories: [Dongduk.Category] {
+    var categories: [동덕여자대학교.Category] {
         return [
             ("ALL", "전체"),
             ("42", "교무처"),
@@ -32,15 +32,15 @@ struct Dongduk: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: Dongduk.Category, inPage page: Int, searchText: String = "") -> String {
+    func pageURL(inCategory category: 동덕여자대학교.Category, inPage page: Int, searchText: String = "") -> String {
         return "\(url1)\(url2)\(category.name)\(url3)\(page)\(searchText)"
     }
     
-    func postURL(inCategory category: Dongduk.Category, link: String) -> String {
+    func postURL(inCategory category: 동덕여자대학교.Category, link: String) -> String {
         return "\(url1)\(link)"
     }
     
-    func requestPosts(inCategory category: Dongduk.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 동덕여자대학교.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
             guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
@@ -62,7 +62,7 @@ struct Dongduk: UniversityModel {
     }
 }
 
-extension Dongduk {
+extension 동덕여자대학교 {
     private var url1: String {
         return "https://www.dongduk.ac.kr"
     }

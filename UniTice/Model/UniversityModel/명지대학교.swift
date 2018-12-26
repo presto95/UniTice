@@ -8,13 +8,13 @@
 
 import Kanna
 
-struct Mju: UniversityModel {
+struct 명지대학교: UniversityModel {
 
     var name: String {
         return "명지대학교"
     }
     
-    var categories: [Mju.Category] {
+    var categories: [명지대학교.Category] {
         return [
             ("11294", "일반공지"),
             ("11310", "성적/수강공지"),
@@ -23,15 +23,15 @@ struct Mju: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: Mju.Category, inPage page: Int, searchText: String) -> String {
+    func pageURL(inCategory category: 명지대학교.Category, inPage page: Int, searchText: String) -> String {
         return "\(url1)\("list.jsp?boardId=")\(category.name)\(url2(ofCategory: category))\(page)"
     }
     
-    func postURL(inCategory category: Mju.Category, link: String) -> String {
+    func postURL(inCategory category: 명지대학교.Category, link: String) -> String {
         return "\(url1)\(link)"
     }
     
-    func requestPosts(inCategory category: Mju.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 명지대학교.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
             guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: "")) else { return }
@@ -54,12 +54,12 @@ struct Mju: UniversityModel {
     }
 }
 
-extension Mju {
+extension 명지대학교 {
     private var url1: String {
         return "http://www.mju.ac.kr/mbs/mjukr/jsp/board/"
     }
     
-    private func url2(ofCategory category: Mju.Category) -> String {
+    private func url2(ofCategory category: 명지대학교.Category) -> String {
         switch category.name {
         case "11294":
             return "&search=&column=&categoryDepth=&categoryId=0&mcategoryId=&boardType=01&listType=01&command=list&id=mjukr_050101000000&spage="
