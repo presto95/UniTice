@@ -12,7 +12,7 @@ class MainNoticeHeaderView: UIView {
     
     var state: Bool = false {
         didSet {
-            foldButton.setTitle(state ? "펼치기" : "접기", for: [])
+            foldButton.setImage(state ? UIImage(named: "arrow_down") : UIImage(named: "arrow_up"), for: [])
         }
     }
     
@@ -20,6 +20,8 @@ class MainNoticeHeaderView: UIView {
     
     @IBOutlet weak var foldButton: UIButton! {
         didSet {
+            foldButton.setTitle(nil, for: [])
+            foldButton.imageView?.contentMode = .scaleAspectFit
             foldButton.addTarget(self, action: #selector(touchUpFoldButton(_:)), for: .touchUpInside)
         }
     }

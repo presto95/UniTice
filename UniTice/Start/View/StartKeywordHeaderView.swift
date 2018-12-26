@@ -27,7 +27,7 @@ class StartKeywordHeaderView: UIView {
     
     @objc private func touchUpAddButton(_ sender: UIButton) {
         if let text = keywordTextField.text {
-            touchUpAddButtonHandler?(text)
+            touchUpAddButtonHandler?(text.replacingOccurrences(of: " ", with: ""))
             keywordTextField.text = nil
         }
     }

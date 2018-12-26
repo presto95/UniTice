@@ -14,6 +14,8 @@ class BookmarkViewController: UIViewController {
 
     private lazy var universityModel = University.generateModel()
     
+    private lazy var keywords = (User.fetch()?.keywords)!
+    
     private var bookmarks = User.fetch()?.bookmarks
     
     @IBOutlet private weak var tableView: UITableView! {
@@ -47,7 +49,7 @@ extension BookmarkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
         let bookmark = bookmarks?[indexPath.row]
-        cell.textLabel?.text = bookmark?.title
+        cell.textLabel?.attributedText = bookmark?.title.highlightKeywords(Array(keywords))
         cell.detailTextLabel?.text = bookmark?.date
         return cell
     }

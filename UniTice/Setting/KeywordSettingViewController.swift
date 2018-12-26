@@ -45,7 +45,7 @@ class KeywordSettingViewController: UIViewController {
             let alert = UIAlertController(title: "", message: "키워드", preferredStyle: .alert)
             alert.addTextField { _ in }
             let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
-                if let text = alert.textFields?.first?.text {
+                if let text = alert.textFields?.first?.text?.replacingOccurrences(of: " ", with: "") {
                     User.insertKeyword(text) { hasDuplicated in
                         if !hasDuplicated {
                             self.keywords.insert(text, at: 0)
@@ -55,7 +55,6 @@ class KeywordSettingViewController: UIViewController {
                             .alert(title: "", message: "키워드 중복")
                             .action(title: "확인")
                             .present(to: self)
-                            return
                         }
                     }
                 }

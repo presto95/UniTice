@@ -138,34 +138,13 @@ extension MainContentTableViewController {
             if indexPath.section == 0 {
                 if !fixedPosts.isEmpty {
                     let post = fixedPosts[indexPath.row]
-                    let title = post.title
-                    let attributedString = NSMutableAttributedString(string: title)
-                    if !keywords.isEmpty {
-                        for keyword in keywords {
-                            do {
-                                let regex = try NSRegularExpression(pattern: keyword, options: .caseInsensitive)
-                                let range = NSRange(location: 0, length: title.utf16.count)
-                                for match in regex.matches(in: title, options: .withTransparentBounds, range: range) {
-                                    attributedString.addAttributes([
-                                        .backgroundColor: UIColor.cyan,
-                                        .foregroundColor: UIColor.purple,
-                                        .font: UIFont.systemFont(ofSize: 15, weight: .heavy)
-                                        ], range: match.range)
-                                }
-                                cell.textLabel?.attributedText = attributedString
-                            } catch {
-                                print(error.localizedDescription)
-                            }
-                        }
-                    } else {
-                        cell.textLabel?.text = post.title
-                    }
+                    cell.textLabel?.attributedText = post.title.highlightKeywords(Array(keywords))
                     cell.detailTextLabel?.text = post.date
                 }
             } else {
                 if !standardPosts.isEmpty {
                     let post = standardPosts[indexPath.row]
-                    cell.textLabel?.text = post.title
+                    cell.textLabel?.attributedText = post.title.highlightKeywords(Array(keywords))
                     cell.detailTextLabel?.text = post.date
                 }
             }

@@ -28,8 +28,8 @@
 		1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */; };
 		1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */; };
 		1976CE3521CF61B200897E39 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE3321CF61B200897E39 /* PostCell.xib */; };
-		1995DE8521D31D90005FE193 /* FooterLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1995DE8321D31D90005FE193 /* FooterLoadingCell.swift */; };
-		1995DE8621D31D90005FE193 /* FooterLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1995DE8421D31D90005FE193 /* FooterLoadingCell.xib */; };
+		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
+		198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AC21D343BF00AF4801 /* SearchViewController.swift */; };
 		19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* InitialInfo.swift */; };
 		19AB910121D21929000CB844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB910021D21929000CB844 /* User.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
@@ -78,8 +78,8 @@
 		1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		1976CE3321CF61B200897E39 /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
-		1995DE8321D31D90005FE193 /* FooterLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLoadingCell.swift; sourceTree = "<group>"; };
-		1995DE8421D31D90005FE193 /* FooterLoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterLoadingCell.xib; sourceTree = "<group>"; };
+		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		198DC0AC21D343BF00AF4801 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* InitialInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfo.swift; sourceTree = "<group>"; };
 		19AB910021D21929000CB844 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -188,6 +188,7 @@
 				19ED807C21CB67C400BA6529 /* UIViewController+.swift */,
 				19ED807E21CB6A8100BA6529 /* NSObject+.swift */,
 				19ED808821CB7C7600BA6529 /* UIView+.swift */,
+				198DC0AA21D33F5700AF4801 /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -198,8 +199,6 @@
 				1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */,
 				1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */,
 				1976CE3321CF61B200897E39 /* PostCell.xib */,
-				1995DE8421D31D90005FE193 /* FooterLoadingCell.xib */,
-				1995DE8321D31D90005FE193 /* FooterLoadingCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +209,7 @@
 				1959D57221CE13D400F6182F /* MainContainerViewController.swift */,
 				1959D57421CE192000F6182F /* MainContentTableViewController.swift */,
 				194BF415219D45B100FA6124 /* SearchResultTableViewController.swift */,
+				198DC0AC21D343BF00AF4801 /* SearchViewController.swift */,
 				194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */,
 				193005EC21B14658003C9DBB /* SettingTableViewController.swift */,
 			);
@@ -375,7 +375,6 @@
 				193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */,
 				19AF276921983A85009488C8 /* .swiftlint.yml in Resources */,
 				191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */,
-				1995DE8621D31D90005FE193 /* FooterLoadingCell.xib in Resources */,
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 				1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */,
@@ -490,11 +489,11 @@
 				1959D57D21CE2A5D00F6182F /* Mju.swift in Sources */,
 				19C6BBBC2197F8D4002FC39C /* University.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
+				198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */,
 				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
 				19ED808921CB7C7600BA6529 /* UIView+.swift in Sources */,
 				19ED806F21CA5FA000BA6529 /* Seoultech.swift in Sources */,
-				1995DE8521D31D90005FE193 /* FooterLoadingCell.swift in Sources */,
 				19AF276621983127009488C8 /* Post.swift in Sources */,
 				19ED807921CA63DC00BA6529 /* StartFinishViewController.swift in Sources */,
 				19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */,
@@ -507,6 +506,7 @@
 				1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */,
 				19ED807521CA63CB00BA6529 /* StartUniversitySelectViewController.swift in Sources */,
 				1959D57521CE192000F6182F /* MainContentTableViewController.swift in Sources */,
+				198DC0AB21D33F5700AF4801 /* String+.swift in Sources */,
 				19ED807F21CB6A8100BA6529 /* NSObject+.swift in Sources */,
 				1959D57321CE13D400F6182F /* MainContainerViewController.swift in Sources */,
 				1959D57B21CE2A5600F6182F /* Dongduk.swift in Sources */,
