@@ -11,7 +11,7 @@ import SnapKit
 
 class ChangeUniversityViewController: UIViewController {
     
-    private var universities = University.allCases
+    private var universities = University.allCases.sorted { $0.rawValue < $1.rawValue }
     
     @IBOutlet private weak var pickerView: UIPickerView! {
         didSet {

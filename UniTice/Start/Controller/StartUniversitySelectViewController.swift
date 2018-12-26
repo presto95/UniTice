@@ -10,7 +10,7 @@ import UIKit
 
 class StartUniversitySelectViewController: UIViewController {
 
-    private let universities = University.allCases
+    private let universities = University.allCases.sorted { $0.rawValue < $1.rawValue }
     
     @IBOutlet private weak var pickerView: UIPickerView! {
         didSet {

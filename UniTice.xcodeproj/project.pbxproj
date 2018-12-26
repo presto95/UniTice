@@ -32,6 +32,7 @@
 		198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AC21D343BF00AF4801 /* SearchViewController.swift */; };
 		198DC0AF21D34A0700AF4801 /* 전남대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AE21D34A0700AF4801 /* 전남대학교.swift */; };
 		198DC0B121D34FC300AF4801 /* 서울대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0B021D34FC300AF4801 /* 서울대학교.swift */; };
+		198DC0B721D3569800AF4801 /* 제주대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0B621D3569800AF4801 /* 제주대학교.swift */; };
 		19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* InitialInfo.swift */; };
 		19AB910121D21929000CB844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB910021D21929000CB844 /* User.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
@@ -84,6 +85,7 @@
 		198DC0AC21D343BF00AF4801 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		198DC0AE21D34A0700AF4801 /* 전남대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "전남대학교.swift"; sourceTree = "<group>"; };
 		198DC0B021D34FC300AF4801 /* 서울대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "서울대학교.swift"; sourceTree = "<group>"; };
+		198DC0B621D3569800AF4801 /* 제주대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "제주대학교.swift"; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* InitialInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfo.swift; sourceTree = "<group>"; };
 		19AB910021D21929000CB844 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				19ED806E21CA5FA000BA6529 /* 서울과학기술대학교.swift */,
 				198DC0B021D34FC300AF4801 /* 서울대학교.swift */,
 				198DC0AE21D34A0700AF4801 /* 전남대학교.swift */,
+				198DC0B621D3569800AF4801 /* 제주대학교.swift */,
 			);
 			path = UniversityModel;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				198DC0AB21D33F5700AF4801 /* String+.swift in Sources */,
 				19ED807F21CB6A8100BA6529 /* NSObject+.swift in Sources */,
 				1959D57321CE13D400F6182F /* MainContainerViewController.swift in Sources */,
+				198DC0B721D3569800AF4801 /* 제주대학교.swift in Sources */,
 				1959D57B21CE2A5600F6182F /* 동덕여자대학교.swift in Sources */,
 				19ED807D21CB67C400BA6529 /* UIViewController+.swift in Sources */,
 				19ED808B21CB7CF400BA6529 /* StartKeywordHeaderView.swift in Sources */,
