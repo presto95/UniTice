@@ -2,6 +2,7 @@ disabled_rules:
 - leading_whitespace
 - trailing_whitespace
 - line_length
+- cyclomatic_complexity
 
 excluded:
 - Pods/
