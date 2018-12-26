@@ -28,7 +28,7 @@ struct 제주대학교: UniversityModel {
     }
     
     func pageURL(inCategory category: 제주대학교.Category, inPage page: Int, searchText: String = "") -> String {
-        return "\(url1)\(category.name)\(url2)\(page)\(url3)\(searchText)"
+        return "\(url1)\(category.name)\(url2)\(page)\(url3)\(searchText.percentEncoding)"
     }
     
     func postURL(inCategory category: 제주대학교.Category, link: String) -> String {

@@ -18,12 +18,17 @@ struct 서울과학기술대학교: UniversityModel {
         return [
             ("notice", "대학공지사항"),
             ("matters", "학사공지"),
-            ("janghak", "장학공지")
+            ("janghak", "장학공지"),
+            ("graduate", "대학원공지"),
+            ("bid", "대학입찰"),
+            ("recruit", "채용정보"),
+            ("committee", "등록금심의위원회"),
+            ("budgetcomm", "재정위원회")
         ]
     }
     
     func pageURL(inCategory category: 서울과학기술대학교.Category, inPage page: Int, searchText: String = "") -> String {
-        return "\(url1)\(category.name)\(url2(ofCategory: category))\(page)\(url3(ofCategory: category))\(searchText)"
+        return "\(url1)\(category.name)\(url2(ofCategory: category))\(page)\(url3(ofCategory: category))\(searchText.percentEncoding)"
     }
     
     func postURL(inCategory category: 서울과학기술대학교.Category, link: String) -> String {

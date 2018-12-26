@@ -23,7 +23,7 @@ struct 명지대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 명지대학교.Category, inPage page: Int, searchText: String) -> String {
+    func pageURL(inCategory category: 명지대학교.Category, inPage page: Int, searchText: String = "") -> String {
         return "\(url1)\("list.jsp?boardId=")\(category.name)\(url2(ofCategory: category))\(page)"
     }
     
