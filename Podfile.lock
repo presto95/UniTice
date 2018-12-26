@@ -71,7 +71,6 @@ PODS:
   - Realm/Headers (3.12.0)
   - RealmSwift (3.12.0):
     - Realm (= 3.12.0)
-  - SkeletonView (1.4.1)
   - SnapKit (4.0.1)
   - XLPagerTabStrip (8.1.0)
 
@@ -85,7 +84,6 @@ DEPENDENCIES:
   - KeychainAccess
   - MarqueeLabel/Swift
   - RealmSwift
-  - SkeletonView
   - SnapKit (~> 4.0.0)
   - XLPagerTabStrip (~> 8.1)
 
@@ -109,7 +107,6 @@ SPEC REPOS:
     - Protobuf
     - Realm
     - RealmSwift
-    - SkeletonView
     - SnapKit
     - XLPagerTabStrip
 
@@ -132,10 +129,9 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
   RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
-  SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: cd81ad848dcec0cc8e7af42d38056a2bd39f2d06
+PODFILE CHECKSUM: 2c23ec0afa229e344a565051e31152841dfb5675
 
 COCOAPODS: 1.6.0.beta.1

@@ -11,7 +11,6 @@ target 'UniTice' do
   pod 'Firebase/Messaging'
   pod 'Carte'
   pod 'SnapKit', '~> 4.0.0'
-  pod 'SkeletonView'
   pod 'DZNEmptyDataSet'
   pod 'XLPagerTabStrip', '~> 8.1'
   pod 'KeychainAccess'

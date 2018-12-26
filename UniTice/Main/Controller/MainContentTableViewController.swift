@@ -9,7 +9,6 @@
 import UIKit
 import XLPagerTabStrip
 import SnapKit
-import SkeletonView
 import SafariServices
 
 class MainContentTableViewController: UITableViewController {
@@ -84,6 +83,7 @@ class MainContentTableViewController: UITableViewController {
     }
     
     private func requestPosts() {
+        footerActivityIndicator?.startAnimating()
         universityModel?.requestPosts(inCategory: category, inPage: page, searchText: "") { posts in
             while posts.isEmpty {
                 self.requestPosts()
@@ -130,14 +130,8 @@ extension MainContentTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
         if posts.isEmpty {
             tableView.allowsSelection = false
-            cell.textLabel?.showAnimatedGradientSkeleton()
-            cell.detailTextLabel?.showAnimatedGradientSkeleton()
         } else {
             tableView.allowsSelection = true
-            cell.textLabel?.hideSkeleton()
-            cell.detailTextLabel?.hideSkeleton()
-            cell.textLabel?.backgroundColor = .white
-            cell.detailTextLabel?.backgroundColor = .white
             if indexPath.section == 0 {
                 if !fixedPosts.isEmpty {
                     let post = fixedPosts[indexPath.row]
@@ -160,18 +154,10 @@ extension MainContentTableViewController {
             if isFixedNoticeFolded {
                 return 0
             } else {
-                if posts.isEmpty {
-                    return 5
-                } else {
-                    return fixedPosts.count
-                }
+                return fixedPosts.count
             }
         } else if section == 1 {
-            if posts.isEmpty {
-                return 15
-            } else {
-                return standardPosts.count
-            }
+            return standardPosts.count
         }
         return 0
     }
@@ -244,12 +230,6 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         present(viewControllerToCommit, animated: true, completion: nil)
-    }
-}
-
-extension MainContentTableViewController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return "postCell"
     }
 }
 
