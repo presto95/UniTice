@@ -66,6 +66,8 @@ extension University {
             return 제주대학교()
         case .cnu:
             return 충남대학교()
+        case .chungbuk:
+            return 충북대학교()
         default:
             return 서울과학기술대학교()
         }
