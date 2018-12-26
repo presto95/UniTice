@@ -35,4 +35,8 @@ extension String {
     var percentEncoding: String {
         return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     }
+    
+    var trimmed: String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 }
