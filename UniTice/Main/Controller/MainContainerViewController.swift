@@ -49,6 +49,12 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
         return viewControllers
     }
     
+    @IBAction private func touchUpSearchButton(_ sender: UIBarButtonItem) {
+        guard let next = UIViewController.instantiate(from: "Main", identifier: SearchViewController.classNameToString) as? SearchViewController else { return }
+        next.category = (viewControllers(for: self)[currentIndex] as? MainContentTableViewController)?.category
+        navigationController?.pushViewController(next, animated: true)
+    }
+    
     private func setupUniversityLabel() {
         let universityLabel = UILabel()
         universityLabel.text = universityModel.name

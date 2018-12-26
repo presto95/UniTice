@@ -84,7 +84,7 @@ class MainContentTableViewController: UITableViewController {
     }
     
     private func requestPosts() {
-        universityModel?.requestPosts(inCategory: category, inPage: page) { posts in
+        universityModel?.requestPosts(inCategory: category, inPage: page, searchText: "") { posts in
             while posts.isEmpty {
                 self.requestPosts()
                 return
