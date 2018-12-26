@@ -65,6 +65,8 @@ class MainContentTableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
         tableView.tableFooterView = footerRefreshView
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        tableView.separatorColor = .purple
         tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
     }
     
@@ -104,6 +106,7 @@ class MainContentTableViewController: UITableViewController {
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
         let viewController = SFSafariViewController(url: url, configuration: config)
+        viewController.preferredControlTintColor = .purple
         viewController.dismissButtonStyle = .close
         return viewController
     }

@@ -40,6 +40,7 @@ class BookmarkViewController: UIViewController {
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
         let viewController = SFSafariViewController(url: url, configuration: config)
+        viewController.preferredControlTintColor = .purple
         viewController.dismissButtonStyle = .close
         return viewController
     }
