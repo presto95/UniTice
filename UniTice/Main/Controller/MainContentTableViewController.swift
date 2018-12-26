@@ -15,10 +15,26 @@ import SafariServices
 
 class MainContentTableViewController: UITableViewController {
 
-    private var posts: [Post] = []
-    
     private lazy var keywords = (User.fetch()?.keywords)!
     
+    private lazy var footerRefreshView: UIView = {
+        let footerRefreshView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
+        footerRefreshView.backgroundColor = .white
+        let footerActivityIndicator = UIActivityIndicatorView(style: .gray)
+        footerActivityIndicator.hidesWhenStopped = true
+        footerRefreshView.addSubview(footerActivityIndicator)
+        footerActivityIndicator.snp.makeConstraints { maker in
+            maker.center.equalToSuperview()
+        }
+        return footerRefreshView
+    }()
+    
+    private var footerActivityIndicator: UIActivityIndicatorView? {
+        return footerRefreshView.subviews.last as? UIActivityIndicatorView
+    }
+    
+    private var posts: [Post] = []
+
     private var fixedPosts: [Post] {
         return posts.filter { $0.number == 0 }
     }
@@ -31,7 +47,11 @@ class MainContentTableViewController: UITableViewController {
 
     var categoryIndex: Int!
     
-    var page: Int = 1
+    var page: Int = 1 {
+        didSet {
+            requestPosts()
+        }
+    }
     
     var universityModel: UniversityModel!
     
@@ -45,7 +65,7 @@ class MainContentTableViewController: UITableViewController {
         registerForPreviewing(with: self, sourceView: tableView)
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = footerRefreshView
         tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
     }
     
@@ -58,21 +78,26 @@ class MainContentTableViewController: UITableViewController {
     
     @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
         posts.removeAll()
-        requestPosts()
+        page = 1
         refreshControl?.endRefreshing()
     }
     
     private func requestPosts() {
-        universityModel?.requestPosts(inCategory: category, inPage: page, completion: { posts in
+        universityModel?.requestPosts(inCategory: category, inPage: page) { posts in
             while posts.isEmpty {
                 self.requestPosts()
                 return
             }
-            self.posts = posts
+            if self.page == 1 {
+                self.posts.append(contentsOf: posts)
+            } else {
+                self.posts.append(contentsOf: posts.filter { $0.number != 0 })
+            }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.footerActivityIndicator?.stopAnimating()
             }
-        })
+        }
     }
     
     private func safariViewController(url: URL) -> SFSafariViewController {
@@ -82,6 +107,19 @@ class MainContentTableViewController: UITableViewController {
         let viewController = SFSafariViewController(url: url, configuration: config)
         viewController.dismissButtonStyle = .close
         return viewController
+    }
+}
+
+extension MainContentTableViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.bounds.height {
+            if !(footerActivityIndicator?.isAnimating ?? false) {
+                footerActivityIndicator?.startAnimating()
+                page += 1
+            }
+        }
     }
 }
 

@@ -31,7 +31,7 @@ struct Mju: UniversityModel {
         return "\(url1)\(link)"
     }
     
-    func requestPosts(inCategory category: Mju.Category, inPage page: Int, completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: Mju.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
             guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: "")) else { return }

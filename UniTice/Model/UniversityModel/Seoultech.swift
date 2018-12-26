@@ -30,7 +30,7 @@ struct Seoultech: UniversityModel {
         return "\(url1)\(category.name)\(link)"
     }
     
-    func requestPosts(inCategory category: Seoultech.Category, inPage page: Int, completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: Seoultech.Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
             guard let url = URL(string: self.pageURL(inCategory: category, inPage: page)) else { return }
