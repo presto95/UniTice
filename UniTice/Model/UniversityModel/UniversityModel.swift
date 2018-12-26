@@ -20,5 +20,5 @@ protocol UniversityModel {
     
     func postURL(inCategory category: Category, link: String) -> String
     
-    func requestPosts(inCategory category: Category, inPage page: Int, _ completion: @escaping (([Post]) -> Void))
+    func requestPosts(inCategory category: Category, inPage page: Int, searchText text: String, _ completion: @escaping (([Post]) -> Void))
 }
