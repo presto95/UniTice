@@ -46,6 +46,8 @@ extension University {
         switch university {
         case .knu:
             return 경북대학교()
+        case .gsnu:
+            return 경상대학교()
         case .dongduk:
             return 동덕여자대학교()
         case .mju:
