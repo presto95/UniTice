@@ -77,8 +77,3 @@ extension 충남대학교 {
         return "&site_dvs=&ntt_tag=&GotoPage="
     }
 }
-
-
-//http://plus.cnu.ac.kr/_prog/_board/?site_dvs_cd=kr&menu_dvs_cd=0701&code=sub07_0701&skey=title&sval=&site_dvs=&ntt_tag=&GotoPage=1
-
-//
