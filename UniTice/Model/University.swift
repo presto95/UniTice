@@ -44,6 +44,8 @@ extension University {
         let user = User.fetch() ?? User()
         let university = University(rawValue: user.university) ?? .seoultech
         switch university {
+        case .kangwon:
+            return 강원대학교()
         case .knu:
             return 경북대학교()
         case .gsnu:
