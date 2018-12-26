@@ -16,7 +16,7 @@ extension String {
             for keyword in keywords {
                 do {
                     let regex = try NSRegularExpression(pattern: keyword, options: .caseInsensitive)
-                    let range = NSRange(location: 0, length: self.utf16.count)
+                    let range = NSRange(location: 0, length: utf16.count)
                     for match in regex.matches(in: self, options: .withTransparentBounds, range: range) {
                         attributedString.addAttributes([
                             .backgroundColor: UIColor.cyan,
@@ -30,5 +30,9 @@ extension String {
             }
         }
         return attributedString
+    }
+    
+    var percentEncoding: String {
+        return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     }
 }
