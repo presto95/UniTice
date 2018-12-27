@@ -221,6 +221,8 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
         if let indexPath = tableView.indexPathForRow(at: location) {
             let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
             let fullLink = universityModel.postURL(inCategory: category, link: post.link)
+            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLink)
+            User.insertBookmark(bookmark)
             if let url = URL(string: fullLink) {
                 return safariViewController(url: url)
             }
