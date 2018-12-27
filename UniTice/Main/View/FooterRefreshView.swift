@@ -32,10 +32,16 @@ class FooterRefreshView: UIView {
     }
     
     func activate() {
-        activityIndicatorView.startAnimating()
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            self.activityIndicatorView.startAnimating()
+        }
     }
     
     func deactivate() {
-        activityIndicatorView.stopAnimating()
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self.activityIndicatorView.stopAnimating()
+        }
     }
 }
