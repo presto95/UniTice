@@ -50,6 +50,7 @@ class MainContentTableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
         tableView.tableFooterView = footerRefreshView
+        tableView.backgroundColor = .groupTableViewBackground
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         tableView.separatorColor = .purple
         tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
