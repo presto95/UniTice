@@ -55,7 +55,7 @@ class StartKeywordRegisterViewController: UIViewController {
 extension StartKeywordRegisterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? KeywordCell else { return UITableViewCell() }
-        cell.keywordLabel.text = keywords[indexPath.row]
+        cell.setKeyword(keywords[indexPath.row])
         return cell
     }
     

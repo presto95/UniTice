@@ -16,6 +16,7 @@ class FooterRefreshView: UIView {
     
     private lazy var activityIndicatorView: UIActivityIndicatorView! = {
         let indicator = UIActivityIndicatorView(style: .gray)
+        indicator.color = .purple
         indicator.hidesWhenStopped =  true
         return indicator
     }()

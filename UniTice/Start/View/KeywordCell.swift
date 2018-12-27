@@ -11,12 +11,16 @@ import UIKit
 @IBDesignable
 class KeywordCell: UITableViewCell {
 
-    @IBOutlet weak var keywordLabel: UILabel!
+    @IBOutlet private weak var keywordLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         keywordLabel.layer.cornerRadius = keywordLabel.bounds.height / 2
-        keywordLabel.layer.borderColor = UIColor.black.cgColor
+        keywordLabel.layer.borderColor = UIColor.purple.cgColor
         keywordLabel.layer.borderWidth = 1
+    }
+    
+    func setKeyword(_ keyword: String) {
+        keywordLabel.text = keyword
     }
 }
