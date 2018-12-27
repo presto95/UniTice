@@ -27,7 +27,7 @@ class MainContentTableViewController: UITableViewController {
         return posts.filter { $0.number != 0 }
     }
     
-    private var isFixedNoticeFolded: Bool = false
+    private var isFixedNoticeFolded = UserDefaults.standard.bool(forKey: "fold")
 
     var categoryIndex: Int!
     

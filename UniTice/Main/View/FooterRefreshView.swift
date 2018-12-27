@@ -24,7 +24,7 @@ class FooterRefreshView: UIView {
     
     private lazy var textLabel: UILabel! = {
         let label = UILabel()
-        label.text = "위로 스와이프하여 더 많은 게시물 가져오기"
+        label.text = "👆위로 스와이프하여 더 많은 게시물 가져오기✨"
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.sizeToFit()
         label.isHidden = true

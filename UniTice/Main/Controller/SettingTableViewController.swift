@@ -21,7 +21,18 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    private let texts = [["학교 변경", "키워드 설정", "알림 설정"], ["문의하기", "앱 평가하기"], ["오픈소스 라이센스"]]
+    private lazy var switchControl: UISwitch = {
+        let control = UISwitch()
+        control.isOn = !UserDefaults.standard.bool(forKey: "fold")
+        control.addTarget(self, action: #selector(switchDidValueChanged(_:)), for: .valueChanged)
+        return control
+    }()
+    
+    private var switchIsOn: Bool {
+        return switchControl.isOn
+    }
+    
+    private let texts = [["상단 고정 게시물 펼치기"], ["학교 변경", "키워드 설정", "알림 설정"], ["문의하기", "앱 평가하기"], ["오픈소스 라이센스"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,22 +56,36 @@ class SettingTableViewController: UITableViewController {
             self.notificationHasGranted = notificationHasGranted
         }
     }
+    
+    @objc private func switchDidValueChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(false, forKey: "fold")
+        } else {
+            UserDefaults.standard.set(true, forKey: "fold")
+        }
+        tableView.reloadData()
+    }
 }
 
 extension SettingTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = texts[indexPath.section][indexPath.row]
+        if indexPath.section == 0 {
+            cell.accessoryView = switchControl
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return 1
         case 1:
-            return 2
+            return 3
         case 2:
+            return 2
+        case 3:
             return 1
         default:
             return 0
@@ -73,6 +98,12 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 0 {
+            if switchIsOn {
+                return "상단 고정 게시물이 펼쳐진 상태입니다."
+            } else {
+                return "상단 고정 게시물이 접혀진 상태입니다."
+            }
+        } else if section == 1 {
             if notificationHasGranted {
                 return "알림이 활성화되어 있습니다."
             } else {
@@ -88,28 +119,28 @@ extension SettingTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = indexPath.row
         switch indexPath.section {
-        case 0 where row == 0:
+        case 1 where row == 0:
             let next = UIViewController.instantiate(from: "Setting", identifier: ChangeUniversityViewController.classNameToString)
             navigationController?.pushViewController(next, animated: true)
-        case 0 where row == 1:
+        case 1 where row == 1:
             let next = UIViewController.instantiate(from: "Setting", identifier: KeywordSettingViewController.classNameToString)
             navigationController?.pushViewController(next, animated: true)
-        case 0 where row == 2:
+        case 1 where row == 2:
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
             
-        case 1 where row == 0:
+        case 2 where row == 0:
             if MFMailComposeViewController.canSendMail() {
                 let mail = MFMailComposeViewController()
                 mail.mailComposeDelegate = self
                 mail.setToRecipients(["yoohan95@gmail.com"])
                 present(mail, animated: true)
             }
-        case 1 where row == 1:
+        case 2 where row == 1:
             // 앱 아이디 생성 후 가능
             break
-        case 2 where row == 0:
+        case 3 where row == 0:
             let controller: CarteViewController = {
                 let controller = CarteViewController(style: .plain)
                 controller.items.sort { $0.name < $1.name }
