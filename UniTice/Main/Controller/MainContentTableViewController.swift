@@ -72,10 +72,6 @@ class MainContentTableViewController: UITableViewController {
     private func requestPosts() {
         footerRefreshView.activate()
         universityModel?.requestPosts(inCategory: category, inPage: page, searchText: "") { posts in
-            while posts.isEmpty {
-                self.requestPosts()
-                return
-            }
             if self.page == 1 {
                 self.posts.append(contentsOf: posts)
             } else {
