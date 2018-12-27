@@ -11,28 +11,12 @@ import SnapKit
 import SafariServices
 
 class SearchViewController: UIViewController {
-
-    private lazy var keywords = (User.fetch()?.keywords)!
     
-    private lazy var footerRefreshView: UIView = {
-        let footerRefreshView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
-        footerRefreshView.backgroundColor = .white
-        let footerActivityIndicator = UIActivityIndicatorView(style: .gray)
-        footerActivityIndicator.hidesWhenStopped = true
-        footerRefreshView.addSubview(footerActivityIndicator)
-        footerActivityIndicator.snp.makeConstraints { maker in
-            maker.center.equalToSuperview()
-        }
-        return footerRefreshView
-    }()
+    private lazy var footerRefreshView = FooterRefreshView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
     
     private lazy var universityModel = University.generateModel()
     
     private lazy var searchController = UISearchController(searchResultsController: nil)
-    
-    private var footerActivityIndicator: UIActivityIndicatorView? {
-        return footerRefreshView.subviews.last as? UIActivityIndicatorView
-    }
     
     private var posts: [Post] = []
     
@@ -48,7 +32,7 @@ class SearchViewController: UIViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
-            tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
+            tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
         }
     }
     
@@ -65,19 +49,26 @@ class SearchViewController: UIViewController {
         }
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = footerRefreshView
+        searchController.searchBar.placeholder = "제목"
+        searchController.delegate = self
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         navigationItem.titleView = searchController.searchBar
         searchController.hidesNavigationBarDuringPresentation = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchController.isActive = true
+    }
+
     private func requestPosts(searchText text: String) {
-        footerActivityIndicator?.startAnimating()
+        footerRefreshView.activate()
         universityModel.requestPosts(inCategory: category, inPage: page, searchText: text) { posts in
             self.posts.append(contentsOf: posts.filter { $0.number != 0 })
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.footerActivityIndicator?.stopAnimating()
+                self.footerRefreshView.deactivate()
             }
         }
     }
@@ -126,8 +117,8 @@ extension SearchViewController {
             let offsetY = scrollView.contentOffset.y
             let contentHeight = scrollView.contentSize.height
             if offsetY > contentHeight - scrollView.bounds.height {
-                if !(footerActivityIndicator?.isAnimating ?? false) {
-                    footerActivityIndicator?.startAnimating()
+                if !footerRefreshView.isLoading {
+                    footerRefreshView.activate()
                     page += 1
                     requestPosts(searchText: searchText)
                 }
@@ -157,9 +148,20 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        DispatchQueue.main.async {
+            self.searchController.isActive = false
+        }
         posts.removeAll()
         searchButtonHasClicked = true
         searchText = searchBar.text ?? ""
         requestPosts(searchText: searchText)
+    }
+}
+
+extension SearchViewController: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        DispatchQueue.main.async {
+            searchController.searchBar.becomeFirstResponder()
+        }
     }
 }

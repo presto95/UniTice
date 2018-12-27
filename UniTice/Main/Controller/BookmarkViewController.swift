@@ -23,7 +23,7 @@ class BookmarkViewController: UIViewController {
             tableView.delegate = self
             tableView.dataSource = self
             tableView.emptyDataSetSource = self
-            tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
+            tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
         }
     }
     

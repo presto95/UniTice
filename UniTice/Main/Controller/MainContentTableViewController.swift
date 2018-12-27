@@ -14,22 +14,8 @@ import SafariServices
 class MainContentTableViewController: UITableViewController {
 
     private lazy var keywords = (User.fetch()?.keywords)!
-    
-    private lazy var footerRefreshView: UIView = {
-        let footerRefreshView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
-        footerRefreshView.backgroundColor = .white
-        let footerActivityIndicator = UIActivityIndicatorView(style: .gray)
-        footerActivityIndicator.hidesWhenStopped = true
-        footerRefreshView.addSubview(footerActivityIndicator)
-        footerActivityIndicator.snp.makeConstraints { maker in
-            maker.center.equalToSuperview()
-        }
-        return footerRefreshView
-    }()
-    
-    private var footerActivityIndicator: UIActivityIndicatorView? {
-        return footerRefreshView.subviews.last as? UIActivityIndicatorView
-    }
+
+    private lazy var footerRefreshView = FooterRefreshView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
     
     private var posts: [Post] = []
 
@@ -66,7 +52,7 @@ class MainContentTableViewController: UITableViewController {
         tableView.tableFooterView = footerRefreshView
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         tableView.separatorColor = .purple
-        tableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "postCell")
+        tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +69,7 @@ class MainContentTableViewController: UITableViewController {
     }
     
     private func requestPosts() {
-        footerActivityIndicator?.startAnimating()
+        footerRefreshView.activate()
         universityModel?.requestPosts(inCategory: category, inPage: page, searchText: "") { posts in
             while posts.isEmpty {
                 self.requestPosts()
@@ -96,7 +82,7 @@ class MainContentTableViewController: UITableViewController {
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.footerActivityIndicator?.stopAnimating()
+                self.footerRefreshView.deactivate()
             }
         }
     }
@@ -117,8 +103,8 @@ extension MainContentTableViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         if offsetY > contentHeight - scrollView.bounds.height {
-            if !(footerActivityIndicator?.isAnimating ?? false) {
-                footerActivityIndicator?.startAnimating()
+            if !footerRefreshView.isLoading {
+                footerRefreshView.activate()
                 page += 1
             }
         }
