@@ -11,6 +11,7 @@
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
+		191CDE0B21D4DCCE00EBCBE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */; };
 		193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */; };
 		193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193005EC21B14658003C9DBB /* SettingTableViewController.swift */; };
 		1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1930D34E21BFFCD700424FBF /* Start.storyboard */; };
@@ -25,7 +26,6 @@
 		1959D57921CE212000F6182F /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57821CE212000F6182F /* UniversityModel.swift */; };
 		1959D57B21CE2A5600F6182F /* 동덕여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */; };
 		1959D57D21CE2A5D00F6182F /* 명지대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57C21CE2A5D00F6182F /* 명지대학교.swift */; };
-		1959D58321CE52E300F6182F /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1959D58221CE52E300F6182F /* Setting.storyboard */; };
 		1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */; };
 		1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */; };
 		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
@@ -70,6 +70,7 @@
 		191B6477219728CD005E5CE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Setting.storyboard; path = Setting/Setting.storyboard; sourceTree = "<group>"; };
 		193005E821B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		193005E921B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		1959D57821CE212000F6182F /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동덕여자대학교.swift"; sourceTree = "<group>"; };
 		1959D57C21CE2A5D00F6182F /* 명지대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "명지대학교.swift"; sourceTree = "<group>"; };
-		1959D58221CE52E300F6182F /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -198,8 +198,6 @@
 		194BF41D219EA53900FA6124 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				1959D58221CE52E300F6182F /* Setting.storyboard */,
-				1959D58121CE52CA00F6182F /* View */,
 				1959D58021CE52C400F6182F /* Controller */,
 			);
 			name = Setting;
@@ -243,17 +241,11 @@
 		1959D58021CE52C400F6182F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */,
 				194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */,
 				194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		1959D58121CE52CA00F6182F /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		196499A32197F1F500BEE6C1 /* Supporting Files */ = {
@@ -413,10 +405,10 @@
 				191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */,
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
+				191CDE0B21D4DCCE00EBCBE4 /* Setting.storyboard in Resources */,
 				1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */,
 				19ED808721CB78B700BA6529 /* StartKeywordHeaderView.xib in Resources */,
 				1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */,
-				1959D58321CE52E300F6182F /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
