@@ -18,6 +18,7 @@
 		194BF41F219EA54E00FA6124 /* ChangeUniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */; };
 		194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */; };
 		194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF426219EE73200FA6124 /* UIAlertController+.swift */; };
+		1958FA7D21D4A4F700DACF72 /* 고려대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1958FA7C21D4A4F700DACF72 /* 고려대학교.swift */; };
 		1959D57321CE13D400F6182F /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57221CE13D400F6182F /* MainContainerViewController.swift */; };
 		1959D57521CE192000F6182F /* MainContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57421CE192000F6182F /* MainContentTableViewController.swift */; };
 		1959D57921CE212000F6182F /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57821CE212000F6182F /* UniversityModel.swift */; };
@@ -78,6 +79,7 @@
 		194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeUniversityViewController.swift; path = Setting/ChangeUniversityViewController.swift; sourceTree = "<group>"; };
 		194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeywordSettingViewController.swift; path = Setting/KeywordSettingViewController.swift; sourceTree = "<group>"; };
 		194BF426219EE73200FA6124 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		1958FA7C21D4A4F700DACF72 /* 고려대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "고려대학교.swift"; sourceTree = "<group>"; };
 		1959D57221CE13D400F6182F /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		1959D57421CE192000F6182F /* MainContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentTableViewController.swift; sourceTree = "<group>"; };
 		1959D57821CE212000F6182F /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				198DC0B821D35A7400AF4801 /* 강원대학교.swift */,
 				198DC0BE21D35A9000AF4801 /* 경북대학교.swift */,
 				198DC0C221D35AA000AF4801 /* 경상대학교.swift */,
+				1958FA7C21D4A4F700DACF72 /* 고려대학교.swift */,
 				1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */,
 				1959D57C21CE2A5D00F6182F /* 명지대학교.swift */,
 				198DC0C021D35A9800AF4801 /* 부산대학교.swift */,
@@ -533,6 +536,7 @@
 				198DC0BD21D35A8800AF4801 /* 충북대학교.swift in Sources */,
 				19ED807B21CB63E600BA6529 /* StartConfirmButton.swift in Sources */,
 				198DC0AF21D34A0700AF4801 /* 전남대학교.swift in Sources */,
+				1958FA7D21D4A4F700DACF72 /* 고려대학교.swift in Sources */,
 				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
 				1959D57921CE212000F6182F /* UniversityModel.swift in Sources */,
 				19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */,
