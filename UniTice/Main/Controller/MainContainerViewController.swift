@@ -26,9 +26,26 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
             if let error = error {
                 fatalError(error.localizedDescription)
             }
-            if !isGranted {
-                // 알림 권한 허용 대화상자 띄울 위치는?
+            if !UserDefaults.standard.bool(forKey: "showsAlertIfPermissionDenied") {
+                let content = UNMutableNotificationContent()
+                content.title = ""
+                content.body = "오늘은 무슨 공지사항이 새로 올라왔을까요? 확인해 보세요."
+                var dateComponents = DateComponents()
+                dateComponents.hour = 9
+                dateComponents.minute = 0
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                let request = UNNotificationRequest(identifier: "localNotification", content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                    print(error?.localizedDescription ?? "")
+                })
+                if !isGranted {
+                    UIAlertController
+                        .alert(title: "", message: "알림을 받을 수 없습니다.\n설정에서 알림 권한을 설정할 수 있습니다.")
+                        .action(title: "확인")
+                        .present(to: self)
+                }
             }
+            UserDefaults.standard.set(true, forKey: "showsAlertIfPermissionDenied")
         }
         setupUniversityLabel()
     }
