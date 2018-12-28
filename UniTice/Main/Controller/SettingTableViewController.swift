@@ -93,7 +93,7 @@ extension SettingTableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -107,7 +107,7 @@ extension SettingTableViewController {
             if notificationHasGranted {
                 return "알림이 활성화되어 있습니다."
             } else {
-                return "알림이 비활성화되어 있습니다. 키워드 알림을 받을 수 없습니다."
+                return "알림이 비활성화되어 있습니다."
             }
         }
         return nil
