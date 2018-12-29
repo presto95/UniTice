@@ -7,3 +7,4 @@ disabled_rules:
 excluded:
 - Pods/
 - UniTice/Model/User.swift
+- UniTice/Model/University.swift
