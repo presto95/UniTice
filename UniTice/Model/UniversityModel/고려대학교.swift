@@ -77,11 +77,3 @@ extension 고려대학교 {
         return "&articleId="
     }
 }
-
-//http://www.korea.ac.kr/cop/portalBoard/portalBoardList.do?siteId=university&type=NG&page=1&findType=SUBJECT&findWord=2018
-//일반공지
-//http://www.korea.ac.kr/cop/portalBoard/portalBoardList.do?siteId=university&type=E
-//학사공지
-//http://www.korea.ac.kr/cop/portalBoard/portalBoardList.do?siteId=university&type=J
-//장학금공지
-

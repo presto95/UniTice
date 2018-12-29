@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // 앱이 포어그라운드에 있을 때 푸시 알림이 오면 호출됨. 화면에는 배너가 뜨지 않으나 데이터는 옴
+        // 앱이 포어그라운드에 있을 때 알림이 오면 호출됨. 화면에는 배너가 뜨지 않으나 데이터는 옴
         let userInfo = notification.request.content.userInfo
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")

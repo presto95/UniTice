@@ -20,8 +20,7 @@ extension String {
                     for match in regex.matches(in: self, options: .withTransparentBounds, range: range) {
                         attributedString.addAttributes([
                             .backgroundColor: UIColor.cyan,
-                            .foregroundColor: UIColor.purple,
-                            .font: UIFont.systemFont(ofSize: 15, weight: .heavy)
+                            .foregroundColor: UIColor.purple
                             ], range: match.range)
                     }
                 } catch {

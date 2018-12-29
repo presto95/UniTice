@@ -42,6 +42,7 @@
 		198DC0C521D35AAB00AF4801 /* 전북대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0C421D35AAB00AF4801 /* 전북대학교.swift */; };
 		198DC0CD21D462A000AF4801 /* FooterRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0CC21D462A000AF4801 /* FooterRefreshView.swift */; };
 		198DC0CF21D467EC00AF4801 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0CE21D467EC00AF4801 /* PostCell.swift */; };
+		19A10AD521D6FE0E00AAFCAC /* 광운대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A10AD421D6FE0E00AAFCAC /* 광운대학교.swift */; };
 		19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* InitialInfo.swift */; };
 		19AB910121D21929000CB844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB910021D21929000CB844 /* User.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
@@ -104,6 +105,7 @@
 		198DC0C421D35AAB00AF4801 /* 전북대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "전북대학교.swift"; sourceTree = "<group>"; };
 		198DC0CC21D462A000AF4801 /* FooterRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterRefreshView.swift; sourceTree = "<group>"; };
 		198DC0CE21D467EC00AF4801 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		19A10AD421D6FE0E00AAFCAC /* 광운대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "광운대학교.swift"; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* InitialInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfo.swift; sourceTree = "<group>"; };
 		19AB910021D21929000CB844 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				198DC0BE21D35A9000AF4801 /* 경북대학교.swift */,
 				198DC0C221D35AA000AF4801 /* 경상대학교.swift */,
 				1958FA7C21D4A4F700DACF72 /* 고려대학교.swift */,
+				19A10AD421D6FE0E00AAFCAC /* 광운대학교.swift */,
 				1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */,
 				1959D57C21CE2A5D00F6182F /* 명지대학교.swift */,
 				198DC0C021D35A9800AF4801 /* 부산대학교.swift */,
@@ -513,6 +516,7 @@
 				19AB910121D21929000CB844 /* User.swift in Sources */,
 				1959D57D21CE2A5D00F6182F /* 명지대학교.swift in Sources */,
 				19C6BBBC2197F8D4002FC39C /* University.swift in Sources */,
+				19A10AD521D6FE0E00AAFCAC /* 광운대학교.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
 				198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */,
 				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
