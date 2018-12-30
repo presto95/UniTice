@@ -24,7 +24,7 @@ struct 경북대학교: UniversityModel {
     }
     
     func pageURL(inCategory category: 경북대학교.Category, inPage page: Int, searchText: String) -> String {
-        return "\(url1)\(url2)\(page)\(url3)\(category.name)\(url4(searchText: searchText))"
+        return "\(url1)\(url2)\(page)\(url3)\(category.name)\(url4(searchText: searchText.percentEncoding))"
     }
     
     func postURL(inCategory category: 경북대학교.Category, link: String) -> String {
