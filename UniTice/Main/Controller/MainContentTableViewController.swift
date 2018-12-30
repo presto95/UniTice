@@ -20,7 +20,13 @@ class MainContentTableViewController: UITableViewController {
     private var posts: [Post] = []
 
     private var fixedPosts: [Post] {
-        return posts.filter { $0.number == 0 }
+        get {
+            return posts.filter { $0.number == 0 }
+        }
+        set {
+            posts.append(contentsOf: newValue)
+        }
+        
     }
     
     private var standardPosts: [Post] {
@@ -75,7 +81,11 @@ class MainContentTableViewController: UITableViewController {
             if self.page == 1 {
                 self.posts.append(contentsOf: posts)
             } else {
-                self.posts.append(contentsOf: posts.filter { $0.number != 0 })
+                if posts.first?.title == self.fixedPosts.first?.title {
+                    self.posts.append(contentsOf: posts.filter { $0.number != 0 })
+                } else {
+                    self.posts.append(contentsOf: posts)
+                }
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
