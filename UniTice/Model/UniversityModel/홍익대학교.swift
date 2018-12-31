@@ -75,5 +75,3 @@ extension 홍익대학교 {
     }
     
 }
-
-//http://www.hongik.ac.kr/front/boardlist.do?currentPage=1&bbsConfigFK=2&searchField=D.TITLE&searchValue=2018
