@@ -18,6 +18,7 @@ enum University: String, CaseIterable {
     case korea = "고려대학교"
     // ㄴ
     // ㄷ
+    case dongguk = "동국대학교"
     case dongduk = "동덕여자대학교"
     // ㄹ
     // ㅁ
@@ -57,6 +58,8 @@ extension University {
             return 경희대학교()
         case .korea:
             return 고려대학교()
+        case .dongguk:
+            return 동국대학교()
         case .dongduk:
             return 동덕여자대학교()
         case .mju:
