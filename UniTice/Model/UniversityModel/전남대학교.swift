@@ -34,21 +34,7 @@ struct 전남대학교: UniversityModel {
             ("1367", "행정공고")
         ]
     }
-    
-    func pageURL(inCategory category: 전남대학교.Category, inPage page: Int, searchText text: String) throws -> URL {
-        guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
-            throw UniversityError.invalidURLError
-        }
-        return url
-    }
-    
-    func postURL(inCategory category: 전남대학교.Category, uri link: String) throws -> URL {
-        guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
-            throw UniversityError.invalidURLError
-        }
-        return url
-    }
-    
+
     func requestPosts(inCategory category: 전남대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
