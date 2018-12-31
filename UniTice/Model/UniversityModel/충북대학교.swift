@@ -22,59 +22,73 @@ struct 충북대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 충북대학교.Category, inPage page: Int, searchText: String) -> String {
-        return "\(url1)\(url2)\(page)\(url3)\(category.name)\(url4)\(searchText.percentEncoding)"
+    func pageURL(inCategory category: 충북대학교.Category, inPage page: Int, searchText text: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func postURL(inCategory category: 충북대학교.Category, link: String) -> String {
-        return "\(url1)\(link)"
+    func postURL(inCategory category: 충북대학교.Category, uri link: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func requestPosts(inCategory category: 충북대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 충북대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
-            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: text)) else { return }
-            guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
-            let rows = doc.xpath("//table[@class='basic']//tbody[@class='tb']//td")
-            let links = doc.xpath("//table[@class='basic']//tbody[@class='tb']//td[@class='subject']//a/@href")
-            let divisor: Int
-            switch category.name {
-            case "112", "113":
-                divisor = 6
-            default:
-                divisor = 4
+            do {
+                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
+                let doc = try HTML(url: url, encoding: .utf8)
+                let rows = doc.xpath("//table[@class='basic']//tbody[@class='tb']//td")
+                let links = doc.xpath("//table[@class='basic']//tbody[@class='tb']//td[@class='subject']//a/@href")
+                let divisor: Int
+                switch category.identifier {
+                case "112", "113":
+                    divisor = 6
+                default:
+                    divisor = 4
+                }
+                for (index, element) in links.enumerated() {
+                    let numberIndex = index * divisor
+                    let titleIndex = index * divisor + 1
+                    let dateIndex = index * divisor + divisor - 1
+                    let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                    let title = rows[titleIndex].text?.trimmed ?? "?"
+                    let date = rows[dateIndex].text?.trimmed ?? "?"
+                    var link = element.text?.trimmed ?? "?"
+                    link.removeFirst()
+                    let post = Post(number: number, title: title, date: date, link: link)
+                    posts.append(post)
+                }
+                completion(posts, nil)
+            } catch {
+                completion(nil, error)
             }
-            for (index, element) in links.enumerated() {
-                let numberIndex = index * divisor
-                let titleIndex = index * divisor + 1
-                let dateIndex = index * divisor + divisor - 1
-                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmed ?? "?"
-                let date = rows[dateIndex].text?.trimmed ?? "?"
-                var link = element.text?.trimmed ?? "?"
-                link.removeFirst()
-                let post = Post(number: number, title: title, date: date, link: link)
-                posts.append(post)
-            }
-            completion(posts)
         }
     }
 }
 
 extension 충북대학교 {
-    private var url1: String {
+    var baseURL: String {
         return "http://www.chungbuk.ac.kr/site/www"
     }
     
-    private var url2: String {
-        return "/boardList.do?key=698&searchType=TITLE&page="
+    var commonQueries: String {
+        return "/boardList.do?key=698&searchType=TITLE"
     }
     
-    private var url3: String {
-        return "&boardSeq="
+    func categoryQuery(_ category: 충북대학교.Category) -> String {
+        return "&boardSeq=\(category.identifier)"
     }
     
-    private var url4: String {
-        return "&searchKeyword="
+    func pageQuery(_ page: Int) -> String {
+        return "&page=\(page)"
+    }
+    
+    func searchQuery(_ text: String) -> String {
+        return "&searchKeyword=\(text.percentEncoding)"
     }
 }

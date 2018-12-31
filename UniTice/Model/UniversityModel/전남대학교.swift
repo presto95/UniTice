@@ -35,55 +35,65 @@ struct 전남대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 전남대학교.Category, inPage page: Int, searchText: String) -> String {
-        return "\(url1)\(url2)\(category.name)\(url3)\(page)\(url4)\(searchText.percentEncoding)\(url5)"
+    func pageURL(inCategory category: 전남대학교.Category, inPage page: Int, searchText text: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func postURL(inCategory category: 전남대학교.Category, link: String) -> String {
-        return "\(url1)\(link)"
+    func postURL(inCategory category: 전남대학교.Category, uri link: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func requestPosts(inCategory category: 전남대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 전남대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
-            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: text)) else { return }
-            guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
-            let rows = doc.xpath("//table[@class='board_list']//tbody//td")
-            let links = doc.xpath("//table[@class='board_list']//tbody//td[@class='title']//a/@href")
-            for (index, element) in links.enumerated() {
-                let numberIndex = index * 5
-                let titleIndex = index * 5 + 1
-                let dateIndex = index * 5 + 3
-                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmed ?? "?"
-                let date = rows[dateIndex].text?.trimmed ?? "?"
-                let link = element.text?.trimmed ?? "?"
-                let post = Post(number: number, title: title, date: date, link: link)
-                posts.append(post)
+            do {
+                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
+                let doc = try HTML(url: url, encoding: .utf8)
+                let rows = doc.xpath("//table[@class='board_list']//tbody//td")
+                let links = doc.xpath("//table[@class='board_list']//tbody//td[@class='title']//a/@href")
+                for (index, element) in links.enumerated() {
+                    let numberIndex = index * 5
+                    let titleIndex = index * 5 + 1
+                    let dateIndex = index * 5 + 3
+                    let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                    let title = rows[titleIndex].text?.trimmed ?? "?"
+                    let date = rows[dateIndex].text?.trimmed ?? "?"
+                    let link = element.text?.trimmed ?? "?"
+                    let post = Post(number: number, title: title, date: date, link: link)
+                    posts.append(post)
+                }
+                completion(posts, nil)
+            } catch {
+                completion(nil, error)
             }
-            completion(posts)
         }
     }
 }
 
 extension 전남대학교 {
-    private var url1: String {
+    var baseURL: String {
         return "http://www.jnu.ac.kr"
     }
     
-    private var url2: String {
-        return "/WebApp/web/HOM/COM/Board/board.aspx?boardID=5&bbsMode=list&cate="
+    var commonQueries: String {
+        return "/WebApp/web/HOM/COM/Board/board.aspx?boardID=5&bbsMode=list&searchTarget=title"
     }
     
-    private var url3: String {
-        return "&page="
+    func categoryQuery(_ category: 전남대학교.Category) -> String {
+        return "&cate=\(category.identifier)"
     }
     
-    private var url4: String {
-        return "&keyword="
+    func pageQuery(_ page: Int) -> String {
+        return "&page=\(page)"
     }
     
-    private var url5: String {
-        return "&searchTarget=title"
+    func searchQuery(_ text: String) -> String {
+        return "&keyword=\(text.percentEncoding)"
     }
 }

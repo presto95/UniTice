@@ -27,85 +27,87 @@ struct 서울과학기술대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 서울과학기술대학교.Category, inPage page: Int, searchText: String) -> String {
-        return "\(url1)\(category.name)\(url2(ofCategory: category))\(page)\(url3(ofCategory: category))\(searchText.percentEncoding)"
+    func pageURL(inCategory category: 서울과학기술대학교.Category, inPage page: Int, searchText text: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func postURL(inCategory category: 서울과학기술대학교.Category, link: String) -> String {
-        return "\(url1)\(category.name)\(link)"
+    func postURL(inCategory category: 서울과학기술대학교.Category, uri link: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(category.identifier)\(link.percentEncoding)") else {
+            throw UniversityError.invalidURLError
+        }
+        print(111)
+        return url
     }
     
-    func requestPosts(inCategory category: 서울과학기술대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 서울과학기술대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
-            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: text)) else { return }
-            guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
-            let rows = doc.xpath("//div[@class='wrap_list']//tr[@class='body_tr']//td")
-            let links = doc.xpath("//div[@class='wrap_list']//tr[@class='body_tr']//td[@class='tit']//a/@href")
-            for (index, element) in links.enumerated() {
-                let numberIndex = index * 6
-                let titleIndex = index * 6 + 1
-                let dateIndex = index * 6 + 4
-                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmed ?? "?"
-                let date = rows[dateIndex].text?.trimmed ?? "?"
-                let link = element.text?.trimmed ?? "?"
-                let post = Post(number: number, title: title, date: date, link: link)
-                posts.append(post)
+            do {
+                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
+                let doc = try HTML(url: url, encoding: .utf8)
+                let rows = doc.xpath("//div[@class='wrap_list']//tr[@class='body_tr']//td")
+                let links = doc.xpath("//div[@class='wrap_list']//tr[@class='body_tr']//td[@class='tit']//a/@href")
+                for (index, element) in links.enumerated() {
+                    let numberIndex = index * 6
+                    let titleIndex = index * 6 + 1
+                    let dateIndex = index * 6 + 4
+                    let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                    let title = rows[titleIndex].text?.trimmed ?? "?"
+                    let date = rows[dateIndex].text?.trimmed ?? "?"
+                    let link = element.text?.trimmed ?? "?"
+                    let post = Post(number: number, title: title, date: date, link: link)
+                    posts.append(post)
+                }
+                completion(posts, nil)
+            } catch {
+                completion(nil, error)
             }
-            completion(posts)
         }
     }
 }
 
 extension 서울과학기술대학교 {
-    private var url1: String {
+    var baseURL: String {
         return "http://www.seoultech.ac.kr/service/info/"
     }
     
-    private func url2(ofCategory category: 서울과학기술대학교.Category) -> String {
-        switch category.name {
-        case "notice":
-            return "/?bidx=4691&bnum=4691&allboard=false&page="
-        case "matters":
-            return "/?bidx=6112&bnum=6112&allboard=true&page="
-        case "janghak":
-            return "/?bidx=5233&bnum=5233&allboard=true&page="
-        case "graduate":
-            return "/?bidx=56589&bnum=56589&allboard=false&page="
-        case "bid":
-            return "/?bidx=4694&bnum=4694&allboard=true&page="
-        case "recruit":
-            return "/?bidx=3601&bnum=3601&allboard=false&page="
-        case "committee":
-            return "/?bidx=3606&bnum=3606&allboard=false&page="
-        case "budgetcomm":
-            return "/?bidx=56473&bnum=56473&allboard=false&page="
-        default:
-            return ""
-        }
+    var commonQueries: String {
+        return ""
     }
     
-    private func url3(ofCategory category: 서울과학기술대학교.Category) -> String {
-        switch category.name {
+    func categoryQuery(_ category: 서울과학기술대학교.Category) -> String {
+        var result = category.identifier
+        switch category.identifier {
         case "notice":
-            return "&size=9&searchtype=1&searchtext="
+            result += "/?bidx=4691&bnum=4691&allboard=false&size=9"
         case "matters":
-            return "&size=5&searchtype=1&searchtext="
+            result += "/?bidx=6112&bnum=6112&allboard=true&size=5"
         case "janghak":
-            return "&size=5&searchtype=1&searchtext="
+            result += "/?bidx=5233&bnum=5233&allboard=true&size=5"
         case "graduate":
-            return "&size=9&searchtype=1&searchtext="
+            result += "/?bidx=56589&bnum=56589&allboard=false&size=9"
         case "bid":
-            return "&size=9&searchtype=1&searchtext="
+            result += "/?bidx=4694&bnum=4694&allboard=true&size=9"
         case "recruit":
-            return "&size=10&searchtype=1&searchtext="
+            result += "/?bidx=3601&bnum=3601&allboard=false&size=10"
         case "committee":
-            return "&size=15&searchtype=1&searchtext="
+            result += "/?bidx=3606&bnum=3606&allboard=false&size=15"
         case "budgetcomm":
-            return "&size=15&searchtype=1&searchtext="
+            result += "/?bidx=56473&bnum=56473&allboard=false&size=15"
         default:
-            return ""
+            result += ""
         }
+        return result
+    }
+    
+    func pageQuery(_ page: Int) -> String {
+        return "&page=\(page)"
+    }
+    
+    func searchQuery(_ text: String) -> String {
+        return "&searchtype=1&searchtext=\(text.percentEncoding)"
     }
 }

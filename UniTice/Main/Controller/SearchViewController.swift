@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
     
     private var searchText: String = ""
     
-    var category: (name: String, description: String)!
+    var category: (identifier: String, description: String)!
     
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -64,7 +64,12 @@ class SearchViewController: UIViewController {
 
     private func requestPosts(searchText text: String) {
         footerRefreshView.activate()
-        universityModel.requestPosts(inCategory: category, inPage: page, searchText: text) { posts in
+        universityModel.requestPosts(inCategory: category, inPage: page, searchText: text) { posts, error in
+            if let error = error {
+                UIAlertController.presentErrorAlert(error, to: self)
+                return
+            }
+            guard let posts = posts else { return }
             self.posts.append(contentsOf: posts.filter { $0.number != 0 })
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -102,11 +107,14 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let post = posts[indexPath.row]
-        let fullLink = universityModel.postURL(inCategory: category, link: post.link).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLink)
-        User.insertBookmark(bookmark)
-        if let url = URL(string: fullLink) {
-            present(safariViewController(url: url), animated: true)
+        do {
+            let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
+            let fullLinkString = fullLink.absoluteString
+            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+            User.insertBookmark(bookmark)
+            present(safariViewController(url: fullLink), animated: true)
+        } catch {
+            UIAlertController.presentErrorAlert(error, to: self)
         }
     }
 }
@@ -131,11 +139,14 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = tableView.indexPathForRow(at: location) {
             let post = posts[indexPath.row]
-            let fullLink = universityModel.postURL(inCategory: category, link: post.link).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLink)
-            User.insertBookmark(bookmark)
-            if let url = URL(string: fullLink) {
-                return safariViewController(url: url)
+            do {
+                let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
+                let fullLinkString = fullLink.absoluteString
+                let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+                User.insertBookmark(bookmark)
+                return safariViewController(url: fullLink)
+            } catch {
+                UIAlertController.presentErrorAlert(error, to: self)
             }
         }
         return nil

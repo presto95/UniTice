@@ -45,7 +45,7 @@ class MainContentTableViewController: UITableViewController {
     
     var universityModel: UniversityModel!
     
-    var category: (name: String, description: String) {
+    var category: (identifier: String, description: String) {
         return universityModel?.categories[categoryIndex] ?? ("", "")
     }
     
@@ -77,7 +77,11 @@ class MainContentTableViewController: UITableViewController {
     
     private func requestPosts() {
         footerRefreshView.activate()
-        universityModel?.requestPosts(inCategory: category, inPage: page, searchText: "") { posts in
+        universityModel?.requestPosts(inCategory: category, inPage: page, searchText: "") { posts, error in
+            if let error = error {
+                UIAlertController.presentErrorAlert(error, to: self)
+            }
+            guard let posts = posts else { return }
             if self.page == 1 {
                 self.posts.append(contentsOf: posts)
             } else {
@@ -164,11 +168,14 @@ extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-        let fullLink = universityModel.postURL(inCategory: category, link: post.link)
-        let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLink)
-        User.insertBookmark(bookmark)
-        if let url = URL(string: fullLink) {
-            present(safariViewController(url: url), animated: true)
+        do {
+            let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
+            let fullLinkString = fullLink.absoluteString
+            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+            User.insertBookmark(bookmark)
+            present(safariViewController(url: fullLink), animated: true)
+        } catch {
+            UIAlertController.presentErrorAlert(error, to: self)
         }
     }
     
@@ -213,11 +220,15 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = tableView.indexPathForRow(at: location) {
             let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-            let fullLink = universityModel.postURL(inCategory: category, link: post.link)
-            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLink)
-            User.insertBookmark(bookmark)
-            if let url = URL(string: fullLink) {
-                return safariViewController(url: url)
+            do {
+                let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
+                let fullLinkString = fullLink.absoluteString
+                print(fullLinkString)
+                let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+                User.insertBookmark(bookmark)
+                return safariViewController(url: fullLink)
+            } catch {
+                UIAlertController.presentErrorAlert(error, to: self)
             }
         }
         return nil

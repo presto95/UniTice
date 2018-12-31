@@ -23,58 +23,68 @@ struct 강원대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 강원대학교.Category, inPage page: Int, searchText: String) -> String {
-        return "\(url1)\(url2)\(category.name)\(url3)\(page)\(url4)\(searchText.percentEncoding)"
+    func pageURL(inCategory category: 강원대학교.Category, inPage page: Int, searchText text: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func postURL(inCategory category: 강원대학교.Category, link: String) -> String {
-        return "\(url1)\(link)"
+    func postURL(inCategory category: 강원대학교.Category, uri link: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func requestPosts(inCategory category: 강원대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 강원대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
-            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: text)) else { return }
-            guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
-            let rows = doc.xpath("//table[@class='bbs_default list']//tbody[@class='tb']//td")
-            let links = doc.xpath("//table[@class='bbs_default list']//tbody[@class='tb']//td[@class='subject']//a/@href")
-            for (index, element) in links.enumerated() {
-                let numberIndex = index * 7
-                let titleIndex = index * 7 + 2
-                let dateIndex = index * 7 + 5
-                let campusIndex = index * 7 + 1
-                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmed ?? "?"
-                let date = rows[dateIndex].text?.trimmed ?? "?"
-                var link = element.text?.trimmed ?? "?"
-                link.removeFirst()
-                let campus = rows[campusIndex].text?.trimmed ?? "?"
-                let post = Post(number: number, title: title, date: "\(date) | \(campus)", link: link)
-                posts.append(post)
+            do {
+                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
+                let doc = try HTML(url: url, encoding: .utf8)
+                let rows = doc.xpath("//table[@class='bbs_default list']//tbody[@class='tb']//td")
+                let links = doc.xpath("//table[@class='bbs_default list']//tbody[@class='tb']//td[@class='subject']//a/@href")
+                for (index, element) in links.enumerated() {
+                    let numberIndex = index * 7
+                    let titleIndex = index * 7 + 2
+                    let dateIndex = index * 7 + 5
+                    let campusIndex = index * 7 + 1
+                    let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                    let title = rows[titleIndex].text?.trimmed ?? "?"
+                    let date = rows[dateIndex].text?.trimmed ?? "?"
+                    var link = element.text?.trimmed ?? "?"
+                    link.removeFirst()
+                    let campus = rows[campusIndex].text?.trimmed ?? "?"
+                    let post = Post(number: number, title: title, date: "\(date) | \(campus)", link: link)
+                    posts.append(post)
+                }
+                completion(posts, nil)
+            } catch {
+                completion(nil, error)
             }
-            completion(posts)
         }
     }
 }
 
 extension 강원대학교 {
-    private var url1: String {
+    var baseURL: String {
         return "http://www.kangwon.ac.kr/www"
     }
     
-    private var url2: String {
-        return "/selectBbsNttList.do?pageUnit=10&searchCnd=SJ&key=277&bbsNo="
+    var commonQueries: String {
+        return "/selectBbsNttList.do?pageUnit=10&searchCnd=SJ&key=277"
     }
     
-    private var url3: String {
-        return "&pageIndex="
+    func categoryQuery(_ category: 강원대학교.Category) -> String {
+        return "&bbsNo=\(category.identifier)"
     }
     
-    private var url4: String {
-        return "&searchKrwd="
+    func pageQuery(_ page: Int) -> String {
+        return "&pageIndex=\(page)"
+    }
+    
+    func searchQuery(_ text: String) -> String {
+        return "&searchKrwd=\(text.percentEncoding)"
     }
 }
-
-//http://www.kangwon.ac.kr/www/selectBbsNttList.do?bbsNo=81&&pageUnit=10&searchCnd=SJ&searchKrwd=2018&key=277&pageIndex=2
-
-//http://www.kangwon.ac.kr/www/selectBbsNttList.do?bbsNo=38&&pageUnit=10&searchCnd=SJ&searchKrwd=2018&key=279&pageIndex=2

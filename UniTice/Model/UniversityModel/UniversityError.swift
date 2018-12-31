@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+enum UniversityError: Error {
+    
+    case invalidURLError
+    
+    case htmlParseError
+}
+
+extension UniversityError: LocalizedError {
+    var localizedDescription: String {
+        switch self {
+        case .invalidURLError:
+            return "잘못된 URL 형식입니다."
+        case .htmlParseError:
+            return "HTML 파싱을 실패하였습니다."
+        }
+    }
+}

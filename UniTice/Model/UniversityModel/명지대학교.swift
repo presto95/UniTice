@@ -23,66 +23,78 @@ struct 명지대학교: UniversityModel {
         ]
     }
     
-    func pageURL(inCategory category: 명지대학교.Category, inPage page: Int, searchText: String) -> String {
-        return "\(url1)\(url2)\(category.name)\(url3(ofCategory: category))\(url4)\(page)\(url5)\(searchText.percentEncoding)"
+    func pageURL(inCategory category: 명지대학교.Category, inPage page: Int, searchText text: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func postURL(inCategory category: 명지대학교.Category, link: String) -> String {
-        return "\(url1)\(link)"
+    func postURL(inCategory category: 명지대학교.Category, uri link: String) throws -> URL {
+        guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
+            throw UniversityError.invalidURLError
+        }
+        return url
     }
     
-    func requestPosts(inCategory category: 명지대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]) -> Void)) {
+    func requestPosts(inCategory category: 명지대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
-            guard let url = URL(string: self.pageURL(inCategory: category, inPage: page, searchText: text)) else { return }
-            print(url.absoluteString)
-            guard let doc = try? HTML(url: url, encoding: .utf8) else { return }
-            let links = doc.xpath("//table[@cellspacing='0']//a/@href")
-            let rows = doc.xpath("//table[@cellspacing='0']//td")
-            for (index, element) in links.enumerated() {
-                let numberIndex = index * 5
-                let titleIndex = index * 5 + 1
-                let dateIndex = index * 5 + 2
-                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
-                let title = rows[titleIndex].text?.trimmed ?? "?"
-                let date = rows[dateIndex].text?.trimmed ?? "?"
-                let link = element.text?.trimmed ?? "?"
-                let post = Post(number: number, title: title, date: date, link: link)
-                posts.append(post)
+            do {
+                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
+                let doc = try HTML(url: url, encoding: .utf8)
+                let links = doc.xpath("//table[@cellspacing='0']//a/@href")
+                let rows = doc.xpath("//table[@cellspacing='0']//td")
+                for (index, element) in links.enumerated() {
+                    let numberIndex = index * 5
+                    let titleIndex = index * 5 + 1
+                    let dateIndex = index * 5 + 2
+                    let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                    let title = rows[titleIndex].text?.trimmed ?? "?"
+                    let date = rows[dateIndex].text?.trimmed ?? "?"
+                    let link = element.text?.trimmed ?? "?"
+                    let post = Post(number: number, title: title, date: date, link: link)
+                    posts.append(post)
+                }
+                completion(posts, nil)
+            } catch {
+                completion(nil, error)
             }
-            completion(posts)
         }
     }
 }
 
 extension 명지대학교 {
-    private var url1: String {
+    var baseURL: String {
         return "http://www.mju.ac.kr/mbs/mjukr/jsp/board/"
     }
     
-    private var url2: String {
-        return "list.jsp?boardId="
+    var commonQueries: String {
+        return "list.jsp?qt=&column=TITLE&categoryDepth=&categoryId=0&mcategoryId=&boardType=01&listType=01&command=list"
     }
-    private func url3(ofCategory category: 명지대학교.Category) -> String {
-        switch category.name {
+    
+    func categoryQuery(_ category: 명지대학교.Category) -> String {
+        var result = "&boardId=\(category.identifier)"
+        switch category.identifier {
         case "11294":
-            return "&qt=&column=TITLE&categoryDepth=&categoryId=0&mcategoryId=&boardType=01&listType=01&command=list&id=mjukr_050101000000"
+            result += "&id=mjukr_050101000000"
         case "11310":
-             return "&qt=&column=TITLE&categoryDepth=&categoryId=0&mcategoryId=&boardType=01&listType=01&command=list&id=mjukr_050103000000"
+            result += "&id=mjukr_050103000000"
         case "11318":
-             return "&qt=&column=TITLE&categoryDepth=&categoryId=0&mcategoryId=&boardType=01&listType=01&command=list&id=mjukr_050104000000"
+            result += "&id=mjukr_050104000000"
         case "11327":
-             return "&qt=&column=TITLE&categoryDepth=&categoryId=0&mcategoryId=&boardType=01&listType=01&command=list&id=mjukr_050106000000"
+            result += "&id=mjukr_050106000000"
         default:
-            return ""
+            result += ""
         }
+        return result
     }
     
-    private var url4: String {
-        return "&spage="
+    func pageQuery(_ page: Int) -> String {
+        return "&spage=\(page)"
     }
     
-    private var url5: String {
-        return "&search="
+    func searchQuery(_ text: String) -> String {
+        return "&search=\(text.percentEncoding)"
     }
 }

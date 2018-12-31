@@ -43,6 +43,7 @@
 		198DC0CD21D462A000AF4801 /* FooterRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0CC21D462A000AF4801 /* FooterRefreshView.swift */; };
 		198DC0CF21D467EC00AF4801 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0CE21D467EC00AF4801 /* PostCell.swift */; };
 		19A7F86121D90366005E1E6D /* 경희대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86021D90366005E1E6D /* 경희대학교.swift */; };
+		19A7F86321D90F1D005E1E6D /* UniversityError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86221D90F1D005E1E6D /* UniversityError.swift */; };
 		19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* InitialInfo.swift */; };
 		19AB910121D21929000CB844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB910021D21929000CB844 /* User.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
@@ -106,6 +107,7 @@
 		198DC0CC21D462A000AF4801 /* FooterRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterRefreshView.swift; sourceTree = "<group>"; };
 		198DC0CE21D467EC00AF4801 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		19A7F86021D90366005E1E6D /* 경희대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "경희대학교.swift"; sourceTree = "<group>"; };
+		19A7F86221D90F1D005E1E6D /* UniversityError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityError.swift; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* InitialInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfo.swift; sourceTree = "<group>"; };
 		19AB910021D21929000CB844 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		19ED806D21CA5F8E00BA6529 /* UniversityModel */ = {
 			isa = PBXGroup;
 			children = (
+				19A7F86221D90F1D005E1E6D /* UniversityError.swift */,
 				1959D57821CE212000F6182F /* UniversityModel.swift */,
 				198DC0B821D35A7400AF4801 /* 강원대학교.swift */,
 				198DC0BE21D35A9000AF4801 /* 경북대학교.swift */,
@@ -522,6 +525,7 @@
 				198DC0C121D35A9800AF4801 /* 부산대학교.swift in Sources */,
 				198DC0C521D35AAB00AF4801 /* 전북대학교.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
+				19A7F86321D90F1D005E1E6D /* UniversityError.swift in Sources */,
 				19ED808921CB7C7600BA6529 /* UIView+.swift in Sources */,
 				198DC0C321D35AA000AF4801 /* 경상대학교.swift in Sources */,
 				1958FA7F21D4ADCC00DACF72 /* 성균관대학교.swift in Sources */,
