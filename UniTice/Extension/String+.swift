@@ -32,7 +32,7 @@ extension String {
     }
     
     var percentEncoding: String {
-        return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
     
     var trimmed: String {
