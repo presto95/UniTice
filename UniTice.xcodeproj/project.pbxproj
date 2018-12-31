@@ -45,6 +45,7 @@
 		19A7F86121D90366005E1E6D /* 경희대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86021D90366005E1E6D /* 경희대학교.swift */; };
 		19A7F86321D90F1D005E1E6D /* UniversityError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86221D90F1D005E1E6D /* UniversityError.swift */; };
 		19A7F86521D9DB7D005E1E6D /* 동국대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86421D9DB7D005E1E6D /* 동국대학교.swift */; };
+		19A7F86721DA577D005E1E6D /* 홍익대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86621DA577D005E1E6D /* 홍익대학교.swift */; };
 		19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* InitialInfo.swift */; };
 		19AB910121D21929000CB844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB910021D21929000CB844 /* User.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
@@ -110,6 +111,7 @@
 		19A7F86021D90366005E1E6D /* 경희대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "경희대학교.swift"; sourceTree = "<group>"; };
 		19A7F86221D90F1D005E1E6D /* UniversityError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityError.swift; sourceTree = "<group>"; };
 		19A7F86421D9DB7D005E1E6D /* 동국대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동국대학교.swift"; sourceTree = "<group>"; };
+		19A7F86621DA577D005E1E6D /* 홍익대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "홍익대학교.swift"; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* InitialInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfo.swift; sourceTree = "<group>"; };
 		19AB910021D21929000CB844 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				198DC0B621D3569800AF4801 /* 제주대학교.swift */,
 				198DC0BA21D35A8100AF4801 /* 충남대학교.swift */,
 				198DC0BC21D35A8800AF4801 /* 충북대학교.swift */,
+				19A7F86621DA577D005E1E6D /* 홍익대학교.swift */,
 			);
 			path = UniversityModel;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
 				198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */,
 				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
+				19A7F86721DA577D005E1E6D /* 홍익대학교.swift in Sources */,
 				198DC0C121D35A9800AF4801 /* 부산대학교.swift in Sources */,
 				198DC0C521D35AAB00AF4801 /* 전북대학교.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
