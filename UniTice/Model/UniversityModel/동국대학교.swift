@@ -25,7 +25,7 @@ struct 동국대학교: UniversityModel {
         ]
     }
     
-    func requestPosts(inCategory category: 동국대학교.Category, inPage page: Int, searchText text: String, _ completion: @escaping (([Post]?, Error?) -> Void)) {
+    func requestPosts(inCategory category: 동국대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
         DispatchQueue.global(qos: .background).async {
             var posts = [Post]()
             do {
@@ -34,7 +34,7 @@ struct 동국대학교: UniversityModel {
                 let rows = doc.xpath("//tbody//td")
                 let links = doc.xpath("//tbody//td[@class='title']//a/@href")
                 for (index, element) in links.enumerated() {
-                    let numberIndex = index
+                    let numberIndex = index * 7
                     let titleIndex = index * 7 + 1
                     let dateIndex = index * 7 + 3
                     let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
