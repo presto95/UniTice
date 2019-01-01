@@ -10,6 +10,8 @@ import UIKit
 
 enum University: String, CaseIterable {
     
+    //A
+    case kaist = "KAIST"
     // ㄱ
     case kangwon = "강원대학교"
     case knu = "경북대학교"
@@ -50,6 +52,8 @@ extension University {
         let user = User.fetch() ?? User()
         let university = University(rawValue: user.university) ?? .seoultech
         switch university {
+        case .kaist:
+            return KAIST()
         case .kangwon:
             return 강원대학교()
         case .knu:

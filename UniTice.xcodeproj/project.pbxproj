@@ -26,6 +26,7 @@
 		1959D57921CE212000F6182F /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57821CE212000F6182F /* UniversityModel.swift */; };
 		1959D57B21CE2A5600F6182F /* 동덕여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */; };
 		1959D57D21CE2A5D00F6182F /* 명지대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57C21CE2A5D00F6182F /* 명지대학교.swift */; };
+		195B993A21DB448100367456 /* KAIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B993921DB448100367456 /* KAIST.swift */; };
 		1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */; };
 		1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */; };
 		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
@@ -93,6 +94,7 @@
 		1959D57821CE212000F6182F /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동덕여자대학교.swift"; sourceTree = "<group>"; };
 		1959D57C21CE2A5D00F6182F /* 명지대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "명지대학교.swift"; sourceTree = "<group>"; };
+		195B993921DB448100367456 /* KAIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KAIST.swift; sourceTree = "<group>"; };
 		1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				19A7F86221D90F1D005E1E6D /* UniversityError.swift */,
 				1959D57821CE212000F6182F /* UniversityModel.swift */,
+				195B993921DB448100367456 /* KAIST.swift */,
 				198DC0B821D35A7400AF4801 /* 강원대학교.swift */,
 				198DC0BE21D35A9000AF4801 /* 경북대학교.swift */,
 				198DC0C221D35AA000AF4801 /* 경상대학교.swift */,
@@ -530,6 +533,7 @@
 				19A7F86521D9DB7D005E1E6D /* 동국대학교.swift in Sources */,
 				19C6BBBC2197F8D4002FC39C /* University.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
+				195B993A21DB448100367456 /* KAIST.swift in Sources */,
 				198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */,
 				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
 				19A7F86721DA577D005E1E6D /* 홍익대학교.swift in Sources */,
