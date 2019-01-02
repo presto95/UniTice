@@ -31,6 +31,7 @@
 		195B993E21DBA9A200367456 /* 덕성여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B993D21DBA9A200367456 /* 덕성여자대학교.swift */; };
 		195B994021DBAEED00367456 /* 성신여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B993F21DBAEED00367456 /* 성신여자대학교.swift */; };
 		195B994221DBB35500367456 /* 세종대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B994121DBB35500367456 /* 세종대학교.swift */; };
+		195B994421DCAE6300367456 /* 이화여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B994321DCAE6300367456 /* 이화여자대학교.swift */; };
 		1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */; };
 		1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */; };
 		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
@@ -103,6 +104,7 @@
 		195B993D21DBA9A200367456 /* 덕성여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "덕성여자대학교.swift"; sourceTree = "<group>"; };
 		195B993F21DBAEED00367456 /* 성신여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "성신여자대학교.swift"; sourceTree = "<group>"; };
 		195B994121DBB35500367456 /* 세종대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "세종대학교.swift"; sourceTree = "<group>"; };
+		195B994321DCAE6300367456 /* 이화여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "이화여자대학교.swift"; sourceTree = "<group>"; };
 		1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				1958FA7E21D4ADCC00DACF72 /* 성균관대학교.swift */,
 				195B993F21DBAEED00367456 /* 성신여자대학교.swift */,
 				195B994121DBB35500367456 /* 세종대학교.swift */,
+				195B994321DCAE6300367456 /* 이화여자대학교.swift */,
 				198DC0AE21D34A0700AF4801 /* 전남대학교.swift */,
 				198DC0C421D35AAB00AF4801 /* 전북대학교.swift */,
 				198DC0B621D3569800AF4801 /* 제주대학교.swift */,
@@ -471,13 +474,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UniTice/Pods-UniTice-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Carte/Carte.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
-				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -489,13 +489,10 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Carte.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -552,6 +549,7 @@
 				19A7F86721DA577D005E1E6D /* 홍익대학교.swift in Sources */,
 				198DC0C121D35A9800AF4801 /* 부산대학교.swift in Sources */,
 				198DC0C521D35AAB00AF4801 /* 전북대학교.swift in Sources */,
+				195B994421DCAE6300367456 /* 이화여자대학교.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
 				19A7F86321D90F1D005E1E6D /* UniversityError.swift in Sources */,
 				195B993C21DB48AD00367456 /* 서울여자대학교.swift in Sources */,

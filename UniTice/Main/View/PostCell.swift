@@ -12,6 +12,7 @@ class PostCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: "postCell")
+        textLabel?.numberOfLines = 0
         textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         detailTextLabel?.font = UIFont.systemFont(ofSize: 13, weight: .light)
     }
