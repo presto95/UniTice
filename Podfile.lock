@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (4.8.0)
   - Carte (2.1.6)
   - DZNEmptyDataSet (1.8.1)
   - Firebase/Core (5.13.0):
@@ -58,8 +57,6 @@ PODS:
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
   - Kanna (4.0.2)
-  - KeychainAccess (3.1.2)
-  - MarqueeLabel/Swift (3.2.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -75,21 +72,17 @@ PODS:
   - XLPagerTabStrip (8.1.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
   - Carte
   - DZNEmptyDataSet
   - Firebase/Core
   - Firebase/Messaging
   - Kanna (~> 4.0.0)
-  - KeychainAccess
-  - MarqueeLabel/Swift
   - RealmSwift
   - SnapKit (~> 4.0.0)
   - XLPagerTabStrip (~> 8.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - Carte
     - DZNEmptyDataSet
     - Firebase
@@ -101,8 +94,6 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - Kanna
-    - KeychainAccess
-    - MarqueeLabel
     - nanopb
     - Protobuf
     - Realm
@@ -111,7 +102,6 @@ SPEC REPOS:
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Carte: c8200bfb59b77336aa2f02e84cc4ac0fa820034d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
@@ -123,8 +113,6 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   Kanna: c60b61d72554bf04ed1ee074f9b379855cab4892
-  KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
-  MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
@@ -132,6 +120,6 @@ SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: 2c23ec0afa229e344a565051e31152841dfb5675
+PODFILE CHECKSUM: eb80c086c447c3dbab4432a954668d9d07f4ce23
 
 COCOAPODS: 1.6.0.beta.1
