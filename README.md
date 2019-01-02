@@ -2,9 +2,15 @@
 
 ## 대학교 공지사항 알리미
 
-개발중...
+UNDER DEVELOPING👩🏻‍💻👩🏻‍💻👨🏻‍💻
 
-### 지원 (예정) 대학교
+---
+
+### 지원 대학교
+
+**A**
+
+KAIST
 
 **ㄱ**
 
@@ -14,11 +20,17 @@
 
 경상대학교
 
+경희대학교
+
 고려대학교
 
 **ㄴ**
 
 **ㄷ**
+
+덕성여자대학교
+
+동국대학교
 
 동덕여자대학교
 
@@ -38,9 +50,17 @@
 
 서울대학교
 
+서울여자대학교
+
 성균관대학교
 
+성신여자대학교
+
+세종대학교
+
 **ㅇ**
+
+이화여자대학교
 
 **ㅈ**
 
@@ -64,25 +84,29 @@
 
 **ㅎ**
 
+한국외국어대학교
+
+홍익대학교
+
+---
+
 ### 제공하는 기능
 
 - 학교별 공지 확인
-- 키워드 푸시 알림
+- ~~키워드 푸시 알림~~
 
 ### 사용하는 라이브러리
 
-- Kanna : 학교 공지 게시판 HTML 파싱
-- Alamofire : 서버와 통신
-- SwiftLint : 코딩 컨벤션 강제
-- Firebase/Core : Firebase
-- Firebase/Messaing : FCM
-- Carte : 오픈 소스 라이센스 표시
-- SnapKit : 코드에서 오토레이아웃 설정
-- SkeletonView : 네트워킹 중에 컨텐츠를 로딩하고 있다는 것을 사용자에게 알리기
-- DZNEmptyDataSet : 컨텐츠가 없음을 사용자에게 알리기
-- XLPagerTabStrip : 상단 탭 UI 구현
-- KeychainAccess : UUID 저장
-- RealmSwift : 로컬 데이터베이스
+- Kanna
+- RealmSwift
+- XLPagerTabStrip
+- Firebase/Core
+- Firebase/Messaing
+- SnapKit
+- DZNEmptyDataSet
+- Carte
+
+---
 
 ### 성능 관련
 
