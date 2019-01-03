@@ -19,30 +19,6 @@ protocol UniversityModel {
     /// 카테고리.
     var categories: [Category] { get }
     
-    /// Base URL. 재정의하여 사용하기.
-    var baseURL: String { get }
-    
-    /// 불필요한 쿼리 문자열. 재정의하여 사용하기.
-    var commonQueries: String { get }
-    
-    /// 카테고리 쿼리 문자열. 재정의하여 사용하기.
-    ///
-    /// - Parameter category: 카테고리
-    /// - Returns: 카테고리 쿼리 문자열
-    func categoryQuery(_ category: Category) -> String
-    
-    /// 페이지 쿼리 문자열. 재정의하여 사용하기.
-    ///
-    /// - Parameter page: 페이지
-    /// - Returns: 페이지 쿼리 문자열
-    func pageQuery(_ page: Int) -> String
-    
-    /// 검색 쿼리 문자열. 재정의하여 사용하기.
-    ///
-    /// - Parameter text: 검색 키워드
-    /// - Returns: 검색 쿼리 문자열
-    func searchQuery(_ text: String) -> String
-    
     /// 파싱할 URL.
     ///
     /// - Parameters:
@@ -70,18 +46,35 @@ protocol UniversityModel {
     ///   - text: 검색 키워드. 기본값 `""`
     ///   - completion: 요청 후 컴플리션 핸들러
     func requestPosts(inCategory category: Category, inPage page: Int, searchText text: String, _ completion: @escaping (([Post]?, Error?) -> Void))
+    
+    /// Base URL. 재정의하여 사용하기.
+    var baseURL: String { get }
+    
+    /// 불필요한 쿼리 문자열. 재정의하여 사용하기.
+    var commonQueries: String { get }
+    
+    /// 카테고리 쿼리 문자열. 재정의하여 사용하기.
+    ///
+    /// - Parameter category: 카테고리
+    /// - Returns: 카테고리 쿼리 문자열
+    func categoryQuery(_ category: Category) -> String
+    
+    /// 페이지 쿼리 문자열. 재정의하여 사용하기.
+    ///
+    /// - Parameter page: 페이지
+    /// - Returns: 페이지 쿼리 문자열
+    func pageQuery(_ page: Int) -> String
+    
+    /// 검색 쿼리 문자열. 재정의하여 사용하기.
+    ///
+    /// - Parameter text: 검색 키워드
+    /// - Returns: 검색 쿼리 문자열
+    func searchQuery(_ text: String) -> String
 }
 
 extension UniversityModel {
     
     /// 파싱할 URL 초기 구현. `Base URL` - `불필요한 쿼리 스트링` - `카테고리 쿼리 스트링` - `페이지 쿼리 스트링` - `검색 쿼리 스트링`으로 구성됨.
-    ///
-    /// - Parameters:
-    ///   - category: 카테고리
-    ///   - page: 페이지
-    ///   - text: 검색 키워드
-    /// - Returns: 파싱할 URL
-    /// - Throws: URL 형식에 맞지 않는 경우 에러 던짐.
     func pageURL(inCategory category: Category, inPage page: Int, searchText text: String) throws -> URL {
         guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
             throw UniversityError.invalidURLError
@@ -90,13 +83,7 @@ extension UniversityModel {
     }
     
     /// 게시물 URL 초기 구현. `Base URL` - `게시물 링크`로 구성됨.
-    ///
-    /// - Parameters:
-    ///   - category: 카테고리
-    ///   - link: 파싱 결과에 따른 게시물 URI
-    /// - Returns: 게시물 URL
-    /// - Throws: URL 형식에 맞지 않는 경우 에러 던짐.
-    func postURL(inCategory category: 경북대학교.Category, uri link: String) throws -> URL {
+    func postURL(inCategory category: Self.Category, uri link: String) throws -> URL {
         guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
             throw UniversityError.invalidURLError
         }

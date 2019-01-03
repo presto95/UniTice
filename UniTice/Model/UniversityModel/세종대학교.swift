@@ -29,7 +29,6 @@ struct 세종대학교: UniversityModel {
             var posts = [Post]()
             do {
                 let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
-                print(url.absoluteString)
                 let doc = try HTML(url: url, encoding: .utf8)
                 let rows = doc.xpath("//tbody//tr//td")
                 let links = doc.xpath("//tbody//tr//td[@class='subject']//a/@href")
