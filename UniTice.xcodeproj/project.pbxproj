@@ -61,7 +61,6 @@
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
 		19C6BBBC2197F8D4002FC39C /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* University.swift */; };
 		19ED806F21CA5FA000BA6529 /* 서울과학기술대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED806E21CA5FA000BA6529 /* 서울과학기술대학교.swift */; };
-		19ED807321CA63C200BA6529 /* StartMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807221CA63C200BA6529 /* StartMainViewController.swift */; };
 		19ED807521CA63CB00BA6529 /* StartUniversitySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */; };
 		19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */; };
 		19ED807921CA63DC00BA6529 /* StartFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */; };
@@ -136,7 +135,6 @@
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		19C6BBBB2197F8D4002FC39C /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
 		19ED806E21CA5FA000BA6529 /* 서울과학기술대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "서울과학기술대학교.swift"; sourceTree = "<group>"; };
-		19ED807221CA63C200BA6529 /* StartMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainViewController.swift; sourceTree = "<group>"; };
 		19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUniversitySelectViewController.swift; sourceTree = "<group>"; };
 		19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordRegisterViewController.swift; sourceTree = "<group>"; };
 		19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartFinishViewController.swift; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 		19ED808421CB786100BA6529 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				19ED807221CA63C200BA6529 /* StartMainViewController.swift */,
 				19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */,
 				19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */,
 				19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */,
@@ -480,7 +477,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UniTice/Pods-UniTice-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Carte/Carte.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
@@ -495,7 +491,6 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Carte.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
@@ -541,7 +536,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */,
-				19ED807321CA63C200BA6529 /* StartMainViewController.swift in Sources */,
 				194BF41F219EA54E00FA6124 /* ChangeUniversityViewController.swift in Sources */,
 				19AB910121D21929000CB844 /* User.swift in Sources */,
 				1959D57D21CE2A5D00F6182F /* 명지대학교.swift in Sources */,

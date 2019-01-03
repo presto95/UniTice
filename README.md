@@ -40,6 +40,8 @@ KAIST
 
 명지대학교
 
+목포대학교
+
 **ㅂ**
 
 부산대학교
@@ -104,7 +106,6 @@ KAIST
 - Firebase/Messaing
 - SnapKit
 - DZNEmptyDataSet
-- Carte
 
 ---
 
