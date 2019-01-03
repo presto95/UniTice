@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Carte
 import UserNotifications
 import MessageUI
 
@@ -32,7 +31,7 @@ class SettingTableViewController: UITableViewController {
         return switchControl.isOn
     }
     
-    private let texts = [["상단 고정 게시물 펼치기"], ["학교 변경", "키워드 설정", "알림 설정"], ["문의하기", "앱 평가하기"], ["오픈소스 라이센스"]]
+    private let texts = [["상단 고정 게시물 펼치기"], ["학교 변경", "키워드 설정", "알림 설정"], ["문의하기", "앱 평가하기"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,15 +84,13 @@ extension SettingTableViewController {
             return 3
         case 2:
             return 2
-        case 3:
-            return 1
         default:
             return 0
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -138,15 +135,8 @@ extension SettingTableViewController {
                 present(mail, animated: true)
             }
         case 2 where row == 1:
-            // 앱 아이디 생성 후 가능
-            break
-        case 3 where row == 0:
-            let controller: CarteViewController = {
-                let controller = CarteViewController(style: .plain)
-                controller.items.sort { $0.name < $1.name }
-                return controller
-            }()
-            navigationController?.pushViewController(controller, animated: true)
+            guard let url = URL(string: "itms-apps://itunes.apple.com/app/1447871519") else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         default:
             break
         }

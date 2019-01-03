@@ -7,7 +7,6 @@ target 'UniTice' do
   pod 'Kanna', '~> 4.0.0'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
-  pod 'Carte'
   pod 'SnapKit', '~> 4.0.0'
   pod 'DZNEmptyDataSet'
   pod 'XLPagerTabStrip', '~> 8.1'

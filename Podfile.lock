@@ -1,5 +1,4 @@
 PODS:
-  - Carte (2.1.6)
   - DZNEmptyDataSet (1.8.1)
   - Firebase/Core (5.13.0):
     - Firebase/CoreOnly
@@ -72,7 +71,6 @@ PODS:
   - XLPagerTabStrip (8.1.0)
 
 DEPENDENCIES:
-  - Carte
   - DZNEmptyDataSet
   - Firebase/Core
   - Firebase/Messaging
@@ -83,7 +81,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Carte
     - DZNEmptyDataSet
     - Firebase
     - FirebaseAnalytics
@@ -102,7 +99,6 @@ SPEC REPOS:
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
-  Carte: c8200bfb59b77336aa2f02e84cc4ac0fa820034d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
@@ -120,6 +116,6 @@ SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: eb80c086c447c3dbab4432a954668d9d07f4ce23
+PODFILE CHECKSUM: 5b6f6f10a896e8b413b1f0f20e69be02318bfab7
 
 COCOAPODS: 1.6.0.beta.1
