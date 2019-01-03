@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class StartUniversitySelectViewController: UIViewController {
 
@@ -31,14 +32,15 @@ class StartUniversitySelectViewController: UIViewController {
         }
     }
     
-    @IBOutlet private weak var backButton: StartBackButton! {
-        didSet {
-            backButton.addTarget(self, action: #selector(touchUpBackButton(_:)), for: .touchUpInside)
-        }
-    }
-    
     @objc private func touchUpNoneButton(_ sender: UIButton) {
-        // 공식계정으로 메일 보내게끔 해서 학교 수요 알아볼수도?
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["yoohan95@gmail.com"])
+            mail.setSubject("[다연결] 우리 학교가 목록에 없어요!")
+            mail.setMessageBody("\n\n\n\n\n\n알려주셔서 감사합니다. 최대한 빨리 업데이트 하겠습니다.", isHTML: false)
+            present(mail, animated: true, completion: nil)
+        }
     }
     
     @objc private func touchUpConfirmButton(_ sender: UIButton) {
@@ -66,5 +68,11 @@ extension StartUniversitySelectViewController: UIPickerViewDataSource {
 extension StartUniversitySelectViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return universities[row].rawValue
+    }
+}
+
+extension StartUniversitySelectViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
