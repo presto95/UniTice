@@ -47,25 +47,25 @@ protocol UniversityModel {
     ///   - completion: 요청 후 컴플리션 핸들러
     func requestPosts(inCategory category: Category, inPage page: Int, searchText text: String, _ completion: @escaping (([Post]?, Error?) -> Void))
     
-    /// Base URL. 재정의하여 사용하기.
+    /// Base URL.
     var baseURL: String { get }
     
-    /// 불필요한 쿼리 문자열. 재정의하여 사용하기.
+    /// 불필요한 쿼리 문자열.
     var commonQueries: String { get }
     
-    /// 카테고리 쿼리 문자열. 재정의하여 사용하기.
+    /// 카테고리 쿼리 문자열.
     ///
     /// - Parameter category: 카테고리
     /// - Returns: 카테고리 쿼리 문자열
     func categoryQuery(_ category: Category) -> String
     
-    /// 페이지 쿼리 문자열. 재정의하여 사용하기.
+    /// 페이지 쿼리 문자열.
     ///
     /// - Parameter page: 페이지
     /// - Returns: 페이지 쿼리 문자열
     func pageQuery(_ page: Int) -> String
     
-    /// 검색 쿼리 문자열. 재정의하여 사용하기.
+    /// 검색 쿼리 문자열.
     ///
     /// - Parameter text: 검색 키워드
     /// - Returns: 검색 쿼리 문자열
