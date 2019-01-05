@@ -78,5 +78,3 @@ extension 삼육대학교 {
         return "&k=\(text.percentEncoding)"
     }
 }
-
-//https://new.syu.ac.kr/academic/academic-notice?t=&page=2&c=title&k=2018
