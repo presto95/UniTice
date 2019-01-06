@@ -32,7 +32,7 @@ struct 한국산업기술대학교: UniversityModel {
             var posts = [Post]()
             do {
                 let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
-                let doc = try HTML(url: url, encoding: .init(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422)))
+                let doc = try HTML(url: url, encoding: .eucKR)
                 let rows = doc.xpath("//tbody//tr//td")
                 let links = doc.xpath("//tbody//tr//td[2]//a/@href")
                 for (index, element) in links.enumerated() {

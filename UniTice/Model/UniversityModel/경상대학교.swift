@@ -32,7 +32,7 @@ struct 경상대학교: UniversityModel {
             var posts = [Post]()
             do {
                 let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
-                let doc = try HTML(url: url, encoding: .init(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422)))
+                let doc = try HTML(url: url, encoding: .eucKR)
                 let rows = doc.xpath("//tbody[@class='tb']//td")
                 let links = doc.xpath("//tbody[@class='tb']//td[@class='subject']//a[1]/@href")
                 let realRows = Array(rows.dropFirst(rows.count % links.count))

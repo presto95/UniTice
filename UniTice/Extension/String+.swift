@@ -19,8 +19,8 @@ extension String {
                     let range = NSRange(location: 0, length: utf16.count)
                     for match in regex.matches(in: self, options: .withTransparentBounds, range: range) {
                         attributedString.addAttributes([
-                            .backgroundColor: UIColor.cyan.withAlphaComponent(0.3),
-                            .foregroundColor: UIColor.purple
+                            .backgroundColor: UIColor.purple.withAlphaComponent(0.7),
+                            .foregroundColor: UIColor.white
                             ], range: match.range)
                     }
                 } catch {
@@ -38,4 +38,8 @@ extension String {
     var trimmed: String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
+}
+
+extension String.Encoding {
+    static let eucKR = String.Encoding.init(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422))
 }

@@ -39,7 +39,7 @@ struct 덕성여자대학교: UniversityModel {
             do {
                 let url = try self.pageURL(inCategory: category, inPage: page - 1, searchText: text)
                 print(url.absoluteString)
-                let doc = try HTML(url: url, encoding: .init(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422)))
+                let doc = try HTML(url: url, encoding: .eucKR)
                 let rows = doc.xpath("//tbody//tr//td")
                 let links = doc.xpath("//tbody//tr//td[@class='title']//a/@href")
                 for (index, element) in links.enumerated() {
