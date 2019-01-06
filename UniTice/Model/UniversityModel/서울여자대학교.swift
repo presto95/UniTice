@@ -46,13 +46,7 @@ struct 서울여자대학교: UniversityModel {
                     let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
                     let title = rows[titleIndex].text?.trimmed ?? "?"
                     let date = rows[dateIndex].text?.trimmed ?? "?"
-                    let tempLink = element.text?.trimmed.map { String($0) } ?? []
-                    var link = ""
-                    for character in tempLink {
-                        if let digit = Int(character) {
-                            link += "\(digit)"
-                        }
-                    }
+                    let link = element.text?.trimmed.filter { Int("\($0)") != nil } ?? "?"
                     let post = Post(number: number, title: title, date: date, link: link)
                     posts.append(post)
                 }
