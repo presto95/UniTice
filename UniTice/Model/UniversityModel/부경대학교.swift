@@ -73,7 +73,3 @@ extension 부경대학교 {
         return "&p_skey=title&p_stext=\(text.percentEncoding)"
     }
 }
-
-//http://www.pknu.ac.kr/usrBoardActn.do?p_bm_idx=5&p_boardcode=PK10000005&p_pageno=3&p_skey=title&p_stext=2018&p_sbsidx=2
-
-

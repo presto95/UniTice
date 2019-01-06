@@ -39,6 +39,7 @@
 		195B995421E0D46200367456 /* 국민대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B995321E0D46200367456 /* 국민대학교.swift */; };
 		195B995821E0DDFD00367456 /* 숙명여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B995721E0DDFD00367456 /* 숙명여자대학교.swift */; };
 		195B99B821E1D2C400367456 /* 부경대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B99B721E1D2C400367456 /* 부경대학교.swift */; };
+		195B99BA21E1EDD600367456 /* KC대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B99B921E1EDD600367456 /* KC대학교.swift */; };
 		1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */; };
 		1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */; };
 		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
@@ -118,6 +119,7 @@
 		195B995321E0D46200367456 /* 국민대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "국민대학교.swift"; sourceTree = "<group>"; };
 		195B995721E0DDFD00367456 /* 숙명여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "숙명여자대학교.swift"; sourceTree = "<group>"; };
 		195B99B721E1D2C400367456 /* 부경대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "부경대학교.swift"; sourceTree = "<group>"; };
+		195B99B921E1EDD600367456 /* KC대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KC대학교.swift"; sourceTree = "<group>"; };
 		1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				19A7F86221D90F1D005E1E6D /* UniversityError.swift */,
 				1959D57821CE212000F6182F /* UniversityModel.swift */,
 				195B993921DB448100367456 /* KAIST.swift */,
+				195B99B921E1EDD600367456 /* KC대학교.swift */,
 				198DC0B821D35A7400AF4801 /* 강원대학교.swift */,
 				198DC0BE21D35A9000AF4801 /* 경북대학교.swift */,
 				198DC0C221D35AA000AF4801 /* 경상대학교.swift */,
@@ -595,6 +598,7 @@
 				19A7F86121D90366005E1E6D /* 경희대학교.swift in Sources */,
 				195B99B821E1D2C400367456 /* 부경대학교.swift in Sources */,
 				194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */,
+				195B99BA21E1EDD600367456 /* KC대학교.swift in Sources */,
 				1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */,
 				195B994221DBB35500367456 /* 세종대학교.swift in Sources */,
 				195B995821E0DDFD00367456 /* 숙명여자대학교.swift in Sources */,
