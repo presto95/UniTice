@@ -18,6 +18,7 @@
 		193D654521E1F4F800FAB1DE /* 광운대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193D654421E1F4F800FAB1DE /* 광운대학교.swift */; };
 		193D654721E2197000FAB1DE /* 서경대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193D654621E2197000FAB1DE /* 서경대학교.swift */; };
 		193D654921E21D0D00FAB1DE /* 서울교육대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193D654821E21D0D00FAB1DE /* 서울교육대학교.swift */; };
+		193D654B21E226BA00FAB1DE /* 성공회대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193D654A21E226BA00FAB1DE /* 성공회대학교.swift */; };
 		194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */; };
 		194BF41F219EA54E00FA6124 /* ChangeUniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */; };
 		194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */; };
@@ -101,6 +102,7 @@
 		193D654421E1F4F800FAB1DE /* 광운대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "광운대학교.swift"; sourceTree = "<group>"; };
 		193D654621E2197000FAB1DE /* 서경대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "서경대학교.swift"; sourceTree = "<group>"; };
 		193D654821E21D0D00FAB1DE /* 서울교육대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "서울교육대학교.swift"; sourceTree = "<group>"; };
+		193D654A21E226BA00FAB1DE /* 성공회대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "성공회대학교.swift"; sourceTree = "<group>"; };
 		194BF419219DBF6D00FA6124 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeUniversityViewController.swift; path = Setting/ChangeUniversityViewController.swift; sourceTree = "<group>"; };
 		194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeywordSettingViewController.swift; path = Setting/KeywordSettingViewController.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				193D654821E21D0D00FAB1DE /* 서울교육대학교.swift */,
 				198DC0B021D34FC300AF4801 /* 서울대학교.swift */,
 				195B993B21DB48AD00367456 /* 서울여자대학교.swift */,
+				193D654A21E226BA00FAB1DE /* 성공회대학교.swift */,
 				1958FA7E21D4ADCC00DACF72 /* 성균관대학교.swift */,
 				195B993F21DBAEED00367456 /* 성신여자대학교.swift */,
 				195B994121DBB35500367456 /* 세종대학교.swift */,
@@ -580,6 +583,7 @@
 				198DC0C521D35AAB00AF4801 /* 전북대학교.swift in Sources */,
 				195B994421DCAE6300367456 /* 이화여자대학교.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
+				193D654B21E226BA00FAB1DE /* 성공회대학교.swift in Sources */,
 				19A7F86321D90F1D005E1E6D /* UniversityError.swift in Sources */,
 				195B993C21DB48AD00367456 /* 서울여자대학교.swift in Sources */,
 				195B994621DCB39300367456 /* 한성대학교.swift in Sources */,
