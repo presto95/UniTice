@@ -196,7 +196,6 @@ extension MainContentTableViewController {
         if section == 0 {
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 5))
             footerView.backgroundColor = .purple
-            //footerView.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
             return footerView
         }
         return nil
