@@ -31,7 +31,6 @@ struct 서울과학기술대학교: UniversityModel {
         guard let url = URL(string: "\(baseURL)\(category.identifier)\(link.percentEncoding)") else {
             throw UniversityError.invalidURLError
         }
-        print(111)
         return url
     }
     
