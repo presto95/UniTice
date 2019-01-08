@@ -13,6 +13,7 @@
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
 		191CDE0B21D4DCCE00EBCBE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */; };
 		192FF1F621E465F100FF0F15 /* 동신대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F521E465F100FF0F15 /* 동신대학교.swift */; };
+		192FF1F821E46B1000FF0F15 /* 세한대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F721E46B1000FF0F15 /* 세한대학교.swift */; };
 		193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */; };
 		193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193005EC21B14658003C9DBB /* SettingTableViewController.swift */; };
 		1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1930D34E21BFFCD700424FBF /* Start.storyboard */; };
@@ -101,6 +102,7 @@
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Setting.storyboard; path = Setting/Setting.storyboard; sourceTree = "<group>"; };
 		192FF1F521E465F100FF0F15 /* 동신대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동신대학교.swift"; sourceTree = "<group>"; };
+		192FF1F721E46B1000FF0F15 /* 세한대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "세한대학교.swift"; sourceTree = "<group>"; };
 		193005E821B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		193005E921B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				1958FA7E21D4ADCC00DACF72 /* 성균관대학교.swift */,
 				195B993F21DBAEED00367456 /* 성신여자대학교.swift */,
 				195B994121DBB35500367456 /* 세종대학교.swift */,
+				192FF1F721E46B1000FF0F15 /* 세한대학교.swift */,
 				195B995721E0DDFD00367456 /* 숙명여자대학교.swift */,
 				195B994321DCAE6300367456 /* 이화여자대학교.swift */,
 				198DC0AE21D34A0700AF4801 /* 전남대학교.swift */,
@@ -633,6 +636,7 @@
 				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
 				195B993E21DBA9A200367456 /* 덕성여자대학교.swift in Sources */,
 				1959D57921CE212000F6182F /* UniversityModel.swift in Sources */,
+				192FF1F821E46B1000FF0F15 /* 세한대학교.swift in Sources */,
 				19A7F86921DA5FDE005E1E6D /* 한국외국어대학교.swift in Sources */,
 				19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */,
 				193D654921E21D0D00FAB1DE /* 서울교육대학교.swift in Sources */,

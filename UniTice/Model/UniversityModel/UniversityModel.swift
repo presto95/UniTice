@@ -87,6 +87,7 @@ extension UniversityModel {
         guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
             throw UniversityError.invalidURLError
         }
+        print(url.absoluteString)
         return url
     }
 }
