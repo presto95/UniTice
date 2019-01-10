@@ -8,7 +8,7 @@
 
 import Kanna
 
-struct 세종대학교: UniversityModel {
+struct 세종대학교: UniversityScrappable {
     
     var name: String {
         return "세종대학교"

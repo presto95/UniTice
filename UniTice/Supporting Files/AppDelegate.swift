@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             addShortcut(to: application)
         }
         window?.makeKeyAndVisible()
+        
+        UniversityModel.shared.generateModel()
         return true
     }
     

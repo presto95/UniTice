@@ -11,8 +11,8 @@ import XLPagerTabStrip
 import UserNotifications
 
 class MainContainerViewController: ButtonBarPagerTabStripViewController {
-    
-    private var universityModel: UniversityModel = University.generateModel() {
+
+    private var universityModel: UniversityScrappable = UniversityModel.shared.universityModel {
         didSet {
             (navigationItem.leftBarButtonItem?.customView as? UILabel)?.text = universityModel.name
         }
@@ -26,7 +26,7 @@ class MainContainerViewController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        universityModel = University.generateModel()
+        universityModel = UniversityModel.shared.universityModel
         reloadPagerTabStripView()
     }
     

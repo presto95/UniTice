@@ -101,21 +101,3 @@ class User: Object {
         return nil
     }
 }
-
-@objcMembers
-class Bookmark: Object {
-    
-    dynamic var index: Int = 0
-    
-    dynamic var category: String = ""
-    
-    dynamic var title: String = ""
-    
-    dynamic var date: String = ""
-    
-    dynamic var link: String = ""
-    
-    func incrementIndex() -> Int {
-        return (try! Realm().objects(Bookmark.self).max(ofProperty: "index") as Int? ?? 0) + 1
-    }
-}

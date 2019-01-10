@@ -8,7 +8,7 @@
 
 import Kanna
 
-struct KAIST: UniversityModel {
+struct KAIST: UniversityScrappable {
     
     var name: String {
         return "KAIST"

@@ -55,6 +55,7 @@ class StartFinishViewController: UIViewController {
         user.university = university
         user.keywords.append(objectsIn: keywords)
         User.addUser(user)
+        UniversityModel.shared.generateModel()
         let next = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
         next.modalTransitionStyle = .flipHorizontal
         present(next, animated: true, completion: nil)

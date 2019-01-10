@@ -11,8 +11,8 @@ import DZNEmptyDataSet
 import SafariServices
 
 class BookmarkViewController: UIViewController {
-
-    private lazy var universityModel = University.generateModel()
+    
+    private let universityModel = UniversityModel.shared.universityModel
     
     private lazy var keywords = (User.fetch()?.keywords)!
     

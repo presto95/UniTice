@@ -14,7 +14,7 @@ class SearchViewController: UIViewController {
     
     private lazy var footerRefreshView = FooterRefreshView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
     
-    private lazy var universityModel = University.generateModel()
+    private let universityModel = UniversityModel.shared.universityModel
     
     private lazy var searchController = UISearchController(searchResultsController: nil)
     

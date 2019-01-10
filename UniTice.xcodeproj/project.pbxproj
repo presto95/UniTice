@@ -36,7 +36,7 @@
 		1958FA7F21D4ADCC00DACF72 /* 성균관대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1958FA7E21D4ADCC00DACF72 /* 성균관대학교.swift */; };
 		1959D57321CE13D400F6182F /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57221CE13D400F6182F /* MainContainerViewController.swift */; };
 		1959D57521CE192000F6182F /* MainContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57421CE192000F6182F /* MainContentTableViewController.swift */; };
-		1959D57921CE212000F6182F /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57821CE212000F6182F /* UniversityModel.swift */; };
+		1959D57921CE212000F6182F /* UniversityScrappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57821CE212000F6182F /* UniversityScrappable.swift */; };
 		1959D57B21CE2A5600F6182F /* 동덕여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */; };
 		1959D57D21CE2A5D00F6182F /* 명지대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57C21CE2A5D00F6182F /* 명지대학교.swift */; };
 		195B993A21DB448100367456 /* KAIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B993921DB448100367456 /* KAIST.swift */; };
@@ -56,6 +56,8 @@
 		1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */; };
 		1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */; };
 		197DE94421E71B59005DCECB /* 한양대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94321E71B59005DCECB /* 한양대학교.swift */; };
+		197DE94621E77AAA005DCECB /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94521E77AAA005DCECB /* Bookmark.swift */; };
+		197DE94821E77B32005DCECB /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94721E77B32005DCECB /* UniversityModel.swift */; };
 		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
 		198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AC21D343BF00AF4801 /* SearchViewController.swift */; };
 		198DC0AF21D34A0700AF4801 /* 전남대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AE21D34A0700AF4801 /* 전남대학교.swift */; };
@@ -130,7 +132,7 @@
 		1958FA7E21D4ADCC00DACF72 /* 성균관대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "성균관대학교.swift"; sourceTree = "<group>"; };
 		1959D57221CE13D400F6182F /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		1959D57421CE192000F6182F /* MainContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentTableViewController.swift; sourceTree = "<group>"; };
-		1959D57821CE212000F6182F /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
+		1959D57821CE212000F6182F /* UniversityScrappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityScrappable.swift; sourceTree = "<group>"; };
 		1959D57A21CE2A5600F6182F /* 동덕여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동덕여자대학교.swift"; sourceTree = "<group>"; };
 		1959D57C21CE2A5D00F6182F /* 명지대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "명지대학교.swift"; sourceTree = "<group>"; };
 		195B993921DB448100367456 /* KAIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KAIST.swift; sourceTree = "<group>"; };
@@ -150,6 +152,8 @@
 		1976CE2B21CE649B00897E39 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		1976CE2D21CE64AA00897E39 /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		197DE94321E71B59005DCECB /* 한양대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "한양대학교.swift"; sourceTree = "<group>"; };
+		197DE94521E77AAA005DCECB /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		197DE94721E77B32005DCECB /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		198DC0AC21D343BF00AF4801 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		198DC0AE21D34A0700AF4801 /* 전남대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "전남대학교.swift"; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 		194BF41D219EA53900FA6124 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */,
 				1959D58021CE52C400F6182F /* Controller */,
 			);
 			name = Setting;
@@ -305,7 +310,6 @@
 		1959D58021CE52C400F6182F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */,
 				194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */,
 				194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */,
 			);
@@ -324,10 +328,11 @@
 		19C6BBBA2197F8C6002FC39C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				19AB910021D21929000CB844 /* User.swift */,
-				19C6BBBB2197F8D4002FC39C /* University.swift */,
-				19AF276521983127009488C8 /* Post.swift */,
 				19A88DC121CBC65400A3F81C /* InitialInfo.swift */,
+				19AB910021D21929000CB844 /* User.swift */,
+				197DE94521E77AAA005DCECB /* Bookmark.swift */,
+				19AF276521983127009488C8 /* Post.swift */,
+				19C6BBBB2197F8D4002FC39C /* University.swift */,
 				19ED806D21CA5F8E00BA6529 /* UniversityModel */,
 			);
 			path = Model;
@@ -336,8 +341,9 @@
 		19ED806D21CA5F8E00BA6529 /* UniversityModel */ = {
 			isa = PBXGroup;
 			children = (
+				197DE94721E77B32005DCECB /* UniversityModel.swift */,
 				19A7F86221D90F1D005E1E6D /* UniversityError.swift */,
-				1959D57821CE212000F6182F /* UniversityModel.swift */,
+				1959D57821CE212000F6182F /* UniversityScrappable.swift */,
 				195B993921DB448100367456 /* KAIST.swift */,
 				195B99B921E1EDD600367456 /* KC대학교.swift */,
 				193D655721E31CCD00FAB1DE /* 강남대학교.swift */,
@@ -607,6 +613,8 @@
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
 				195B993A21DB448100367456 /* KAIST.swift in Sources */,
 				198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */,
+				197DE94621E77AAA005DCECB /* Bookmark.swift in Sources */,
+				197DE94821E77B32005DCECB /* UniversityModel.swift in Sources */,
 				195B994C21DE33D100367456 /* 목포대학교.swift in Sources */,
 				195B994021DBAEED00367456 /* 성신여자대학교.swift in Sources */,
 				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
@@ -643,7 +651,7 @@
 				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
 				195B993E21DBA9A200367456 /* 덕성여자대학교.swift in Sources */,
 				197DE94421E71B59005DCECB /* 한양대학교.swift in Sources */,
-				1959D57921CE212000F6182F /* UniversityModel.swift in Sources */,
+				1959D57921CE212000F6182F /* UniversityScrappable.swift in Sources */,
 				192FF1F821E46B1000FF0F15 /* 세한대학교.swift in Sources */,
 				19A7F86921DA5FDE005E1E6D /* 한국외국어대학교.swift in Sources */,
 				19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */,

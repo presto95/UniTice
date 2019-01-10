@@ -11,7 +11,7 @@ import SnapKit
 
 class ChangeUniversityViewController: UIViewController {
     
-    private var universities = University.allCases.sorted { $0.rawValue < $1.rawValue }
+    private let universities = University.allCases.sorted { $0.rawValue < $1.rawValue }
     
     @IBOutlet private weak var pickerView: UIPickerView! {
         didSet {
@@ -39,6 +39,7 @@ class ChangeUniversityViewController: UIViewController {
         User.updateUniversity(universities[selectedIndex].rawValue)
         User.removeBookmarksAll()
         User.removeKeywordsAll()
+        UniversityModel.shared.generateModel()
         navigationController?.popViewController(animated: true)
     }
 }
