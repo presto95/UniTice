@@ -15,17 +15,26 @@ extension UIAlertController {
     }
     
     @discardableResult
-    func action(title: String?, style: UIAlertAction.Style = .default, handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
-        let action = UIAlertAction(title: title, style: style) { (action) in
-            handler?(action)
-        }
-        self.addAction(action)
+    func textField(_ configuration: ((UITextField) -> Void)? = nil) -> UIAlertController {
+        addTextField(configurationHandler: configuration)
         return self
     }
     
-    func present(to viewController: UIViewController?, handler: (() -> Void)? = nil) {
+    @discardableResult
+    func action(title: String?, style: UIAlertAction.Style = .default, handler: ((UIAlertAction, [UITextField]?) -> Void)? = nil) -> UIAlertController {
+        guard let textFields = textFields else {
+            let action = UIAlertAction(title: title, style: style) { handler?($0, nil) }
+            addAction(action)
+            return self
+        }
+        let action = UIAlertAction(title: title, style: style) { handler?($0, textFields) }
+        addAction(action)
+        return self
+    }
+    
+    func present(to viewController: UIViewController?, animated: Bool = true, handler: (() -> Void)? = nil) {
         DispatchQueue.main.async {
-            viewController?.present(self, animated: true, completion: handler)
+            viewController?.present(self, animated: animated, completion: handler)
         }
     }
 }

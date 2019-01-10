@@ -42,27 +42,26 @@ class KeywordSettingViewController: UIViewController {
                 .action(title: "확인")
                 .present(to: self)
         } else {
-            let alert = UIAlertController(title: "", message: "키워드", preferredStyle: .alert)
-            alert.addTextField { _ in }
-            let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
-                if let text = alert.textFields?.first?.text?.replacingOccurrences(of: " ", with: "") {
-                    User.insertKeyword(text) { hasDuplicated in
-                        if !hasDuplicated {
-                            self.keywords.insert(text, at: 0)
-                            self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
-                        } else {
-                            UIAlertController
-                            .alert(title: "", message: "키워드 중복")
-                            .action(title: "확인")
-                            .present(to: self)
+            UIAlertController
+                .alert(title: "", message: "키워드")
+                .textField()
+                .action(title: "확인") { _, textFields in
+                    if let text = textFields?.first?.text?.replacingOccurrences(of: " ", with: "") {
+                        User.insertKeyword(text) { isDuplicated in
+                            if !isDuplicated {
+                                self.keywords.insert(text, at: 0)
+                                self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
+                            } else {
+                                UIAlertController
+                                    .alert(title: "", message: "키워드 중복")
+                                    .action(title: "확인")
+                                    .present(to: self)
+                            }
                         }
                     }
                 }
-            }
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alert.addAction(confirmAction)
-            alert.addAction(cancelAction)
-            present(alert, animated: true, completion: nil)
+                .action(title: "취소", style: .cancel)
+                .present(to: self)
         }
     }
 }
