@@ -8,47 +8,40 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 class StartKeywordRegisterViewController: UIViewController {
 
+    private let disposeBag = DisposeBag()
+    
     private var keywords: [String] = []
     
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
-            tableView.delegate = self
             tableView.dataSource = self
+            tableView.delegate = self
         }
     }
     
-    @IBOutlet private weak var confirmButton: StartConfirmButton! {
-        didSet {
-            confirmButton.addTarget(self, action: #selector(touchUpConfirmButton(_:)), for: .touchUpInside)
-        }
-    }
+    @IBOutlet private weak var confirmButton: StartConfirmButton!
     
-    @IBOutlet private weak var backButton: StartBackButton! {
-        didSet {
-            backButton.addTarget(self, action: #selector(touchUpBackButton(_:)), for: .touchUpInside)
-        }
-    }
+    @IBOutlet private weak var backButton: StartBackButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchUpSuperView(_:))))
-    }
-    
-    @objc private func touchUpSuperView(_ recognizer: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
-    
-    @objc private func touchUpConfirmButton(_ sender: UIButton) {
-        InitialInfo.shared.keywords = keywords
-        let next = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
-        navigationController?.pushViewController(next, animated: true)
-    }
-    
-    @objc private func touchUpBackButton(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+        bindUI()
+        
+        let tableViewRx = tableView.rx
+        tableViewRx
+            .itemDeleted
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let `self` = self else { return }
+                self.keywords.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -85,18 +78,49 @@ extension StartKeywordRegisterViewController: UITableViewDelegate {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            keywords.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
+    }
+}
+
+private extension StartKeywordRegisterViewController {
+    func bindUI() {
+        bindViewGesture()
+        bindConfirmButton()
+        bindBackButton()
+    }
+    
+    func bindViewGesture() {
+        view.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                self.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindConfirmButton() {
+        confirmButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                InitialInfo.shared.keywords = self.keywords
+                let next = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
+                self.navigationController?.pushViewController(next, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindBackButton() {
+        backButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
