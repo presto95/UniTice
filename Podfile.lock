@@ -67,6 +67,11 @@ PODS:
   - Realm/Headers (3.12.0)
   - RealmSwift (3.12.0):
     - Realm (= 3.12.0)
+  - RxAtomic (4.4.0)
+  - RxCocoa (4.4.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.4.0):
+    - RxAtomic (~> 4.4)
   - SnapKit (4.0.1)
   - XLPagerTabStrip (8.1.0)
 
@@ -76,6 +81,8 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Kanna (~> 4.0.0)
   - RealmSwift
+  - RxCocoa
+  - RxSwift
   - SnapKit (~> 4.0.0)
   - XLPagerTabStrip (~> 8.1)
 
@@ -95,6 +102,9 @@ SPEC REPOS:
     - Protobuf
     - Realm
     - RealmSwift
+    - RxAtomic
+    - RxCocoa
+    - RxSwift
     - SnapKit
     - XLPagerTabStrip
 
@@ -113,9 +123,12 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
   RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
+  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
+  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
+  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: 5b6f6f10a896e8b413b1f0f20e69be02318bfab7
+PODFILE CHECKSUM: c4de3323697c5524b93e04320fbde09b0c9ef523
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.6.0.beta.2

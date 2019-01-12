@@ -30,7 +30,6 @@ struct 강남대학교: UniversityScrappable {
         guard let url = URL(string: "\(baseURL)\(commonQueriesForPost)\(commonQueries)\(encMenuSeq(first))\(encMenuBoardSeq(second))") else {
             throw UniversityError.invalidURLError
         }
-        print(url.absoluteString)
         return url
     }
     
