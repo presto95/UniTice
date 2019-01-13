@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 첫 화면 설정
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.tintColor = .purple
+        window?.tintColor = .main
         if User.fetch() == nil {
             UserDefaults.standard.set(true, forKey: "fold")
             window?.rootViewController = UIViewController.instantiate(from: "Start", identifier: "StartNavigationController")

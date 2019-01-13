@@ -19,7 +19,7 @@ extension String {
                     let range = NSRange(location: 0, length: utf16.count)
                     for match in regex.matches(in: self, options: .withTransparentBounds, range: range) {
                         attributedString.addAttributes([
-                            .backgroundColor: UIColor.purple.withAlphaComponent(0.7),
+                            .backgroundColor: UIColor.main.withAlphaComponent(0.7),
                             .foregroundColor: UIColor.white
                             ], range: match.range)
                     }

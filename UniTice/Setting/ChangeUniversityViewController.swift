@@ -21,7 +21,7 @@ class ChangeUniversityViewController: UIViewController {
     
     @IBOutlet private weak var confirmButton: UIButton! {
         didSet {
-            confirmButton.layer.borderColor = UIColor.purple.cgColor
+            confirmButton.layer.borderColor = UIColor.main.cgColor
             confirmButton.layer.borderWidth = 1
             confirmButton.layer.cornerRadius = confirmButton.bounds.height / 2
             confirmButton.addTarget(self, action: #selector(touchUpConfirmButton(_:)), for: .touchUpInside)
