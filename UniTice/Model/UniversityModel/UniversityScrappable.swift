@@ -27,7 +27,7 @@ protocol UniversityScrappable {
     ///   - text: 검색 키워드
     /// - Returns: 파싱할 URL
     /// - Throws: URL 형식에 맞지 않는 경우 에러 던짐.
-    func pageURL(inCategory category: Category, inPage page: Int, searchText text: String) throws -> URL
+    func pageURL(inCategory category: Category, inPage page: Int, searchText text: String) -> URL
     
     /// 게시물 URL.
     ///
@@ -36,7 +36,7 @@ protocol UniversityScrappable {
     ///   - link: 파싱 결과에 따른 게시물 URI
     /// - Returns: 게시물 URL
     /// - Throws: URL 형식에 맞지 않는 경우 에러 던짐.
-    func postURL(inCategory category: Category, uri link: String) throws -> URL
+    func postURL(inCategory category: Category, uri link: String) -> URL
     
     /// 게시물 요청.
     ///
@@ -75,19 +75,18 @@ protocol UniversityScrappable {
 extension UniversityScrappable {
     
     /// 파싱할 URL 초기 구현. `Base URL` - `불필요한 쿼리 스트링` - `카테고리 쿼리 스트링` - `페이지 쿼리 스트링` - `검색 쿼리 스트링`으로 구성됨.
-    func pageURL(inCategory category: Category, inPage page: Int, searchText text: String) throws -> URL {
+    func pageURL(inCategory category: Category, inPage page: Int, searchText text: String) -> URL {
         guard let url = URL(string: "\(baseURL)\(commonQueries)\(categoryQuery(category))\(pageQuery(page))\(searchQuery(text))") else {
-            throw UniversityError.invalidURLError
+            fatalError()
         }
         return url
     }
     
     /// 게시물 URL 초기 구현. `Base URL` - `게시물 링크`로 구성됨.
-    func postURL(inCategory category: Self.Category, uri link: String) throws -> URL {
+    func postURL(inCategory category: Category, uri link: String) -> URL {
         guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
-            throw UniversityError.invalidURLError
+            fatalError()
         }
-        print(url.absoluteString)
         return url
     }
 }

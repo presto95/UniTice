@@ -6,7 +6,7 @@
 //  Copyright © 2019 presto. All rights reserved.
 //
 
-import Kanna
+import Foundation
 
 struct KC대학교: UniversityScrappable {
     
@@ -29,40 +29,38 @@ struct KC대학교: UniversityScrappable {
         switch category.identifier {
         case "EC0101":
             guard let url = URL(string: link.percentEncoding) else {
-                throw UniversityError.invalidURLError
+                fatalError()
             }
             return url
         default:
             guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
-                throw UniversityError.invalidURLError
+                fatalError()
             }
             return url
         }
     }
     
     func requestPosts(inCategory category: KC대학교.Category, inPage page: Int, searchText text: String, _ completion: @escaping (([Post]?, Error?) -> Void)) {
-        DispatchQueue.global(qos: .background).async {
-            var posts = [Post]()
-            do {
-                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
-                let doc = try HTML(url: url, encoding: .utf8)
-                let rows = doc.xpath("//tbody//tr//td")
-                let links = doc.xpath("//tbody//td[@class='b_sub']//a/@href")
-                for (index, element) in links.enumerated() {
-                    let numberIndex = index * 6
-                    let titleIndex = index * 6 + 1
-                    let dateIndex = index * 6 + 3
-                    let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
-                    let title = rows[titleIndex].text?.trimmed ?? "?"
-                    let date = rows[dateIndex].text?.trimmed ?? "?"
-                    let link = element.text?.trimmed ?? "?"
-                    let post = Post(number: number, title: title, date: date, link: link)
-                    posts.append(post)
-                }
-                completion(posts, nil)
-            } catch {
+        Kanna.shared.request(pageURL(inCategory: category, inPage: page, searchText: text)) { doc, error in
+            guard let doc = doc else {
                 completion(nil, error)
+                return
             }
+            var posts = [Post]()
+            let rows = doc.xpath("//tbody//tr//td")
+            let links = doc.xpath("//tbody//td[@class='b_sub']//a/@href")
+            for (index, element) in links.enumerated() {
+                let numberIndex = index * 6
+                let titleIndex = index * 6 + 1
+                let dateIndex = index * 6 + 3
+                let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+                let title = rows[titleIndex].text?.trimmed ?? "?"
+                let date = rows[dateIndex].text?.trimmed ?? "?"
+                let link = element.text?.trimmed ?? "?"
+                let post = Post(number: number, title: title, date: date, link: link)
+                posts.append(post)
+            }
+            completion(posts, nil)
         }
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2019 presto. All rights reserved.
 //
 
-import Kanna
+import Foundation
 
 struct 광운대학교: UniversityScrappable {
     
@@ -29,35 +29,31 @@ struct 광운대학교: UniversityScrappable {
     }
     
     func requestPosts(inCategory category: 광운대학교.Category, inPage page: Int, searchText text: String, _ completion: @escaping (([Post]?, Error?) -> Void)) {
-        DispatchQueue.global(qos: .background).async {
-            var posts = [Post]()
-            var descriptions = self.categories.map { "[\($0.description)]" }
-            descriptions.append(contentsOf: ["신규게시글", "Attachment"])
-            do {
-                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
-                let doc = try HTML(url: url, encoding: .utf8)
-                let numbers = doc.xpath("//div[@class='board-list-box']//li//span[1]")
-                let titles = doc.xpath("//div[@class='board-list-box']//div[@class='board-text']//a")
-                let dates = doc.xpath("//div[@class='board-list-box']//p[@class='info']")
-                let links = doc.xpath("//div[@class='board-list-box']//div[@class='board-text']//a/@href")
-                for (index, element) in links.enumerated() {
-                    let number = Int(numbers[index].text?.trimmed ?? "") ?? 0
-                    var tempTitle = titles[index].text?.trimmed ?? "?"
-                    for description in descriptions {
-                        if let range = tempTitle.range(of: description) {
-                            tempTitle.removeSubrange(range)
-                        }
-                    }
-                    let title = tempTitle.trimmed
-                    let date = dates[index].text?.trimmed.components(separatedBy: "|")[1].trimmed ?? "?"
-                    let link = element.text?.trimmed ?? "?"
-                    let post = Post(number: number, title: title, date: date, link: link)
-                    posts.append(post)
-                }
-                completion(posts, nil)
-            } catch {
+        Kanna.shared.request(pageURL(inCategory: category, inPage: page, searchText: text)) { doc, error in
+            guard let doc = doc else {
                 completion(nil, error)
+                return
             }
+            var posts = [Post]()
+            let numbers = doc.xpath("//div[@class='board-list-box']//li//span[1]")
+            let titles = doc.xpath("//div[@class='board-list-box']//div[@class='board-text']//a")
+            let dates = doc.xpath("//div[@class='board-list-box']//p[@class='info']")
+            let links = doc.xpath("//div[@class='board-list-box']//div[@class='board-text']//a/@href")
+            for (index, element) in links.enumerated() {
+                let number = Int(numbers[index].text?.trimmed ?? "") ?? 0
+                var tempTitle = titles[index].text?.trimmed ?? "?"
+                for description in descriptions {
+                    if let range = tempTitle.range(of: description) {
+                        tempTitle.removeSubrange(range)
+                    }
+                }
+                let title = tempTitle.trimmed
+                let date = dates[index].text?.trimmed.components(separatedBy: "|")[1].trimmed ?? "?"
+                let link = element.text?.trimmed ?? "?"
+                let post = Post(number: number, title: title, date: date, link: link)
+                posts.append(post)
+            }
+            completion(posts, nil)
         }
     }
 }

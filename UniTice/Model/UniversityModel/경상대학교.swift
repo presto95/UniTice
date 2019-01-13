@@ -6,7 +6,7 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
-import Kanna
+import Foundation
 
 struct 경상대학교: UniversityScrappable {
     
@@ -28,42 +28,40 @@ struct 경상대학교: UniversityScrappable {
     }
     
     func requestPosts(inCategory category: 경상대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
-        DispatchQueue.global(qos: .background).async {
-            var posts = [Post]()
-            do {
-                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
-                let doc = try HTML(url: url, encoding: .eucKR)
-                let rows = doc.xpath("//tbody[@class='tb']//td")
-                let links = doc.xpath("//tbody[@class='tb']//td[@class='subject']//a[1]/@href")
-                let realRows = Array(rows.dropFirst(rows.count % links.count))
-                let divisor: Int
-                let dateIndexIncrement: Int
-                switch category.identifier {
-                case "10026":
-                    divisor = 7
-                    dateIndexIncrement = 4
-                case "10027", "10029", "11531", "10579":
-                    divisor = 5
-                    dateIndexIncrement = 3
-                default:
-                    divisor = 6
-                    dateIndexIncrement = 4
-                }
-                for (index, element) in links.enumerated() {
-                    let numberIndex = index * divisor
-                    let titleIndex = index * divisor + 1
-                    let dateIndex = index * divisor + dateIndexIncrement
-                    let number = Int(realRows[numberIndex].text?.trimmed ?? "") ?? 0
-                    let title = realRows[titleIndex].text?.trimmed ?? "?"
-                    let date = realRows[dateIndex].text?.trimmed ?? "?"
-                    let link = element.text?.trimmed ?? "?"
-                    let post = Post(number: number, title: title, date: date, link: link)
-                    posts.append(post)
-                }
-                completion(posts, nil)
-            } catch {
+        Kanna.shared.request(pageURL(inCategory: category, inPage: page, searchText: text), encoding: .eucKR) { doc, error in
+            guard let doc = doc {
                 completion(nil, error)
+                return
             }
+            var posts = [Post]()
+            let rows = doc.xpath("//tbody[@class='tb']//td")
+            let links = doc.xpath("//tbody[@class='tb']//td[@class='subject']//a[1]/@href")
+            let realRows = Array(rows.dropFirst(rows.count % links.count))
+            let divisor: Int
+            let dateIndexIncrement: Int
+            switch category.identifier {
+            case "10026":
+                divisor = 7
+                dateIndexIncrement = 4
+            case "10027", "10029", "11531", "10579":
+                divisor = 5
+                dateIndexIncrement = 3
+            default:
+                divisor = 6
+                dateIndexIncrement = 4
+            }
+            for (index, element) in links.enumerated() {
+                let numberIndex = index * divisor
+                let titleIndex = index * divisor + 1
+                let dateIndex = index * divisor + dateIndexIncrement
+                let number = Int(realRows[numberIndex].text?.trimmed ?? "") ?? 0
+                let title = realRows[titleIndex].text?.trimmed ?? "?"
+                let date = realRows[dateIndex].text?.trimmed ?? "?"
+                let link = element.text?.trimmed ?? "?"
+                let post = Post(number: number, title: title, date: date, link: link)
+                posts.append(post)
+            }
+            completion(posts, nil)
         }
     }
 }
