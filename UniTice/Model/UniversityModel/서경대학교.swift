@@ -26,7 +26,7 @@ struct 서경대학교: UniversityScrappable {
     
     func postURL(inCategory category: 서경대학교.Category, uri link: String) throws -> URL {
         guard let url = URL(string: link.percentEncoding) else {
-            throw UniversityError.invalidURLError
+            fatalError()
         }
         return url
     }

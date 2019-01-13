@@ -56,7 +56,6 @@ struct 한국산업기술대학교: UniversityScrappable {
             }
             completion(posts, nil)
         }
-        }
     }
 }
 

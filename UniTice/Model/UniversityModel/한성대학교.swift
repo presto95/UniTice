@@ -22,14 +22,14 @@ struct 한성대학교: UniversityScrappable {
         ]
     }
     
-    func pageURL(inCategory category: 한성대학교.Category, inPage page: Int, searchText text: String) throws -> URL {
+    func pageURL(inCategory category: 한성대학교.Category, inPage page: Int, searchText text: String) -> URL {
         guard let url = URL(string: "\(baseURL)\(categoryQuery(category))\(commonQueries)\(pageQuery(page))\(searchQuery(text))") else {
             fatalError()
         }
         return url
     }
     
-    func postURL(inCategory category: 경북대학교.Category, uri link: String) throws -> URL {
+    func postURL(inCategory category: 경북대학교.Category, uri link: String) -> URL {
         guard let url = URL(string: link) else {
             fatalError()
         }

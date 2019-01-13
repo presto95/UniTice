@@ -26,7 +26,7 @@ struct 덕성여자대학교: UniversityScrappable {
         ]
     }
     
-    func postURL(inCategory category: 덕성여자대학교.Category, uri link: String) throws -> URL {
+    func postURL(inCategory category: 덕성여자대학교.Category, uri link: String) -> URL {
         guard let url = URL(string: "\(baseURL)\(commonQueriesForPost)\(link)") else {
             fatalError()
         }
@@ -39,6 +39,7 @@ struct 덕성여자대학교: UniversityScrappable {
                 completion(nil, error)
                 return
             }
+            var posts = [Post]()
             let rows = doc.xpath("//tbody//tr//td")
             let links = doc.xpath("//tbody//tr//td[@class='title']//a/@href")
             for (index, element) in links.enumerated() {

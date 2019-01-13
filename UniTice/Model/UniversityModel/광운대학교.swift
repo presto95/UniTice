@@ -35,6 +35,8 @@ struct 광운대학교: UniversityScrappable {
                 return
             }
             var posts = [Post]()
+            var descriptions = self.categories.map { "[\($0.description)]" }
+            descriptions.append(contentsOf: ["신규게시글", "Attachment"])
             let numbers = doc.xpath("//div[@class='board-list-box']//li//span[1]")
             let titles = doc.xpath("//div[@class='board-list-box']//div[@class='board-text']//a")
             let dates = doc.xpath("//div[@class='board-list-box']//p[@class='info']")
