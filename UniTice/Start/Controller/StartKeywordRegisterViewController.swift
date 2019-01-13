@@ -16,12 +16,15 @@ class StartKeywordRegisterViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
     
+    private var viewModel = StartKeywordRegisterViewModel()
+    
     private var keywords: [String] = []
     
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
-            tableView.dataSource = self
             tableView.delegate = self
+            tableView.rowHeight = 60
+            tableView.sectionHeaderHeight = 60
         }
     }
     
@@ -33,27 +36,11 @@ class StartKeywordRegisterViewController: UIViewController {
         super.viewDidLoad()
         bindUI()
         
-        let tableViewRx = tableView.rx
-        tableViewRx
-            .itemDeleted
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let `self` = self else { return }
-                self.keywords.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            })
+        viewModel.keywords.asObservable()
+            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: KeywordCell.self)) { _, keyword, cell in
+                cell.setKeyword(keyword)
+            }
             .disposed(by: disposeBag)
-    }
-}
-
-extension StartKeywordRegisterViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? KeywordCell else { return UITableViewCell() }
-        cell.setKeyword(keywords[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return keywords.count
     }
 }
 
@@ -78,12 +65,11 @@ extension StartKeywordRegisterViewController: UITableViewDelegate {
         return true
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            keywords.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 

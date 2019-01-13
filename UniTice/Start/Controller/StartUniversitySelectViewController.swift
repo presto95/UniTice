@@ -14,8 +14,8 @@ import RxCocoa
 class StartUniversitySelectViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
-
-    private lazy var universities = University.allCases.sorted { $0.rawValue < $1.rawValue }
+    
+    private var viewModel = StartUniversityViewModel()
     
     @IBOutlet private weak var pickerView: UIPickerView!
     
@@ -33,43 +33,53 @@ private extension StartUniversitySelectViewController {
     func bindUI() {
         bindConfirmButton()
         bindNoneButton()
-        bindPickerViewTitles()
+        bindPickerViewItemTitles()
+        bindPickerViewItemSelected()
     }
     
     func bindConfirmButton() {
-        confirmButton.rx.tap.asObservable()
+        confirmButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
-                let universityIndex = self.pickerView.selectedRow(inComponent: 0)
-                InitialInfo.shared.university = self.universities[universityIndex]
-                let next = UIViewController.instantiate(from: "Start", identifier: StartKeywordRegisterViewController.classNameToString)
-                self.navigationController?.pushViewController(next, animated: true)
+                UIViewController
+                    .instantiate(from: "Start", identifier: StartKeywordRegisterViewController.classNameToString)
+                    .push(at: self)
             })
             .disposed(by: disposeBag)
     }
     
     func bindNoneButton() {
-        noneButton.rx.tap.asObservable()
+        noneButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
-                if MFMailComposeViewController.canSendMail() {
-                    let mail = MFMailComposeViewController()
-                    mail.mailComposeDelegate = self
-                    mail.setToRecipients(["yoohan95@gmail.com"])
-                    mail.setSubject("[다연결] 우리 학교가 목록에 없어요!")
-                    mail.setMessageBody("\n\n\n\n\n\n피드백 감사합니다.", isHTML: false)
-                    self.present(mail, animated: true, completion: nil)
-                }
+                let mailComposer = MFMailComposeViewController()
+                mailComposer.mailComposeDelegate = self
+                mailComposer.setToRecipients(["yoohan95@gmail.com"])
+                mailComposer.setSubject("[다연결] 우리 학교가 목록에 없어요.")
+                mailComposer.setMessageBody("\n\n\n\n\n\n피드백 감사합니다.", isHTML: false)
+                self.present(mailComposer, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
     
-    func bindPickerViewTitles() {
+    func bindPickerViewItemTitles() {
         Observable
-            .just(universities)
+            .just(viewModel.universities)
             .bind(to: pickerView.rx.itemTitles) { _, element in
                 return element.rawValue
             }
+            .disposed(by: disposeBag)
+    }
+    
+    func bindPickerViewItemSelected() {
+        pickerView.rx
+            .modelSelected(University.self)
+            .map { $0.first }
+            .subscribe(onNext: { [weak self] university in
+                if let university = university {
+                    self?.viewModel.selectedUniversity = university
+                }
+            })
             .disposed(by: disposeBag)
     }
 }
