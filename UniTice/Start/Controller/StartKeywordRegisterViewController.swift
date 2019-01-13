@@ -8,59 +8,39 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 class StartKeywordRegisterViewController: UIViewController {
 
+    private let disposeBag = DisposeBag()
+    
+    private var viewModel = StartKeywordRegisterViewModel()
+    
     private var keywords: [String] = []
     
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
-            tableView.dataSource = self
+            tableView.rowHeight = 60
+            tableView.sectionHeaderHeight = 60
         }
     }
     
-    @IBOutlet private weak var confirmButton: StartConfirmButton! {
-        didSet {
-            confirmButton.addTarget(self, action: #selector(touchUpConfirmButton(_:)), for: .touchUpInside)
-        }
-    }
+    @IBOutlet private weak var confirmButton: StartConfirmButton!
     
-    @IBOutlet private weak var backButton: StartBackButton! {
-        didSet {
-            backButton.addTarget(self, action: #selector(touchUpBackButton(_:)), for: .touchUpInside)
-        }
-    }
+    @IBOutlet private weak var backButton: StartBackButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchUpSuperView(_:))))
-    }
-    
-    @objc private func touchUpSuperView(_ recognizer: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
-    
-    @objc private func touchUpConfirmButton(_ sender: UIButton) {
-        InitialInfo.shared.keywords = keywords
-        let next = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
-        navigationController?.pushViewController(next, animated: true)
-    }
-    
-    @objc private func touchUpBackButton(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
-}
-
-extension StartKeywordRegisterViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? KeywordCell else { return UITableViewCell() }
-        cell.setKeyword(keywords[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return keywords.count
+        bindUI()
+        
+        viewModel.keywords.asObservable()
+            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: KeywordCell.self)) { _, keyword, cell in
+                cell.setKeyword(keyword)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -91,12 +71,42 @@ extension StartKeywordRegisterViewController: UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+}
+
+private extension StartKeywordRegisterViewController {
+    func bindUI() {
+        bindViewGesture()
+        bindConfirmButton()
+        bindBackButton()
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+    func bindViewGesture() {
+        view.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                self.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindConfirmButton() {
+        confirmButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                InitialInfo.shared.keywords = self.keywords
+                let next = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
+                self.navigationController?.pushViewController(next, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindBackButton() {
+        backButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }

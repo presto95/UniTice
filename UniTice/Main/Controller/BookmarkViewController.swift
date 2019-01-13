@@ -35,12 +35,14 @@ class BookmarkViewController: UIViewController {
     
     private func safariViewController(at row: Int) -> SFSafariViewController {
         let bookmark = bookmarks?[row]
-        guard let url = URL(string: bookmark?.link ?? "") else { fatalError("invalid url format") }
+        guard let url = URL(string: bookmark?.link ?? "") else {
+            fatalError("invalid url format")
+        }
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
         let viewController = SFSafariViewController(url: url, configuration: config)
-        viewController.preferredControlTintColor = .purple
+        viewController.preferredControlTintColor = .main
         viewController.dismissButtonStyle = .close
         return viewController
     }

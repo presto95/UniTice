@@ -15,8 +15,6 @@ class MainContentTableViewController: UITableViewController {
 
     private lazy var keywords = (User.fetch()?.keywords)!
 
-    private lazy var footerRefreshView = FooterRefreshView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
-    
     private var posts: [Post] = []
 
     private var fixedPosts: [Post] {
@@ -49,6 +47,8 @@ class MainContentTableViewController: UITableViewController {
         return universityModel?.categories[categoryIndex] ?? ("", "")
     }
     
+    private lazy var footerRefreshView = FooterRefreshView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = category.description
@@ -58,7 +58,7 @@ class MainContentTableViewController: UITableViewController {
         tableView.tableFooterView = footerRefreshView
         tableView.backgroundColor = .groupTableViewBackground
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        tableView.separatorColor = .purple
+        tableView.separatorColor = .main
         tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
     }
     
@@ -103,7 +103,7 @@ class MainContentTableViewController: UITableViewController {
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
         let viewController = SFSafariViewController(url: url, configuration: config)
-        viewController.preferredControlTintColor = .purple
+        viewController.preferredControlTintColor = .main
         viewController.dismissButtonStyle = .close
         return viewController
     }
@@ -168,15 +168,11 @@ extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-        do {
-            let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
-            let fullLinkString = fullLink.absoluteString
-            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-            User.insertBookmark(bookmark)
-            present(safariViewController(url: fullLink), animated: true)
-        } catch {
-            UIAlertController.presentErrorAlert(error, to: self)
-        }
+        let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+        let fullLinkString = fullLink.absoluteString
+        let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+        User.insertBookmark(bookmark)
+        present(safariViewController(url: fullLink), animated: true)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -195,7 +191,7 @@ extension MainContentTableViewController {
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 5))
-            footerView.backgroundColor = .purple
+            footerView.backgroundColor = .main
             return footerView
         }
         return nil
@@ -220,16 +216,12 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = tableView.indexPathForRow(at: location) {
             let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-            do {
-                let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
-                let fullLinkString = fullLink.absoluteString
-                print(fullLinkString)
-                let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-                User.insertBookmark(bookmark)
-                return safariViewController(url: fullLink)
-            } catch {
-                UIAlertController.presentErrorAlert(error, to: self)
-            }
+            let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+            let fullLinkString = fullLink.absoluteString
+            print(fullLinkString)
+            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+            User.insertBookmark(bookmark)
+            return safariViewController(url: fullLink)
         }
         return nil
     }

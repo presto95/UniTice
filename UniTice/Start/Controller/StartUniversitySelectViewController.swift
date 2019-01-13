@@ -8,66 +8,80 @@
 
 import UIKit
 import MessageUI
+import RxSwift
+import RxCocoa
 
 class StartUniversitySelectViewController: UIViewController {
-
-    private let universities = University.allCases.sorted { $0.rawValue < $1.rawValue }
     
-    @IBOutlet private weak var pickerView: UIPickerView! {
-        didSet {
-            pickerView.delegate = self
-            pickerView.dataSource = self
-        }
-    }
+    private let disposeBag = DisposeBag()
     
-    @IBOutlet private weak var noneButton: UIButton! {
-        didSet {
-            noneButton.addTarget(self, action: #selector(touchUpNoneButton(_:)), for: .touchUpInside)
-        }
-    }
+    private var viewModel = StartUniversityViewModel()
     
-    @IBOutlet private weak var confirmButton: StartConfirmButton! {
-        didSet {
-            confirmButton.addTarget(self, action: #selector(touchUpConfirmButton(_:)), for: .touchUpInside)
-        }
-    }
+    @IBOutlet private weak var pickerView: UIPickerView!
     
-    @objc private func touchUpNoneButton(_ sender: UIButton) {
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients(["yoohan95@gmail.com"])
-            mail.setSubject("[다연결] 우리 학교가 목록에 없어요!")
-            mail.setMessageBody("\n\n\n\n\n\n알려주셔서 감사합니다. 최대한 빨리 업데이트 하겠습니다.", isHTML: false)
-            present(mail, animated: true, completion: nil)
-        }
-    }
+    @IBOutlet private weak var noneButton: UIButton!
     
-    @objc private func touchUpConfirmButton(_ sender: UIButton) {
-        let universityIndex = pickerView.selectedRow(inComponent: 0)
-        InitialInfo.shared.university = universities[universityIndex]
-        let next = UIViewController.instantiate(from: "Start", identifier: StartKeywordRegisterViewController.classNameToString)
-        navigationController?.pushViewController(next, animated: true)
-    }
+    @IBOutlet private weak var confirmButton: StartConfirmButton!
     
-    @objc private func touchUpBackButton(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindUI()
     }
 }
 
-extension StartUniversitySelectViewController: UIPickerViewDataSource {
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return universities.count
+private extension StartUniversitySelectViewController {
+    func bindUI() {
+        bindConfirmButton()
+        bindNoneButton()
+        bindPickerViewItemTitles()
+        bindPickerViewItemSelected()
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    func bindConfirmButton() {
+        confirmButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                UIViewController
+                    .instantiate(from: "Start", identifier: StartKeywordRegisterViewController.classNameToString)
+                    .push(at: self)
+                InitialInfo.shared.university = self.viewModel.selectedUniversity
+            })
+            .disposed(by: disposeBag)
     }
-}
-
-extension StartUniversitySelectViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return universities[row].rawValue
+    
+    func bindNoneButton() {
+        noneButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                let mailComposer = MFMailComposeViewController()
+                mailComposer.mailComposeDelegate = self
+                mailComposer.setToRecipients(["yoohan95@gmail.com"])
+                mailComposer.setSubject("[다연결] 우리 학교가 목록에 없어요.")
+                mailComposer.setMessageBody("\n\n\n\n\n\n피드백 감사합니다.", isHTML: false)
+                self.present(mailComposer, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindPickerViewItemTitles() {
+        Observable
+            .just(viewModel.universities)
+            .bind(to: pickerView.rx.itemTitles) { _, element in
+                return element.rawValue
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func bindPickerViewItemSelected() {
+        pickerView.rx
+            .modelSelected(University.self)
+            .map { $0.first }
+            .subscribe(onNext: { [weak self] university in
+                if let university = university {
+                    self?.viewModel.selectedUniversity = university
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 

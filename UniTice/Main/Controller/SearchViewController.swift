@@ -83,7 +83,7 @@ class SearchViewController: UIViewController {
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
         let viewController = SFSafariViewController(url: url, configuration: config)
-        viewController.preferredControlTintColor = .purple
+        viewController.preferredControlTintColor = .main
         viewController.dismissButtonStyle = .close
         return viewController
     }
@@ -107,15 +107,11 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let post = posts[indexPath.row]
-        do {
-            let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
-            let fullLinkString = fullLink.absoluteString
-            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-            User.insertBookmark(bookmark)
-            present(safariViewController(url: fullLink), animated: true)
-        } catch {
-            UIAlertController.presentErrorAlert(error, to: self)
-        }
+        let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+        let fullLinkString = fullLink.absoluteString
+        let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+        User.insertBookmark(bookmark)
+        present(safariViewController(url: fullLink), animated: true)
     }
 }
 
@@ -139,15 +135,11 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = tableView.indexPathForRow(at: location) {
             let post = posts[indexPath.row]
-            do {
-                let fullLink = try universityModel.postURL(inCategory: category, uri: post.link)
-                let fullLinkString = fullLink.absoluteString
-                let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-                User.insertBookmark(bookmark)
-                return safariViewController(url: fullLink)
-            } catch {
-                UIAlertController.presentErrorAlert(error, to: self)
-            }
+            let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+            let fullLinkString = fullLink.absoluteString
+            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+            User.insertBookmark(bookmark)
+            return safariViewController(url: fullLink)
         }
         return nil
     }

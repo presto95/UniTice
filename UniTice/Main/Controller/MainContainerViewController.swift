@@ -60,7 +60,7 @@ extension MainContainerViewController {
     
     private func setupButtonBar() {
         settings.style.selectedBarHeight = 5
-        settings.style.selectedBarBackgroundColor = .purple
+        settings.style.selectedBarBackgroundColor = .main
         settings.style.buttonBarBackgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
         settings.style.buttonBarItemBackgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
         settings.style.buttonBarItemTitleColor = .black

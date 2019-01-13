@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190D98FD21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */; };
 		191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B6470219728CC005E5CE6 /* AppDelegate.swift */; };
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
 		191CDE0B21D4DCCE00EBCBE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */; };
+		1929733F21EB6F410021B05E /* Kanna.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929733E21EB6F410021B05E /* Kanna.swift */; };
+		1929734121EB738F0021B05E /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929734021EB738F0021B05E /* UIColor+.swift */; };
+		1929734421EB7B800021B05E /* MainContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929734321EB7B800021B05E /* MainContentViewModel.swift */; };
+		1929734921EB8C400021B05E /* ChangeUniversityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929734821EB8C400021B05E /* ChangeUniversityViewModel.swift */; };
 		192FF1F621E465F100FF0F15 /* 동신대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F521E465F100FF0F15 /* 동신대학교.swift */; };
 		192FF1F821E46B1000FF0F15 /* 세한대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F721E46B1000FF0F15 /* 세한대학교.swift */; };
 		192FF1FA21E470F300FF0F15 /* 우석대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F921E470F300FF0F15 /* 우석대학교.swift */; };
@@ -58,6 +63,7 @@
 		197DE94421E71B59005DCECB /* 한양대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94321E71B59005DCECB /* 한양대학교.swift */; };
 		197DE94621E77AAA005DCECB /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94521E77AAA005DCECB /* Bookmark.swift */; };
 		197DE94821E77B32005DCECB /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94721E77B32005DCECB /* UniversityModel.swift */; };
+		1988FCBD21EB29590006A9DF /* StartUniversityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988FCBC21EB29590006A9DF /* StartUniversityViewModel.swift */; };
 		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
 		198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AC21D343BF00AF4801 /* SearchViewController.swift */; };
 		198DC0AF21D34A0700AF4801 /* 전남대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AE21D34A0700AF4801 /* 전남대학교.swift */; };
@@ -73,7 +79,6 @@
 		198DC0CD21D462A000AF4801 /* FooterRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0CC21D462A000AF4801 /* FooterRefreshView.swift */; };
 		198DC0CF21D467EC00AF4801 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0CE21D467EC00AF4801 /* PostCell.swift */; };
 		19A7F86121D90366005E1E6D /* 경희대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86021D90366005E1E6D /* 경희대학교.swift */; };
-		19A7F86321D90F1D005E1E6D /* UniversityError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86221D90F1D005E1E6D /* UniversityError.swift */; };
 		19A7F86521D9DB7D005E1E6D /* 동국대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86421D9DB7D005E1E6D /* 동국대학교.swift */; };
 		19A7F86721DA577D005E1E6D /* 홍익대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86621DA577D005E1E6D /* 홍익대학교.swift */; };
 		19A7F86921DA5FDE005E1E6D /* 한국외국어대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86821DA5FDE005E1E6D /* 한국외국어대학교.swift */; };
@@ -98,6 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordRegisterViewModel.swift; sourceTree = "<group>"; };
 		191B646D219728CC005E5CE6 /* UniTice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniTice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191B6470219728CC005E5CE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		191B6475219728CC005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -105,6 +111,10 @@
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Setting.storyboard; path = Setting/Setting.storyboard; sourceTree = "<group>"; };
+		1929733E21EB6F410021B05E /* Kanna.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kanna.swift; sourceTree = "<group>"; };
+		1929734021EB738F0021B05E /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		1929734321EB7B800021B05E /* MainContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentViewModel.swift; sourceTree = "<group>"; };
+		1929734821EB8C400021B05E /* ChangeUniversityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUniversityViewModel.swift; sourceTree = "<group>"; };
 		192FF1F521E465F100FF0F15 /* 동신대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동신대학교.swift"; sourceTree = "<group>"; };
 		192FF1F721E46B1000FF0F15 /* 세한대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "세한대학교.swift"; sourceTree = "<group>"; };
 		192FF1F921E470F300FF0F15 /* 우석대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "우석대학교.swift"; sourceTree = "<group>"; };
@@ -154,6 +164,7 @@
 		197DE94321E71B59005DCECB /* 한양대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "한양대학교.swift"; sourceTree = "<group>"; };
 		197DE94521E77AAA005DCECB /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		197DE94721E77B32005DCECB /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
+		1988FCBC21EB29590006A9DF /* StartUniversityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUniversityViewModel.swift; sourceTree = "<group>"; };
 		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		198DC0AC21D343BF00AF4801 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		198DC0AE21D34A0700AF4801 /* 전남대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "전남대학교.swift"; sourceTree = "<group>"; };
@@ -169,7 +180,6 @@
 		198DC0CC21D462A000AF4801 /* FooterRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterRefreshView.swift; sourceTree = "<group>"; };
 		198DC0CE21D467EC00AF4801 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		19A7F86021D90366005E1E6D /* 경희대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "경희대학교.swift"; sourceTree = "<group>"; };
-		19A7F86221D90F1D005E1E6D /* UniversityError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityError.swift; sourceTree = "<group>"; };
 		19A7F86421D9DB7D005E1E6D /* 동국대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동국대학교.swift"; sourceTree = "<group>"; };
 		19A7F86621DA577D005E1E6D /* 홍익대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "홍익대학교.swift"; sourceTree = "<group>"; };
 		19A7F86821DA5FDE005E1E6D /* 한국외국어대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "한국외국어대학교.swift"; sourceTree = "<group>"; };
@@ -232,6 +242,7 @@
 				191B647C219728CD005E5CE6 /* Info.plist */,
 				193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */,
 				1930D34B21BFFB9C00424FBF /* UniTice.entitlements */,
+				1929733D21EB6F070021B05E /* Network */,
 				19C6BBBA2197F8C6002FC39C /* Model */,
 				1930D34C21BFFC9000424FBF /* Start */,
 				1930D34D21BFFC9900424FBF /* Main */,
@@ -242,12 +253,37 @@
 			path = UniTice;
 			sourceTree = "<group>";
 		};
+		1929733D21EB6F070021B05E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1929733E21EB6F410021B05E /* Kanna.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1929734221EB7B6F0021B05E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1929734321EB7B800021B05E /* MainContentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1929734521EB8C230021B05E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1929734821EB8C400021B05E /* ChangeUniversityViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
 		1930D34C21BFFC9000424FBF /* Start */ = {
 			isa = PBXGroup;
 			children = (
 				191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */,
 				1930D34E21BFFCD700424FBF /* Start.storyboard */,
 				19ED808521CB786700BA6529 /* View */,
+				1988FCBE21EB2FBA0006A9DF /* ViewModel */,
 				19ED808421CB786100BA6529 /* Controller */,
 			);
 			path = Start;
@@ -258,6 +294,7 @@
 			children = (
 				191B6474219728CC005E5CE6 /* Main.storyboard */,
 				1959D57021CE12B800F6182F /* View */,
+				1929734221EB7B6F0021B05E /* ViewModel */,
 				1959D57121CE12C600F6182F /* Controller */,
 			);
 			path = Main;
@@ -267,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */,
+				1929734521EB8C230021B05E /* ViewModel */,
 				1959D58021CE52C400F6182F /* Controller */,
 			);
 			name = Setting;
@@ -280,6 +318,7 @@
 				19ED807E21CB6A8100BA6529 /* NSObject+.swift */,
 				19ED808821CB7C7600BA6529 /* UIView+.swift */,
 				198DC0AA21D33F5700AF4801 /* String+.swift */,
+				1929734021EB738F0021B05E /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -325,6 +364,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1988FCBE21EB2FBA0006A9DF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1988FCBC21EB29590006A9DF /* StartUniversityViewModel.swift */,
+				190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		19C6BBBA2197F8C6002FC39C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,7 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				197DE94721E77B32005DCECB /* UniversityModel.swift */,
-				19A7F86221D90F1D005E1E6D /* UniversityError.swift */,
 				1959D57821CE212000F6182F /* UniversityScrappable.swift */,
 				195B993921DB448100367456 /* KAIST.swift */,
 				195B99B921E1EDD600367456 /* KC대학교.swift */,
@@ -551,6 +598,7 @@
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
@@ -568,6 +616,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
@@ -624,13 +673,15 @@
 				195B994C21DE33D100367456 /* 목포대학교.swift in Sources */,
 				195B994021DBAEED00367456 /* 성신여자대학교.swift in Sources */,
 				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
+				1929734421EB7B800021B05E /* MainContentViewModel.swift in Sources */,
 				19A7F86721DA577D005E1E6D /* 홍익대학교.swift in Sources */,
 				198DC0C121D35A9800AF4801 /* 부산대학교.swift in Sources */,
 				198DC0C521D35AAB00AF4801 /* 전북대학교.swift in Sources */,
 				195B994421DCAE6300367456 /* 이화여자대학교.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
 				193D654B21E226BA00FAB1DE /* 성공회대학교.swift in Sources */,
-				19A7F86321D90F1D005E1E6D /* UniversityError.swift in Sources */,
+				1929734121EB738F0021B05E /* UIColor+.swift in Sources */,
+				1929733F21EB6F410021B05E /* Kanna.swift in Sources */,
 				193D654F21E2E36000FAB1DE /* 총신대학교.swift in Sources */,
 				193D655621E3162700FAB1DE /* 경성대학교.swift in Sources */,
 				195B993C21DB48AD00367456 /* 서울여자대학교.swift in Sources */,
@@ -648,6 +699,7 @@
 				193D655A21E327AE00FAB1DE /* 대진대학교.swift in Sources */,
 				198DC0B921D35A7400AF4801 /* 강원대학교.swift in Sources */,
 				195B995221E0780900367456 /* 삼육대학교.swift in Sources */,
+				1988FCBD21EB29590006A9DF /* StartUniversityViewModel.swift in Sources */,
 				19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */,
 				19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */,
 				198DC0BD21D35A8800AF4801 /* 충북대학교.swift in Sources */,
@@ -668,10 +720,12 @@
 				194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */,
 				195B99BA21E1EDD600367456 /* KC대학교.swift in Sources */,
 				1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */,
+				1929734921EB8C400021B05E /* ChangeUniversityViewModel.swift in Sources */,
 				195B994221DBB35500367456 /* 세종대학교.swift in Sources */,
 				195B995821E0DDFD00367456 /* 숙명여자대학교.swift in Sources */,
 				198DC0B121D34FC300AF4801 /* 서울대학교.swift in Sources */,
 				198DC0BF21D35A9000AF4801 /* 경북대학교.swift in Sources */,
+				190D98FD21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift in Sources */,
 				193D654521E1F4F800FAB1DE /* 광운대학교.swift in Sources */,
 				193D655121E2E64A00FAB1DE /* 한국예술종합학교.swift in Sources */,
 				19ED807521CA63CB00BA6529 /* StartUniversitySelectViewController.swift in Sources */,

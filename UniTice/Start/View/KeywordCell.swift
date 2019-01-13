@@ -16,7 +16,7 @@ class KeywordCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         keywordLabel.layer.cornerRadius = keywordLabel.bounds.height / 2
-        keywordLabel.layer.borderColor = UIColor.purple.cgColor
+        keywordLabel.layer.borderColor = UIColor.main.cgColor
         keywordLabel.layer.borderWidth = 1
     }
     

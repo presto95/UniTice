@@ -6,7 +6,7 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
-import Kanna
+import Foundation
 
 struct 동덕여자대학교: UniversityScrappable {
     
@@ -33,27 +33,25 @@ struct 동덕여자대학교: UniversityScrappable {
     }
 
     func requestPosts(inCategory category: 동덕여자대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
-        DispatchQueue.global(qos: .background).async {
-            var posts = [Post]()
-            do {
-                let url = try self.pageURL(inCategory: category, inPage: page, searchText: text)
-                let doc = try HTML(url: url, encoding: .utf8)
-                let numbers = doc.xpath("//tbody//td[@class='td-01']")
-                let titles = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a")
-                let links = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a/@href")
-                let dates = doc.xpath("//tbody//td[@class='td-05']")
-                for (index, element) in titles.enumerated() {
-                    let number = Int(numbers[index].text ?? "") ?? 0
-                    let title = element.text?.trimmed ?? "?"
-                    let link = links[index].text?.trimmed ?? "?"
-                    let date = dates[index].text?.trimmed ?? "?"
-                    let post = Post(number: number, title: title, date: date, link: link)
-                    posts.append(post)
-                }
-                completion(posts, nil)
-            } catch {
+        Kanna.shared.request(pageURL(inCategory: category, inPage: page, searchText: text)) { doc, error in
+            guard let doc = doc else {
                 completion(nil, error)
+                return
             }
+            var posts = [Post]()
+            let numbers = doc.xpath("//tbody//td[@class='td-01']")
+            let titles = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a")
+            let links = doc.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a/@href")
+            let dates = doc.xpath("//tbody//td[@class='td-05']")
+            for (index, element) in titles.enumerated() {
+                let number = Int(numbers[index].text ?? "") ?? 0
+                let title = element.text?.trimmed ?? "?"
+                let link = links[index].text?.trimmed ?? "?"
+                let date = dates[index].text?.trimmed ?? "?"
+                let post = Post(number: number, title: title, date: date, link: link)
+                posts.append(post)
+            }
+            completion(posts, nil)
         }
     }
 }
