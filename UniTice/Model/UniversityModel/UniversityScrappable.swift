@@ -84,10 +84,25 @@ extension UniversityScrappable {
     
     /// 게시물 URL 초기 구현. `Base URL` - `게시물 링크`로 구성됨.
     func postURL(inCategory category: Self.Category, uri link: String) throws -> URL {
-        guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
+        let fullLink = try changeURL(baseURL, link)
+        guard let url = URL(string: fullLink) else {
             throw UniversityError.invalidURLError
         }
         print(url.absoluteString)
         return url
+    }
+    
+    /// 웹뷰 링크에 문제 있는 학교들 링크 바꿔줌.
+    func changeURL(_ baseURL: String, _ link: String) throws -> String {
+        switch UniversityModel.shared.universityModel.name {
+        case "명지대학교":
+            let mjuLink = link.replacingOccurrences(of: "view", with: "view_mobile")
+            let mjuBaseURL = baseURL.replacingOccurrences(of: "mjukr", with: "mjumob")
+            let full = "\(mjuBaseURL)\(mjuLink)"
+            return full
+        default:
+            let full = "\(baseURL)\(link)"
+            return full
+        }
     }
 }

@@ -63,13 +63,13 @@ extension 명지대학교 {
         var result = "&boardId=\(category.identifier)"
         switch category.identifier {
         case "11294":
-            result += "&id=mjukr_050101000000"
+            result += "&id=mjumob_050101000000"
         case "11310":
-            result += "&id=mjukr_050103000000"
+            result += "&id=mjumob_050103000000"
         case "11318":
-            result += "&id=mjukr_050104000000"
+            result += "&id=mjumob_050104000000"
         case "11327":
-            result += "&id=mjukr_050106000000"
+            result += "&id=mjumob_050106000000"
         default:
             result += ""
         }
