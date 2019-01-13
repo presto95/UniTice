@@ -216,16 +216,12 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = tableView.indexPathForRow(at: location) {
             let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-            do {
-                let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-                let fullLinkString = fullLink.absoluteString
-                print(fullLinkString)
-                let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-                User.insertBookmark(bookmark)
-                return safariViewController(url: fullLink)
-            } catch {
-                UIAlertController.presentErrorAlert(error, to: self)
-            }
+            let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+            let fullLinkString = fullLink.absoluteString
+            print(fullLinkString)
+            let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+            User.insertBookmark(bookmark)
+            return safariViewController(url: fullLink)
         }
         return nil
     }

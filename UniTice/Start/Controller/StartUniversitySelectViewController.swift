@@ -44,6 +44,7 @@ private extension StartUniversitySelectViewController {
                 UIViewController
                     .instantiate(from: "Start", identifier: StartKeywordRegisterViewController.classNameToString)
                     .push(at: self)
+                InitialInfo.shared.university = self.viewModel.selectedUniversity
             })
             .disposed(by: disposeBag)
     }
