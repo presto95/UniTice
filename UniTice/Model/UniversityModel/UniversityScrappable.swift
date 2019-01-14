@@ -70,6 +70,14 @@ protocol UniversityScrappable {
     /// - Parameter text: 검색 키워드
     /// - Returns: 검색 쿼리 문자열
     func searchQuery(_ text: String) -> String
+    
+    /// 모바일 리다이렉트되는 URL 변경
+    ///
+    /// - Parameters:
+    ///   - baseURL: Base URL
+    ///   - link: 페이지 링크
+    /// - Returns: 변경된 전체 URL
+    func changeURLForMobile(_ baseURL: String, _ link: String) -> String
 }
 
 extension UniversityScrappable {
@@ -84,23 +92,24 @@ extension UniversityScrappable {
     
     /// 게시물 URL 초기 구현. `Base URL` - `게시물 링크`로 구성됨.
     func postURL(inCategory category: Category, uri link: String) -> URL {
-        guard let fullLink = try? changeURL(baseURL, link), let url = URL(string: fullLink) else {
+        let changedURL = changeURLForMobile(baseURL, link)
+        guard let url = URL(string: changedURL) else {
             fatalError()
         }
         return url
     }
     
-    /// 웹뷰 링크에 문제 있는 학교들 링크 바꿔줌.
-    func changeURL(_ baseURL: String, _ link: String) throws -> String {
-        switch UniversityModel.shared.universityModel.name {
-        case "명지대학교":
+    func changeURLForMobile(_ baseURL: String, _ link: String) -> String {
+        let user = User.fetch() ?? User()
+        let university = University(rawValue: user.university) ?? .seoultech
+        switch university {
+        case .mju:
             let mjuLink = link.replacingOccurrences(of: "view", with: "view_mobile")
             let mjuBaseURL = baseURL.replacingOccurrences(of: "mjukr", with: "mjumob")
-            let full = "\(mjuBaseURL)\(mjuLink.percentEncoding)"
-            return full
+            let fullLink = "\(mjuBaseURL)\(mjuLink.percentEncoding)"
+            return fullLink
         default:
-            let full = "\(baseURL)\(link.percentEncoding)"
-            return full
+            return "\(baseURL)\(link.percentEncoding)"
         }
     }
 }
