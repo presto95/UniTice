@@ -99,6 +99,7 @@ class MainContentTableViewController: UITableViewController {
     }
     
     private func safariViewController(url: URL) -> SFSafariViewController {
+        print(url.absoluteString)
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
         config.entersReaderIfAvailable = true
