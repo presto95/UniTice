@@ -78,9 +78,9 @@
                             <constraint firstItem="Z6S-KS-TVT" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" id="FMA-3q-lNG"/>
                             <constraint firstItem="yJF-tP-xtG" firstAttribute="top" secondItem="3eh-di-0hX" secondAttribute="top" id="GGT-MQ-b2I"/>
                             <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="Z6S-KS-TVT" secondAttribute="trailing" id="MeR-fI-0fZ"/>
-                            <constraint firstItem="Z6S-KS-TVT" firstAttribute="top" secondItem="yJF-tP-xtG" secondAttribute="bottom" id="aBh-5t-i3L"/>
                             <constraint firstAttribute="bottom" secondItem="Z6S-KS-TVT" secondAttribute="bottom" id="lzs-aW-w8k"/>
                             <constraint firstItem="3eh-di-0hX" firstAttribute="trailing" secondItem="yJF-tP-xtG" secondAttribute="trailing" id="oWN-cr-ZJZ"/>
+                            <constraint firstItem="Z6S-KS-TVT" firstAttribute="top" secondItem="yJF-tP-xtG" secondAttribute="bottom" id="qEB-vG-dEM"/>
                             <constraint firstItem="yJF-tP-xtG" firstAttribute="leading" secondItem="3eh-di-0hX" secondAttribute="leading" id="qsK-cv-RMf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3eh-di-0hX"/>
