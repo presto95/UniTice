@@ -1,5 +1,8 @@
 # UniTice
 
+![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
+![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
+
 ## 대학교 공지사항 알리미
 
 UNDER DEVELOPING👩🏻‍💻👩🏻‍💻👨🏻‍💻
