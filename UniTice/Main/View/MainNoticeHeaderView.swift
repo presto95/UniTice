@@ -8,25 +8,25 @@
 
 import UIKit
 
-class MainNoticeHeaderView: UIView {
-    
-    var state: Bool = false {
-        didSet {
-            foldButton.setImage(state ? UIImage(named: "arrow_down") : UIImage(named: "arrow_up"), for: [])
-        }
+final class MainNoticeHeaderView: UIView {
+  
+  var state: Bool = false {
+    didSet {
+      foldButton.setImage(state ? UIImage(named: "arrow_down") : UIImage(named: "arrow_up"), for: [])
     }
-    
-    var foldingHandler: (() -> Void)?
-    
-    @IBOutlet weak var foldButton: UIButton! {
-        didSet {
-            foldButton.setTitle(nil, for: [])
-            foldButton.imageView?.contentMode = .scaleAspectFit
-            foldButton.addTarget(self, action: #selector(touchUpFoldButton(_:)), for: .touchUpInside)
-        }
+  }
+  
+  var foldingHandler: (() -> Void)?
+  
+  @IBOutlet weak var foldButton: UIButton! {
+    didSet {
+      foldButton.setTitle(nil, for: [])
+      foldButton.imageView?.contentMode = .scaleAspectFit
+      foldButton.addTarget(self, action: #selector(foldButtonDidTap(_:)), for: .touchUpInside)
     }
-    
-    @objc private func touchUpFoldButton(_ sender: UIButton) {
-        foldingHandler?()
-    }
+  }
+  
+  @objc private func foldButtonDidTap(_ sender: UIButton) {
+    foldingHandler?()
+  }
 }

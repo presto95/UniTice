@@ -8,35 +8,35 @@
 
 import UIKit
 
-class StartKeywordHeaderView: UIView {
-    
-    var touchUpAddButtonHandler: ((String) -> Void)?
-    
-    @IBOutlet private weak var keywordTextField: UITextField! {
-        didSet {
-            keywordTextField.delegate = self
-        }
+final class StartKeywordHeaderView: UIView {
+  
+  var addButtonDidTapHandler: ((String) -> Void)?
+  
+  @IBOutlet private weak var keywordTextField: UITextField! {
+    didSet {
+      keywordTextField.delegate = self
     }
-    
-    @IBOutlet private weak var addButton: UIButton! {
-        didSet {
-            addButton.imageView?.contentMode = .scaleAspectFit
-            addButton.addTarget(self, action: #selector(touchUpAddButton(_:)), for: .touchUpInside)
-        }
+  }
+  
+  @IBOutlet private weak var addButton: UIButton! {
+    didSet {
+      addButton.imageView?.contentMode = .scaleAspectFit
+      addButton.addTarget(self, action: #selector(addButtonDidTap(_:)), for: .touchUpInside)
     }
-    
-    @objc private func touchUpAddButton(_ sender: UIButton) {
-        if let text = keywordTextField.text {
-            guard !text.isEmpty else { return }
-            touchUpAddButtonHandler?(text.replacingOccurrences(of: " ", with: ""))
-            keywordTextField.text = nil
-        }
+  }
+  
+  @objc private func addButtonDidTap(_ sender: UIButton) {
+    if let text = keywordTextField.text {
+      guard !text.isEmpty else { return }
+      addButtonDidTapHandler?(text.replacingOccurrences(of: " ", with: ""))
+      keywordTextField.text = nil
     }
+  }
 }
 
 extension StartKeywordHeaderView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
 }

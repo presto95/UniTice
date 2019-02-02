@@ -9,18 +9,18 @@
 import UIKit
 
 @IBDesignable
-class KeywordCell: UITableViewCell {
-
-    @IBOutlet private weak var keywordLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        keywordLabel.layer.cornerRadius = keywordLabel.bounds.height / 2
-        keywordLabel.layer.borderColor = UIColor.main.cgColor
-        keywordLabel.layer.borderWidth = 1
-    }
-    
-    func setKeyword(_ keyword: String) {
-        keywordLabel.text = keyword
-    }
+final class KeywordCell: UITableViewCell {
+  
+  @IBOutlet private weak var keywordLabel: UILabel!
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    keywordLabel.layer.cornerRadius = keywordLabel.bounds.height / 2
+    keywordLabel.layer.borderColor = UIColor.main.cgColor
+    keywordLabel.layer.borderWidth = 1
+  }
+  
+  func setKeyword(_ keyword: String) {
+    keywordLabel.text = keyword
+  }
 }

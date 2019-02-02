@@ -9,10 +9,10 @@
 import RxSwift
 
 struct StartKeywordRegisterViewModel {
-    
-    var keywords: Variable<[String]> = Variable([]) {
-        didSet {
-            InitialInfo.shared.keywords = keywords.value
-        }
+  
+  var keywords: Variable<[String]> = Variable([]) {
+    didSet {
+      InitialInfo.shared.keywords = keywords.value
     }
+  }
 }

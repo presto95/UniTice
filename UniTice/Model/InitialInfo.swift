@@ -8,11 +8,13 @@
 
 import Foundation
 
-class InitialInfo {
-    
-    static let shared = InitialInfo()
-    
-    var university: University = .dongduk
-    
-    var keywords: [String] = []
+final class InitialInfo {
+  
+  static let shared = InitialInfo()
+  
+  private init() { }
+  
+  var university: University = .dongduk
+  
+  var keywords: [String] = []
 }

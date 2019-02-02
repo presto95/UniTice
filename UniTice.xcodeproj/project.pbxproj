@@ -13,7 +13,7 @@
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
 		191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */; };
 		191CDE0B21D4DCCE00EBCBE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */; };
-		1929733F21EB6F410021B05E /* Kanna.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929733E21EB6F410021B05E /* Kanna.swift */; };
+		1929733F21EB6F410021B05E /* KannaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929733E21EB6F410021B05E /* KannaManager.swift */; };
 		1929734121EB738F0021B05E /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929734021EB738F0021B05E /* UIColor+.swift */; };
 		1929734421EB7B800021B05E /* MainContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929734321EB7B800021B05E /* MainContentViewModel.swift */; };
 		1929734921EB8C400021B05E /* ChangeUniversityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1929734821EB8C400021B05E /* ChangeUniversityViewModel.swift */; };
@@ -111,7 +111,7 @@
 		191B647A219728CD005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191B647C219728CD005E5CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		191CDE0A21D4DCCE00EBCBE4 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Setting.storyboard; path = Setting/Setting.storyboard; sourceTree = "<group>"; };
-		1929733E21EB6F410021B05E /* Kanna.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kanna.swift; sourceTree = "<group>"; };
+		1929733E21EB6F410021B05E /* KannaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KannaManager.swift; sourceTree = "<group>"; };
 		1929734021EB738F0021B05E /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		1929734321EB7B800021B05E /* MainContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentViewModel.swift; sourceTree = "<group>"; };
 		1929734821EB8C400021B05E /* ChangeUniversityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUniversityViewModel.swift; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 		1929733D21EB6F070021B05E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				1929733E21EB6F410021B05E /* Kanna.swift */,
+				1929733E21EB6F410021B05E /* KannaManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -681,7 +681,7 @@
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
 				193D654B21E226BA00FAB1DE /* 성공회대학교.swift in Sources */,
 				1929734121EB738F0021B05E /* UIColor+.swift in Sources */,
-				1929733F21EB6F410021B05E /* Kanna.swift in Sources */,
+				1929733F21EB6F410021B05E /* KannaManager.swift in Sources */,
 				193D654F21E2E36000FAB1DE /* 총신대학교.swift in Sources */,
 				193D655621E3162700FAB1DE /* 경성대학교.swift in Sources */,
 				195B993C21DB48AD00367456 /* 서울여자대학교.swift in Sources */,

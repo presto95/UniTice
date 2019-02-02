@@ -9,6 +9,5 @@
 import RxSwift
 
 struct MainContentViewModel {
-    
-    
+  
 }
