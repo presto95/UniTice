@@ -27,7 +27,7 @@ struct 제주대학교: UniversityScrappable {
     ]
   }
   
-  func postURL(inCategory category: 제주대학교.Category, uri link: String) throws -> URL {
+  func postURL(inCategory category: 제주대학교.Category, uri link: String) -> URL {
     guard let url = URL(string: link.percentEncoding) else {
       fatalError()
     }

@@ -6,6 +6,7 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
+import StoreKit
 import UIKit
 import UserNotifications
 
@@ -29,6 +30,13 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController {
   override func viewWillAppear(_ animated: Bool) {
     universityModel = UniversityModel.shared.universityModel
     reloadPagerTabStripView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if User.fetch()?.bookmarks.count ?? 0 > 5 {
+      SKStoreReviewController.requestReview()
+    }
   }
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {

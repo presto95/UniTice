@@ -23,8 +23,7 @@ struct 서울여자대학교: UniversityScrappable {
       ("8", "일반/봉사")
     ]
   }
-  
-  func postURL(inCategory category: 경북대학교.Category, uri link: String) throws -> URL {
+  func postURL(inCategory category: 서울여자대학교.Category, uri link: String) -> URL {
     guard let url = URL(string: "\(baseURL)\(commonQueriesForPost(category))\(link)") else {
       fatalError()
     }
@@ -45,7 +44,7 @@ struct 서울여자대학교: UniversityScrappable {
         let titleIndex = index * 5 + 1
         let dateIndex = index * 5 + 3
         let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
-        let title = rows[titleIndex].text?.trimmed ?? "?"
+        let title = rows[titleIndex].at_xpath("div//div")?.text?.trimmed ?? "?"
         let date = rows[dateIndex].text?.trimmed ?? "?"
         let link = element.text?.trimmed.filter { Int("\($0)") != nil } ?? "?"
         let post = Post(number: number, title: title, date: date, link: link)
@@ -78,6 +77,21 @@ extension 서울여자대학교 {
   }
   
   private func commonQueriesForPost(_ category: 서울여자대학교.Category) -> String {
-    return "/boardview.do?bbsConfigFK=\(category.identifier)&pkid="
+    var cate = ""
+    switch category.identifier {
+    case "4":
+      cate += "336"
+    case "5":
+      cate += "337"
+    case "6":
+      cate += "338"
+    case "7":
+      cate += "339"
+    case "8":
+      cate += "340"
+    default:
+      cate += ""
+    }
+    return "/mboardview.do?cmsDirPkid=\(cate)&cmsLocalPkid=0&bbsConfigFK=\(category.identifier)&pkid="
   }
 }

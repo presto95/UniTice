@@ -12,5 +12,5 @@ struct StartUniversityViewModel {
   
   var universities = University.allCases.sorted { $0.rawValue < $1.rawValue }
   
-  var selectedUniversity: University = .seoultech
+  var selectedUniversity: University = .kaist
 }

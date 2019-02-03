@@ -31,16 +31,16 @@ struct 대진대학교: UniversityScrappable {
         return
       }
       var posts = [Post]()
-      let fixedCount = doc.xpath("//tbody//tr[@class='hot ']").count
-      let numbers = doc.xpath("//tbody//tr//td[1]")
-      let titles = doc.xpath("//tbody//tr//td[2]")
-      let dates = doc.xpath("//tbody//tr//td[4]")
-      let links = doc.xpath("//tbody//tr//td[2]//a/@href")
-      for (index, element) in numbers.enumerated() {
-        let number = Int(element.text?.trimmed ?? "") ?? 0
-        let title = titles[index].text?.trimmed ?? "?"
-        let link = links[index].text?.trimmed.dropFirst().description ?? "?"
-        let date = number == 0 ? "" : dates[index - fixedCount].text?.trimmed ?? "?"
+      let rows = doc.xpath("//div[2]//tbody//tr//td")
+      let links = doc.xpath("//div[2]//tbody//tr//td//a/@href")
+      for (index, element) in links.enumerated() {
+        let numberIndex = index * 4
+        let titleIndex = index * 4 + 1
+        let dateIndex = index * 4 + 2
+        let number = Int(rows[numberIndex].text?.trimmed ?? "") ?? 0
+        let title = rows[titleIndex].text?.trimmed ?? "?"
+        let date = rows[dateIndex].text?.trimmed ?? "?"
+        let link = element.text?.trimmed ?? "?"
         let post = Post(number: number, title: title, date: date, link: link)
         posts.append(post)
       }

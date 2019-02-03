@@ -8,13 +8,19 @@
 
 import Kanna
 
-final class KannaManager {
+protocol KannaManagerProtocol: class {
+  func request(_ url: URL,
+               encoding: String.Encoding,
+               strategyHandler strategy: @escaping (HTMLDocument?, Error?) -> Void)
+}
+
+final class KannaManager: KannaManagerProtocol {
   
   static let shared = KannaManager()
   
   func request(_ url: URL,
                encoding: String.Encoding = .utf8,
-               strategyHandler strategy: @escaping ((HTMLDocument?, Error?) -> Void)) {
+               strategyHandler strategy: @escaping (HTMLDocument?, Error?) -> Void) {
     DispatchQueue.global(qos: .background).async {
       do {
         let doc = try HTML(url: url, encoding: encoding)

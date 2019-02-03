@@ -24,6 +24,7 @@ final class StartKeywordRegisterViewController: UIViewController {
   @IBOutlet private weak var tableView: UITableView! {
     didSet {
       tableView.delegate = self
+      tableView.dataSource = self
       tableView.rowHeight = 60
       tableView.sectionHeaderHeight = 60
     }
@@ -36,12 +37,20 @@ final class StartKeywordRegisterViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     bindUI()
-    
-    viewModel.keywords.asObservable()
-      .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: KeywordCell.self)) { _, keyword, cell in
-        cell.setKeyword(keyword)
-      }
-      .disposed(by: disposeBag)
+  }
+}
+
+extension StartKeywordRegisterViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    if let keywordCell = cell as? KeywordCell {
+      keywordCell.setKeyword(keywords[indexPath.row])
+    }
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return keywords.count
   }
 }
 
