@@ -34,7 +34,7 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    if User.fetch()?.bookmarks.count ?? 0 > 5 {
+    if Int.random(in: 1...10) == 5 {
       SKStoreReviewController.requestReview()
     }
   }
