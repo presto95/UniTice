@@ -5,7 +5,7 @@
 
 ## 대학교 공지사항 알리미
 
-UNDER DEVELOPING👩🏻‍💻👩🏻‍💻👨🏻‍💻
+UNDER DEVELOPMENT👩🏻‍💻👩🏻‍💻👨🏻‍💻
 
 ---
 
