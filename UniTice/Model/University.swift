@@ -10,7 +10,7 @@ import UIKit
 
 enum University: String, CaseIterable {
   
-  //A
+  // A
   case kaist = "KAIST"
   case kcu = "KC대학교"
   // ㄱ

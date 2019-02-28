@@ -1,12 +1,12 @@
 disabled_rules:
 - leading_whitespace
 - trailing_whitespace
-- line_length
 - cyclomatic_complexity
 
 excluded:
-- Pods/
-- UniTice/Model
+  - Pods/
+  - UniTice/Model
+  - UniTice/SwiftGens
 
 line_length:
   warning: 99

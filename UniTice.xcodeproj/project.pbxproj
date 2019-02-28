@@ -20,7 +20,6 @@
 		192FF1F621E465F100FF0F15 /* 동신대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F521E465F100FF0F15 /* 동신대학교.swift */; };
 		192FF1F821E46B1000FF0F15 /* 세한대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F721E46B1000FF0F15 /* 세한대학교.swift */; };
 		192FF1FA21E470F300FF0F15 /* 우석대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192FF1F921E470F300FF0F15 /* 우석대학교.swift */; };
-		193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */; };
 		193005ED21B14658003C9DBB /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193005EC21B14658003C9DBB /* SettingTableViewController.swift */; };
 		1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1930D34E21BFFCD700424FBF /* Start.storyboard */; };
 		193D654521E1F4F800FAB1DE /* 광운대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193D654421E1F4F800FAB1DE /* 광운대학교.swift */; };
@@ -37,6 +36,17 @@
 		194BF41F219EA54E00FA6124 /* ChangeUniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */; };
 		194BF421219EA88B00FA6124 /* KeywordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */; };
 		194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BF426219EE73200FA6124 /* UIAlertController+.swift */; };
+		19528CD32226A70000A34FFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19528CD22226A70000A34FFF /* GoogleService-Info.plist */; };
+		19528CDB2226CF2B00A34FFF /* KannaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CDA2226CF2B00A34FFF /* KannaTest.swift */; };
+		19528CE32226E6FB00A34FFF /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19528CE22226E6FB00A34FFF /* swiftgen.yml */; };
+		19528CE72226E75700A34FFF /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CE52226E75700A34FFF /* Assets.swift */; };
+		19528CE82226E75700A34FFF /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CE62226E75700A34FFF /* Storyboard.swift */; };
+		19528CEA2226E81200A34FFF /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CE92226E81200A34FFF /* Notification.Name+.swift */; };
+		19528CED2226EA1600A34FFF /* UTButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CEC2226EA1600A34FFF /* UTButton.swift */; };
+		19528CEF2226EB4200A34FFF /* UTButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CEE2226EB4200A34FFF /* UTButtonType.swift */; };
+		19528CF12227A3AB00A34FFF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CF02227A3AB00A34FFF /* Log.swift */; };
+		19528CF32227A51E00A34FFF /* UniversitySelectionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CF22227A51E00A34FFF /* UniversitySelectionViewReactor.swift */; };
+		19528CF52227B66D00A34FFF /* KeywordRegisterReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19528CF42227B66D00A34FFF /* KeywordRegisterReactor.swift */; };
 		1958FA7D21D4A4F700DACF72 /* 고려대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1958FA7C21D4A4F700DACF72 /* 고려대학교.swift */; };
 		1958FA7F21D4ADCC00DACF72 /* 성균관대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1958FA7E21D4ADCC00DACF72 /* 성균관대학교.swift */; };
 		1959D57321CE13D400F6182F /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959D57221CE13D400F6182F /* MainContainerViewController.swift */; };
@@ -63,7 +73,6 @@
 		197DE94421E71B59005DCECB /* 한양대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94321E71B59005DCECB /* 한양대학교.swift */; };
 		197DE94621E77AAA005DCECB /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94521E77AAA005DCECB /* Bookmark.swift */; };
 		197DE94821E77B32005DCECB /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197DE94721E77B32005DCECB /* UniversityModel.swift */; };
-		1988FCBD21EB29590006A9DF /* StartUniversityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988FCBC21EB29590006A9DF /* StartUniversityViewModel.swift */; };
 		198DC0AB21D33F5700AF4801 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AA21D33F5700AF4801 /* String+.swift */; };
 		198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AC21D343BF00AF4801 /* SearchViewController.swift */; };
 		198DC0AF21D34A0700AF4801 /* 전남대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DC0AE21D34A0700AF4801 /* 전남대학교.swift */; };
@@ -88,7 +97,7 @@
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
 		19C6BBBC2197F8D4002FC39C /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* University.swift */; };
 		19ED806F21CA5FA000BA6529 /* 서울과학기술대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED806E21CA5FA000BA6529 /* 서울과학기술대학교.swift */; };
-		19ED807521CA63CB00BA6529 /* StartUniversitySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */; };
+		19ED807521CA63CB00BA6529 /* UniversitySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807421CA63CB00BA6529 /* UniversitySelectionViewController.swift */; };
 		19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */; };
 		19ED807921CA63DC00BA6529 /* StartFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */; };
 		19ED807B21CB63E600BA6529 /* StartConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */; };
@@ -101,6 +110,16 @@
 		19ED808B21CB7CF400BA6529 /* StartKeywordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808A21CB7CF400BA6529 /* StartKeywordHeaderView.swift */; };
 		8992C80A88030DEB544A8F15 /* Pods_UniTice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72581DA59CEA8965CF3C2034 /* Pods_UniTice.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		19528CDD2226CF2B00A34FFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 191B6465219728CC005E5CE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 191B646C219728CC005E5CE6;
+			remoteInfo = UniTice;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordRegisterViewModel.swift; sourceTree = "<group>"; };
@@ -120,7 +139,6 @@
 		192FF1F921E470F300FF0F15 /* 우석대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "우석대학교.swift"; sourceTree = "<group>"; };
 		193005E821B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		193005E921B13ABC003C9DBB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		193005EC21B14658003C9DBB /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		1930D34B21BFFB9C00424FBF /* UniTice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UniTice.entitlements; sourceTree = "<group>"; };
 		1930D34E21BFFCD700424FBF /* Start.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
@@ -138,6 +156,19 @@
 		194BF41E219EA54E00FA6124 /* ChangeUniversityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeUniversityViewController.swift; path = Setting/ChangeUniversityViewController.swift; sourceTree = "<group>"; };
 		194BF420219EA88B00FA6124 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeywordSettingViewController.swift; path = Setting/KeywordSettingViewController.swift; sourceTree = "<group>"; };
 		194BF426219EE73200FA6124 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		19528CD22226A70000A34FFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		19528CD82226CF2B00A34FFF /* UniTiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniTiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		19528CDA2226CF2B00A34FFF /* KannaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KannaTest.swift; sourceTree = "<group>"; };
+		19528CDC2226CF2B00A34FFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19528CE22226E6FB00A34FFF /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
+		19528CE52226E75700A34FFF /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		19528CE62226E75700A34FFF /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		19528CE92226E81200A34FFF /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		19528CEC2226EA1600A34FFF /* UTButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTButton.swift; sourceTree = "<group>"; };
+		19528CEE2226EB4200A34FFF /* UTButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTButtonType.swift; sourceTree = "<group>"; };
+		19528CF02227A3AB00A34FFF /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		19528CF22227A51E00A34FFF /* UniversitySelectionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversitySelectionViewReactor.swift; sourceTree = "<group>"; };
+		19528CF42227B66D00A34FFF /* KeywordRegisterReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterReactor.swift; sourceTree = "<group>"; };
 		1958FA7C21D4A4F700DACF72 /* 고려대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "고려대학교.swift"; sourceTree = "<group>"; };
 		1958FA7E21D4ADCC00DACF72 /* 성균관대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "성균관대학교.swift"; sourceTree = "<group>"; };
 		1959D57221CE13D400F6182F /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
@@ -164,7 +195,6 @@
 		197DE94321E71B59005DCECB /* 한양대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "한양대학교.swift"; sourceTree = "<group>"; };
 		197DE94521E77AAA005DCECB /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		197DE94721E77B32005DCECB /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
-		1988FCBC21EB29590006A9DF /* StartUniversityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUniversityViewModel.swift; sourceTree = "<group>"; };
 		198DC0AA21D33F5700AF4801 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		198DC0AC21D343BF00AF4801 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		198DC0AE21D34A0700AF4801 /* 전남대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "전남대학교.swift"; sourceTree = "<group>"; };
@@ -189,7 +219,7 @@
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		19C6BBBB2197F8D4002FC39C /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
 		19ED806E21CA5FA000BA6529 /* 서울과학기술대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "서울과학기술대학교.swift"; sourceTree = "<group>"; };
-		19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUniversitySelectViewController.swift; sourceTree = "<group>"; };
+		19ED807421CA63CB00BA6529 /* UniversitySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversitySelectionViewController.swift; sourceTree = "<group>"; };
 		19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordRegisterViewController.swift; sourceTree = "<group>"; };
 		19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartFinishViewController.swift; sourceTree = "<group>"; };
 		19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartConfirmButton.swift; sourceTree = "<group>"; };
@@ -203,6 +233,7 @@
 		44803E144585D9995DBF0F72 /* Pods-UniTice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.release.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.release.xcconfig"; sourceTree = "<group>"; };
 		55B681C006DAD892F87CBBFF /* Pods-UniTice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.debug.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.debug.xcconfig"; sourceTree = "<group>"; };
 		72581DA59CEA8965CF3C2034 /* Pods_UniTice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniTice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D996E5D56617F68162ABE8D7 /* Pods_UniTiceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniTiceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,14 +245,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		19528CD52226CF2B00A34FFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		191B6464219728CC005E5CE6 = {
 			isa = PBXGroup;
 			children = (
+				19528CE22226E6FB00A34FFF /* swiftgen.yml */,
 				19AF276821983A85009488C8 /* .swiftlint.yml */,
 				191B646F219728CC005E5CE6 /* UniTice */,
+				19528CD92226CF2B00A34FFF /* UniTiceTests */,
 				191B646E219728CC005E5CE6 /* Products */,
 				CCA741B89CEFB0D6DF343890 /* Pods */,
 				F79BC641885A2F8B0CFAC71A /* Frameworks */,
@@ -232,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				191B646D219728CC005E5CE6 /* UniTice.app */,
+				19528CD82226CF2B00A34FFF /* UniTiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,8 +280,10 @@
 		191B646F219728CC005E5CE6 /* UniTice */ = {
 			isa = PBXGroup;
 			children = (
+				19528CEB2226EA0500A34FFF /* Common */,
+				19528CE42226E73200A34FFF /* SwiftGen */,
+				19528CD22226A70000A34FFF /* GoogleService-Info.plist */,
 				191B647C219728CD005E5CE6 /* Info.plist */,
-				193005EA21B13EAE003C9DBB /* GoogleService-Info.plist */,
 				1930D34B21BFFB9C00424FBF /* UniTice.entitlements */,
 				1929733D21EB6F070021B05E /* Network */,
 				19C6BBBA2197F8C6002FC39C /* Model */,
@@ -319,8 +362,37 @@
 				19ED808821CB7C7600BA6529 /* UIView+.swift */,
 				198DC0AA21D33F5700AF4801 /* String+.swift */,
 				1929734021EB738F0021B05E /* UIColor+.swift */,
+				19528CE92226E81200A34FFF /* Notification.Name+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		19528CD92226CF2B00A34FFF /* UniTiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				19528CDA2226CF2B00A34FFF /* KannaTest.swift */,
+				19528CDC2226CF2B00A34FFF /* Info.plist */,
+			);
+			path = UniTiceTests;
+			sourceTree = "<group>";
+		};
+		19528CE42226E73200A34FFF /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+				19528CE52226E75700A34FFF /* Assets.swift */,
+				19528CE62226E75700A34FFF /* Storyboard.swift */,
+			);
+			path = SwiftGen;
+			sourceTree = "<group>";
+		};
+		19528CEB2226EA0500A34FFF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				19528CEC2226EA1600A34FFF /* UTButton.swift */,
+				19528CEE2226EB4200A34FFF /* UTButtonType.swift */,
+				19528CF02227A3AB00A34FFF /* Log.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		1959D57021CE12B800F6182F /* View */ = {
@@ -367,7 +439,6 @@
 		1988FCBE21EB2FBA0006A9DF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1988FCBC21EB29590006A9DF /* StartUniversityViewModel.swift */,
 				190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */,
 			);
 			path = ViewModel;
@@ -445,9 +516,11 @@
 		19ED808421CB786100BA6529 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				19ED807421CA63CB00BA6529 /* StartUniversitySelectViewController.swift */,
+				19ED807421CA63CB00BA6529 /* UniversitySelectionViewController.swift */,
 				19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */,
 				19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */,
+				19528CF22227A51E00A34FFF /* UniversitySelectionViewReactor.swift */,
+				19528CF42227B66D00A34FFF /* KeywordRegisterReactor.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -477,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				72581DA59CEA8965CF3C2034 /* Pods_UniTice.framework */,
+				D996E5D56617F68162ABE8D7 /* Pods_UniTiceTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -492,8 +566,9 @@
 				191B6469219728CC005E5CE6 /* Sources */,
 				191B646A219728CC005E5CE6 /* Frameworks */,
 				191B646B219728CC005E5CE6 /* Resources */,
-				19AF276721983822009488C8 /* ShellScript */,
+				19AF276721983822009488C8 /* SwiftLint */,
 				220C9224912B9175145F7CE4 /* [CP] Embed Pods Frameworks */,
+				19528CCF2226957000A34FFF /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -503,6 +578,24 @@
 			productName = SchoolNoticeNotifier;
 			productReference = 191B646D219728CC005E5CE6 /* UniTice.app */;
 			productType = "com.apple.product-type.application";
+		};
+		19528CD72226CF2B00A34FFF /* UniTiceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19528CDF2226CF2B00A34FFF /* Build configuration list for PBXNativeTarget "UniTiceTests" */;
+			buildPhases = (
+				19528CD42226CF2B00A34FFF /* Sources */,
+				19528CD52226CF2B00A34FFF /* Frameworks */,
+				19528CD62226CF2B00A34FFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				19528CDE2226CF2B00A34FFF /* PBXTargetDependency */,
+			);
+			name = UniTiceTests;
+			productName = UniTiceTests;
+			productReference = 19528CD82226CF2B00A34FFF /* UniTiceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -525,6 +618,10 @@
 							};
 						};
 					};
+					19528CD72226CF2B00A34FFF = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 191B646C219728CC005E5CE6;
+					};
 				};
 			};
 			buildConfigurationList = 191B6468219728CC005E5CE6 /* Build configuration list for PBXProject "UniTice" */;
@@ -540,6 +637,7 @@
 			projectRoot = "";
 			targets = (
 				191B646C219728CC005E5CE6 /* UniTice */,
+				19528CD72226CF2B00A34FFF /* UniTiceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -549,9 +647,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				193005EB21B13EAE003C9DBB /* GoogleService-Info.plist in Resources */,
 				19AF276921983A85009488C8 /* .swiftlint.yml in Resources */,
+				19528CE32226E6FB00A34FFF /* swiftgen.yml in Resources */,
 				191B647B219728CD005E5CE6 /* LaunchScreen.storyboard in Resources */,
+				19528CD32226A70000A34FFF /* GoogleService-Info.plist in Resources */,
 				191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */,
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 				191CDE0B21D4DCCE00EBCBE4 /* Setting.storyboard in Resources */,
@@ -561,10 +660,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		19528CD62226CF2B00A34FFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19AF276721983822009488C8 /* ShellScript */ = {
+		19528CCF2226957000A34FFF /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"",
+			);
+			name = Fabric;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 5c684550614d2f7ba2dbfc8d40b27e36dcda7389 27243f8078eefeb11c1e1a0606dd8aabbfa0f7dcc0a7c59b08251c648be3f237\n";
+		};
+		19AF276721983822009488C8 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -573,6 +698,7 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -591,13 +717,16 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UniTice/Pods-UniTice-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactorKit/ReactorKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -609,13 +738,16 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactorKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -686,12 +818,14 @@
 				193D655621E3162700FAB1DE /* 경성대학교.swift in Sources */,
 				195B993C21DB48AD00367456 /* 서울여자대학교.swift in Sources */,
 				195B994621DCB39300367456 /* 한성대학교.swift in Sources */,
+				19528CF12227A3AB00A34FFF /* Log.swift in Sources */,
 				19ED808921CB7C7600BA6529 /* UIView+.swift in Sources */,
 				195B995021DEF45B00367456 /* 한국산업기술대학교.swift in Sources */,
 				198DC0C321D35AA000AF4801 /* 경상대학교.swift in Sources */,
 				1958FA7F21D4ADCC00DACF72 /* 성균관대학교.swift in Sources */,
 				19ED806F21CA5FA000BA6529 /* 서울과학기술대학교.swift in Sources */,
 				19AF276621983127009488C8 /* Post.swift in Sources */,
+				19528CEF2226EB4200A34FFF /* UTButtonType.swift in Sources */,
 				192FF1FA21E470F300FF0F15 /* 우석대학교.swift in Sources */,
 				193D655821E31CCD00FAB1DE /* 강남대학교.swift in Sources */,
 				198DC0BB21D35A8100AF4801 /* 충남대학교.swift in Sources */,
@@ -699,18 +833,21 @@
 				193D655A21E327AE00FAB1DE /* 대진대학교.swift in Sources */,
 				198DC0B921D35A7400AF4801 /* 강원대학교.swift in Sources */,
 				195B995221E0780900367456 /* 삼육대학교.swift in Sources */,
-				1988FCBD21EB29590006A9DF /* StartUniversityViewModel.swift in Sources */,
 				19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */,
 				19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */,
 				198DC0BD21D35A8800AF4801 /* 충북대학교.swift in Sources */,
 				19ED807B21CB63E600BA6529 /* StartConfirmButton.swift in Sources */,
+				19528CF32227A51E00A34FFF /* UniversitySelectionViewReactor.swift in Sources */,
 				198DC0AF21D34A0700AF4801 /* 전남대학교.swift in Sources */,
 				1958FA7D21D4A4F700DACF72 /* 고려대학교.swift in Sources */,
+				19528CEA2226E81200A34FFF /* Notification.Name+.swift in Sources */,
+				19528CE72226E75700A34FFF /* Assets.swift in Sources */,
 				194BF41A219DBF6D00FA6124 /* BookmarkViewController.swift in Sources */,
 				195B993E21DBA9A200367456 /* 덕성여자대학교.swift in Sources */,
 				197DE94421E71B59005DCECB /* 한양대학교.swift in Sources */,
 				1959D57921CE212000F6182F /* UniversityScrappable.swift in Sources */,
 				192FF1F821E46B1000FF0F15 /* 세한대학교.swift in Sources */,
+				19528CF52227B66D00A34FFF /* KeywordRegisterReactor.swift in Sources */,
 				19A7F86921DA5FDE005E1E6D /* 한국외국어대학교.swift in Sources */,
 				19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */,
 				193D654921E21D0D00FAB1DE /* 서울교육대학교.swift in Sources */,
@@ -722,13 +859,15 @@
 				1976CE2C21CE649B00897E39 /* MainNoticeHeaderView.swift in Sources */,
 				1929734921EB8C400021B05E /* ChangeUniversityViewModel.swift in Sources */,
 				195B994221DBB35500367456 /* 세종대학교.swift in Sources */,
+				19528CED2226EA1600A34FFF /* UTButton.swift in Sources */,
 				195B995821E0DDFD00367456 /* 숙명여자대학교.swift in Sources */,
 				198DC0B121D34FC300AF4801 /* 서울대학교.swift in Sources */,
 				198DC0BF21D35A9000AF4801 /* 경북대학교.swift in Sources */,
 				190D98FD21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift in Sources */,
+				19528CE82226E75700A34FFF /* Storyboard.swift in Sources */,
 				193D654521E1F4F800FAB1DE /* 광운대학교.swift in Sources */,
 				193D655121E2E64A00FAB1DE /* 한국예술종합학교.swift in Sources */,
-				19ED807521CA63CB00BA6529 /* StartUniversitySelectViewController.swift in Sources */,
+				19ED807521CA63CB00BA6529 /* UniversitySelectionViewController.swift in Sources */,
 				1959D57521CE192000F6182F /* MainContentTableViewController.swift in Sources */,
 				198DC0CD21D462A000AF4801 /* FooterRefreshView.swift in Sources */,
 				198DC0AB21D33F5700AF4801 /* String+.swift in Sources */,
@@ -742,7 +881,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		19528CD42226CF2B00A34FFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19528CDB2226CF2B00A34FFF /* KannaTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		19528CDE2226CF2B00A34FFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 191B646C219728CC005E5CE6 /* UniTice */;
+			targetProxy = 19528CDD2226CF2B00A34FFF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		191B6474219728CC005E5CE6 /* Main.storyboard */ = {
@@ -890,6 +1045,7 @@
 				CODE_SIGN_ENTITLEMENTS = UniTice/UniTice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = UniTice/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -928,6 +1084,56 @@
 			};
 			name = Release;
 		};
+		19528CE02226CF2B00A34FFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H79MF628K3;
+				HEADER_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/include/libxml2",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+				);
+				INFOPLIST_FILE = UniTiceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.presto.UniTiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UniTice.app/UniTice";
+			};
+			name = Debug;
+		};
+		19528CE12226CF2B00A34FFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H79MF628K3;
+				HEADER_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/include/libxml2",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+				);
+				INFOPLIST_FILE = UniTiceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.presto.UniTiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UniTice.app/UniTice";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -945,6 +1151,15 @@
 			buildConfigurations = (
 				191B6480219728CD005E5CE6 /* Debug */,
 				191B6481219728CD005E5CE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		19528CDF2226CF2B00A34FFF /* Build configuration list for PBXNativeTarget "UniTiceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19528CE02226CF2B00A34FFF /* Debug */,
+				19528CE12226CF2B00A34FFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -39,7 +39,7 @@ final class User: Object {
   static func insertBookmark(_ post: Post) {
     guard let user = User.fetch() else { return }
     let bookmark = Bookmark()
-    bookmark.index = bookmark.incrementIndex()
+    bookmark.index = bookmark.uniqueID
     bookmark.title = post.title
     bookmark.date = post.date
     bookmark.link = post.link

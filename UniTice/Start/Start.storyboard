@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NVk-Nv-uDP">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Start University Select View Controller-->
+        <!--University Selection View Controller-->
         <scene sceneID="hD4-nz-Qvw">
             <objects>
-                <viewController storyboardIdentifier="StartUniversitySelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OEF-hd-od1" customClass="StartUniversitySelectViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartUniversitySelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OEF-hd-od1" customClass="UniversitySelectionViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yqP-xy-Ifw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnd-o7-FEG">
-                                <rect key="frame" x="0.0" y="225.5" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="192" width="600" height="216"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDT-Jb-lz7" customClass="StartConfirmButton" customModule="UniTice" customModuleProvider="target">
-                                <rect key="frame" x="32" y="595" width="311" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDT-Jb-lz7" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
+                                <rect key="frame" x="32" y="528" width="536" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="fpU-bq-xm7"/>
                                 </constraints>
                                 <state key="normal" title="확인"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uMw-OY-eep">
-                                <rect key="frame" x="32" y="100" width="311" height="92.5"/>
+                                <rect key="frame" x="32" y="90" width="536" height="92.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학교 선택" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDr-e1-qCa">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="38.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="536" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yrX-Ws-LnH">
-                                        <rect key="frame" x="0.0" y="46.5" width="311" height="46"/>
+                                        <rect key="frame" x="0.0" y="46.5" width="536" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지를 받아볼 학교를 선택해 주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIv-Rv-YSo">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="536" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hpO-TD-GTe">
-                                                <rect key="frame" x="0.0" y="18" width="311" height="28"/>
+                                                <rect key="frame" x="0.0" y="18" width="536" height="28"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리 학교가 목록에 없나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8e-rh-C8j">
                                                         <rect key="frame" x="0.0" y="0.0" width="140.5" height="28"/>
@@ -57,7 +58,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1i-KN-Xcw">
-                                                        <rect key="frame" x="148.5" y="0.0" width="162.5" height="28"/>
+                                                        <rect key="frame" x="148.5" y="0.0" width="387.5" height="28"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                         <state key="normal" title="우리에게 알려주세요!"/>
                                                     </button>
@@ -86,7 +87,7 @@
                     <navigationItem key="navigationItem" id="fJg-nk-PGM"/>
                     <connections>
                         <outlet property="confirmButton" destination="QDT-Jb-lz7" id="LTx-XI-Ukk"/>
-                        <outlet property="noneButton" destination="w1i-KN-Xcw" id="1An-qJ-vPv"/>
+                        <outlet property="noticeButton" destination="w1i-KN-Xcw" id="1An-qJ-vPv"/>
                         <outlet property="pickerView" destination="tnd-o7-FEG" id="oXo-iD-18v"/>
                     </connections>
                 </viewController>
@@ -99,52 +100,50 @@
             <objects>
                 <viewController storyboardIdentifier="StartKeywordRegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rDL-L8-DVu" customClass="StartKeywordRegisterViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PXb-Om-z7a">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fpq-Ur-OUI" customClass="StartConfirmButton" customModule="UniTice" customModuleProvider="target">
-                                <rect key="frame" x="118" y="595" width="225" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fpq-Ur-OUI" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
+                                <rect key="frame" x="208" y="528" width="360" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Vgk-yP-YVf"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uUN-zM-2Mo">
-                                <rect key="frame" x="32" y="100" width="311" height="82.5"/>
+                                <rect key="frame" x="32" y="90" width="536" height="82.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키워드 등록" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1G-mp-1Ca">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="38.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="536" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관심 있는 키워드를 등록하세요. 최대 3개까지 등록 가능합니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Zw-vM-xkl">
-                                        <rect key="frame" x="0.0" y="46.5" width="311" height="36"/>
+                                        <rect key="frame" x="0.0" y="46.5" width="536" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pY-T9-AHI" customClass="StartBackButton" customModule="UniTice" customModuleProvider="target">
-                                <rect key="frame" x="32" y="595" width="70" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="fIW-Q9-X4z"/>
-                                </constraints>
-                                <state key="normal" title="뒤로"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wlr-MU-Mtt">
-                                <rect key="frame" x="32" y="208.5" width="311" height="250"/>
+                                <rect key="frame" x="32" y="175" width="536" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="wLW-2t-Veg"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="60" id="zzX-Fm-Mmw" customClass="KeywordCell" customModule="UniTice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="536" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zzX-Fm-Mmw" id="vv9-Ae-HEU">
-                                            <rect key="frame" x="0.0" y="0.0" width="311" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="536" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4L-jF-F5c">
@@ -167,6 +166,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pY-T9-AHI" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
+                                <rect key="frame" x="32" y="528" width="160" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fIW-Q9-X4z"/>
+                                </constraints>
+                                <state key="normal" title="뒤로"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -201,34 +212,44 @@
             <objects>
                 <viewController storyboardIdentifier="StartFinishViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9XB-V8-lJh" customClass="StartFinishViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mwd-6T-FSe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKE-dc-1YR" customClass="StartConfirmButton" customModule="UniTice" customModuleProvider="target">
-                                <rect key="frame" x="118" y="595" width="225" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKE-dc-1YR" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
+                                <rect key="frame" x="208" y="528" width="360" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="pra-0B-5Qc"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJI-Cx-czQ" customClass="StartBackButton" customModule="UniTice" customModuleProvider="target">
-                                <rect key="frame" x="32" y="595" width="70" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJI-Cx-czQ" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
+                                <rect key="frame" x="32" y="528" width="160" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="eYo-me-RFv"/>
                                 </constraints>
                                 <state key="normal" title="뒤로"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GCn-kl-VaB">
-                                <rect key="frame" x="32" y="100" width="311" height="82.5"/>
+                                <rect key="frame" x="32" y="90" width="536" height="82.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="초기 설정 완료" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyo-4a-8aB">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="38.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="536" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록한 정보를 확인해 주세요. 나중에 수정 가능합니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjN-w1-eWJ">
-                                        <rect key="frame" x="0.0" y="46.5" width="311" height="36"/>
+                                        <rect key="frame" x="0.0" y="46.5" width="536" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -236,7 +257,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTQ-zS-SIk">
-                                <rect key="frame" x="32" y="293" width="60" height="20.5"/>
+                                <rect key="frame" x="32" y="259.5" width="60" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="UkI-r0-dsy"/>
                                 </constraints>
@@ -245,7 +266,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키워드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn0-st-Cs3">
-                                <rect key="frame" x="32" y="353.5" width="60" height="20.5"/>
+                                <rect key="frame" x="32" y="320" width="60" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="esg-JE-00H"/>
                                 </constraints>
@@ -254,13 +275,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울과학기술대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P24-DV-KYi">
-                                <rect key="frame" x="108" y="293" width="235" height="20.5"/>
+                                <rect key="frame" x="108" y="259.5" width="460" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="없음" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2x-ri-SdP">
-                                <rect key="frame" x="108" y="353.5" width="235" height="20.5"/>
+                                <rect key="frame" x="108" y="320" width="460" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -307,6 +328,7 @@
                 <navigationController storyboardIdentifier="StartNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="NVk-Nv-uDP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="d6b-0V-r1T">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

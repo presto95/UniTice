@@ -21,7 +21,7 @@ final class Bookmark: Object {
   
   dynamic var link: String = ""
   
-  func incrementIndex() -> Int {
+  var uniqueID: Int {
     return (try! Realm().objects(Bookmark.self).max(ofProperty: "index") as Int? ?? 0) + 1
   }
 }
