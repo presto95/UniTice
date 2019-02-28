@@ -43,7 +43,10 @@ final class SettingTableViewController: UITableViewController {
         self.notificationHasGranted = false
       }
     }
-    NotificationCenter.default.addObserver(self, selector: #selector(didReceiveEnterForegroundNotification(_:)), name: NSNotification.Name("willEnterForeground"), object: nil)
+    NotificationCenter.default
+      .addObserver(self,
+                   selector: #selector(didReceiveEnterForegroundNotification(_:)),
+                   name: NSNotification.Name("willEnterForeground"), object: nil)
   }
   
   deinit {
@@ -67,7 +70,8 @@ final class SettingTableViewController: UITableViewController {
 }
 
 extension SettingTableViewController {
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView,
+                          cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     cell.textLabel?.text = texts[indexPath.section][indexPath.row]
     if indexPath.section == 0 {
@@ -93,7 +97,8 @@ extension SettingTableViewController {
     return 3
   }
   
-  override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+  override func tableView(_ tableView: UITableView,
+                          titleForFooterInSection section: Int) -> String? {
     if section == 0 {
       if switchIsOn {
         return "상단 고정 게시물이 펼쳐진 상태입니다."
@@ -117,10 +122,10 @@ extension SettingTableViewController {
     let row = indexPath.row
     switch indexPath.section {
     case 1 where row == 0:
-      let next = UIViewController.instantiate(from: "Setting", identifier: ChangeUniversityViewController.classNameToString)
+      let next = StoryboardScene.Setting.changeUniversityViewController.instantiate()
       navigationController?.pushViewController(next, animated: true)
     case 1 where row == 1:
-      let next = UIViewController.instantiate(from: "Setting", identifier: KeywordSettingViewController.classNameToString)
+      let next = StoryboardScene.Setting.keywordSettingViewController.instantiate()
       navigationController?.pushViewController(next, animated: true)
     case 1 where row == 2:
       if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -144,7 +149,9 @@ extension SettingTableViewController {
 }
 
 extension SettingTableViewController: MFMailComposeViewControllerDelegate {
-  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+  func mailComposeController(_ controller: MFMailComposeViewController,
+                             didFinishWith result: MFMailComposeResult,
+                             error: Error?) {
     controller.dismiss(animated: true)
   }
 }

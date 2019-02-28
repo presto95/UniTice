@@ -73,7 +73,9 @@ extension BookmarkViewController: UITableViewDelegate {
     return true
   }
   
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView,
+                 commit editingStyle: UITableViewCell.EditingStyle,
+                 forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       if let bookmark = bookmarks?[indexPath.row] {
         User.removeBookmark(bookmark)
@@ -84,14 +86,16 @@ extension BookmarkViewController: UITableViewDelegate {
 }
 
 extension BookmarkViewController: UIViewControllerPreviewingDelegate {
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         viewControllerForLocation location: CGPoint) -> UIViewController? {
     if let indexPath = tableView.indexPathForRow(at: location) {
       return safariViewController(at: indexPath.row)
     }
     return nil
   }
   
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit
+    viewControllerToCommit: UIViewController) {
     present(viewControllerToCommit, animated: true, completion: nil)
   }
 }

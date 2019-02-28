@@ -12,7 +12,8 @@ final class MainNoticeHeaderView: UIView {
   
   var state: Bool = false {
     didSet {
-      foldButton.setImage(state ? UIImage(named: "arrow_down") : UIImage(named: "arrow_up"), for: [])
+      foldButton.setImage(state ? UIImage(named: "arrow_down") : UIImage(named: "arrow_up"),
+                          for: [])
     }
   }
   

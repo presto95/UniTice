@@ -7,7 +7,7 @@ excluded:
   - Pods/
   - UniTice/Model
   - UniTice/SwiftGens
-
+  - UniTice/Supporting Files/AppDelegate.swift
 line_length:
   warning: 99
   error: 120

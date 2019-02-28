@@ -41,5 +41,5 @@ extension String {
 }
 
 extension String.Encoding {
-  static let eucKR = String.Encoding.init(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422))
+  static let eucKR = String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422))
 }

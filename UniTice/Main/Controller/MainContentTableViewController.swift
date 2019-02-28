@@ -48,14 +48,17 @@ final class MainContentTableViewController: UITableViewController {
     return universityModel?.categories[categoryIndex] ?? ("", "")
   }
   
-  private lazy var footerRefreshView = FooterRefreshView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
+  private lazy var footerRefreshView
+    = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
   
   override func viewDidLoad() {
     super.viewDidLoad()
     title = category.description
     registerForPreviewing(with: self, sourceView: tableView)
     refreshControl = UIRefreshControl()
-    refreshControl?.addTarget(self, action: #selector(didRefreshControlActivate(_:)), for: .valueChanged)
+    refreshControl?.addTarget(self,
+                              action: #selector(didRefreshControlActivate(_:)),
+                              for: .valueChanged)
     tableView.tableFooterView = footerRefreshView
     tableView.backgroundColor = .groupTableViewBackground
     tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
@@ -78,24 +81,25 @@ final class MainContentTableViewController: UITableViewController {
   
   private func requestPosts() {
     footerRefreshView.activate()
-    universityModel?.requestPosts(inCategory: category, inPage: page, searchText: "") { posts, error in
-      if let error = error {
-        UIAlertController.presentErrorAlert(error, to: self)
-      }
-      guard let posts = posts else { return }
-      if self.page == 1 {
-        self.posts.append(contentsOf: posts)
-      } else {
-        if posts.first?.title == self.fixedPosts.first?.title {
-          self.posts.append(contentsOf: posts.filter { $0.number != 0 })
-        } else {
-          self.posts.append(contentsOf: posts)
+    universityModel?
+      .requestPosts(inCategory: category, inPage: page, searchText: "") { posts, error in
+        if let error = error {
+          UIAlertController.presentErrorAlert(error, to: self)
         }
-      }
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-        self.footerRefreshView.deactivate()
-      }
+        guard let posts = posts else { return }
+        if self.page == 1 {
+          self.posts.append(contentsOf: posts)
+        } else {
+          if posts.first?.title == self.fixedPosts.first?.title {
+            self.posts.append(contentsOf: posts.filter { $0.number != 0 })
+          } else {
+            self.posts.append(contentsOf: posts)
+          }
+        }
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+          self.footerRefreshView.deactivate()
+        }
     }
   }
   
@@ -125,7 +129,8 @@ extension MainContentTableViewController {
 }
 
 extension MainContentTableViewController {
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView,
+                          cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
     if posts.isEmpty {
       tableView.allowsSelection = false
@@ -177,9 +182,12 @@ extension MainContentTableViewController {
     present(safariViewController(url: fullLink), animated: true)
   }
   
-  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+  override func tableView(_ tableView: UITableView,
+                          viewForHeaderInSection section: Int) -> UIView? {
     if section == 0 {
-      guard let headerView = UIView.instantiate(fromXib: "MainNoticeHeaderView") as? MainNoticeHeaderView else { return nil }
+      guard let headerView = UIView
+        .instantiate(fromXib: MainNoticeHeaderView.classNameToString) as? MainNoticeHeaderView
+        else { return nil }
       headerView.state = isFixedNoticeFolded
       headerView.foldingHandler = {
         self.isFixedNoticeFolded = !self.isFixedNoticeFolded
@@ -190,7 +198,8 @@ extension MainContentTableViewController {
     return nil
   }
   
-  override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+  override func tableView(_ tableView: UITableView,
+                          viewForFooterInSection section: Int) -> UIView? {
     if section == 0 {
       let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 5))
       footerView.backgroundColor = .main
@@ -199,14 +208,16 @@ extension MainContentTableViewController {
     return nil
   }
   
-  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+  override func tableView(_ tableView: UITableView,
+                          heightForHeaderInSection section: Int) -> CGFloat {
     if section == 0 {
       return 48
     }
     return .leastNonzeroMagnitude
   }
   
-  override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+  override func tableView(_ tableView: UITableView,
+                          heightForFooterInSection section: Int) -> CGFloat {
     if section == 0 {
       return 5
     }
@@ -215,7 +226,8 @@ extension MainContentTableViewController {
 }
 
 extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         viewControllerForLocation location: CGPoint) -> UIViewController? {
     if let indexPath = tableView.indexPathForRow(at: location) {
       let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
       let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
@@ -228,7 +240,8 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     return nil
   }
   
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         commit viewControllerToCommit: UIViewController) {
     present(viewControllerToCommit, animated: true, completion: nil)
   }
 }

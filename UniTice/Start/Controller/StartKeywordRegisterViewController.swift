@@ -10,7 +10,6 @@ import UIKit
 
 import ReactorKit
 import RxCocoa
-import RxDataSources
 import RxGesture
 import RxSwift
 import SnapKit
@@ -18,10 +17,6 @@ import SnapKit
 final class StartKeywordRegisterViewController: UIViewController, StoryboardView {
   
   var disposeBag = DisposeBag()
-  
-  //private var viewModel = StartKeywordRegisterViewModel()
-  
-  //private var keywords: [String] = []
   
   @IBOutlet private weak var tableView: UITableView!
   
@@ -31,8 +26,13 @@ final class StartKeywordRegisterViewController: UIViewController, StoryboardView
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    //bindUI()
+    setup()
+  }
+  
+  func bind(reactor: KeywordRegisterViewReactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindUI()
   }
   
   private func setup() {
@@ -41,9 +41,30 @@ final class StartKeywordRegisterViewController: UIViewController, StoryboardView
     tableView.rowHeight = 60
     tableView.sectionHeaderHeight = 60
   }
+}
+
+// MARK: - Reactor Binding
+
+private extension StartKeywordRegisterViewController {
   
-  func bind(reactor: KeywordRegisterViewReactor) {
+  func bindAction(_ reactor: KeywordRegisterViewReactor) {
+    tableView.rx.itemDeleted.asObservable()
+      .map { Reactor.Action.removeKeyword(index: $0.row) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    confirmButton.rx.tap
+      .map { Reactor.Action.touchUpConfirmButton }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    backButton.rx.tap
+      .map { Reactor.Action.touchUpBackButton }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+  
+  func bindState(_ reactor: KeywordRegisterViewReactor) {
     reactor.state.map { $0.keywords }
+      .distinctUntilChanged()
       .bind(to: tableView.rx
         .items(cellIdentifier: "cell", cellType: KeywordCell.self)) { _, element, cell in
           if let keyword = element {
@@ -51,7 +72,35 @@ final class StartKeywordRegisterViewController: UIViewController, StoryboardView
           }
       }
       .disposed(by: disposeBag)
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel>
+    reactor.state.map { $0.isConfirmButtonSelected }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        InitialInfo.shared.keywords = reactor.currentState.keywords.compactMap { $0 }
+        let finishViewController = StoryboardScene.Start.startFinishViewController.instantiate()
+        finishViewController.reactor = FinishViewReactor()
+        finishViewController.push(at: self)
+      })
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isBackButtonSelected }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  func bindUI() {
+    view.rx.tapGesture()
+      .when(.recognized)
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.view.endEditing(true)
+      })
+      .disposed(by: disposeBag)
   }
 }
 

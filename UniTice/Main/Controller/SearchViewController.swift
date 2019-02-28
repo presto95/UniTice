@@ -13,7 +13,8 @@ import SnapKit
 
 final class SearchViewController: UIViewController {
   
-  private lazy var footerRefreshView = FooterRefreshView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 32))
+  private lazy var footerRefreshView
+    = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
   
   private let universityModel = UniversityModel.shared.universityModel
   
@@ -65,17 +66,18 @@ final class SearchViewController: UIViewController {
   
   private func requestPosts(searchText text: String) {
     footerRefreshView.activate()
-    universityModel.requestPosts(inCategory: category, inPage: page, searchText: text) { posts, error in
-      if let error = error {
-        UIAlertController.presentErrorAlert(error, to: self)
-        return
-      }
-      guard let posts = posts else { return }
-      self.posts.append(contentsOf: posts.filter { $0.number != 0 })
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-        self.footerRefreshView.deactivate()
-      }
+    universityModel
+      .requestPosts(inCategory: category, inPage: page, searchText: text) { posts, error in
+        if let error = error {
+          UIAlertController.presentErrorAlert(error, to: self)
+          return
+        }
+        guard let posts = posts else { return }
+        self.posts.append(contentsOf: posts.filter { $0.number != 0 })
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+          self.footerRefreshView.deactivate()
+        }
     }
   }
   
@@ -133,7 +135,8 @@ extension SearchViewController {
 }
 
 extension SearchViewController: UIViewControllerPreviewingDelegate {
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         viewControllerForLocation location: CGPoint) -> UIViewController? {
     if let indexPath = tableView.indexPathForRow(at: location) {
       let post = posts[indexPath.row]
       let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
@@ -145,7 +148,8 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
     return nil
   }
   
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         commit viewControllerToCommit: UIViewController) {
     present(viewControllerToCommit, animated: true, completion: nil)
   }
 }

@@ -65,25 +65,23 @@ private extension UniversitySelectionViewController {
     // 확인 버튼 눌렸는지에 대한 상태 바인딩
     reactor.state.map { $0.isConfirmButtonSelected }
       .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] isSelected in
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        if isSelected {
-          let keywordRegisterViewController
-            = StoryboardScene.Start.startKeywordRegisterViewController.instantiate()
-          keywordRegisterViewController.reactor = KeywordRegisterReactor()
-          keywordRegisterViewController.push(at: self)
-        }
+        let keywordRegisterViewController
+          = StoryboardScene.Start.startKeywordRegisterViewController.instantiate()
+        keywordRegisterViewController.reactor = KeywordRegisterViewReactor()
+        keywordRegisterViewController.push(at: self)
       })
       .disposed(by: disposeBag)
     // 알려주세요 버튼 눌렸는지에 대한 상태 바인딩
     reactor.state.map { $0.isInfoButtonSelected }
       .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] isSelected in
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        if isSelected {
-          let mailComposer = self.formMailComposeViewController()
-          self.present(mailComposer, animated: true, completion: nil)
-        }
+        let mailComposer = self.formMailComposeViewController()
+        self.present(mailComposer, animated: true, completion: nil)
       })
       .disposed(by: disposeBag)
   }

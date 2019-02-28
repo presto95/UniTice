@@ -9,7 +9,9 @@
 import UIKit
 
 extension UIAlertController {
-  static func alert(title: String?, message: String?, style: UIAlertController.Style = .alert) -> UIAlertController {
+  static func alert(title: String?,
+                    message: String?,
+                    style: UIAlertController.Style = .alert) -> UIAlertController {
     let alert = UIAlertController(title: title, message: message, preferredStyle: style)
     return alert
   }
@@ -21,7 +23,9 @@ extension UIAlertController {
   }
   
   @discardableResult
-  func action(title: String?, style: UIAlertAction.Style = .default, handler: ((UIAlertAction, [UITextField]?) -> Void)? = nil) -> UIAlertController {
+  func action(title: String?,
+              style: UIAlertAction.Style = .default,
+              handler: ((UIAlertAction, [UITextField]?) -> Void)? = nil) -> UIAlertController {
     guard let textFields = textFields else {
       let action = UIAlertAction(title: title, style: style) { handler?($0, nil) }
       addAction(action)
@@ -32,7 +36,9 @@ extension UIAlertController {
     return self
   }
   
-  func present(to viewController: UIViewController?, animated: Bool = true, handler: (() -> Void)? = nil) {
+  func present(to viewController: UIViewController?,
+               animated: Bool = true,
+               handler: (() -> Void)? = nil) {
     DispatchQueue.main.async {
       viewController?.present(self, animated: animated, completion: handler)
     }

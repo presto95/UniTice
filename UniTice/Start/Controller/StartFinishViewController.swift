@@ -8,13 +8,15 @@
 
 import UIKit
 
-final class StartFinishViewController: UIViewController {
+import ReactorKit
+import RxCocoa
+import RxSwift
+
+final class StartFinishViewController: UIViewController, StoryboardView {
   
-  @IBOutlet weak var universityLabel: UILabel! {
-    didSet {
-      universityLabel.text = InitialInfo.shared.university.rawValue
-    }
-  }
+  var disposeBag: DisposeBag = DisposeBag()
+  
+  @IBOutlet weak var universityLabel: UILabel!
   
   @IBOutlet weak var keywordLabel: UILabel! {
     didSet {
@@ -35,32 +37,64 @@ final class StartFinishViewController: UIViewController {
     }
   }
   
-  @IBOutlet private weak var confirmButton: StartConfirmButton! {
-    didSet {
-      confirmButton.addTarget(self, action: #selector(confirmButtonDidTap(_:)), for: .touchUpInside)
-    }
+  @IBOutlet private weak var confirmButton: UTButton!
+  
+  @IBOutlet private weak var backButton: UTButton!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
   }
   
-  @IBOutlet private weak var backButton: StartBackButton! {
-    didSet {
-      backButton.addTarget(self, action: #selector(backButtonDidTap(_:)), for: .touchUpInside)
-    }
+  func bind(reactor: FinishViewReactor) {
+    confirmButton.rx.tap
+      .map { Reactor.Action.touchUpConfirmButton }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    backButton.rx.tap
+      .map { Reactor.Action.touchUpBackButton }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isConfirmButtonSelected }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        let mainViewController = StoryboardScene.Main.mainNavigationController.instantiate()
+        mainViewController.modalTransitionStyle = .flipHorizontal
+        mainViewController.present(to: self)
+      })
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isBackButtonSelected }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
   }
   
-  @objc private func confirmButtonDidTap(_ sender: UIButton) {
-    let university = InitialInfo.shared.university.rawValue
-    let keywords = InitialInfo.shared.keywords
-    let user = User()
-    user.university = university
-    user.keywords.append(objectsIn: keywords)
-    User.addUser(user)
-    UniversityModel.shared.generateModel()
-    let next = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
-    next.modalTransitionStyle = .flipHorizontal
-    present(next, animated: true, completion: nil)
+  private func setup() {
+    universityLabel.text = InitialInfo.shared.university.rawValue
+    confirmButton.type = .next
+    backButton.type = .back
   }
   
-  @objc private func backButtonDidTap(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
-  }
+//  @objc private func confirmButtonDidTap(_ sender: UIButton) {
+//    let university = InitialInfo.shared.university.rawValue
+//    let keywords = InitialInfo.shared.keywords
+//    let user = User()
+//    user.university = university
+//    user.keywords.append(objectsIn: keywords)
+//    User.addUser(user)
+//    UniversityModel.shared.generateModel()
+//    let next = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
+//    next.modalTransitionStyle = .flipHorizontal
+//    present(next, animated: true, completion: nil)
+//  }
+//
+//  @objc private func backButtonDidTap(_ sender: UIButton) {
+//    navigationController?.popViewController(animated: true)
+//  }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		190D98FD21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */; };
+		190728412227E49400E422C0 /* FinishViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190728402227E49400E422C0 /* FinishViewReactor.swift */; };
 		191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B6470219728CC005E5CE6 /* AppDelegate.swift */; };
 		191B6476219728CC005E5CE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191B6474219728CC005E5CE6 /* Main.storyboard */; };
 		191B6478219728CD005E5CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191B6477219728CD005E5CE6 /* Assets.xcassets */; };
@@ -122,7 +122,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordRegisterViewModel.swift; sourceTree = "<group>"; };
+		190728402227E49400E422C0 /* FinishViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewReactor.swift; sourceTree = "<group>"; };
 		191B646D219728CC005E5CE6 /* UniTice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniTice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191B6470219728CC005E5CE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		191B6475219728CC005E5CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -326,7 +326,6 @@
 				191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */,
 				1930D34E21BFFCD700424FBF /* Start.storyboard */,
 				19ED808521CB786700BA6529 /* View */,
-				1988FCBE21EB2FBA0006A9DF /* ViewModel */,
 				19ED808421CB786100BA6529 /* Controller */,
 			);
 			path = Start;
@@ -436,14 +435,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		1988FCBE21EB2FBA0006A9DF /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				190D98FC21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		19C6BBBA2197F8C6002FC39C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +512,7 @@
 				19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */,
 				19528CF22227A51E00A34FFF /* UniversitySelectionViewReactor.swift */,
 				19528CF42227B66D00A34FFF /* KeywordRegisterReactor.swift */,
+				190728402227E49400E422C0 /* FinishViewReactor.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -799,6 +791,7 @@
 				19C6BBBC2197F8D4002FC39C /* University.swift in Sources */,
 				191B6471219728CC005E5CE6 /* AppDelegate.swift in Sources */,
 				195B993A21DB448100367456 /* KAIST.swift in Sources */,
+				190728412227E49400E422C0 /* FinishViewReactor.swift in Sources */,
 				198DC0AD21D343BF00AF4801 /* SearchViewController.swift in Sources */,
 				197DE94621E77AAA005DCECB /* Bookmark.swift in Sources */,
 				197DE94821E77B32005DCECB /* UniversityModel.swift in Sources */,
@@ -863,7 +856,6 @@
 				195B995821E0DDFD00367456 /* 숙명여자대학교.swift in Sources */,
 				198DC0B121D34FC300AF4801 /* 서울대학교.swift in Sources */,
 				198DC0BF21D35A9000AF4801 /* 경북대학교.swift in Sources */,
-				190D98FD21EB5EAD0031DFC5 /* StartKeywordRegisterViewModel.swift in Sources */,
 				19528CE82226E75700A34FFF /* Storyboard.swift in Sources */,
 				193D654521E1F4F800FAB1DE /* 광운대학교.swift in Sources */,
 				193D655121E2E64A00FAB1DE /* 한국예술종합학교.swift in Sources */,

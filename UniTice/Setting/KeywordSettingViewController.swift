@@ -15,7 +15,9 @@ final class KeywordSettingViewController: UIViewController {
   private var keywords: [String] = []
   
   private lazy var addButton: UIBarButtonItem! = {
-    let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonDidTap(_:)))
+    let button = UIBarButtonItem(barButtonSystemItem: .add,
+                                 target: self,
+                                 action: #selector(addButtonDidTap(_:)))
     return button
   }()
   
@@ -88,7 +90,9 @@ extension KeywordSettingViewController: UITableViewDelegate {
     return true
   }
   
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView,
+                 commit editingStyle: UITableViewCell.EditingStyle,
+                 forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let keyword = keywords[indexPath.row]
       User.removeKeyword(keyword)

@@ -1,5 +1,5 @@
 //
-//  KeywordRegisterReactor.swift
+//  FinishViewReactor.swift
 //  UniTice
 //
 //  Created by Presto on 28/02/2019.
@@ -10,17 +10,13 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-final class KeywordRegisterViewReactor: Reactor {
+final class FinishViewReactor: Reactor {
   
   enum Action {
     
     case touchUpConfirmButton
     
     case touchUpBackButton
-    
-    case addKeyword(String?)
-    
-    case removeKeyword(index: Int)
   }
   
   enum Mutation {
@@ -28,15 +24,9 @@ final class KeywordRegisterViewReactor: Reactor {
     case setConfirmButtonSelection(Bool)
     
     case setBackButtonSelection(Bool)
-    
-    case addKeyword(String?)
-    
-    case removeKeyword(index: Int)
   }
   
   struct State {
-    
-    var keywords: [String?] = []
     
     var isConfirmButtonSelected: Bool = false
     
@@ -57,10 +47,6 @@ final class KeywordRegisterViewReactor: Reactor {
         Observable.just(Mutation.setBackButtonSelection(true)),
         Observable.just(Mutation.setBackButtonSelection(false))
         ])
-    case let .addKeyword(keyword):
-      return Observable.just(Mutation.addKeyword(keyword))
-    case let .removeKeyword(index):
-      return Observable.just(Mutation.removeKeyword(index: index))
     }
   }
   
@@ -71,10 +57,6 @@ final class KeywordRegisterViewReactor: Reactor {
       state.isConfirmButtonSelected = isConfirmButtonSelected
     case let .setBackButtonSelection(isBackButtonSelected):
       state.isBackButtonSelected = isBackButtonSelected
-    case let .addKeyword(keyword):
-      state.keywords.append(keyword)
-    case let .removeKeyword(index):
-      state.keywords.remove(at: index)
     }
     return state
   }
