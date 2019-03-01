@@ -24,6 +24,8 @@ final class FinishViewReactor: Reactor {
     case setConfirmButtonSelection(Bool)
     
     case setBackButtonSelection(Bool)
+    
+    case saveInitialData
   }
   
   struct State {
@@ -40,6 +42,7 @@ final class FinishViewReactor: Reactor {
     case .touchUpConfirmButton:
       return Observable.concat([
         Observable.just(Mutation.setConfirmButtonSelection(true)),
+        saveUser(),
         Observable.just(Mutation.setConfirmButtonSelection(false))
         ])
     case .touchUpBackButton:
@@ -57,7 +60,26 @@ final class FinishViewReactor: Reactor {
       state.isConfirmButtonSelected = isConfirmButtonSelected
     case let .setBackButtonSelection(isBackButtonSelected):
       state.isBackButtonSelected = isBackButtonSelected
+    case .saveInitialData:
+      break
     }
     return state
+  }
+}
+
+// MARK: - Private Method
+
+private extension FinishViewReactor {
+  
+  func saveUser() -> Observable<Mutation> {
+    return Observable
+      .zip(InitialInfo.shared.university, InitialInfo.shared.keywords) { university, keywords in
+        let user = User()
+        user.university = university.rawValue
+        user.keywords.append(objectsIn: keywords)
+        User.addUser(user)
+        UniversityModel.shared.generateModel()
+        return .saveInitialData
+    }
   }
 }

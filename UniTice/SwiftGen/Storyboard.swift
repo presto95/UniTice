@@ -42,9 +42,9 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Start.self)
 
-    internal static let startFinishViewController = SceneType<StartFinishViewController>(storyboard: Start.self, identifier: "StartFinishViewController")
+    internal static let startFinishViewController = SceneType<FinishViewController>(storyboard: Start.self, identifier: "StartFinishViewController")
 
-    internal static let startKeywordRegisterViewController = SceneType<StartKeywordRegisterViewController>(storyboard: Start.self, identifier: "StartKeywordRegisterViewController")
+    internal static let startKeywordRegisterViewController = SceneType<KeywordRegisterViewController>(storyboard: Start.self, identifier: "StartKeywordRegisterViewController")
 
     internal static let startNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Start.self, identifier: "StartNavigationController")
 

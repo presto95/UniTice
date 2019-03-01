@@ -12,6 +12,7 @@ import UIKit
 import ReactorKit
 import RxCocoa
 import RxSwift
+import Then
 
 final class UniversitySelectionViewController: UIViewController, StoryboardView {
   
@@ -25,7 +26,7 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    confirmButton.type = .next
+    setup()
   }
   
   func bind(reactor: UniversitySelectionViewReactor) {
@@ -34,13 +35,8 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
     bindUI()
   }
   
-  private func formMailComposeViewController() -> UIViewController {
-    let mailComposer = MFMailComposeViewController()
-    mailComposer.mailComposeDelegate = self
-    mailComposer.setToRecipients(["yoohan95@gmail.com"])
-    mailComposer.setSubject("[다연결] 우리 학교가 목록에 없어요.")
-    mailComposer.setMessageBody("\n\n\n\n\n\n피드백 감사합니다.", isHTML: false)
-    return mailComposer
+  private func setup() {
+    confirmButton.type = .next
   }
 }
 
@@ -48,6 +44,7 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
 
 private extension UniversitySelectionViewController {
   
+  /// 리액터 액션 바인딩.
   func bindAction(_ reactor: UniversitySelectionViewReactor) {
     // 확인 버튼 바인딩
     confirmButton.rx.tap
@@ -61,6 +58,7 @@ private extension UniversitySelectionViewController {
       .disposed(by: disposeBag)
   }
   
+  /// 리액터 상태 바인딩.
   func bindState(_ reactor: UniversitySelectionViewReactor) {
     // 확인 버튼 눌렸는지에 대한 상태 바인딩
     reactor.state.map { $0.isConfirmButtonSelected }
@@ -86,6 +84,7 @@ private extension UniversitySelectionViewController {
       .disposed(by: disposeBag)
   }
   
+  /// UI 바인딩.
   func bindUI() {
     // 피커 뷰 데이터 소스 바인딩
     Observable.just(University.allCases)
@@ -98,7 +97,7 @@ private extension UniversitySelectionViewController {
       .map { $0.first }
       .subscribe(onNext: { university in
         if let university = university {
-          InitialInfo.shared.university = university
+          InitialInfo.shared.university.onNext(university)
         }
       })
       .disposed(by: disposeBag)
@@ -112,5 +111,21 @@ extension UniversitySelectionViewController: MFMailComposeViewControllerDelegate
   func mailComposeController(_ controller: MFMailComposeViewController,
                              didFinishWith result: MFMailComposeResult, error: Error?) {
     controller.dismiss(animated: true, completion: nil)
+  }
+}
+
+// MARK: - Private Method
+
+private extension UniversitySelectionViewController {
+  
+  /// 메일 작성 뷰 컨트롤러 만들기.
+  func formMailComposeViewController() -> UIViewController {
+    let mailComposer = MFMailComposeViewController().then {
+      $0.mailComposeDelegate = self
+      $0.setToRecipients(["yoohan95@gmail.com"])
+      $0.setSubject("[다연결] 우리 학교가 목록에 없어요.")
+      $0.setMessageBody("\n\n\n\n\n\n피드백 감사합니다.", isHTML: false)
+    }
+    return mailComposer
   }
 }

@@ -8,7 +8,13 @@
 
 import UIKit
 
-final class StartKeywordHeaderView: UIView {
+import ReactorKit
+import RxCocoa
+import RxSwift
+
+final class KeywordRegisterHeaderView: UIView, StoryboardView {
+  
+  var disposeBag: DisposeBag = DisposeBag()
   
   var addButtonDidTapHandler: ((String) -> Void)?
   
@@ -25,6 +31,10 @@ final class StartKeywordHeaderView: UIView {
     }
   }
   
+  func bind(reactor: KeywordRegisterHeaderViewReactor) {
+    
+  }
+  
   @objc private func addButtonDidTap(_ sender: UIButton) {
     if let text = keywordTextField.text {
       guard !text.isEmpty else { return }
@@ -34,7 +44,7 @@ final class StartKeywordHeaderView: UIView {
   }
 }
 
-extension StartKeywordHeaderView: UITextFieldDelegate {
+extension KeywordRegisterHeaderView: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true

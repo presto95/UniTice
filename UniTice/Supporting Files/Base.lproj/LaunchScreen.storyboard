@@ -19,15 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="hoQ-Ru-Hb7">
-                                <rect key="frame" x="0.0" y="167" width="375" height="333.5"/>
+                                <rect key="frame" x="94" y="77.5" width="187.5" height="512"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.5" id="8Xh-hN-QYK"/>
                             <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mxk-Wv-ISA"/>
                             <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sv7-P2-pTh"/>
-                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="vxV-wV-CVb"/>
+                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="vxV-wV-CVb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -8,8 +8,14 @@
 
 import UIKit
 
+import ReactorKit
+import RxCocoa
+import RxSwift
+
 @IBDesignable
-final class KeywordCell: UITableViewCell {
+final class KeywordCell: UITableViewCell, StoryboardView {
+  
+  var disposeBag: DisposeBag = DisposeBag()
   
   @IBOutlet private weak var keywordLabel: UILabel!
   
@@ -18,6 +24,10 @@ final class KeywordCell: UITableViewCell {
     keywordLabel.layer.cornerRadius = keywordLabel.bounds.height / 2
     keywordLabel.layer.borderColor = UIColor.main.cgColor
     keywordLabel.layer.borderWidth = 1
+  }
+  
+  func bind(reactor: KeywordCellReactor) {
+    
   }
   
   func setKeyword(_ keyword: String) {

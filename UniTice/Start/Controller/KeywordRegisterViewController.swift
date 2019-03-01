@@ -14,7 +14,7 @@ import RxGesture
 import RxSwift
 import SnapKit
 
-final class StartKeywordRegisterViewController: UIViewController, StoryboardView {
+final class KeywordRegisterViewController: UIViewController, StoryboardView {
   
   var disposeBag = DisposeBag()
   
@@ -45,10 +45,10 @@ final class StartKeywordRegisterViewController: UIViewController, StoryboardView
 
 // MARK: - Reactor Binding
 
-private extension StartKeywordRegisterViewController {
+private extension KeywordRegisterViewController {
   
   func bindAction(_ reactor: KeywordRegisterViewReactor) {
-    tableView.rx.itemDeleted.asObservable()
+    tableView.rx.itemDeleted
       .map { Reactor.Action.removeKeyword(index: $0.row) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -77,7 +77,7 @@ private extension StartKeywordRegisterViewController {
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        InitialInfo.shared.keywords = reactor.currentState.keywords.compactMap { $0 }
+        InitialInfo.shared.keywords.onNext(reactor.currentState.keywords.compactMap { $0 })
         let finishViewController = StoryboardScene.Start.startFinishViewController.instantiate()
         finishViewController.reactor = FinishViewReactor()
         finishViewController.push(at: self)
@@ -139,7 +139,9 @@ private extension StartKeywordRegisterViewController {
 //    return true
 //  }
 //
-//  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//  func tableView(_ tableView: UITableView,
+//                 commit editingStyle: UITableViewCell.EditingStyle,
+//                 forRowAt indexPath: IndexPath) {
 //    if editingStyle == .delete {
 //      keywords.remove(at: indexPath.row)
 //      tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -169,7 +171,8 @@ private extension StartKeywordRegisterViewController {
 //      .subscribe(onNext: { [weak self] _ in
 //        guard let `self` = self else { return }
 //        InitialInfo.shared.keywords = self.keywords
-//        let next = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
+//        let next
+//          = UIViewController.instantiate(from: "Start", identifier: StartFinishViewController.classNameToString)
 //        self.navigationController?.pushViewController(next, animated: true)
 //      })
 //      .disposed(by: disposeBag)

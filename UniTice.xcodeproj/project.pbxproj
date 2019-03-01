@@ -93,21 +93,21 @@
 		19A7F86921DA5FDE005E1E6D /* 한국외국어대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7F86821DA5FDE005E1E6D /* 한국외국어대학교.swift */; };
 		19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A88DC121CBC65400A3F81C /* InitialInfo.swift */; };
 		19AB910121D21929000CB844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB910021D21929000CB844 /* User.swift */; };
+		19AEA87222299D4000D9515F /* KeywordRegisterHeaderViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AEA87122299D4000D9515F /* KeywordRegisterHeaderViewReactor.swift */; };
+		19AEA87422299D8C00D9515F /* KeywordCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AEA87322299D8C00D9515F /* KeywordCellReactor.swift */; };
 		19AF276621983127009488C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF276521983127009488C8 /* Post.swift */; };
 		19AF276921983A85009488C8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 19AF276821983A85009488C8 /* .swiftlint.yml */; };
 		19C6BBBC2197F8D4002FC39C /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C6BBBB2197F8D4002FC39C /* University.swift */; };
 		19ED806F21CA5FA000BA6529 /* 서울과학기술대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED806E21CA5FA000BA6529 /* 서울과학기술대학교.swift */; };
 		19ED807521CA63CB00BA6529 /* UniversitySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807421CA63CB00BA6529 /* UniversitySelectionViewController.swift */; };
-		19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */; };
-		19ED807921CA63DC00BA6529 /* StartFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */; };
-		19ED807B21CB63E600BA6529 /* StartConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */; };
+		19ED807721CA63D700BA6529 /* KeywordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807621CA63D700BA6529 /* KeywordRegisterViewController.swift */; };
+		19ED807921CA63DC00BA6529 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807821CA63DC00BA6529 /* FinishViewController.swift */; };
 		19ED807D21CB67C400BA6529 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807C21CB67C400BA6529 /* UIViewController+.swift */; };
 		19ED807F21CB6A8100BA6529 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED807E21CB6A8100BA6529 /* NSObject+.swift */; };
-		19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808021CB6E9400BA6529 /* StartBackButton.swift */; };
 		19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808221CB72D800BA6529 /* KeywordCell.swift */; };
-		19ED808721CB78B700BA6529 /* StartKeywordHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19ED808621CB78B700BA6529 /* StartKeywordHeaderView.xib */; };
+		19ED808721CB78B700BA6529 /* KeywordRegisterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19ED808621CB78B700BA6529 /* KeywordRegisterHeaderView.xib */; };
 		19ED808921CB7C7600BA6529 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808821CB7C7600BA6529 /* UIView+.swift */; };
-		19ED808B21CB7CF400BA6529 /* StartKeywordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808A21CB7CF400BA6529 /* StartKeywordHeaderView.swift */; };
+		19ED808B21CB7CF400BA6529 /* KeywordRegisterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED808A21CB7CF400BA6529 /* KeywordRegisterHeaderView.swift */; };
 		8992C80A88030DEB544A8F15 /* Pods_UniTice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72581DA59CEA8965CF3C2034 /* Pods_UniTice.framework */; };
 /* End PBXBuildFile section */
 
@@ -215,21 +215,21 @@
 		19A7F86821DA5FDE005E1E6D /* 한국외국어대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "한국외국어대학교.swift"; sourceTree = "<group>"; };
 		19A88DC121CBC65400A3F81C /* InitialInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfo.swift; sourceTree = "<group>"; };
 		19AB910021D21929000CB844 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		19AEA87122299D4000D9515F /* KeywordRegisterHeaderViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterHeaderViewReactor.swift; sourceTree = "<group>"; };
+		19AEA87322299D8C00D9515F /* KeywordCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCellReactor.swift; sourceTree = "<group>"; };
 		19AF276521983127009488C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		19AF276821983A85009488C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		19C6BBBB2197F8D4002FC39C /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
 		19ED806E21CA5FA000BA6529 /* 서울과학기술대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "서울과학기술대학교.swift"; sourceTree = "<group>"; };
 		19ED807421CA63CB00BA6529 /* UniversitySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversitySelectionViewController.swift; sourceTree = "<group>"; };
-		19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordRegisterViewController.swift; sourceTree = "<group>"; };
-		19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartFinishViewController.swift; sourceTree = "<group>"; };
-		19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartConfirmButton.swift; sourceTree = "<group>"; };
+		19ED807621CA63D700BA6529 /* KeywordRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterViewController.swift; sourceTree = "<group>"; };
+		19ED807821CA63DC00BA6529 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
 		19ED807C21CB67C400BA6529 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		19ED807E21CB6A8100BA6529 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
-		19ED808021CB6E9400BA6529 /* StartBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBackButton.swift; sourceTree = "<group>"; };
 		19ED808221CB72D800BA6529 /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
-		19ED808621CB78B700BA6529 /* StartKeywordHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartKeywordHeaderView.xib; sourceTree = "<group>"; };
+		19ED808621CB78B700BA6529 /* KeywordRegisterHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordRegisterHeaderView.xib; sourceTree = "<group>"; };
 		19ED808821CB7C7600BA6529 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
-		19ED808A21CB7CF400BA6529 /* StartKeywordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartKeywordHeaderView.swift; sourceTree = "<group>"; };
+		19ED808A21CB7CF400BA6529 /* KeywordRegisterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterHeaderView.swift; sourceTree = "<group>"; };
 		44803E144585D9995DBF0F72 /* Pods-UniTice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.release.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.release.xcconfig"; sourceTree = "<group>"; };
 		55B681C006DAD892F87CBBFF /* Pods-UniTice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.debug.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.debug.xcconfig"; sourceTree = "<group>"; };
 		72581DA59CEA8965CF3C2034 /* Pods_UniTice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniTice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -323,8 +323,8 @@
 		1930D34C21BFFC9000424FBF /* Start */ = {
 			isa = PBXGroup;
 			children = (
-				191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */,
 				1930D34E21BFFCD700424FBF /* Start.storyboard */,
+				19AEA87022299CF400D9515F /* Reactor */,
 				19ED808521CB786700BA6529 /* View */,
 				19ED808421CB786100BA6529 /* Controller */,
 			);
@@ -429,10 +429,23 @@
 		196499A32197F1F500BEE6C1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				191B6479219728CD005E5CE6 /* LaunchScreen.storyboard */,
 				191B6470219728CC005E5CE6 /* AppDelegate.swift */,
 				191B6477219728CD005E5CE6 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19AEA87022299CF400D9515F /* Reactor */ = {
+			isa = PBXGroup;
+			children = (
+				19528CF22227A51E00A34FFF /* UniversitySelectionViewReactor.swift */,
+				19528CF42227B66D00A34FFF /* KeywordRegisterReactor.swift */,
+				190728402227E49400E422C0 /* FinishViewReactor.swift */,
+				19AEA87122299D4000D9515F /* KeywordRegisterHeaderViewReactor.swift */,
+				19AEA87322299D8C00D9515F /* KeywordCellReactor.swift */,
+			);
+			path = Reactor;
 			sourceTree = "<group>";
 		};
 		19C6BBBA2197F8C6002FC39C /* Model */ = {
@@ -508,11 +521,8 @@
 			isa = PBXGroup;
 			children = (
 				19ED807421CA63CB00BA6529 /* UniversitySelectionViewController.swift */,
-				19ED807621CA63D700BA6529 /* StartKeywordRegisterViewController.swift */,
-				19ED807821CA63DC00BA6529 /* StartFinishViewController.swift */,
-				19528CF22227A51E00A34FFF /* UniversitySelectionViewReactor.swift */,
-				19528CF42227B66D00A34FFF /* KeywordRegisterReactor.swift */,
-				190728402227E49400E422C0 /* FinishViewReactor.swift */,
+				19ED807621CA63D700BA6529 /* KeywordRegisterViewController.swift */,
+				19ED807821CA63DC00BA6529 /* FinishViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -520,11 +530,9 @@
 		19ED808521CB786700BA6529 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				19ED807A21CB63E600BA6529 /* StartConfirmButton.swift */,
-				19ED808021CB6E9400BA6529 /* StartBackButton.swift */,
 				19ED808221CB72D800BA6529 /* KeywordCell.swift */,
-				19ED808621CB78B700BA6529 /* StartKeywordHeaderView.xib */,
-				19ED808A21CB7CF400BA6529 /* StartKeywordHeaderView.swift */,
+				19ED808621CB78B700BA6529 /* KeywordRegisterHeaderView.xib */,
+				19ED808A21CB7CF400BA6529 /* KeywordRegisterHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -647,7 +655,7 @@
 				191B6476219728CC005E5CE6 /* Main.storyboard in Resources */,
 				191CDE0B21D4DCCE00EBCBE4 /* Setting.storyboard in Resources */,
 				1930D34F21BFFCD700424FBF /* Start.storyboard in Resources */,
-				19ED808721CB78B700BA6529 /* StartKeywordHeaderView.xib in Resources */,
+				19ED808721CB78B700BA6529 /* KeywordRegisterHeaderView.xib in Resources */,
 				1976CE2E21CE64AA00897E39 /* MainNoticeHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,7 +729,9 @@
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxViewController/RxViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -742,7 +752,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -797,12 +809,12 @@
 				197DE94821E77B32005DCECB /* UniversityModel.swift in Sources */,
 				195B994C21DE33D100367456 /* 목포대학교.swift in Sources */,
 				195B994021DBAEED00367456 /* 성신여자대학교.swift in Sources */,
-				19ED808121CB6E9400BA6529 /* StartBackButton.swift in Sources */,
 				1929734421EB7B800021B05E /* MainContentViewModel.swift in Sources */,
 				19A7F86721DA577D005E1E6D /* 홍익대학교.swift in Sources */,
 				198DC0C121D35A9800AF4801 /* 부산대학교.swift in Sources */,
 				198DC0C521D35AAB00AF4801 /* 전북대학교.swift in Sources */,
 				195B994421DCAE6300367456 /* 이화여자대학교.swift in Sources */,
+				19AEA87422299D8C00D9515F /* KeywordCellReactor.swift in Sources */,
 				194BF427219EE73200FA6124 /* UIAlertController+.swift in Sources */,
 				193D654B21E226BA00FAB1DE /* 성공회대학교.swift in Sources */,
 				1929734121EB738F0021B05E /* UIColor+.swift in Sources */,
@@ -822,14 +834,13 @@
 				192FF1FA21E470F300FF0F15 /* 우석대학교.swift in Sources */,
 				193D655821E31CCD00FAB1DE /* 강남대학교.swift in Sources */,
 				198DC0BB21D35A8100AF4801 /* 충남대학교.swift in Sources */,
-				19ED807921CA63DC00BA6529 /* StartFinishViewController.swift in Sources */,
+				19ED807921CA63DC00BA6529 /* FinishViewController.swift in Sources */,
 				193D655A21E327AE00FAB1DE /* 대진대학교.swift in Sources */,
 				198DC0B921D35A7400AF4801 /* 강원대학교.swift in Sources */,
 				195B995221E0780900367456 /* 삼육대학교.swift in Sources */,
 				19A88DC221CBC65400A3F81C /* InitialInfo.swift in Sources */,
-				19ED807721CA63D700BA6529 /* StartKeywordRegisterViewController.swift in Sources */,
+				19ED807721CA63D700BA6529 /* KeywordRegisterViewController.swift in Sources */,
 				198DC0BD21D35A8800AF4801 /* 충북대학교.swift in Sources */,
-				19ED807B21CB63E600BA6529 /* StartConfirmButton.swift in Sources */,
 				19528CF32227A51E00A34FFF /* UniversitySelectionViewReactor.swift in Sources */,
 				198DC0AF21D34A0700AF4801 /* 전남대학교.swift in Sources */,
 				1958FA7D21D4A4F700DACF72 /* 고려대학교.swift in Sources */,
@@ -844,6 +855,7 @@
 				19A7F86921DA5FDE005E1E6D /* 한국외국어대학교.swift in Sources */,
 				19ED808321CB72D800BA6529 /* KeywordCell.swift in Sources */,
 				193D654921E21D0D00FAB1DE /* 서울교육대학교.swift in Sources */,
+				19AEA87222299D4000D9515F /* KeywordRegisterHeaderViewReactor.swift in Sources */,
 				19A7F86121D90366005E1E6D /* 경희대학교.swift in Sources */,
 				193D654721E2197000FAB1DE /* 서경대학교.swift in Sources */,
 				195B99B821E1D2C400367456 /* 부경대학교.swift in Sources */,
@@ -869,7 +881,7 @@
 				198DC0B721D3569800AF4801 /* 제주대학교.swift in Sources */,
 				1959D57B21CE2A5600F6182F /* 동덕여자대학교.swift in Sources */,
 				19ED807D21CB67C400BA6529 /* UIViewController+.swift in Sources */,
-				19ED808B21CB7CF400BA6529 /* StartKeywordHeaderView.swift in Sources */,
+				19ED808B21CB7CF400BA6529 /* KeywordRegisterHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

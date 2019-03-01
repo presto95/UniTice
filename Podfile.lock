@@ -85,7 +85,11 @@ PODS:
     - RxSwift (~> 4.4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - RxViewController (0.4.1):
+    - RxCocoa (>= 4.0.0)
+    - RxSwift (>= 4.0.0)
   - SnapKit (4.0.1)
+  - Then (2.4.0)
   - XLPagerTabStrip (8.1.1)
 
 DEPENDENCIES:
@@ -101,7 +105,9 @@ DEPENDENCIES:
   - RxDataSources
   - RxGesture
   - RxSwift
+  - RxViewController
   - SnapKit
+  - Then
   - XLPagerTabStrip
 
 SPEC REPOS:
@@ -129,7 +135,9 @@ SPEC REPOS:
     - RxDataSources
     - RxGesture
     - RxSwift
+    - RxViewController
     - SnapKit
+    - Then
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
@@ -156,9 +164,11 @@ SPEC CHECKSUMS:
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxGesture: 7f6dfb45dbde06e618c24442d38493e3144f2c95
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  RxViewController: e93e7c233d5b5b62c32231d69726d55f54081bc6
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: e4ac84b03eb993bf6dbb696bd262badd03acd470
+PODFILE CHECKSUM: cf3146f357b63a7cdc3eabf4c6dfcf54d65865b1
 
 COCOAPODS: 1.6.0

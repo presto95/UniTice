@@ -11,31 +11,15 @@ import UIKit
 import ReactorKit
 import RxCocoa
 import RxSwift
+import RxViewController
 
-final class StartFinishViewController: UIViewController, StoryboardView {
+final class FinishViewController: UIViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
   
   @IBOutlet weak var universityLabel: UILabel!
   
-  @IBOutlet weak var keywordLabel: UILabel! {
-    didSet {
-      let keywords = InitialInfo.shared.keywords
-      if keywords.isEmpty {
-        keywordLabel.text = "없음"
-      } else {
-        var result = ""
-        for (index, keyword) in keywords.enumerated() {
-          if index + 1 == keywords.count {
-            result += keyword
-          } else {
-            result += keyword + ", "
-          }
-        }
-        keywordLabel.text = result
-      }
-    }
-  }
+  @IBOutlet weak var keywordLabel: UILabel!
   
   @IBOutlet private weak var confirmButton: UTButton!
   
@@ -47,6 +31,39 @@ final class StartFinishViewController: UIViewController, StoryboardView {
   }
   
   func bind(reactor: FinishViewReactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindUI()
+  }
+  
+  private func setup() {
+    InitialInfo.shared.university
+      .map { $0.rawValue }
+      .bind(to: universityLabel.rx.text)
+      .disposed(by: disposeBag)
+    confirmButton.type = .next
+    backButton.type = .back
+  }
+  
+  //  @objc private func confirmButtonDidTap(_ sender: UIButton) {
+  //    let university = InitialInfo.shared.university.rawValue
+  //    let keywords = InitialInfo.shared.keywords
+  //    let user = User()
+  //    user.university = university
+  //    user.keywords.append(objectsIn: keywords)
+  //    User.addUser(user)
+  //    UniversityModel.shared.generateModel()
+  //    let next = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
+  //    next.modalTransitionStyle = .flipHorizontal
+  //    present(next, animated: true, completion: nil)
+  //  }
+}
+
+// MARK: - Reactor Binding
+
+private extension FinishViewController {
+  
+  func bindAction(_ reactor: FinishViewReactor) {
     confirmButton.rx.tap
       .map { Reactor.Action.touchUpConfirmButton }
       .bind(to: reactor.action)
@@ -55,6 +72,9 @@ final class StartFinishViewController: UIViewController, StoryboardView {
       .map { Reactor.Action.touchUpBackButton }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
+  }
+  
+  func bindState(_ reactor: FinishViewReactor) {
     reactor.state.map { $0.isConfirmButtonSelected }
       .distinctUntilChanged()
       .filter { $0 }
@@ -75,26 +95,13 @@ final class StartFinishViewController: UIViewController, StoryboardView {
       .disposed(by: disposeBag)
   }
   
-  private func setup() {
-    universityLabel.text = InitialInfo.shared.university.rawValue
-    confirmButton.type = .next
-    backButton.type = .back
+  func bindUI() {
+    InitialInfo.shared.keywords
+      .reduce("") { "\($0), \($1)" }
+      .map { $0.components(separatedBy: ",") }
+      .skip(1)
+      .flatMap { Observable.from($0) }
+      .bind(to: keywordLabel.rx.text)
+      .disposed(by: disposeBag)
   }
-  
-//  @objc private func confirmButtonDidTap(_ sender: UIButton) {
-//    let university = InitialInfo.shared.university.rawValue
-//    let keywords = InitialInfo.shared.keywords
-//    let user = User()
-//    user.university = university
-//    user.keywords.append(objectsIn: keywords)
-//    User.addUser(user)
-//    UniversityModel.shared.generateModel()
-//    let next = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
-//    next.modalTransitionStyle = .flipHorizontal
-//    present(next, animated: true, completion: nil)
-//  }
-//
-//  @objc private func backButtonDidTap(_ sender: UIButton) {
-//    navigationController?.popViewController(animated: true)
-//  }
 }

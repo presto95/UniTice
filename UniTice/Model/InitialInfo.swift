@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 final class InitialInfo {
   
@@ -14,7 +15,7 @@ final class InitialInfo {
   
   private init() { }
   
-  var university: University = .dongduk
+  var university: BehaviorSubject<University> = BehaviorSubject(value: .kaist)
   
-  var keywords: [String] = []
+  var keywords: BehaviorSubject<[String]> = BehaviorSubject(value: [])
 }
