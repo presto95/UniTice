@@ -49,7 +49,8 @@ private extension UniversityChangeViewController {
       .disposed(by: disposeBag)
     pickerView.rx.itemSelected
       .map { row, _ in
-        return Reactor.Action.changeUniversity(University.allCases[row])
+        let university = University.allCases[row]
+        return Reactor.Action.changeUniversity(university)
       }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)

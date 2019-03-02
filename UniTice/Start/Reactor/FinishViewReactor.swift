@@ -77,7 +77,7 @@ private extension FinishViewReactor {
         let user = User()
         user.university = university.rawValue
         user.keywords.append(objectsIn: keywords)
-        User.addUser(user)
+        User.add(user)
         UniversityModel.shared.generateModel()
         return .saveInitialData
     }

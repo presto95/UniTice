@@ -20,9 +20,9 @@ final class KeywordSettingViewReactor: Reactor {
     
     case touchUpAddButton
     
-    case touchUpRegisterButton
+    case touchUpRegisterButton(keyword: String)
     
-    case touchUpDeleteKeyword
+    case touchUpDeleteKeyword(index: Int)
   }
   
   enum Mutation {
@@ -62,11 +62,14 @@ final class KeywordSettingViewReactor: Reactor {
         Observable.just(Mutation.setAddButtonSelection(true)),
         Observable.just(Mutation.setAddButtonSelection(false))
         ])
-    case .touchUpRegisterButton:
+    case let .touchUpRegisterButton(keyword):
       return Observable.concat([
         Observable.just(Mutation.setRegisterButtonSelection(true)),
+        saveKeyword(keyword),
         Observable.just(Mutation.setRegisterButtonSelection(false))
         ])
+    case let .touchUpDeleteKeyword(index):
+      
     }
   }
   
@@ -95,6 +98,15 @@ private extension KeywordSettingViewReactor {
     return Observable
       .just(keywords)
       .map { Mutation.initializeKeywords($0) }
+  }
+  
+  func saveKeyword(_ keyword: String) -> Observable<Mutation> {
+    let isDuplicated = User.insertKeyword(keyword)
+    if isDuplicated {
+      return Observable.just(keyword).map { Mutation.addKeyword($0) }
+    } else {
+      return Observable.just(Void()).map { Mutation.addKeyword }
+    }
   }
 }
 

@@ -17,7 +17,7 @@ final class User: Object {
   
   dynamic var bookmarks: List<Bookmark> = List<Bookmark>()
   
-  static func addUser(_ user: User) {
+  static func add(_ user: User) {
     guard User.fetch() == nil else { return }
     let realm = try! Realm()
     let object = User()
@@ -64,6 +64,19 @@ final class User: Object {
     guard let user = User.fetch() else { return }
     try! Realm().write {
       user.bookmarks.removeAll()
+    }
+  }
+  
+  static func insertKeyword(_ keyword: String) -> Bool {
+    guard let user = User.fetch() else { return false }
+    let isDuplicated = !Array(user.keywords.filter { $0 == keyword }).isEmpty
+    if !isDuplicated {
+      try! Realm().write {
+        user.keywords.insert(keyword, at: 0)
+      }
+      return false
+    } else {
+      return true
     }
   }
   

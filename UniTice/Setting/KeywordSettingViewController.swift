@@ -32,13 +32,7 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
 //                           action: #selector(addButtonDidTap(_:)))
   }()
   
-  @IBOutlet private weak var tableView: UITableView! {
-    didSet {
-      tableView.delegate = self
-      tableView.dataSource = self
-      tableView.allowsSelection = false
-    }
-  }
+  @IBOutlet private weak var tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -64,21 +58,26 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
             .alert(title: "", message: "키워드 등록")
             .textField()
             .action(title: "확인") { [weak self, weak reactor] _, textFields in
-              let textField = textFields?.first
               guard let self = self, let reactor = reactor else { return }
-              if let text = textFields?.first?.text?.replacingOccurrences(of: " ", with: "") {
-                User.insertKeyword(text) { isDuplicated in
-                  if !isDuplicated {
-                    self.reactor?.currentState.keywords.insert(text, at: 0)
-                    self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-                  } else {
-                    UIAlertController
-                      .alert(title: "", message: "키워드 중복")
-                      .action(title: "확인")
-                      .present(to: self)
-                  }
-                }
-              }
+              let text = textFields?.first?.text?.replacingOccurrences(of: " ", with: "")
+              Observable
+                .just(Void())
+                .map { Reactor.Action.touchUpRegisterButton(text ?? "") }
+                .bind(to: reactor.action)
+                .disposed(by: self.disposeBag)
+//              if let text = textFields?.first?.text?.replacingOccurrences(of: " ", with: "") {
+//                User.insertKeyword(text) { isDuplicated in
+//                  if !isDuplicated {
+//                    self.reactor?.currentState.keywords.insert(text, at: 0)
+//                    self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+//                  } else {
+//                    UIAlertController
+//                      .alert(title: "", message: "키워드 중복")
+//                      .action(title: "확인")
+//                      .present(to: self)
+//                  }
+//                }
+//              }
             }
             .action(title: "취소")
             .present(to: self)
@@ -100,6 +99,9 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
   private func setup() {
     title = "키워드 설정"
     navigationItem.setRightBarButton(addButton, animated: false)
+    //tableView.delegate = self
+    //tableView.dataSource = self
+    tableView.allowsSelection = false
 //    if let keywords = User.fetch()?.keywords {
 //      self.keywords = keywords.map { "\($0)" }
 //    }
