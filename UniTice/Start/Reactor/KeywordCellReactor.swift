@@ -29,10 +29,10 @@ final class KeywordCellReactor: Reactor {
   let initialState: State = State()
   
   func mutate(action: Action) -> Observable<Mutation> {
-    
+    return .empty()
   }
   
   func reduce(state: State, mutation: Mutation) -> State {
-    
+    return state
   }
 }

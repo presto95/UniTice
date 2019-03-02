@@ -24,9 +24,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mxk-Wv-ISA"/>
-                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sv7-P2-pTh"/>
-                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="vxV-wV-CVb"/>
+                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="1MG-43-E5R"/>
+                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Lxb-Aj-eHt"/>
+                            <constraint firstItem="hoQ-Ru-Hb7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gXM-Xy-npp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

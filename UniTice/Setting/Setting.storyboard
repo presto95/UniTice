@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Change University View Controller-->
+        <!--University Change View Controller-->
         <scene sceneID="lVh-fR-uIg">
             <objects>
-                <viewController storyboardIdentifier="ChangeUniversityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U6C-iM-iar" customClass="ChangeUniversityViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangeUniversityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U6C-iM-iar" customClass="UniversityChangeViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aK1-23-rhY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,7 +32,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tO-8D-7T7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tO-8D-7T7" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
                                 <rect key="frame" x="32" y="622.66666666666663" width="311" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8bH-9q-AfZ"/>
@@ -109,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URm-Lk-L4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="193" y="-27"/>
+            <point key="canvasLocation" x="159" y="-27"/>
         </scene>
     </scenes>
 </document>
