@@ -20,6 +20,9 @@
 		19AEA87A222AB7DF00D9515F /* MainContainerViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AEA879222AB7DF00D9515F /* MainContainerViewReactor.swift */; };
 		19AEA87C222AB83D00D9515F /* BookmarkViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AEA87B222AB83D00D9515F /* BookmarkViewReactor.swift */; };
 		19AEA87E222AB8CB00D9515F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AEA87D222AB8CB00D9515F /* Global.swift */; };
+		19BB091F222AD345005902A1 /* PostCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB091E222AD345005902A1 /* PostCellReactor.swift */; };
+		19BB0921222AD7FB005902A1 /* MainNoticeHeaderViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB0920222AD7FB005902A1 /* MainNoticeHeaderViewReactor.swift */; };
+		19BB0982222C14EF005902A1 /* FooterRefreshViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB0981222C14EF005902A1 /* FooterRefreshViewReactor.swift */; };
 		19F3A05F4C006E0A0D4F48C51B8E21E0 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467BA8E1639B568A9387B60576BD2C /* UIViewController+.swift */; };
 		219892D0B4FE3583AB063EBCD0002218 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8006302D55009B99FFF6160B929335 /* FinishViewController.swift */; };
 		2579F79F2A6FFEB2E718D8853FCE3C49 /* 국민대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DFF282A9DD77921287A866C9C94A28 /* 국민대학교.swift */; };
@@ -139,6 +142,9 @@
 		19AEA879222AB7DF00D9515F /* MainContainerViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewReactor.swift; sourceTree = "<group>"; };
 		19AEA87B222AB83D00D9515F /* BookmarkViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewReactor.swift; sourceTree = "<group>"; };
 		19AEA87D222AB8CB00D9515F /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		19BB091E222AD345005902A1 /* PostCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellReactor.swift; sourceTree = "<group>"; };
+		19BB0920222AD7FB005902A1 /* MainNoticeHeaderViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderViewReactor.swift; sourceTree = "<group>"; };
+		19BB0981222C14EF005902A1 /* FooterRefreshViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterRefreshViewReactor.swift; sourceTree = "<group>"; };
 		1B16401B06A2660A566E3A7B8191C287 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		1B7C85F3F353D624F41AA16370A4F52D /* 동신대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "동신대학교.swift"; sourceTree = "<group>"; };
 		1D96FD51224C7D218592805DACABBAD7 /* KC대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KC대학교.swift"; sourceTree = "<group>"; };
@@ -401,9 +407,12 @@
 			isa = PBXGroup;
 			children = (
 				5C0170C4FA5AC68A0B5D12845786028D /* FooterRefreshView.swift */,
+				19BB0981222C14EF005902A1 /* FooterRefreshViewReactor.swift */,
 				6EA5FD3186A4E0BA644DEEA1CBCDAF83 /* MainNoticeHeaderView.swift */,
+				19BB0920222AD7FB005902A1 /* MainNoticeHeaderViewReactor.swift */,
 				66E4FFF93C749226C5E5ED319669672E /* MainNoticeHeaderView.xib */,
 				A4275ADB99849E51DB7054CB2786AADC /* PostCell.swift */,
+				19BB091E222AD345005902A1 /* PostCellReactor.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -830,6 +839,7 @@
 				3F3E5F1399AD939548F7FC897A110584 /* SettingTableViewController.swift in Sources */,
 				FB0C3AF4032219F1A06407549725535F /* Storyboard.swift in Sources */,
 				383CD2CA7F30BECB2DF575CDF2965042 /* String+.swift in Sources */,
+				19BB091F222AD345005902A1 /* PostCellReactor.swift in Sources */,
 				CCEA9222AA5F6C67C2D19F177433ECD8 /* UIAlertController+.swift in Sources */,
 				C12471B8D670A05423BAA5D5E83C864C /* UIColor+.swift in Sources */,
 				6BDFBD0FD582E811F565BEEA32A92BD4 /* UIView+.swift in Sources */,
@@ -864,6 +874,7 @@
 				9C6F20F46871F413339D77CAD848C617 /* 부경대학교.swift in Sources */,
 				B15FDECC9FEC2136CDF3817EA30A9D70 /* 부산대학교.swift in Sources */,
 				625655905C26C8FB521D85600E798863 /* 삼육대학교.swift in Sources */,
+				19BB0921222AD7FB005902A1 /* MainNoticeHeaderViewReactor.swift in Sources */,
 				C4B9670C34D7327A39C409C7C44C18B3 /* 서경대학교.swift in Sources */,
 				C6CAC7D87F43E47ACEB914EDBF45C54C /* 서울과학기술대학교.swift in Sources */,
 				F658C7FDA964E2CF7DD94DB443B1F129 /* 서울교육대학교.swift in Sources */,
@@ -872,6 +883,7 @@
 				3196C1D198A5E0A6A15F82AC4AEB74CE /* 성결대학교.swift in Sources */,
 				B4D141AB9E76617E893A942C0A992391 /* 성공회대학교.swift in Sources */,
 				8E939C58D1FD0A32F79139B473A66583 /* 성균관대학교.swift in Sources */,
+				19BB0982222C14EF005902A1 /* FooterRefreshViewReactor.swift in Sources */,
 				D8D7A73A59F3E9A7C72508A0E0F00172 /* 성신여자대학교.swift in Sources */,
 				7E94145B8F173180D9781CEBDEEA0D3C /* 세종대학교.swift in Sources */,
 				B9029B032325EE61EF1311BFBA02C57F /* 세한대학교.swift in Sources */,

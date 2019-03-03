@@ -8,53 +8,63 @@
 
 import UIKit
 
-final class FooterRefreshView: UIView {
+import ReactorKit
+import RxCocoa
+import RxSwift
+
+final class FooterRefreshView: UIView, View {
   
-  var isLoading: Bool {
-    return activityIndicatorView.isAnimating
+  typealias Reactor = FooterRefreshViewReactor
+  
+  var disposeBag: DisposeBag = DisposeBag()
+  
+  private let activityIndicator = UIActivityIndicatorView().then {
+    $0.color = .main
+    $0.hidesWhenStopped = true
   }
   
-  private lazy var activityIndicatorView: UIActivityIndicatorView! = {
-    let indicator = UIActivityIndicatorView(style: .gray)
-    indicator.color = .main
-    indicator.hidesWhenStopped = true
-    addSubview(indicator)
-    return indicator
-  }()
+  private let textLabel = UILabel().then {
+    $0.text = "👆위로 스와이프하여 더 많은 게시물 가져오기✨"
+    $0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+    $0.sizeToFit()
+  }
   
-  private lazy var textLabel: UILabel! = {
-    let label = UILabel()
-    label.text = "👆위로 스와이프하여 더 많은 게시물 가져오기✨"
-    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-    label.sizeToFit()
-    label.isHidden = true
-    addSubview(label)
-    return label
-  }()
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    activityIndicatorView.center = center
+  init(reactor: Reactor) {
+    super.init(frame: .zero)
+    self.reactor = reactor
+    activityIndicator.center = center
     textLabel.center = center
+    addSubview(activityIndicator)
+    addSubview(textLabel)
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func activate() {
-    DispatchQueue.main.async {
-      UIApplication.shared.isNetworkActivityIndicatorVisible = true
-      self.activityIndicatorView.startAnimating()
-      self.textLabel.isHidden = true
-    }
+  func bind(reactor: Reactor) {
+    reactor.state.map { $0.isRefreshing }
+      .distinctUntilChanged()
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] isRefreshing in
+        guard let self = self else { return }
+        self.reloadSubviews(isRefreshing)
+      })
+      .disposed(by: disposeBag)
   }
+}
+
+// MARK: - Private Method
+
+private extension FooterRefreshView {
   
-  func deactivate() {
-    DispatchQueue.main.async {
-      UIApplication.shared.isNetworkActivityIndicatorVisible = false
-      self.activityIndicatorView.stopAnimating()
-      self.textLabel.isHidden = false
+  func reloadSubviews(_ isRefreshing: Bool) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = isRefreshing
+    textLabel.isHighlighted = isRefreshing
+    if isRefreshing {
+      activityIndicator.startAnimating()
+    } else {
+      activityIndicator.stopAnimating()
     }
   }
 }
