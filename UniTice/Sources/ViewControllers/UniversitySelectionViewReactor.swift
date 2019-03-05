@@ -16,27 +16,35 @@ final class UniversitySelectionViewReactor: Reactor {
     
     case selectUniversity(University)
     
-    case touchUpConfirmButton
+    case confirm
     
-    case touchUpNoticeButton
+    case inquiry
   }
   
   enum Mutation {
     
     case setUniversity(University)
     
-    case setConfirmButtonSelection(Bool)
+    case presentNext
     
-    case setInfoButtonSelection(Bool)
+    case presentMailComposer(Bool)
+    
+    //case setConfirmButtonSelection(Bool)
+    
+    //case setInfoButtonSelection(Bool)
   }
   
   struct State {
     
     var university: University?
     
-    var isConfirmButtonSelected: Bool = false
+    var isPresentingNextScene: Bool = false
     
-    var isInfoButtonSelected: Bool = false
+    var isInquiryButtonSelected: Bool = false
+    
+    //var isConfirmButtonSelected: Bool = false
+    
+    //var isInfoButtonSelected: Bool = false
   }
   
   let initialState: State = State()
@@ -45,15 +53,16 @@ final class UniversitySelectionViewReactor: Reactor {
     switch action {
     case let .selectUniversity(university):
       return Observable.just(Mutation.setUniversity(university))
-    case .touchUpConfirmButton:
+    case .confirm:
+      return Observable.just(Mutation.presentNext)
+//      return Observable.concat([
+//        Observable.just(Mutation.setConfirmButtonSelection(true)),
+//        Observable.just(Mutation.setConfirmButtonSelection(false))
+//        ])
+    case .inquiry:
       return Observable.concat([
-        Observable.just(Mutation.setConfirmButtonSelection(true)),
-        Observable.just(Mutation.setConfirmButtonSelection(false))
-        ])
-    case .touchUpNoticeButton:
-      return Observable.concat([
-        Observable.just(Mutation.setInfoButtonSelection(true)),
-        Observable.just(Mutation.setInfoButtonSelection(false))
+        Observable.just(Mutation.presentMailComposer(true)),
+        Observable.just(Mutation.presentMailComposer(false))
         ])
     }
   }
@@ -63,10 +72,14 @@ final class UniversitySelectionViewReactor: Reactor {
     switch mutation {
     case let .setUniversity(university):
       state.university = university
-    case let .setConfirmButtonSelection(isConfirmButtonSelected):
-      state.isConfirmButtonSelected = isConfirmButtonSelected
-    case let .setInfoButtonSelection(isInfoButtonSelected):
-      state.isInfoButtonSelected = isInfoButtonSelected
+    case .presentNext:
+      state.isPresentingNextScene = true
+    case let .presentMailComposer(isSelected):
+      state.isInquiryButtonSelected = isSelected
+//    case let .setConfirmButtonSelection(isConfirmButtonSelected):
+//      state.isConfirmButtonSelected = isConfirmButtonSelected
+//    case let .setInfoButtonSelection(isInfoButtonSelected):
+//      state.isInfoButtonSelected = isInfoButtonSelected
     }
     return state
   }

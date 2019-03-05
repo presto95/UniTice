@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension String {
+  
   func highlightKeywords(_ keywords: [String]) -> NSAttributedString {
     let attributedString = NSMutableAttributedString(string: self)
     if !keywords.isEmpty {
@@ -38,8 +39,4 @@ extension String {
   var trimmed: String {
     return trimmingCharacters(in: .whitespacesAndNewlines)
   }
-}
-
-extension String.Encoding {
-  static let eucKR = String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422))
 }

@@ -12,6 +12,7 @@ import UserNotifications
 
 import ReactorKit
 import RxCocoa
+import RxDataSources
 import RxSwift
 import Then
 
@@ -21,56 +22,18 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  private var notificationHasGranted: Bool = false {
-    didSet {
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-      }
-    }
-  }
+  var dataSource: RxTableViewSectionedReloadDataSource<SettingTableViewSection>!
   
-  private lazy var switchControl: UISwitch = {
-    let control = UISwitch()
-    control.isOn = !UserDefaults.standard.bool(forKey: "fold")
-    control.addTarget(self, action: #selector(switchDidValueChanged(_:)), for: .valueChanged)
-    return control
-  }()
-  
-  private var switchIsOn: Bool {
-    return switchControl.isOn
-  }
-  
-  private let texts = [["상단 고정 게시물 펼치기"], ["학교 변경", "키워드 설정", "알림 설정"], ["문의하기", "앱 평가하기"]]
+  private let upperPostFoldingSwitch = UISwitch()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-//    UNUserNotificationCenter.current().getNotificationSettings { settings in
-//      if settings.authorizationStatus == .authorized {
-//        self.notificationHasGranted = true
-//      } else {
-//        self.notificationHasGranted = false
-//      }
-//    }
-//    NotificationCenter.default
-//      .addObserver(self,
-//                   selector: #selector(didReceiveEnterForegroundNotification(_:)),
-//                   name: .willEnterForeground, object: nil)
-  }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self)
   }
   
   private func setup() {
     title = "설정"
   }
-  
-//  @objc private func didReceiveEnterForegroundNotification(_ notification: Notification) {
-//    if let notificationHasGranted = notification.userInfo?["notificationHasGranted"] as? Bool {
-//      self.notificationHasGranted = notificationHasGranted
-//    }
-//  }
   
   @objc private func switchDidValueChanged(_ sender: UISwitch) {
     if sender.isOn {
@@ -82,6 +45,18 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
   }
   
   func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindDataSource()
+    bindUI()
+  }
+}
+
+// MARK: - Reactor Binding
+
+private extension SettingTableViewController {
+  
+  func bindAction(_ reactor: Reactor) {
     Observable<Bool>
       .create { observer in
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -94,90 +69,79 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     NotificationCenter.default.rx.notification(.willEnterForeground)
-      .map { Reactor.Action.setNotificationSwitch($0?["notificationHasGranted"]) }
+      .map { $0.userInfo?["notificationHasGranted"] as? Bool ?? false }
+      .map { Reactor.Action.setNotificationSwitch($0) }
       .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    
+  }
+  
+  func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.isUpperPostFolded }
+      .distinctUntilChanged()
+      .subscribe(onNext: { [weak self] isUpperPostFolded in
+        self?.upperPostFoldingSwitch.setOn(isUpperPostFolded, animated: true)
+        self?.tableView.reloadData()
+      })
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isNotificationGranted }
+      .distinctUntilChanged()
+      .subscribe(onNext: { [weak self] _ in
+        self?.tableView.reloadData()
+      })
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.sections }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+  }
+  
+  func bindDataSource() {
+    dataSource
+      = RxTableViewSectionedReloadDataSource<SettingTableViewSection>
+        .init(configureCell: { [weak self] dataSource, tableView, indexPath, title in
+          let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+          cell.textLabel?.text = title
+          if indexPath.section == 0 {
+            cell.accessoryView = self?.upperPostFoldingSwitch
+          }
+          return cell
+        })
+  }
+  
+  func bindUI() {
+    tableView.rx.itemSelected
+      .subscribe(onNext: { [weak self] indexPath in
+        guard let self = self else { return }
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        let row = indexPath.row
+        switch indexPath.section {
+        case 1 where row == 0:
+          StoryboardScene.Setting.changeUniversityViewController.instantiate().push(at: self)
+        case 1 where row == 1:
+          StoryboardScene.Setting.keywordSettingViewController.instantiate().push(at: self)
+        case 1 where row == 2:
+          if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+          }
+        case 2 where row == 0:
+          if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["yoohan95@gmail.com"])
+            self.present(mail, animated: true)
+          }
+        case 2 where row == 1:
+          guard let url = URL(string: "itms-apps://itunes.apple.com/app/1447871519") else { return }
+          UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        default:
+          break
+        }
+      })
       .disposed(by: disposeBag)
   }
 }
 
-extension SettingTableViewController {
-  override func tableView(_ tableView: UITableView,
-                          cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel?.text = texts[indexPath.section][indexPath.row]
-    if indexPath.section == 0 {
-      cell.accessoryView = switchControl
-    }
-    return cell
-  }
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    switch section {
-    case 0:
-      return 1
-    case 1:
-      return 3
-    case 2:
-      return 2
-    default:
-      return 0
-    }
-  }
-  
-  override func numberOfSections(in tableView: UITableView) -> Int {
-    return 3
-  }
-  
-  override func tableView(_ tableView: UITableView,
-                          titleForFooterInSection section: Int) -> String? {
-    if section == 0 {
-      if switchIsOn {
-        return "상단 고정 게시물이 펼쳐진 상태입니다."
-      } else {
-        return "상단 고정 게시물이 접혀진 상태입니다."
-      }
-    } else if section == 1 {
-      if notificationHasGranted {
-        return "알림이 활성화되어 있습니다."
-      } else {
-        return "알림이 비활성화되어 있습니다."
-      }
-    }
-    return nil
-  }
-}
-
-extension SettingTableViewController {
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
-    let row = indexPath.row
-    switch indexPath.section {
-    case 1 where row == 0:
-      let next = StoryboardScene.Setting.changeUniversityViewController.instantiate()
-      navigationController?.pushViewController(next, animated: true)
-    case 1 where row == 1:
-      let next = StoryboardScene.Setting.keywordSettingViewController.instantiate()
-      navigationController?.pushViewController(next, animated: true)
-    case 1 where row == 2:
-      if let url = URL(string: UIApplication.openSettingsURLString) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-      }
-      
-    case 2 where row == 0:
-      if MFMailComposeViewController.canSendMail() {
-        let mail = MFMailComposeViewController()
-        mail.mailComposeDelegate = self
-        mail.setToRecipients(["yoohan95@gmail.com"])
-        present(mail, animated: true)
-      }
-    case 2 where row == 1:
-      guard let url = URL(string: "itms-apps://itunes.apple.com/app/1447871519") else { return }
-      UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    default:
-      break
-    }
-  }
-}
+// MARK: - MFMailComposeViewControllerDelegate 구현
 
 extension SettingTableViewController: MFMailComposeViewControllerDelegate {
   func mailComposeController(_ controller: MFMailComposeViewController,

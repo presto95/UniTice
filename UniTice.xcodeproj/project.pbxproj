@@ -20,6 +20,7 @@
 		191A70C5222E8D870028E3A8 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A70C4222E8D870028E3A8 /* PersistenceService.swift */; };
 		191A70C7222E97300028E3A8 /* SearchViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A70C6222E97300028E3A8 /* SearchViewReactor.swift */; };
 		191A70C9222E973C0028E3A8 /* SettingTableViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A70C8222E973C0028E3A8 /* SettingTableViewReactor.swift */; };
+		191A70CB222ED8680028E3A8 /* String.Encoding+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A70CA222ED8680028E3A8 /* String.Encoding+.swift */; };
 		1D75225E1E557D41817A454A525AD22E /* KAIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C88787E187AEE283EAC4CDA5E8B28E1 /* KAIST.swift */; };
 		1DAE5587AC9DC607198B073416D4C35F /* 숙명여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F45CB26E38DD7556F3DD6B8697AFF13 /* 숙명여자대학교.swift */; };
 		234E9A767CF49F3A54672621A320F37A /* 경상대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF63D0F1F5577EAE34E39649E149A896 /* 경상대학교.swift */; };
@@ -143,6 +144,7 @@
 		191A70C4222E8D870028E3A8 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		191A70C6222E97300028E3A8 /* SearchViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewReactor.swift; sourceTree = "<group>"; };
 		191A70C8222E973C0028E3A8 /* SettingTableViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewReactor.swift; sourceTree = "<group>"; };
+		191A70CA222ED8680028E3A8 /* String.Encoding+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String.Encoding+.swift"; sourceTree = "<group>"; };
 		1982BD56B5E57EF7E9BB4F518595ED03 /* 경희대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "경희대학교.swift"; sourceTree = "<group>"; };
 		19D4E9CD6732AEF55BBAE3F2A8A78707 /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		21CE4AA368C417AD46E63C4C80840C0B /* 대진대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "대진대학교.swift"; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				04BC5FEEC18DB77BB088A0CC073FDEFA /* UIColor+.swift */,
 				346E1257F16BEECFE64A627C0590B979 /* UIView+.swift */,
 				4309BAD337F11933514D1F0222A8F7BF /* UIViewController+.swift */,
+				191A70CA222ED8680028E3A8 /* String.Encoding+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				B2C0C7F0F44536F98C28271F3C6E4DCA /* KC대학교.swift in Sources */,
 				F24617A77992AF6B682F199AFB5D275C /* KeywordCell.swift in Sources */,
 				CC0A8E81C537E8E88164C34BA924FBB2 /* KeywordCellReactor.swift in Sources */,
+				191A70CB222ED8680028E3A8 /* String.Encoding+.swift in Sources */,
 				5E6E0D61CFA1A6DDA7E9F6EDF45A2F42 /* KeywordRegisterHeaderView.swift in Sources */,
 				8D9B12CD25A1114D8B54C0FCDEF08CE9 /* KeywordRegisterHeaderViewReactor.swift in Sources */,
 				63592F74B4889B03DAC260F11498046B /* KeywordRegisterViewController.swift in Sources */,

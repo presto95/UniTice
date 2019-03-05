@@ -49,7 +49,7 @@ protocol PersistenceServiceType: class {
   /// 모든 키워드 삭제하기.
   func removeAllKeywords() -> Observable<Void>
   
-  var isUpperPostFolded: Bool { get }
+  var isUpperPostFolded: Bool { get set }
 }
 
 final class PersistenceService: PersistenceServiceType {
@@ -60,8 +60,8 @@ final class PersistenceService: PersistenceServiceType {
   
   func addUser(_ user: User) -> Observable<Void> {
     let newUser = user
-    return fetchUser().flatMap { _ in .empty() }
-      .ifEmpty(switchTo: Observable<Void>.create({ [weak self] observer in
+    return fetchUser().flatMap { _ in Observable.empty() }
+      .ifEmpty(switchTo: Observable<Void>.create { [weak self] observer in
         guard let self = self else { return Disposables.create() }
         do {
           try self.realm.write {
@@ -73,7 +73,7 @@ final class PersistenceService: PersistenceServiceType {
           observer.onError(error)
         }
         return Disposables.create()
-      }))
+      })
   }
   
   func addBookmark(_ post: Post) -> Observable<Void> {
@@ -131,6 +131,13 @@ final class PersistenceService: PersistenceServiceType {
   }
   
   var isUpperPostFolded: Bool {
-    return UserDefaults.standard.value(forKey: "fold") as? Bool ?? false
+    get {
+      return UserDefaults.standard.value(forKey: "fold") as? Bool ?? false
+    }
+    set {
+      UserDefaults.standard.set(newValue, forKey: "fold")
+      UserDefaults.standard.synchronize()
+    }
+    
   }
 }

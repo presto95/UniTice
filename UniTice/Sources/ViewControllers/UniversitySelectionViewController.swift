@@ -48,12 +48,12 @@ private extension UniversitySelectionViewController {
   func bindAction(_ reactor: UniversitySelectionViewReactor) {
     // 확인 버튼 바인딩
     confirmButton.rx.tap
-      .map { Reactor.Action.touchUpConfirmButton }
+      .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     // 알려주세요 버튼 바인딩
     noticeButton.rx.tap
-      .map { Reactor.Action.touchUpNoticeButton }
+      .map { Reactor.Action.inquiry }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -61,7 +61,7 @@ private extension UniversitySelectionViewController {
   /// 리액터 상태 바인딩.
   func bindState(_ reactor: UniversitySelectionViewReactor) {
     // 확인 버튼 눌렸는지에 대한 상태 바인딩
-    reactor.state.map { $0.isConfirmButtonSelected }
+    reactor.state.map { $0.isPresentingNextScene }
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
@@ -72,8 +72,19 @@ private extension UniversitySelectionViewController {
         keywordRegisterViewController.push(at: self)
       })
       .disposed(by: disposeBag)
+//    reactor.state.map { $0.isConfirmButtonSelected }
+//      .distinctUntilChanged()
+//      .filter { $0 }
+//      .subscribe(onNext: { [weak self] _ in
+//        guard let self = self else { return }
+//        let keywordRegisterViewController
+//          = StoryboardScene.Start.startKeywordRegisterViewController.instantiate()
+//        keywordRegisterViewController.reactor = KeywordRegisterViewReactor()
+//        keywordRegisterViewController.push(at: self)
+//      })
+//      .disposed(by: disposeBag)
     // 알려주세요 버튼 눌렸는지에 대한 상태 바인딩
-    reactor.state.map { $0.isInfoButtonSelected }
+    reactor.state.map { $0.isInquiryButtonSelected }
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in

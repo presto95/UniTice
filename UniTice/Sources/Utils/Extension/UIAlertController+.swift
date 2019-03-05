@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIAlertController {
+  
   static func alert(title: String?,
                     message: String?,
                     style: UIAlertController.Style = .alert) -> UIAlertController {
@@ -42,14 +43,5 @@ extension UIAlertController {
     DispatchQueue.main.async {
       viewController?.present(self, animated: animated, completion: handler)
     }
-  }
-}
-
-extension UIAlertController {
-  static func presentErrorAlert(_ error: Error, to viewController: UIViewController) {
-    UIAlertController
-      .alert(title: "오류", message: error.localizedDescription)
-      .action(title: "확인")
-      .present(to: viewController)
   }
 }

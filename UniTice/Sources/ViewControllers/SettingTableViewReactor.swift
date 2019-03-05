@@ -13,9 +13,24 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-final class SettingTableViewReactor: Reactor {
+struct SettingTableViewSection {
   
-  //typealias SettingSectionModel = SectionModel<Void, String>
+  var footer: String?
+  
+  var items: [Item]
+}
+
+extension SettingTableViewSection: SectionModelType {
+  
+  typealias Item = String
+  
+  init(original: SettingTableViewSection, items: [Item]) {
+    self = original
+    self.items = items
+  }
+}
+
+final class SettingTableViewReactor: Reactor {
   
   enum Action {
     
@@ -35,16 +50,30 @@ final class SettingTableViewReactor: Reactor {
   
   struct State {
     
+    var sections: [SettingTableViewSection] = [
+      SettingTableViewSection(footer: nil, items: ["상단 고정 게시물 펼치기"]),
+      SettingTableViewSection(footer: nil, items: ["학교 변경", "키워드 설정", "알림 설정"]),
+      SettingTableViewSection(footer: nil, items: ["문의하기", "앱 평가하기"])
+    ]
+    
     var isUpperPostFolded: Bool
     
     var isNotificationGranted: Bool
+    
+    init(isUpperPostFolded: Bool, isNotificationGranted: Bool) {
+      self.isUpperPostFolded = isUpperPostFolded
+      self.isNotificationGranted = isNotificationGranted
+    }
   }
   
   let persistenceService: PersistenceServiceType
   
   let initialState: State
   
-  init(isNotificationGranted: Bool, isUpperPostFolded: Bool) {
+  init(persistenceService: PersistenceServiceType,
+       isNotificationGranted: Bool,
+       isUpperPostFolded: Bool) {
+    self.persistenceService = persistenceService
     initialState = State(isUpperPostFolded: isUpperPostFolded,
                          isNotificationGranted: isNotificationGranted)
   }
@@ -65,8 +94,12 @@ final class SettingTableViewReactor: Reactor {
     switch mutation {
     case let .setNotificationStatus(isGranted):
       state.isNotificationGranted = isGranted
+      state.sections[1].footer = isGranted ? "알림이 활성화되어 있습니다." : "알림이 비활성화되어 있습니다."
     case .toggleUpperPostFoldSwitch:
       state.isUpperPostFolded.toggle()
+      state.sections[0].footer
+        = state.isUpperPostFolded ? "상단 고정 게시물이 펼쳐진 상태입니다." : "상단 고정 게시물이 접혀진 상태입니다."
+      persistenceService.isUpperPostFolded = state.isUpperPostFolded
     }
     return state
   }
