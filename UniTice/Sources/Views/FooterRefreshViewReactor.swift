@@ -33,7 +33,7 @@ final class FooterRefreshViewReactor: Reactor {
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case let .refresh:
+    case .refresh:
       return .concat([
         .just(.refresh(true)),
         // 사이드 이펙트

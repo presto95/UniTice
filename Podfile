@@ -15,6 +15,7 @@ target 'UniTice' do
   pod 'RxCocoa'
   pod 'RxDataSources'
   pod 'RxGesture'
+  pod 'RxOptional'
   pod 'RxSwift'
   pod 'RxViewController'
   pod 'SnapKit'

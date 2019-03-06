@@ -134,3 +134,105 @@ enum University: String, CaseIterable {
   
   case hongik = "홍익대학교"
 }
+
+extension University {
+  
+  var model: UniversityScrappable {
+    switch self {
+    case .kaist:
+      return KAIST()
+    case .kcu:
+      return KC대학교()
+    case .kangnam:
+      return 강남대학교()
+    case .kangwon:
+      return 강원대학교()
+    case .knu:
+      return 경북대학교()
+    case .gsnu:
+      return 경상대학교()
+    case .ks:
+      return 경성대학교()
+    case .khu:
+      return 경희대학교()
+    case .korea:
+      return 고려대학교()
+    case .kw:
+      return 광운대학교()
+    case .kookmin:
+      return 국민대학교()
+    case .daejin:
+      return 대진대학교()
+    case .duksung:
+      return 덕성여자대학교()
+    case .dongguk:
+      return 동국대학교()
+    case .dongduk:
+      return 동덕여자대학교()
+    case .dsu:
+      return 동신대학교()
+    case .mju:
+      return 명지대학교()
+    case .mokpo:
+      return 목포대학교()
+    case .pknu:
+      return 부경대학교()
+    case .pusan:
+      return 부산대학교()
+    case .syu:
+      return 삼육대학교()
+    case .skuniv:
+      return 서경대학교()
+    case .seoultech:
+      return 서울과학기술대학교()
+    case .snue:
+      return 서울교육대학교()
+    case .snu:
+      return 서울대학교()
+    case .swu:
+      return 서울여자대학교()
+    case .skhu:
+      return 성공회대학교()
+    case .sungkyul:
+      return 성결대학교()
+    case .skku:
+      return 성균관대학교()
+    case .sungshin:
+      return 성신여자대학교()
+    case .sejong:
+      return 세종대학교()
+    case .sehan:
+      return 세한대학교()
+    case .sookmyung:
+      return 숙명여자대학교()
+    case .woosuk:
+      return 우석대학교()
+    case .ewha:
+      return 이화여자대학교()
+    case .jnu:
+      return 전남대학교()
+    case .jbnu:
+      return 전북대학교()
+    case .jejunu:
+      return 제주대학교()
+    case .chongshin:
+      return 총신대학교()
+    case .cnu:
+      return 충남대학교()
+    case .chungbuk:
+      return 충북대학교()
+    case .kpu:
+      return 한국산업기술대학교()
+    case .karts:
+      return 한국예술종합학교()
+    case .hufs:
+      return 한국외국어대학교()
+    case .hansung:
+      return 한성대학교()
+    case .hanyang:
+      return 한양대학교()
+    case .hongik:
+      return 홍익대학교()
+    }
+  }
+}
