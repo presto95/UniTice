@@ -14,14 +14,21 @@ import RxCocoa
 import RxSwift
 import Then
 
+/// 초기 대학교 설정 뷰 컨트롤러.
 final class UniversitySelectionViewController: UIViewController, StoryboardView {
   
+  typealias Reactor = UniversitySelectionViewReactor
+  
+  /// dispose bag.
   var disposeBag = DisposeBag()
   
+  /// 대학교 목록을 표시하는 피커 뷰.
   @IBOutlet private weak var pickerView: UIPickerView!
   
+  /// `우리에게 알려주세요!` 메일 버튼.
   @IBOutlet private weak var noticeButton: UIButton!
   
+  /// 확인 버튼.
   @IBOutlet private weak var confirmButton: UTButton!
   
   override func viewDidLoad() {
@@ -29,7 +36,7 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
     setup()
   }
   
-  func bind(reactor: UniversitySelectionViewReactor) {
+  func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
     bindUI()
@@ -45,7 +52,7 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
 private extension UniversitySelectionViewController {
   
   /// 리액터 액션 바인딩.
-  func bindAction(_ reactor: UniversitySelectionViewReactor) {
+  func bindAction(_ reactor: Reactor) {
     confirmButton.rx.tap
       .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
@@ -57,8 +64,8 @@ private extension UniversitySelectionViewController {
   }
   
   /// 리액터 상태 바인딩.
-  func bindState(_ reactor: UniversitySelectionViewReactor) {
-    reactor.state.map { $0.isPresentingNextScene }
+  func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.isNextScenePresented }
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in

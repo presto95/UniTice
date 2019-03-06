@@ -16,6 +16,7 @@ import RxDataSources
 import RxSwift
 import Then
 
+/// 설정 테이블 뷰.
 final class SettingTableViewController: UITableViewController, StoryboardView {
   
   typealias Reactor = SettingTableViewReactor
@@ -31,24 +32,15 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
     setup()
   }
   
-  private func setup() {
-    title = "설정"
-  }
-  
-  @objc private func switchDidValueChanged(_ sender: UISwitch) {
-    if sender.isOn {
-      UserDefaults.standard.set(false, forKey: "fold")
-    } else {
-      UserDefaults.standard.set(true, forKey: "fold")
-    }
-    tableView.reloadData()
-  }
-  
   func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
     bindDataSource()
     bindUI()
+  }
+  
+  private func setup() {
+    title = "설정"
   }
 }
 
@@ -70,13 +62,19 @@ private extension SettingTableViewController {
       .disposed(by: disposeBag)
     NotificationCenter.default.rx.notification(.willEnterForeground)
       .map { $0.userInfo?["notificationHasGranted"] as? Bool ?? false }
-      .map { Reactor.Action.setNotificationSwitch($0) }
+      .map { Reactor.Action.fetchNotificationStatus($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    
+    upperPostFoldingSwitch.rx.controlEvent(.valueChanged)
+      .map { Reactor.Action.toggleUpperPostFoldSwitch }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
   
   func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.sections }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
     reactor.state.map { $0.isUpperPostFolded }
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] isUpperPostFolded in
@@ -89,9 +87,6 @@ private extension SettingTableViewController {
       .subscribe(onNext: { [weak self] _ in
         self?.tableView.reloadData()
       })
-      .disposed(by: disposeBag)
-    reactor.state.map { $0.sections }
-      .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
   }
   

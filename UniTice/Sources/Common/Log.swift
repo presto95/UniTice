@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 일반 로그 찍을 때 사용하기.
 func debugLog(_ message: Any,
               file: String = #file,
               function: String = #function,
@@ -19,6 +20,7 @@ func debugLog(_ message: Any,
   #endif
 }
 
+/// 에러 로그 찍을 때 사용하기.
 func errorLog(_ message: Any,
               file: String = #file,
               function: String = #function,

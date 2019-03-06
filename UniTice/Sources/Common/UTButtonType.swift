@@ -8,12 +8,16 @@
 
 import UIKit
 
+/// UniTice 버튼 타입.
 enum UTButtonType: Int {
   
+  /// 다음으로, 확인 등 긍정적.
   case next
   
+  /// 뒤로, 취소 등 부정적.
   case back
   
+  /// 타입에 따른 타이틀.
   var title: String {
     switch self {
     case .next:
@@ -23,6 +27,7 @@ enum UTButtonType: Int {
     }
   }
   
+  /// 타입에 따른 색상.
   var color: UIColor {
     switch self {
     case .next:

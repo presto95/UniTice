@@ -13,28 +13,7 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-struct BookmarkSectionData {
-  
-  var title: String
-  
-  var date: String
-}
-
-struct BookmarkSection {
-  
-  var items: [Item]
-}
-
-extension BookmarkSection: SectionModelType {
-  
-  typealias Item = BookmarkSectionData
-  
-  init(original: BookmarkSection, items: [Item]) {
-    self = original
-    self.items = items
-  }
-}
-
+/// 북마크 뷰 리액터.
 final class BookmarkViewReactor: Reactor {
   
   enum Action {
@@ -46,7 +25,7 @@ final class BookmarkViewReactor: Reactor {
   
   enum Mutation {
     
-    case setBookmarks([Bookmark])
+    case initialize([Bookmark], [String])
     
     case deleteBookmark(Int)
   }
@@ -69,16 +48,23 @@ final class BookmarkViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .viewDidLoad:
-      return persistenceService.fetchBookmarks().map { Mutation.setBookmarks($0) }
+      return Observable
+        .zip(persistenceService.fetchBookmarks(),
+             persistenceService.fetchKeywords()) { Mutation.initialize($0, $1) }
     case let .deleteBookmark(item):
-      return persistenceService.removebook
+      return persistenceService.removeBookmark(at: item).map { Mutation.deleteBookmark(item) }
     }
   }
   
   func reduce(state: State, mutation: Mutation) -> State {
+    var state = state
     switch mutation {
-    case .setBookmarks:
+    case let .initialize(bookmarks, keywords):
+      state.bookmarks = bookmarks
+      state.keywords = keywords
     case let .deleteBookmark(item):
+      state.bookmarks.remove(at: item)
     }
+    return state
   }
 }

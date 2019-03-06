@@ -13,6 +13,7 @@ import RxCocoa
 import RxSwift
 import RxViewController
 
+/// 초기 설정 완료 뷰 컨트롤러.
 final class FinishViewController: UIViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
@@ -44,19 +45,6 @@ final class FinishViewController: UIViewController, StoryboardView {
     confirmButton.type = .next
     backButton.type = .back
   }
-  
-  //  @objc private func confirmButtonDidTap(_ sender: UIButton) {
-  //    let university = InitialInfo.shared.university.rawValue
-  //    let keywords = InitialInfo.shared.keywords
-  //    let user = User()
-  //    user.university = university
-  //    user.keywords.append(objectsIn: keywords)
-  //    User.addUser(user)
-  //    UniversityModel.shared.generateModel()
-  //    let next = UIViewController.instantiate(from: "Main", identifier: "MainNavigationController")
-  //    next.modalTransitionStyle = .flipHorizontal
-  //    present(next, animated: true, completion: nil)
-  //  }
 }
 
 // MARK: - Reactor Binding
@@ -65,11 +53,11 @@ private extension FinishViewController {
   
   func bindAction(_ reactor: FinishViewReactor) {
     confirmButton.rx.tap
-      .map { Reactor.Action.touchUpConfirmButton }
+      .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     backButton.rx.tap
-      .map { Reactor.Action.touchUpBackButton }
+      .map { Reactor.Action.back }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -80,8 +68,9 @@ private extension FinishViewController {
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let mainViewController = StoryboardScene.Main.mainNavigationController.instantiate()
-        mainViewController.modalTransitionStyle = .flipHorizontal
+        let mainViewController = StoryboardScene.Main.mainNavigationController.instantiate().then {
+          $0.modalTransitionStyle = .flipHorizontal
+        }
         mainViewController.present(to: self)
       })
       .disposed(by: disposeBag)
@@ -89,8 +78,7 @@ private extension FinishViewController {
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
-        guard let self = self else { return }
-        self.navigationController?.popViewController(animated: true)
+        self?.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
   }

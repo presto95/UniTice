@@ -16,19 +16,14 @@ import RxDataSources
 import RxSwift
 import RxViewController
 
+/// 북마크 뷰 컨트롤러.
 final class BookmarkViewController: UIViewController, StoryboardView {
   
   typealias Reactor = BookmarkViewReactor
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  private let universityModel = UniversityModel.shared.universityModel
-  
-  private lazy var keywords = (User.fetch()?.keywords)!
-  
-  private var bookmarks = User.fetch()?.bookmarks
-  
-  var dataSource: RxTableViewSectionedReloadDataSource<BookmarkSection>!
+  var dataSource: RxTableViewSectionedReloadDataSource<UTSection>!
   
   @IBOutlet private weak var tableView: UITableView!
   
@@ -42,18 +37,21 @@ final class BookmarkViewController: UIViewController, StoryboardView {
       .map { Reactor.Action.viewDidLoad }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    dataSource = RxTableViewSectionedReloadDataSource<BookmarkSection>
+    dataSource = RxTableViewSectionedReloadDataSource<UTSection>
       .init(configureCell: { dataSource, tableView, indexPath, data in
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-        cell.textLabel?.attributedText = data.title.highlightKeywords(reactor.currentState.keywords)
+        cell.textLabel?.attributedText
+          = data.title.highlightKeywords(reactor.currentState.keywords)
         cell.detailTextLabel?.text = data.date
         return cell
       })
     dataSource.canEditRowAtIndexPath = { _, _ in true }
     reactor.state.map { $0.bookmarks }
-      .map { bookmarks -> [BookmarkSection] in
+      .map { bookmarks -> [UTSection] in
         return bookmarks.map {
-          BookmarkSection(items: [BookmarkSectionData(title: $0.title, date: $0.date)])
+          UTSection(items: [UTSectionData(title: $0.title,
+                                          date: $0.date,
+                                          link: $0.link)])
         }
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
@@ -77,43 +75,13 @@ final class BookmarkViewController: UIViewController, StoryboardView {
     tableView.emptyDataSetSource = self
     tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
   }
-  
-  private func makeSafariViewController(at row: Int) -> SFSafariViewController {
-    let bookmark = bookmarks?[row]
-    guard let url = URL(string: bookmark?.link ?? "") else {
-      fatalError("invalid url format")
-    }
-    let config = SFSafariViewController.Configuration()
-    config.barCollapsingEnabled = true
-    config.entersReaderIfAvailable = true
-    let viewController = SFSafariViewController(url: url, configuration: config)
-    viewController.preferredControlTintColor = .main
-    viewController.dismissButtonStyle = .close
-    return viewController
-  }
 }
 
-// MARK: - UITableViewDelegate 구현
+// MARK: - Reactor Binding
 
-extension BookmarkViewController: UITableViewDelegate {
+private extension BookmarkViewController {
   
-  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let action
-      = UIContextualAction(style: .destructive,
-                           title: "삭제") { [weak self, weak reactor] _, _, _ in
-                            guard let reactor = reactor else { return }
-                            guard let self = self else { return }
-                            let bookmark = reactor.currentState.bookmarks[indexPath.row]
-                            User.removeBookmark(bookmark)
-                            Observable
-                              .just(Void())
-                              .map { Reactor.Action.deleteBookmark(indexPath.row) }
-                              .bind(to: reactor.action)
-                              .disposed(by: self.disposeBag)
-    }
-    let config = UISwipeActionsConfiguration(actions: [action])
-    return config
-  }
+  
 }
 
 // MARK: - UIViewControllerPreviewDelegate 구현
@@ -139,5 +107,26 @@ extension BookmarkViewController: DZNEmptyDataSetSource {
   
   func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
     return NSAttributedString(string: "기록 없음")
+  }
+}
+
+// MARK: - Private Method
+
+private extension BookmarkViewController {
+  
+  func makeSafariViewController(at row: Int) -> SFSafariViewController {
+    let bookmark = reactor?.currentState.bookmarks[row]
+    guard let url = URL(string: bookmark?.link ?? "") else {
+      fatalError("invalid url format")
+    }
+    let config = SFSafariViewController.Configuration().then {
+      $0.barCollapsingEnabled = true
+      $0.entersReaderIfAvailable = true
+    }
+    let viewController = SFSafariViewController(url: url, configuration: config).then {
+      $0.preferredControlTintColor = .main
+      $0.dismissButtonStyle = .close
+    }
+    return viewController
   }
 }

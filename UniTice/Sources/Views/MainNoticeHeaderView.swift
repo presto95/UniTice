@@ -17,41 +17,22 @@ final class MainNoticeHeaderView: UIView, StoryboardView {
   typealias Reactor = MainNoticeHeaderViewReactor
   
   var disposeBag: DisposeBag = DisposeBag()
-  
-//  var state: Bool = false {
-//    didSet {
-//      foldButton.setImage(state ? UIImage(named: "arrow_down") : UIImage(named: "arrow_up"),
-//                          for: [])
-//    }
-//  }
-  
-  //var foldingHandler: (() -> Void)?
-  
-  @IBOutlet weak var foldButton: UIButton! {
-    didSet {
-//      foldButton.setTitle(nil, for: [])
-//      foldButton.imageView?.contentMode = .scaleAspectFit
-      //foldButton.addTarget(self, action: #selector(foldButtonDidTap(_:)), for: .touchUpInside)
-    }
-  }
+
+  @IBOutlet weak var foldButton: UIButton!
   
   override func awakeFromNib() {
     super.awakeFromNib()
     setup()
   }
   
-//  @objc private func foldButtonDidTap(_ sender: UIButton) {
-//    foldingHandler?()
-//  }
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+  }
   
   private func setup() {
     foldButton.setTitle(nil, for: [])
     foldButton.imageView?.contentMode = .scaleAspectFit
-  }
-  
-  func bind(reactor: Reactor) {
-    bindAction(reactor)
-    bindState(reactor)
   }
 }
 

@@ -8,9 +8,11 @@
 
 import UIKit
 
+/// UniTice 버튼 커스텀 클래스.
 @IBDesignable
 final class UTButton: UIButton {
   
+  /// UniTice 버튼 타입.
   var type: UTButtonType {
     get {
       return _type

@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-struct 총신대학교: UniversityScrappable {
+struct 총신대학교: UniversityType {
   
   var name: String {
     return "총신대학교"

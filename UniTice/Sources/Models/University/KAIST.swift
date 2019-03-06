@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-struct KAIST: UniversityScrappable {
+struct KAIST: UniversityType {
   
   var name: String {
     return "KAIST"

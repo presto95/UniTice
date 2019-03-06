@@ -13,6 +13,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+/// 설정 대학교 변경 뷰 컨트롤러.
 final class UniversityChangeViewController: UIViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()

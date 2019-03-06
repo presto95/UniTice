@@ -35,9 +35,9 @@ final class FooterRefreshViewReactor: Reactor {
     switch action {
     case .refresh:
       return .concat([
-        .just(.refresh(true)),
+        Observable.just(Mutation.refresh(true)),
         // 사이드 이펙트
-        .just(.refresh(false))
+        Observable.just(Mutation.refresh(false))
         ])
     }
   }
@@ -46,7 +46,7 @@ final class FooterRefreshViewReactor: Reactor {
     var state = state
     switch mutation {
     case let .refresh(isRefreshing):
-      state.isRefreshing = isRefeshing
+      state.isRefreshing = isRefreshing
     }
     return state
   }

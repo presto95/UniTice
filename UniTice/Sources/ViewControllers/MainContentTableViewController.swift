@@ -42,7 +42,7 @@ final class MainContentTableViewController: UITableViewController {
     }
   }
   
-  var universityModel: UniversityScrappable!
+  var universityModel: UniversityType!
   
   var category: (identifier: String, description: String) {
     return universityModel?.categories[categoryIndex] ?? ("", "")

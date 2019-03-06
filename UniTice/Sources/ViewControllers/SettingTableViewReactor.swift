@@ -30,34 +30,40 @@ extension SettingTableViewSection: SectionModelType {
   }
 }
 
+/// 설정 테이블 뷰 리액터.
 final class SettingTableViewReactor: Reactor {
   
   enum Action {
     
+    /// 알림 권한 상태 가져오기.
     case fetchNotificationStatus(Bool)
     
+    /// 상단 고정 게시물 스위치 토글.
     case toggleUpperPostFoldSwitch
-    
-    case setNotificationSwitch(Bool)
   }
   
   enum Mutation {
     
+    /// 알림 권한 상태 설정.
     case setNotificationStatus(Bool)
     
+    /// 상단 고정 게시물 스위치 토글.
     case toggleUpperPostFoldSwitch
   }
   
   struct State {
     
+    /// 섹션 모델.
     var sections: [SettingTableViewSection] = [
       SettingTableViewSection(footer: nil, items: ["상단 고정 게시물 펼치기"]),
       SettingTableViewSection(footer: nil, items: ["학교 변경", "키워드 설정", "알림 설정"]),
       SettingTableViewSection(footer: nil, items: ["문의하기", "앱 평가하기"])
     ]
     
+    /// 상단 고정 게시물이 펼쳐져 있는 상태인가.
     var isUpperPostFolded: Bool
     
+    /// 알림 권한이 허용된 상태인가.
     var isNotificationGranted: Bool
     
     init(isUpperPostFolded: Bool, isNotificationGranted: Bool) {
@@ -66,9 +72,11 @@ final class SettingTableViewReactor: Reactor {
     }
   }
   
-  let persistenceService: PersistenceServiceType
-  
+  /// 초기 상태.
   let initialState: State
+  
+  /// 데이터 보존 서비스.
+  let persistenceService: PersistenceServiceType
   
   init(persistenceService: PersistenceServiceType,
        isNotificationGranted: Bool,
@@ -84,8 +92,6 @@ final class SettingTableViewReactor: Reactor {
       return Observable.just(Mutation.setNotificationStatus(isGranted))
     case .toggleUpperPostFoldSwitch:
       return Observable.just(Mutation.toggleUpperPostFoldSwitch)
-    case let .setNotificationSwitch(isGranted):
-      return Observable.just(Mutation.setNotificationStatus(isGranted))
     }
   }
   

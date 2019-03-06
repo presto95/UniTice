@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 대학교를 정의한 열거형.
 enum University: String, CaseIterable {
   
   // MARK: A
@@ -137,7 +138,8 @@ enum University: String, CaseIterable {
 
 extension University {
   
-  var model: UniversityScrappable {
+  /// 각 대학교에 따른 모델.
+  var model: UniversityType {
     switch self {
     case .kaist:
       return KAIST()

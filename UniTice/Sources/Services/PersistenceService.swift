@@ -11,18 +11,22 @@ import Foundation
 import RealmSwift
 import RxSwift
 
-/// Realm 서비스 타입.
+/// 데이터 보존 서비스 타입.
 protocol PersistenceServiceType: class {
   
+  /// Realm 인스턴스.
   var realm: Realm { get }
   
   /// 사용자 추가.
+  @discardableResult
   func addUser(_ user: User) -> Observable<User>
   
   /// 북마크 추가.
+  @discardableResult
   func addBookmark(_ post: Post) -> Observable<Bookmark>
   
   /// 키워드 추가.
+  @discardableResult
   func addKeyword(_ keyword: String) -> Observable<String>
   
   /// 사용자 가져오기.
@@ -34,26 +38,36 @@ protocol PersistenceServiceType: class {
   /// 모든 키워드 가져오기.
   func fetchKeywords() -> Observable<[String]>
   
+  /// 대학교 가져오기.
+  func fetchUniversity() -> Observable<University>
+  
   /// 대학교 갱신하기.
+  @discardableResult
   func updateUniversity(_ university: University) -> Observable<University>
   
   /// 북마크 삭제하기.
+  @discardableResult
   func removeBookmark(at index: Int) -> Observable<Void>
   
   /// 모든 북마크 삭제하기.
+  @discardableResult
   func removeAllBookmarks() -> Observable<Void>
   
   /// 키워드 삭제하기.
+  @discardableResult
   func removeKeyword(at index: Int) -> Observable<Void>
   
   /// 모든 키워드 삭제하기.
+  @discardableResult
   func removeAllKeywords() -> Observable<Void>
   
   var isUpperPostFolded: Bool { get set }
 }
 
+/// 데이터 보존 서비스.
 final class PersistenceService: PersistenceServiceType {
   
+  /// PersistenceService Singleton Object.
   static let shared = PersistenceService()
   
   var realm: Realm {
@@ -123,6 +137,11 @@ final class PersistenceService: PersistenceServiceType {
     return fetchUser().flatMap { user in
       return Observable.just(Array(user.keywords))
     }
+  }
+  
+  func fetchUniversity() -> Observable<University> {
+    return fetchUser().flatMap { Observable.just($0.university) }
+      .map { University(rawValue: $0) ?? .kaist }
   }
   
   func updateUniversity(_ university: University) -> Observable<University> {

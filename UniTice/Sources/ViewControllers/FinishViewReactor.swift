@@ -10,20 +10,21 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
+/// 초기 설정 완료 뷰 리액터.
 final class FinishViewReactor: Reactor {
   
   enum Action {
     
-    case touchUpConfirmButton
+    case confirm
     
-    case touchUpBackButton
+    case back
   }
   
   enum Mutation {
     
-    case setConfirmButtonSelection(Bool)
+    case confirm
     
-    case setBackButtonSelection(Bool)
+    case back
     
     case saveInitialData
   }
@@ -37,29 +38,31 @@ final class FinishViewReactor: Reactor {
   
   let initialState: State = State()
   
+  let persistenceService: PersistenceServiceType
+  
+  init(persistenceService: PersistenceServiceType = PersistenceService.shared) {
+    self.persistenceService = persistenceService
+  }
+  
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case .touchUpConfirmButton:
+    case .confirm:
       return Observable.concat([
-        Observable.just(Mutation.setConfirmButtonSelection(true)),
         saveUser(),
-        Observable.just(Mutation.setConfirmButtonSelection(false))
+        Observable.just(Mutation.confirm)
         ])
-    case .touchUpBackButton:
-      return Observable.concat([
-        Observable.just(Mutation.setBackButtonSelection(true)),
-        Observable.just(Mutation.setBackButtonSelection(false))
-        ])
+    case .back:
+      return Observable.just(Mutation.back)
     }
   }
   
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-    case let .setConfirmButtonSelection(isConfirmButtonSelected):
-      state.isConfirmButtonSelected = isConfirmButtonSelected
-    case let .setBackButtonSelection(isBackButtonSelected):
-      state.isBackButtonSelected = isBackButtonSelected
+    case .confirm:
+      state.isConfirmButtonSelected = true
+    case .back:
+      state.isBackButtonSelected = true
     case .saveInitialData:
       break
     }
@@ -73,13 +76,13 @@ private extension FinishViewReactor {
   
   func saveUser() -> Observable<Mutation> {
     return Observable
-      .zip(InitialInfo.shared.university, InitialInfo.shared.keywords) { university, keywords in
-        let user = User()
-        user.university = university.rawValue
-        user.keywords.append(objectsIn: keywords)
-        User.add(user)
-        UniversityModel.shared.generateModel()
-        return .saveInitialData
+      .zip(InitialInfo.shared.university,
+           InitialInfo.shared.keywords) { [weak self] university, keywords in
+            let user = User()
+            user.university = university.rawValue
+            user.keywords.append(objectsIn: keywords)
+            self?.persistenceService.addUser(user)
+            return Mutation.saveInitialData
     }
   }
 }

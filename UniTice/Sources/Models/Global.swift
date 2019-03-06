@@ -10,7 +10,16 @@ import Foundation
 
 import RxSwift
 
-enum Global {
+protocol GlobalType: class {
   
-  static let university: PublishSubject<UniversityModel> = PublishSubject()
+  var university: PublishSubject<University> { get }
+}
+
+final class Global {
+  
+  static let shared = Global()
+  
+  private init() { }
+  
+  var university: PublishSubject<University> = PublishSubject<University>()
 }

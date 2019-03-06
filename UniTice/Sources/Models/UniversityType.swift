@@ -10,7 +10,8 @@ import Foundation
 
 import RxSwift
 
-protocol UniversityScrappable {
+/// 대학교 프로토콜.
+protocol UniversityType {
   
   /// HTML 파싱 매니저 타입.
   var htmlParseManager: HTMLParseManagerType { get }
@@ -51,9 +52,9 @@ protocol UniversityScrappable {
   func changeURLForMobile(_ baseURL: String, _ link: String) -> String
 }
 
-// MARK: - UniversityScrappable 프로토콜 초기 구현
+// MARK: - UniversityType 프로토콜 초기 구현
 
-extension UniversityScrappable {
+extension UniversityType {
   
   var htmlParseManager: HTMLParseManagerType {
     return HTMLParseManager.shared

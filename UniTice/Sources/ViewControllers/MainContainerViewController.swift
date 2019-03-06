@@ -14,7 +14,7 @@ import XLPagerTabStrip
 
 final class MainContainerViewController: ButtonBarPagerTabStripViewController {
   
-  private var universityModel: UniversityScrappable = UniversityModel.shared.universityModel {
+  private var universityModel: UniversityType = UniversityModel.shared.universityModel {
     didSet {
       (navigationItem.leftBarButtonItem?.customView as? UILabel)?.text = universityModel.name
     }
