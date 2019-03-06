@@ -44,7 +44,7 @@ private extension UniversityChangeViewController {
   
   func bindAction(_ reactor: UniversityChangeViewReactor) {
     confirmButton.rx.tap
-      .map { Reactor.Action.touchUpConfirmButton }
+      .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     pickerView.rx.itemSelected

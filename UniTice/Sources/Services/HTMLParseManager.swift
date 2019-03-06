@@ -8,15 +8,15 @@
 
 import Kanna
 
-protocol HTMLParseServiceType: class {
+protocol HTMLParseManagerType: class {
   func request(_ url: URL,
                encoding: String.Encoding,
                completion: @escaping (HTMLDocument?, Error?) -> Void)
 }
 
-final class HTMLParseService: HTMLParseServiceType {
+final class HTMLParseManager: HTMLParseManagerType {
   
-  static let shared = HTMLParseService()
+  static let shared = HTMLParseManager()
   
   func request(_ url: URL,
                encoding: String.Encoding = .utf8,

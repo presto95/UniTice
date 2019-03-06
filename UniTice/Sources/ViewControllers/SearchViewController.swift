@@ -9,16 +9,33 @@
 import SafariServices
 import UIKit
 
+import ReactorKit
+import RxCocoa
+import RxDataSources
+import RxSwift
 import SnapKit
 
-final class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController, StoryboardView {
+  
+  typealias Reactor = SearchViewReactor
+  
+  var disposeBag: DisposeBag = DisposeBag()
   
   private lazy var footerRefreshView
     = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
   
   private let universityModel = UniversityModel.shared.universityModel
   
-  private lazy var searchController = UISearchController(searchResultsController: nil)
+  private lazy var searchController = UISearchController(searchResultsController: nil).then {
+    $0.searchBar.placeholder = "제목"
+    //$0.searchBar.delegate = self
+    //$0.delegate = self
+    $0.hidesNavigationBarDuringPresentation = false
+  }
+  
+  var searchBar: UISearchBar {
+    return searchController.searchBar
+  }
   
   private var posts: [Post] = []
   
@@ -38,30 +55,69 @@ final class SearchViewController: UIViewController {
     }
   }
   
+  let headerView = UIView()
+  
+  let headerLabel = UILabel().then {
+    $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    registerForPreviewing(with: self, sourceView: tableView)
-    let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 48))
-    let label = UILabel()
-    label.text = "검색 카테고리 : \(category.description)"
-    label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-    headerView.addSubview(label)
-    label.snp.makeConstraints { maker in
-      maker.center.equalToSuperview()
-    }
-    tableView.tableHeaderView = headerView
-    tableView.tableFooterView = footerRefreshView
-    searchController.searchBar.placeholder = "제목"
-    searchController.delegate = self
-    searchController.searchBar.delegate = self
-    definesPresentationContext = true
-    navigationItem.titleView = searchController.searchBar
-    searchController.hidesNavigationBarDuringPresentation = false
+    setup()
+    //registerForPreviewing(with: self, sourceView: tableView)
+   
+//    let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 48))
+//    let label = UILabel()
+//    label.text = "검색 카테고리 : \(category.description)"
+//    label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+//    headerView.addSubview(label)
+//    label.snp.makeConstraints { maker in
+//      maker.center.equalToSuperview()
+//    }
+//    tableView.tableHeaderView = headerView
+//    tableView.tableFooterView = footerRefreshView
+//    searchController.searchBar.placeholder = "제목"
+//    searchController.delegate = self
+//    searchController.searchBar.delegate = self
+//    definesPresentationContext = true
+//    navigationItem.titleView = searchController.searchBar
+//    searchController.hidesNavigationBarDuringPresentation = false
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     searchController.isActive = true
+  }
+  
+  private func setup() {
+    registerForPreviewing(with: self, sourceView: tableView)
+    headerView.bounds.size.height = 48
+    headerView.addSubview(headerLabel)
+    headerLabel.snp.makeConstraints { $0.center.equalToSuperview() }
+    tableView.tableHeaderView = headerView
+    tableView.tableFooterView = footerRefreshView
+    definesPresentationContext = true
+    navigationItem.titleView = searchController.searchBar
+  }
+  
+  func bind(reactor: Reactor) {
+    searchController.rx.didPresent.asObservable()
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] _ in
+        self?.searchController.searchBar.becomeFirstResponder()
+      })
+      .disposed(by: disposeBag)
+    searchBar.rx.searchButtonClicked.asObservable()
+        .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] _ in
+        self?.searchController.isActive = false
+      })
+      .
+    reactor.state.map { $0.category }
+      .map { $0.description }
+      .bind(to: headerLabel.rx.text)
+      .disposed(by: disposeBag)
+    
   }
   
   private func requestPosts(searchText text: String) {
@@ -134,6 +190,8 @@ extension SearchViewController {
   }
 }
 
+// MARK: - UIViewControllerPreviewingDelegate 구현
+
 extension SearchViewController: UIViewControllerPreviewingDelegate {
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -166,10 +224,10 @@ extension SearchViewController: UISearchBarDelegate {
   }
 }
 
-extension SearchViewController: UISearchControllerDelegate {
-  func didPresentSearchController(_ searchController: UISearchController) {
-    DispatchQueue.main.async {
-      searchController.searchBar.becomeFirstResponder()
-    }
-  }
-}
+//extension SearchViewController: UISearchControllerDelegate {
+//  func didPresentSearchController(_ searchController: UISearchController) {
+//    DispatchQueue.main.async {
+//      searchController.searchBar.becomeFirstResponder()
+//    }
+//  }
+//}

@@ -23,7 +23,7 @@ struct KAIST: UniversityScrappable {
   }
   
   func requestPosts(inCategory category: KAIST.Category, inPage page: Int, searchText text: String, _ completion: @escaping (([Post]?, Error?) -> Void)) {
-    HTMLParseService.shared.request(pageURL(inCategory: category, inPage: page, searchText: text)) { doc, error in
+    HTMLParseManager.shared.request(pageURL(inCategory: category, inPage: page, searchText: text)) { doc, error in
       guard let doc = doc else {
         completion(nil, error)
         return

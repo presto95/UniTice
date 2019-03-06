@@ -18,14 +18,16 @@ final class UniversityChangeViewReactor: Reactor {
     
     case changeUniversity(University)
     
-    case touchUpConfirmButton
+    case confirm
   }
   
   enum Mutation {
     
     case setUniversity(University)
     
-    case setConfirmButtonSelection(Bool)
+    case confirm
+    
+    //case setConfirmButtonSelection(Bool)
   }
   
   struct State {
@@ -41,12 +43,13 @@ final class UniversityChangeViewReactor: Reactor {
     switch action {
     case let .changeUniversity(university):
       return Observable.just(Mutation.setUniversity(university))
-    case .touchUpConfirmButton:
-      return Observable.concat([
-        Observable.just(Mutation.setConfirmButtonSelection(true)),
-        resetUniversity(),
-        Observable.just(Mutation.setConfirmButtonSelection(false))
-        ])
+    case .confirm:
+      return Observable.just(Mutation.confirm)
+//      return Observable.concat([
+//        Observable.just(Mutation.setConfirmButtonSelection(true)),
+//        resetUniversity(),
+//        Observable.just(Mutation.setConfirmButtonSelection(false))
+//        ])
     }
   }
   
@@ -55,8 +58,10 @@ final class UniversityChangeViewReactor: Reactor {
     switch mutation {
     case let .setUniversity(university):
       state.university = university
-    case let .setConfirmButtonSelection(isSelected):
-      state.isConfirmButtonSelected = isSelected
+    case .confirm:
+      state.isConfirmButtonSelected = true
+//    case let .setConfirmButtonSelection(isSelected):
+//      state.isConfirmButtonSelected = isSelected
     }
     return state
   }

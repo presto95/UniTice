@@ -28,10 +28,6 @@ final class UniversitySelectionViewReactor: Reactor {
     case presentNext
     
     case presentMailComposer(Bool)
-    
-    //case setConfirmButtonSelection(Bool)
-    
-    //case setInfoButtonSelection(Bool)
   }
   
   struct State {
@@ -41,10 +37,6 @@ final class UniversitySelectionViewReactor: Reactor {
     var isPresentingNextScene: Bool = false
     
     var isInquiryButtonSelected: Bool = false
-    
-    //var isConfirmButtonSelected: Bool = false
-    
-    //var isInfoButtonSelected: Bool = false
   }
   
   let initialState: State = State()
@@ -55,10 +47,6 @@ final class UniversitySelectionViewReactor: Reactor {
       return Observable.just(Mutation.setUniversity(university))
     case .confirm:
       return Observable.just(Mutation.presentNext)
-//      return Observable.concat([
-//        Observable.just(Mutation.setConfirmButtonSelection(true)),
-//        Observable.just(Mutation.setConfirmButtonSelection(false))
-//        ])
     case .inquiry:
       return Observable.concat([
         Observable.just(Mutation.presentMailComposer(true)),
@@ -76,10 +64,6 @@ final class UniversitySelectionViewReactor: Reactor {
       state.isPresentingNextScene = true
     case let .presentMailComposer(isSelected):
       state.isInquiryButtonSelected = isSelected
-//    case let .setConfirmButtonSelection(isConfirmButtonSelected):
-//      state.isConfirmButtonSelected = isConfirmButtonSelected
-//    case let .setInfoButtonSelection(isInfoButtonSelected):
-//      state.isInfoButtonSelected = isInfoButtonSelected
     }
     return state
   }

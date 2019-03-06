@@ -30,7 +30,7 @@ struct 고려대학교: UniversityScrappable {
   }
   
   func requestPosts(inCategory category: 고려대학교.Category, inPage page: Int, searchText text: String = "", _ completion: @escaping (([Post]?, Error?) -> Void)) {
-    HTMLParseService.shared.request(pageURL(inCategory: category, inPage: page, searchText: text)) { doc, error in
+    HTMLParseManager.shared.request(pageURL(inCategory: category, inPage: page, searchText: text)) { doc, error in
       guard let doc = doc else {
         completion(nil, error)
         return
