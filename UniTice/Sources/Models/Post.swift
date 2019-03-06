@@ -17,6 +17,9 @@ struct Post: CustomStringConvertible {
   let date: String
   
   let link: String
+}
+
+extension Post: CustomStringConvertible {
   
   var description: String {
     return """

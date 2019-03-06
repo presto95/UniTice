@@ -8,6 +8,8 @@
 
 import Foundation
 
+import RxSwift
+
 final class UniversityModel {
   
   init() { universityModel = 서울과학기술대학교() }

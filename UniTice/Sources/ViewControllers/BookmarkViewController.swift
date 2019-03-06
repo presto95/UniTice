@@ -12,9 +12,13 @@ import UIKit
 import DZNEmptyDataSet
 import ReactorKit
 import RxCocoa
+import RxDataSources
 import RxSwift
+import RxViewController
 
 final class BookmarkViewController: UIViewController, StoryboardView {
+  
+  typealias Reactor = BookmarkViewReactor
   
   var disposeBag: DisposeBag = DisposeBag()
   
@@ -24,6 +28,8 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   
   private var bookmarks = User.fetch()?.bookmarks
   
+  var dataSource: RxTableViewSectionedReloadDataSource<BookmarkSection>!
+  
   @IBOutlet private weak var tableView: UITableView!
   
   override func viewDidLoad() {
@@ -31,34 +37,48 @@ final class BookmarkViewController: UIViewController, StoryboardView {
     setup()
   }
   
-  func bind(reactor: BookmarkViewReactor) {
-    reactor.state.map { $0.bookmarks }
-      .distinctUntilChanged()
-      .bind(to: tableView.rx.items(cellIdentifier: "postCell", cellType: PostCell.self)) { row, element, cell in
-        cell.textLabel?.attributedText = element.title.highlightKeywords(reactor.currentState.keywords)
-        cell.detailTextLabel?.text = element.date
-      }
+  func bind(reactor: Reactor) {
+    rx.viewDidLoad
+      .map { Reactor.Action.viewDidLoad }
+      .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    tableView.rx.itemSelected.asObservable()
-      .distinctUntilChanged()
+    dataSource = RxTableViewSectionedReloadDataSource<BookmarkSection>
+      .init(configureCell: { dataSource, tableView, indexPath, data in
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+        cell.textLabel?.attributedText = data.title.highlightKeywords(reactor.currentState.keywords)
+        cell.detailTextLabel?.text = data.date
+        return cell
+      })
+    dataSource.canEditRowAtIndexPath = { _, _ in true }
+    reactor.state.map { $0.bookmarks }
+      .map { bookmarks -> [BookmarkSection] in
+        return bookmarks.map {
+          BookmarkSection(items: [BookmarkSectionData(title: $0.title, date: $0.date)])
+        }
+      }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    tableView.rx.itemSelected
       .subscribe(onNext: { [weak self] indexPath in
         guard let self = self else { return }
         self.tableView.deselectRow(at: indexPath, animated: true)
-        self.safariViewController(at: indexPath.row).present(to: self)
+        self.makeSafariViewController(at: indexPath.row).present(to: self)
       })
+      .disposed(by: disposeBag)
+    tableView.rx.itemDeleted.asObservable()
+      .map { Reactor.Action.deleteBookmark($0.item) }
+      .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
   
   private func setup() {
     title = "북마크"
     registerForPreviewing(with: self, sourceView: tableView)
-    //tableView.delegate = self
-    //tableView.dataSource = self
     tableView.emptyDataSetSource = self
-    //tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
   }
   
-  private func safariViewController(at row: Int) -> SFSafariViewController {
+  private func makeSafariViewController(at row: Int) -> SFSafariViewController {
     let bookmark = bookmarks?[row]
     guard let url = URL(string: bookmark?.link ?? "") else {
       fatalError("invalid url format")
@@ -94,31 +114,15 @@ extension BookmarkViewController: UITableViewDelegate {
     let config = UISwipeActionsConfiguration(actions: [action])
     return config
   }
-  //
-  //  func tableView(_ tableView: UITableView,
-  //                 canEditRowAt indexPath: IndexPath) -> Bool {
-  //    return true
-  //  }
-  //
-  //  func tableView(_ tableView: UITableView,
-  //                 commit editingStyle: UITableViewCell.EditingStyle,
-  //                 forRowAt indexPath: IndexPath) {
-  //    if editingStyle == .delete {
-  //      if let bookmark = bookmarks?[indexPath.row] {
-  //        User.removeBookmark(bookmark)
-  //        tableView.deleteRows(at: [indexPath], with: .automatic)
-  //      }
-  //    }
-  //  }
 }
 
-// MARK: - Force Touch
+// MARK: - UIViewControllerPreviewDelegate 구현
 
 extension BookmarkViewController: UIViewControllerPreviewingDelegate {
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
     if let indexPath = tableView.indexPathForRow(at: location) {
-      return safariViewController(at: indexPath.row)
+      return makeSafariViewController(at: indexPath.row)
     }
     return nil
   }
@@ -132,6 +136,7 @@ extension BookmarkViewController: UIViewControllerPreviewingDelegate {
 // MARK: - DZNEmptyDataSetSource 구현
 
 extension BookmarkViewController: DZNEmptyDataSetSource {
+  
   func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
     return NSAttributedString(string: "기록 없음")
   }

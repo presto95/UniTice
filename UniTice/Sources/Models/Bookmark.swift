@@ -7,7 +7,6 @@
 //
 
 import RealmSwift
-import Then
 
 @objcMembers
 final class Bookmark: Object {
@@ -21,10 +20,11 @@ final class Bookmark: Object {
   dynamic var date: String = ""
   
   dynamic var link: String = ""
+}
+
+extension Bookmark {
   
   static var uniqueID: Int {
     return (try! Realm().objects(Bookmark.self).max(ofProperty: "index") as Int? ?? 0) + 1
   }
 }
-
-extension Bookmark: Then { }
