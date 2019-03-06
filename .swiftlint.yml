@@ -5,9 +5,10 @@ disabled_rules:
 
 excluded:
   - Pods/
-  - UniTice/Model
-  - UniTice/SwiftGens
+  - UniTice/Models/University
+  - UniTice/Utils/SwiftGen
   - UniTice/Supporting Files/AppDelegate.swift
+
 line_length:
   warning: 99
   error: 120

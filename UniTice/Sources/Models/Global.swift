@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-struct Global {
+enum Global {
   
-  var university: PublishSubject<UniversityModel> = PublishSubject()
+  static let university: PublishSubject<UniversityModel> = PublishSubject()
 }

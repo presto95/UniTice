@@ -7,27 +7,27 @@
 //
 
 import Kanna
+import RxSwift
 
 protocol HTMLParseManagerType: class {
-  func request(_ url: URL,
-               encoding: String.Encoding,
-               completion: @escaping (HTMLDocument?, Error?) -> Void)
+  
+  func request(_ url: URL, encoding: String.Encoding) -> Observable<HTMLDocument>
 }
 
 final class HTMLParseManager: HTMLParseManagerType {
   
   static let shared = HTMLParseManager()
   
-  func request(_ url: URL,
-               encoding: String.Encoding = .utf8,
-               completion: @escaping (HTMLDocument?, Error?) -> Void) {
-    DispatchQueue.global(qos: .background).async {
+  func request(_ url: URL, encoding: String.Encoding = .utf8) -> Observable<HTMLDocument> {
+    return Observable.create { observer in
       do {
-        let doc = try HTML(url: url, encoding: encoding)
-        completion(doc, nil)
+        let document = try HTML(url: url, encoding: encoding)
+        observer.onNext(document)
+        observer.onCompleted()
       } catch {
-        completion(nil, error)
+        observer.onError(error)
       }
+      return Disposables.create()
     }
   }
 }
