@@ -12,30 +12,31 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
+/// 설정 키워드 설정 뷰 리액터.
 final class KeywordSettingViewReactor: Reactor {
   
   enum Action {
     
-    case viewDidLoad
+    case didPresent
     
-    case touchUpAddButton
+    case addKeyword(String?)
+
+    case register
     
-    case touchUpRegisterButton(keyword: String)
-    
-    case touchUpDeleteKeyword(index: Int)
+    case deleteKeyword(at: Int)
   }
   
   enum Mutation {
     
-    case setAddButtonSelection(Bool)
+    case add
+
+    case register
     
-    case setRegisterButtonSelection(Bool)
+    case setKeywords([String])
     
-    case initializeKeywords([String])
+    case addKeyword(String?)
     
-    case addKeyword(String)
-    
-    case deleteKeyword(index: Int)
+    case deleteKeyword(at: Int)
   }
   
   struct State {
@@ -45,10 +46,6 @@ final class KeywordSettingViewReactor: Reactor {
     var isRegisterButtonSelected: Bool = false
     
     var keywords: [String] = []
-    
-    var numberOfKeywords: Int {
-      return keywords.count
-    }
   }
   
   let initialState: State = State()

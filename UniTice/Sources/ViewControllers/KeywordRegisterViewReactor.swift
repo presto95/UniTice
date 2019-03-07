@@ -14,29 +14,35 @@ final class KeywordRegisterViewReactor: Reactor {
   
   enum Action {
     
-    case touchUpConfirmButton
+    case confirm
     
-    case touchUpBackButton
+    case back
     
-    case addKeyword(String?)
+    case inputKeyword(String?)
+    
+    case addKeyword
     
     case removeKeyword(index: Int)
   }
   
   enum Mutation {
     
-    case setConfirmButtonSelection(Bool)
+    case confirm
     
-    case setBackButtonSelection(Bool)
+    case back
     
-    case addKeyword(String?)
+    case setKeyword(String?)
     
-    case removeKeyword(index: Int)
+    case addKeyword
+    
+    case removeKeyword(at: Int)
   }
   
   struct State {
     
-    var keywords: [String?] = []
+    var currentKeyword: String?
+    
+    var keywords: [String] = []
     
     var isConfirmButtonSelected: Bool = false
     
@@ -47,32 +53,29 @@ final class KeywordRegisterViewReactor: Reactor {
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case .touchUpConfirmButton:
-      return Observable.concat([
-        Observable.just(Mutation.setConfirmButtonSelection(true)),
-        Observable.just(Mutation.setConfirmButtonSelection(false))
-        ])
-    case .touchUpBackButton:
-      return Observable.concat([
-        Observable.just(Mutation.setBackButtonSelection(true)),
-        Observable.just(Mutation.setBackButtonSelection(false))
-        ])
-    case let .addKeyword(keyword):
-      return Observable.just(Mutation.addKeyword(keyword))
+    case .confirm:
+      return Observable.just(Mutation.confirm)
+    case .back:
+      return Observable.just(Mutation.back)
+    case let .inputKeyword(keyword):
+      return Observable.just(Mutation.setKeyword(keyword))
+    case .addKeyword:
+      return Observable.just(Mutation.addKeyword)
     case let .removeKeyword(index):
-      return Observable.just(Mutation.removeKeyword(index: index))
-    }
-  }
+      return Observable.just(Mutation.removeKeyword(at: index))
+    }  }
   
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-    case let .setConfirmButtonSelection(isConfirmButtonSelected):
-      state.isConfirmButtonSelected = isConfirmButtonSelected
-    case let .setBackButtonSelection(isBackButtonSelected):
-      state.isBackButtonSelected = isBackButtonSelected
-    case let .addKeyword(keyword):
-      state.keywords.append(keyword)
+    case .confirm:
+      state.isConfirmButtonSelected = true
+    case .back:
+      state.isBackButtonSelected = true
+    case let .setKeyword(keyword):
+      state.currentKeyword = keyword
+    case .addKeyword:
+      state.keywords.insert(state.currentKeyword ?? "", at: 0)
     case let .removeKeyword(index):
       state.keywords.remove(at: index)
     }

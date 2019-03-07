@@ -10,27 +10,21 @@ import UIKit
 
 import ReactorKit
 import RxCocoa
+import RxDataSources
 import RxSwift
 import RxViewController
 import SnapKit
 
+/// 설정 키워드 설정 뷰 컨트롤러.
 final class KeywordSettingViewController: UIViewController, StoryboardView {
   
-  private enum CellIdentifier {
-    
-    static let `default` = "cell"
-  }
+  typealias Reactor = KeywordSettingViewReactor
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  //private var keywords: [String] = []
+  var dataSource: RxTableViewSectionedReloadDataSource<SectionModel<Void, String>>!
   
-  private lazy var addButton: UIBarButtonItem = {
-    return UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
-//    return UIBarButtonItem(barButtonSystemItem: .add,
-//                           target: self,
-//                           action: #selector(addButtonDidTap(_:)))
-  }()
+  let registerButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
   
   @IBOutlet private weak var tableView: UITableView!
   
@@ -39,74 +33,84 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
     setup()
   }
   
-  func bind(reactor: KeywordSettingViewReactor) {
-    rx.viewDidLoad.asObservable()
-      .map { Reactor.Action.viewDidLoad }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-    reactor.state.map { $0.isAddButtonSelected }
-      .distinctUntilChanged()
-      .filter { $0 }
-      .subscribe(onNext: { _ in
-        if reactor.currentState.numberOfKeywords >= 3 {
-          UIAlertController
-            .alert(title: "", message: "키워드는 3개까지만 등록 가능합니다.")
-            .action(title: "확인")
-            .present(to: self)
-        } else {
-          UIAlertController
-            .alert(title: "", message: "키워드 등록")
-            .textField()
-            .action(title: "확인") { [weak self, weak reactor] _, textFields in
-              guard let self = self, let reactor = reactor else { return }
-              let text = textFields?.first?.text?.replacingOccurrences(of: " ", with: "")
-              Observable
-                .just(Void())
-                .map { Reactor.Action.touchUpRegisterButton(text ?? "") }
-                .bind(to: reactor.action)
-                .disposed(by: self.disposeBag)
-//              if let text = textFields?.first?.text?.replacingOccurrences(of: " ", with: "") {
-//                User.insertKeyword(text) { isDuplicated in
-//                  if !isDuplicated {
-//                    self.reactor?.currentState.keywords.insert(text, at: 0)
-//                    self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-//                  } else {
-//                    UIAlertController
-//                      .alert(title: "", message: "키워드 중복")
-//                      .action(title: "확인")
-//                      .present(to: self)
-//                  }
-//                }
-//              }
-            }
-            .action(title: "취소")
-            .present(to: self)
-        }
-      })
-      .disposed(by: disposeBag)
-    reactor.state.map { $0.keywords }
-      .distinctUntilChanged()
-      .bind(to: tableView.rx.items(cellIdentifier: CellIdentifier.default)) { _, element, cell in
-        cell.textLabel?.text = element
-      }
-      .disposed(by: disposeBag)
-    addButton.rx.tap.asObservable()
-      .map { Reactor.Action.touchUpAddButton }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindDataSource()
+    bindUI()
   }
   
   private func setup() {
     title = "키워드 설정"
-    navigationItem.setRightBarButton(addButton, animated: false)
-    //tableView.delegate = self
-    //tableView.dataSource = self
+    navigationItem.setRightBarButton(registerButtonItem, animated: false)
     tableView.allowsSelection = false
-//    if let keywords = User.fetch()?.keywords {
-//      self.keywords = keywords.map { "\($0)" }
-//    }
+  }
+}
+
+// MARK: - Reactor Binding
+
+private extension KeywordSettingViewController {
+  
+  func bindAction(_ reactor: Reactor) {
+    rx.viewDidLoad
+      .map { Reactor.Action.didPresent }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    registerButtonItem.rx.tap
+      .map { Reactor.Action.register }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
   
+  func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.keywords }
+      .map { keywords -> [SectionModel<Void, String>] in
+        return [SectionModel(model: Void(), items: keywords)]
+      }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+  }
+  
+  func bindDataSource() {
+    dataSource = RxTableViewSectionedReloadDataSource<SectionModel<Void, String>>
+      .init(configureCell: { dataSource, tableView, indexPath, keyword in
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = keyword
+        return cell
+      })
+    dataSource.canEditRowAtIndexPath = { _, _ in true }
+  }
+  
+  func bindUI() {
+    
+  }
+}
+
+// MARK: - Private Method
+
+private extension KeywordSettingViewController {
+  
+  func presentKeywordSettingAlertController() -> Observable<String?> {
+    return Observable<String?>.create { observer in
+      let alert = UIAlertController
+        .alert(title: "", message: "등록할 키워드를 입력하세요.")
+        .textField()
+        .action(title: "확인", style: .default) { _, textFields in
+          if let text = textFields?.first?.text {
+            observer.onNext(text)
+          }
+          observer.onCompleted()
+        }
+        .action(title: "취소", style: .cancel) { _, _ in
+          observer.onCompleted()
+        }
+      return Disposables.create {
+        alert.dismiss(animated: true, completion: nil)
+      }
+    }
+  }
+}
+
 //  @objc private func addButtonDidTap(_ sender: UIBarButtonItem) {
 //    if keywords.count >= 3 {
 //      UIAlertController
@@ -136,7 +140,7 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
 //        .present(to: self)
 //    }
 //  }
-}
+
 
 //extension KeywordSettingViewController: UITableViewDataSource {
 //  

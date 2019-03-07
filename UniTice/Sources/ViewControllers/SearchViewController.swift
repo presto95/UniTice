@@ -139,6 +139,11 @@ private extension SearchViewController {
   }
   
   func bindUI() {
+    tableView.rx.itemSelected
+      .subscribe(onNext: { [weak self] indexPath in
+        self?.tableView.deselectRow(at: indexPath, animated: true)
+      })
+      .disposed(by: disposeBag)
     tableView.rx.modelSelected(UTSectionData.self)
       .subscribe(onNext: { [weak self] sectionData in
         guard let self = self else { return }
@@ -149,18 +154,18 @@ private extension SearchViewController {
   }
 }
 
-extension SearchViewController: UITableViewDelegate {
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
+//extension SearchViewController: UITableViewDelegate {
+//
+//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    tableView.deselectRow(at: indexPath, animated: true)
 //    let post = posts[indexPath.row]
 //    let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
 //    let fullLinkString = fullLink.absoluteString
 //    let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
 //    User.insertBookmark(bookmark)
 //    present(safariViewController(url: fullLink), animated: true)
-  }
-}
+//  }
+//}
 
 // MARK: - UIViewControllerPreviewingDelegate 구현
 

@@ -33,40 +33,10 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   }
   
   func bind(reactor: Reactor) {
-    rx.viewDidLoad
-      .map { Reactor.Action.viewDidLoad }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-    dataSource = RxTableViewSectionedReloadDataSource<UTSection>
-      .init(configureCell: { dataSource, tableView, indexPath, data in
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-        cell.textLabel?.attributedText
-          = data.title.highlightKeywords(reactor.currentState.keywords)
-        cell.detailTextLabel?.text = data.date
-        return cell
-      })
-    dataSource.canEditRowAtIndexPath = { _, _ in true }
-    reactor.state.map { $0.bookmarks }
-      .map { bookmarks -> [UTSection] in
-        return bookmarks.map {
-          UTSection(items: [UTSectionData(title: $0.title,
-                                          date: $0.date,
-                                          link: $0.link)])
-        }
-      }
-      .bind(to: tableView.rx.items(dataSource: dataSource))
-      .disposed(by: disposeBag)
-    tableView.rx.itemSelected
-      .subscribe(onNext: { [weak self] indexPath in
-        guard let self = self else { return }
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        self.makeSafariViewController(at: indexPath.row).present(to: self)
-      })
-      .disposed(by: disposeBag)
-    tableView.rx.itemDeleted.asObservable()
-      .map { Reactor.Action.deleteBookmark($0.item) }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
+    bindAction(reactor)
+    bindState(reactor)
+    bindDataSource(reactor)
+    bindUI()
   }
   
   private func setup() {
@@ -81,7 +51,50 @@ final class BookmarkViewController: UIViewController, StoryboardView {
 
 private extension BookmarkViewController {
   
+  func bindAction(_ reactor: Reactor) {
+    rx.viewDidLoad
+      .map { Reactor.Action.viewDidLoad }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    tableView.rx.itemDeleted.asObservable()
+      .map { Reactor.Action.deleteBookmark($0.item) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
   
+  func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.bookmarks }
+      .map { bookmarks in
+        let items = bookmarks.map {
+          return UTSectionData(title: $0.title, date: $0.date, link: $0.link)
+        }
+        return [UTSection(items: items)]
+      }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+  }
+  
+  func bindDataSource(_ reactor: Reactor) {
+    dataSource = RxTableViewSectionedReloadDataSource<UTSection>
+      .init(configureCell: { dataSource, tableView, indexPath, data in
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+        cell.textLabel?.attributedText
+          = data.title.highlightKeywords(reactor.currentState.keywords)
+        cell.detailTextLabel?.text = data.date
+        return cell
+      })
+    dataSource.canEditRowAtIndexPath = { _, _ in true }
+  }
+  
+  func bindUI() {
+    tableView.rx.itemSelected
+      .subscribe(onNext: { [weak self] indexPath in
+        guard let self = self else { return }
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.makeSafariViewController(at: indexPath.row).present(to: self)
+      })
+      .disposed(by: disposeBag)
+  }
 }
 
 // MARK: - UIViewControllerPreviewDelegate 구현
@@ -95,8 +108,8 @@ extension BookmarkViewController: UIViewControllerPreviewingDelegate {
     return nil
   }
   
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit
-    viewControllerToCommit: UIViewController) {
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         commit viewControllerToCommit: UIViewController) {
     present(viewControllerToCommit, animated: true, completion: nil)
   }
 }

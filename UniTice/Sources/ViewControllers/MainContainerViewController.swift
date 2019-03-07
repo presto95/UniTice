@@ -10,15 +10,28 @@ import StoreKit
 import UIKit
 import UserNotifications
 
+import ReactorKit
+import RxCocoa
+import RxSwift
 import XLPagerTabStrip
 
-final class MainContainerViewController: ButtonBarPagerTabStripViewController {
+final class MainContainerViewController: ButtonBarPagerTabStripViewController, StoryboardView {
+  
+  typealias Reactor = MainContainerViewReactor
+  
+  var disposeBag: DisposeBag = DisposeBag()
   
   private var universityModel: UniversityType = UniversityModel.shared.universityModel {
     didSet {
       (navigationItem.leftBarButtonItem?.customView as? UILabel)?.text = universityModel.name
     }
   }
+  
+  @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
+  
+  @IBOutlet private weak var searchButtonItem: UIBarButtonItem!
+  
+  @IBOutlet private weak var bookmarkButtonItem: UIBarButtonItem!
   
   override func viewDidLoad() {
     setupButtonBar()
@@ -41,27 +54,77 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController {
   
   override func viewControllers(
     for pagerTabStripController: PagerTabStripViewController
-    ) -> [UIViewController] {
-    var viewControllers = [UITableViewController]()
-    for index in universityModel.categories.indices {
-      let contentViewController = MainContentTableViewController()
-      contentViewController.categoryIndex = index
-      contentViewController.universityModel = universityModel
+  ) -> [UIViewController] {
+    var viewControllers: [UITableViewController] = []
+    universityModel.categories.indices.forEach { index in
+      let contentViewController = MainContentTableViewController().then {
+        $0.categoryIndex = index
+        $0.universityModel = universityModel
+      }
       viewControllers.append(contentViewController)
     }
     return viewControllers
   }
   
-  @IBAction private func searchButtonDidTap(_ sender: UIBarButtonItem) {
-    let next = StoryboardScene.Main.searchViewController.instantiate()
-    next.category
-      = (viewControllers(for: self)[currentIndex] as? MainContentTableViewController)?.category
-    navigationController?.pushViewController(next, animated: true)
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindUI()
+  }
+//
+//  @IBAction private func searchButtonDidTap(_ sender: UIBarButtonItem) {
+//    let next = StoryboardScene.Main.searchViewController.instantiate()
+//    next.category
+//      = (viewControllers(for: self)[currentIndex] as? MainContentTableViewController)?.category
+//    navigationController?.pushViewController(next, animated: true)
+//  }
+}
+
+// MARK: - Reactor Binding
+
+private extension MainContainerViewController {
+  
+  func bindAction(_ reactor: Reactor) {
+    settingButtonItem.rx.tap
+      .map { Reactor.Action.setting }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    searchButtonItem.rx.tap
+      .map { Reactor.Action.search }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    bookmarkButtonItem.rx.tap
+      .map { Reactor.Action.bookmark }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+  
+  func bindState(_ reactor: Reactor) {
+    
+  }
+  
+  func bindUI() {
+    
   }
 }
 
-extension MainContainerViewController {
-  private func setupUniversityLabel() {
+// MARK: - Private Method
+
+private extension MainContainerViewController {
+  
+  func makeUniversityLabel() -> UILabel {
+    return UILabel().then {
+      $0.text = universityModel.name
+      $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+      $0.sizeToFit()
+    }
+  }
+  
+  func makeLeftBarButtonItem() -> UIBarButtonItem {
+    return UIBarButtonItem()
+  }
+  
+  func setupUniversityLabel() {
     let universityLabel = UILabel()
     universityLabel.text = universityModel.name
     universityLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -70,7 +133,7 @@ extension MainContainerViewController {
     navigationItem.setLeftBarButton(leftBarButtonItem, animated: false)
   }
   
-  private func setupButtonBar() {
+  func setupButtonBar() {
     settings.style.selectedBarHeight = 5
     settings.style.selectedBarBackgroundColor = .main
     settings.style.buttonBarBackgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
@@ -79,12 +142,13 @@ extension MainContainerViewController {
     settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
   }
   
-  private func registerLocalNotification() {
+  func registerLocalNotification() {
     let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
     UNUserNotificationCenter.current()
       .requestAuthorization(options: authOptions) { isGranted, error in
         if let error = error {
-          fatalError(error.localizedDescription)
+          errorLog(error.localizedDescription)
+          // fatalError(error.localizedDescription)
         }
         if !UserDefaults.standard.bool(forKey: "showsAlertIfPermissionDenied") {
           let content = UNMutableNotificationContent()

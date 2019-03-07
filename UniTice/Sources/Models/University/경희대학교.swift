@@ -36,7 +36,7 @@ struct 경희대학교: UniversityType {
         var posts = [Post]()
         let numbers = document.xpath("//tbody//td[@class='col01']")
         let titles = document.xpath("//tbody//p[@class='txt06']")
-        let categories = doc.xpath("//tbody//td[@class='col02']//span[@class='txtBox01 common']")
+        let categories = document.xpath("//tbody//td[@class='col02']//span[@class='txtBox01 common']")
         let dates = document.xpath("//tbody//td[@class='col04']")
         let links = document.xpath("//tbody//td[@class='col02']//a/@href")
         links.enumerated().forEach { index, element in
