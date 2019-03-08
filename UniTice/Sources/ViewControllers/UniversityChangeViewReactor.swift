@@ -82,13 +82,13 @@ private extension UniversityChangeViewReactor {
   
   func resetUniversity() -> Observable<Mutation> {
     let university = currentState.university ?? .kaist
+    Global.shared.university.onNext(university)
     return Observable
       .combineLatest(persistenceService.updateUniversity(university),
                      persistenceService.removeAllKeywords(),
                      persistenceService.removeAllBookmarks()) { _, _, _ in
                       return Mutation.confirm
     }
-    //UniversityModel.shared.generateModel()
-    //return .empty()
+    
   }
 }

@@ -22,6 +22,7 @@
 		17896B715811B5132A703FC7F2BAACB8 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFF6616EB1488F1B4D8F2CD44501081 /* PostCell.swift */; };
 		17B6C087CD479AE77D76238D70BE7127 /* FooterRefreshViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1907767E6F7ACDA586066B8CAC0DC /* FooterRefreshViewReactor.swift */; };
 		191A70D7222FF8E70028E3A8 /* UTSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A70D6222FF8E70028E3A8 /* UTSection.swift */; };
+		191A70DB22311D4B0028E3A8 /* MainContentTableViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A70DA22311D4B0028E3A8 /* MainContentTableViewReactor.swift */; };
 		196772F4D9557518EEB45A2635D04A99 /* KAIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6293BDADFC5B65302A8752BCCB5C1371 /* KAIST.swift */; };
 		198DC83E125DEE96B175EA588947E44A /* 덕성여자대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463C666BC7581143AD615A933F3D767B /* 덕성여자대학교.swift */; };
 		1A3B5C22F61AE1A224285A4A0BA46E35 /* 경상대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF6FBFE220574803F4A6DFD860A40B9 /* 경상대학교.swift */; };
@@ -146,6 +147,7 @@
 		117058885D273C35A1BD629068D3BF00 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		12F490B0A59E711BB21EFE8D29D18A2B /* 총신대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "총신대학교.swift"; sourceTree = "<group>"; };
 		191A70D6222FF8E70028E3A8 /* UTSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTSection.swift; sourceTree = "<group>"; };
+		191A70DA22311D4B0028E3A8 /* MainContentTableViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentTableViewReactor.swift; sourceTree = "<group>"; };
 		19802C4B7162EF2843B92103CA48AE6B /* 고려대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "고려대학교.swift"; sourceTree = "<group>"; };
 		19D4E9CD6732AEF55BBAE3F2A8A78707 /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		1E831692CDE5E3F0A6460580387AFAE2 /* 제주대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "제주대학교.swift"; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				19D4E9CD6732AEF55BBAE3F2A8A78707 /* MainContainerViewController.swift */,
 				8439848A8B96F13A366BBC7EA855C251 /* MainContainerViewReactor.swift */,
 				FB58EBAF3E6B5E052E258577EE7441C6 /* MainContentTableViewController.swift */,
+				191A70DA22311D4B0028E3A8 /* MainContentTableViewReactor.swift */,
 				76E689ECAF5504FAA5C8533CEDCEDF63 /* SearchViewController.swift */,
 				7FA96230FA183B3F4B9713A551BFAB18 /* SearchViewReactor.swift */,
 				AD7DF4E8C9D370FE25717220BF9FB3C8 /* SettingTableViewController.swift */,
@@ -889,6 +892,7 @@
 				E509728FD07597F42A2556592E3B6F16 /* 이화여자대학교.swift in Sources */,
 				33E082F6225F2F7F05FCEF0724656FF7 /* 전남대학교.swift in Sources */,
 				426D7170809FB89FD5ADB170D311B409 /* 전북대학교.swift in Sources */,
+				191A70DB22311D4B0028E3A8 /* MainContentTableViewReactor.swift in Sources */,
 				F736E1812C96DE2070620C540B18FF4F /* 제주대학교.swift in Sources */,
 				2BF5CBDA06D6FB2E7DC9CEA18BB99BDD /* 총신대학교.swift in Sources */,
 				77EB44ED1C4391CD1F9D4615DB7DDBF8 /* 충남대학교.swift in Sources */,

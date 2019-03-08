@@ -25,6 +25,13 @@ struct 명지대학교: UniversityType {
     ]
   }
   
+  func postURL(inCategory category: Category, uri link: String) -> URL? {
+    let mjuLink = link.replacingOccurrences(of: "view", with: "view_mobile")
+    let mjuBaseURL = baseURL.replacingOccurrences(of: "mjukr", with: "mjumob")
+    let fullLink = "\(mjuBaseURL)\(mjuLink.percentEncoding)"
+    return URL(string: fullLink)
+  }
+  
   func requestPosts(inCategory category: Category, inPage page: Int, searchText text: String) -> Observable<[Post]> {
     guard let url = pageURL(inCategory: category, inPage: page, searchText: text)
       else { return .empty() }

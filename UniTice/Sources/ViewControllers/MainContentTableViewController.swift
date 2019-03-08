@@ -9,61 +9,72 @@
 import SafariServices
 import UIKit
 
+import ReactorKit
+import RxCocoa
+import RxDataSources
+import RxSwift
 import SnapKit
 import XLPagerTabStrip
 
-final class MainContentTableViewController: UITableViewController {
+final class MainContentTableViewController: UITableViewController, StoryboardView {
   
-  private lazy var keywords = (User.fetch()?.keywords)!
+  typealias Reactor = MainContentTableViewReactor
   
-  private var posts: [Post] = []
+  // MARK: Property
   
-  private var fixedPosts: [Post] {
-    get {
-      return posts.filter { $0.number == 0 }
-    }
-    set {
-      posts.append(contentsOf: newValue)
-    }
-    
-  }
+//  private lazy var keywords = (User.fetch()?.keywords)!
+//
+//  private var posts: [Post] = []
+//
+//  private var fixedPosts: [Post] {
+//    get {
+//      return posts.filter { $0.number == 0 }
+//    }
+//    set {
+//      posts.append(contentsOf: newValue)
+//    }
+//
+//  }
+//
+//  private var standardPosts: [Post] {
+//    return posts.filter { $0.number != 0 }
+//  }
   
-  private var standardPosts: [Post] {
-    return posts.filter { $0.number != 0 }
-  }
+//  private var isFixedNoticeFolded = UserDefaults.standard.bool(forKey: "fold")
+//
+//  var categoryIndex: Int!
+//
+//  var page: Int = 1 {
+//    didSet {
+//      requestPosts()
+//    }
+//  }
   
-  private var isFixedNoticeFolded = UserDefaults.standard.bool(forKey: "fold")
+  //var universityModel: UniversityType!
   
-  var categoryIndex: Int!
-  
-  var page: Int = 1 {
-    didSet {
-      requestPosts()
-    }
-  }
-  
-  var universityModel: UniversityType!
-  
-  var category: (identifier: String, description: String) {
-    return universityModel?.categories[categoryIndex] ?? ("", "")
-  }
+//  var category: (identifier: String, description: String) {
+//    return universityModel?.categories[categoryIndex] ?? ("", "")
+//  }
   
   private lazy var footerRefreshView
     = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
   
+  // MARK: Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = category.description
-    registerForPreviewing(with: self, sourceView: tableView)
+    setup()
+//    title = category.description
+//    registerForPreviewing(with: self, sourceView: tableView)
     refreshControl = UIRefreshControl()
     refreshControl?.addTarget(self,
                               action: #selector(didRefreshControlActivate(_:)),
                               for: .valueChanged)
-    tableView.tableFooterView = footerRefreshView
-    tableView.backgroundColor = .groupTableViewBackground
-    tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-    tableView.separatorColor = .main
-    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+//    tableView.tableFooterView = footerRefreshView
+//    tableView.backgroundColor = .groupTableViewBackground
+//    tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+//    tableView.separatorColor = .main
+//    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +82,17 @@ final class MainContentTableViewController: UITableViewController {
     if posts.isEmpty {
       requestPosts()
     }
+  }
+  
+  private func setup() {
+    title = reactor?.currentState.category.description
+    registerForPreviewing(with: self, sourceView: tableView)
+    tableView.tableFooterView = footerRefreshView
+    tableView.backgroundColor = .groupTableViewBackground
+    tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+    tableView.separatorColor = .main
+    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+
   }
   
   @objc private func didRefreshControlActivate(_ sender: UIRefreshControl) {
@@ -103,15 +125,39 @@ final class MainContentTableViewController: UITableViewController {
     }
   }
   
-  private func safariViewController(url: URL) -> SFSafariViewController {
-    print(url.absoluteString)
-    let config = SFSafariViewController.Configuration()
-    config.barCollapsingEnabled = true
-    config.entersReaderIfAvailable = true
-    let viewController = SFSafariViewController(url: url, configuration: config)
-    viewController.preferredControlTintColor = .main
-    viewController.dismissButtonStyle = .close
+  private func makeSafariViewController(url: URL) -> SFSafariViewController {
+    let config = SFSafariViewController.Configuration().then {
+      $0.barCollapsingEnabled = true
+      $0.entersReaderIfAvailable = true
+    }
+    let viewController = SFSafariViewController(url: url, configuration: config).then {
+      $0.preferredControlTintColor = .main
+      $0.dismissButtonStyle = .none
+    }
     return viewController
+  }
+  
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindUI()
+  }
+}
+
+// MARK: - Reactor Binding
+
+private extension MainContentTableViewController {
+  
+  func bindAction(_ reactor: Reactor) {
+    
+  }
+  
+  func bindState(_ reactor: Reactor) {
+    
+  }
+  
+  func bindUI() {
+    
   }
 }
 

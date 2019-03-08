@@ -21,11 +21,11 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  private var universityModel: UniversityType = UniversityModel.shared.universityModel {
-    didSet {
-      (navigationItem.leftBarButtonItem?.customView as? UILabel)?.text = universityModel.name
-    }
-  }
+//  private var universityModel: UniversityType = UniversityModel.shared.universityModel {
+//    didSet {
+//      (navigationItem.leftBarButtonItem?.customView as? UILabel)?.text = universityModel.name
+//    }
+//  }
   
   @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
   
@@ -36,8 +36,7 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   override func viewDidLoad() {
     setupButtonBar()
     super.viewDidLoad()
-    registerLocalNotification()
-    setupUniversityLabel()
+    setup()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -47,9 +46,7 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    if Int.random(in: 1...10) == 5 {
-      SKStoreReviewController.requestReview()
-    }
+    presentRatingAlertInRandom()
   }
   
   override func viewControllers(
@@ -70,6 +67,11 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
     bindAction(reactor)
     bindState(reactor)
     bindUI()
+  }
+  
+  private func setup() {
+    registerLocalNotification()
+    setupUniversityLabel()
   }
 //
 //  @IBAction private func searchButtonDidTap(_ sender: UIBarButtonItem) {
@@ -112,25 +114,19 @@ private extension MainContainerViewController {
 
 private extension MainContainerViewController {
   
+  func setupUniversityLabel() {
+    let label = makeUniversityLabel()
+    let barButtonItem = UIBarButtonItem()
+    barButtonItem.customView = label
+    navigationItem.setLeftBarButton(barButtonItem, animated: false)
+  }
+  
   func makeUniversityLabel() -> UILabel {
     return UILabel().then {
       $0.text = universityModel.name
       $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
       $0.sizeToFit()
     }
-  }
-  
-  func makeLeftBarButtonItem() -> UIBarButtonItem {
-    return UIBarButtonItem()
-  }
-  
-  func setupUniversityLabel() {
-    let universityLabel = UILabel()
-    universityLabel.text = universityModel.name
-    universityLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-    universityLabel.sizeToFit()
-    let leftBarButtonItem = UIBarButtonItem(customView: universityLabel)
-    navigationItem.setLeftBarButton(leftBarButtonItem, animated: false)
   }
   
   func setupButtonBar() {
@@ -172,6 +168,12 @@ private extension MainContainerViewController {
           }
         }
         UserDefaults.standard.set(true, forKey: "showsAlertIfPermissionDenied")
+    }
+  }
+  
+  func presentRatingAlertInRandom() {
+    if Int.random(in: 1...10) == 5 {
+      SKStoreReviewController.requestReview()
     }
   }
 }

@@ -27,7 +27,7 @@ protocol PersistenceServiceType: class {
   
   /// 키워드 추가.
   @discardableResult
-  func addKeyword(_ keyword: String) -> Observable<String>
+  func addKeyword(_ keyword: String?) -> Observable<String?>
   
   /// 사용자 가져오기.
   func fetchUser() -> Observable<User>
@@ -106,9 +106,10 @@ final class PersistenceService: PersistenceServiceType {
     }
   }
   
-  func addKeyword(_ keyword: String) -> Observable<String> {
-    return fetchUser().flatMap { [weak self] user -> Observable<String> in
+  func addKeyword(_ keyword: String?) -> Observable<String?> {
+    return fetchUser().flatMap { [weak self] user -> Observable<String?> in
       guard let self = self else { return .empty() }
+      guard let keyword = keyword else { return .empty() }
       let isRedundant = user.keywords.contains(keyword)
       if !isRedundant {
         try self.realm.write {

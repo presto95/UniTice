@@ -14,17 +14,19 @@ import ReactorKit
 import RxCocoa
 import RxDataSources
 import RxSwift
-import Then
 
 /// 설정 테이블 뷰.
 final class SettingTableViewController: UITableViewController, StoryboardView {
   
   typealias Reactor = SettingTableViewReactor
   
+  // MARK: Property
+  
   var disposeBag: DisposeBag = DisposeBag()
   
   var dataSource: RxTableViewSectionedReloadDataSource<SettingTableViewSection>!
   
+  /// 상단 고정 게시물 스위치.
   private let upperPostFoldingSwitch = UISwitch()
   
   override func viewDidLoad() {
@@ -139,6 +141,7 @@ private extension SettingTableViewController {
 // MARK: - MFMailComposeViewControllerDelegate 구현
 
 extension SettingTableViewController: MFMailComposeViewControllerDelegate {
+  
   func mailComposeController(_ controller: MFMailComposeViewController,
                              didFinishWith result: MFMailComposeResult,
                              error: Error?) {

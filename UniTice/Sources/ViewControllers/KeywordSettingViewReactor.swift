@@ -17,93 +17,81 @@ final class KeywordSettingViewReactor: Reactor {
   
   enum Action {
     
+    /// 뷰가 화면에 나타남.
     case didPresent
     
-    case addKeyword(String?)
-
+    /// 뷰에서 키워드 추가 버튼 누름.
     case register
     
+    /// 얼러트에서 확인 버튼 누름.
+    case alertConfirm(String?)
+    
+    /// 얼러트에서 취소 버튼 누름.
+    case alertCancel
+
+    /// 뷰에서 키워드 삭제.
     case deleteKeyword(at: Int)
   }
   
   enum Mutation {
-    
-    case add
 
-    case register
+    /// 키워드 추가 얼러트 띄움.
+    case presentAlert
     
+    /// 얼러트 숨기기.
+    case dismissAlert
+    
+    /// 초기 키워드 설정.
     case setKeywords([String])
     
+    /// 키워드 추가.
     case addKeyword(String?)
     
+    /// 키워드 삭제.
     case deleteKeyword(at: Int)
   }
   
   struct State {
-    
-    var isAddButtonSelected: Bool = false
-    
-    var isRegisterButtonSelected: Bool = false
     
     var keywords: [String] = []
   }
   
   let initialState: State = State()
   
+  let persistenceService: PersistenceServiceType
+  
+  init(persistenceService: PersistenceServiceType = PersistenceService.shared) {
+    self.persistenceService = persistenceService
+  }
+  
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case .viewDidLoad:
-      return fetchSavedKeywords()
-    case .touchUpAddButton:
-      return Observable.concat([
-        Observable.just(Mutation.setAddButtonSelection(true)),
-        Observable.just(Mutation.setAddButtonSelection(false))
-        ])
-    case let .touchUpRegisterButton(keyword):
-      return Observable.concat([
-        Observable.just(Mutation.setRegisterButtonSelection(true)),
-        saveKeyword(keyword),
-        Observable.just(Mutation.setRegisterButtonSelection(false))
-        ])
-    case let .touchUpDeleteKeyword(index):
-      
+    case .didPresent:
+      return persistenceService.fetchKeywords().map { Mutation.setKeywords($0) }
+    case .register:
+      return Observable.just(Mutation.presentAlert)
+    case let .alertConfirm(keyword):
+      return persistenceService.addKeyword(keyword)
+        .map { Mutation.addKeyword($0) }
+    case .alertCancel:
+      return Observable.just(Mutation.dismissAlert)
+    case let .deleteKeyword(index):
+      return persistenceService.removeKeyword(at: index).map { Mutation.deleteKeyword(at: index) }
     }
   }
   
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-    case let .setAddButtonSelection(isSelected):
-      state.isAddButtonSelected = isSelected
-    case let .initializeKeywords(keywords):
+    case let .setKeywords(keywords):
       state.keywords = keywords
     case let .addKeyword(keyword):
-      state.keywords.insert(keyword, at: 0)
+      state.keywords.insert(keyword ?? "", at: 0)
     case let .deleteKeyword(index):
       state.keywords.remove(at: index)
+    default:
+      break
     }
     return state
   }
 }
-
-// MARK: - Private Method
-
-private extension KeywordSettingViewReactor {
-  
-  func fetchSavedKeywords() -> Observable<Mutation> {
-    let keywords = Array(User.fetch()?.keywords.map { "\($0)" } ?? [])
-    return Observable
-      .just(keywords)
-      .map { Mutation.initializeKeywords($0) }
-  }
-  
-  func saveKeyword(_ keyword: String) -> Observable<Mutation> {
-    let isDuplicated = User.insertKeyword(keyword)
-    if isDuplicated {
-      return Observable.just(keyword).map { Mutation.addKeyword($0) }
-    } else {
-      return Observable.just(Void()).map { Mutation.addKeyword }
-    }
-  }
-}
-

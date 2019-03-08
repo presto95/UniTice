@@ -62,7 +62,7 @@ private extension KeywordSettingViewController {
       .disposed(by: disposeBag)
   }
   
-  func bindState(_ reactor: Reactor) {
+  func bindState(_ reactor: Reactor) {  
     reactor.state.map { $0.keywords }
       .map { keywords -> [SectionModel<Void, String>] in
         return [SectionModel(model: Void(), items: keywords)]
@@ -90,78 +90,25 @@ private extension KeywordSettingViewController {
 
 private extension KeywordSettingViewController {
   
-  func presentKeywordSettingAlertController() -> Observable<String?> {
-    return Observable<String?>.create { observer in
-      let alert = UIAlertController
-        .alert(title: "", message: "등록할 키워드를 입력하세요.")
-        .textField()
-        .action(title: "확인", style: .default) { _, textFields in
-          if let text = textFields?.first?.text {
-            observer.onNext(text)
-          }
-          observer.onCompleted()
-        }
-        .action(title: "취소", style: .cancel) { _, _ in
-          observer.onCompleted()
-        }
-      return Disposables.create {
-        alert.dismiss(animated: true, completion: nil)
+  func presentKeywordSettingAlertController() {
+    UIAlertController
+      .alert(title: "", message: "등록할 키워드를 입력하세요.")
+      .textField()
+      .action(title: "확인", style: .default) { [weak self, weak reactor] _, textFields in
+        guard let self = self else { return }
+        guard let reactor = reactor else { return }
+        let text = textFields?.first?.text
+        Observable.just(text).map { Reactor.Action.alertConfirm($0) }
+          .bind(to: reactor.action)
+          .disposed(by: self.disposeBag)
       }
-    }
+      .action(title: "취소", style: .cancel) { [weak self, weak reactor] _, _ in
+        guard let self = self else { return }
+        guard let reactor = reactor else { return }
+        Observable.empty().map { Reactor.Action.alertCancel }
+          .bind(to: reactor.action)
+          .disposed(by: self.disposeBag)
+      }
+      .present(to: self)
   }
 }
-
-//  @objc private func addButtonDidTap(_ sender: UIBarButtonItem) {
-//    if keywords.count >= 3 {
-//      UIAlertController
-//        .alert(title: "", message: "3개 이상은 안돼요!")
-//        .action(title: "확인")
-//        .present(to: self)
-//    } else {
-//      UIAlertController
-//        .alert(title: "", message: "키워드")
-//        .textField()
-//        .action(title: "확인") { _, textFields in
-//          if let text = textFields?.first?.text?.replacingOccurrences(of: " ", with: "") {
-//            User.insertKeyword(text) { isDuplicated in
-//              if !isDuplicated {
-//                self.keywords.insert(text, at: 0)
-//                self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
-//              } else {
-//                UIAlertController
-//                  .alert(title: "", message: "키워드 중복")
-//                  .action(title: "확인")
-//                  .present(to: self)
-//              }
-//            }
-//          }
-//        }
-//        .action(title: "취소", style: .cancel)
-//        .present(to: self)
-//    }
-//  }
-
-
-//extension KeywordSettingViewController: UITableViewDataSource {
-//  
-//  func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-//    return "최대 3개의 키워드를 등록할 수 있습니다. 현재 : \(keywords.count)개"
-//  }
-//}
-//
-//extension KeywordSettingViewController: UITableViewDelegate {
-//  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//    return true
-//  }
-//  
-//  func tableView(_ tableView: UITableView,
-//                 commit editingStyle: UITableViewCell.EditingStyle,
-//                 forRowAt indexPath: IndexPath) {
-//    if editingStyle == .delete {
-//      let keyword = keywords[indexPath.row]
-//      User.removeKeyword(keyword)
-//      keywords.remove(at: indexPath.row)
-//      tableView.reloadSections(IndexSet(0...0), with: .automatic)
-//    }
-//  }
-//}

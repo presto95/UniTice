@@ -1,11 +1,11 @@
 xcassets:
-  inputs: UniTice/Supporting Files/Assets.xcassets
+  inputs: UniTice/Resources/Assets.xcassets
   outputs:
     templateName: swift4
-    output: UniTice/SwiftGen/Assets.swift
+    output: UniTice/Utils/SwiftGen/Assets.swift
 
 ib:
   inputs: UniTice
   outputs:
     templateName: scenes-swift4
-    output: UniTice/SwiftGen/Storyboard.swift
+    output: UniTice/Utils/SwiftGen/Storyboard.swift

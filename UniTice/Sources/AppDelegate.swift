@@ -12,6 +12,7 @@ import UserNotifications
 import Crashlytics
 import Fabric
 import Firebase
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   let gcmMessageIDKey = "gcm.message_id"
+  
+  let persistenceService: PersistenceServiceType = PersistenceService()
+  
+  let disposeBag = DisposeBag()
   
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -32,27 +37,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Messaging.messaging().delegate = self
     // Fabric 설정
     Fabric.with([Crashlytics.self])
-    logUser()
+    // logUser()
     // 첫 화면 설정
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.tintColor = .main
-    if User.fetch() == nil {
-      UserDefaults.standard.set(true, forKey: "fold")
-      let startViewController = StoryboardScene.Start.startNavigationController.instantiate()
-      (startViewController.topViewController as? UniversitySelectionViewController)?.reactor
-        = UniversitySelectionViewReactor()
-      window?.rootViewController = startViewController
-    } else {
-      window?.rootViewController = StoryboardScene.Main.mainNavigationController.instantiate()
-      addShortcut(to: application)
-    }
-    window?.makeKeyAndVisible()
-    
-    UniversityModel.shared.generateModel()
+    persistenceService.fetchUser()
+      .observeOn(MainScheduler.instance)
+      .ifEmpty(switchTo: Observable<User>.empty().flatMap { [weak self] _ -> Observable<User> in
+        self?.addShortcut(to: application)
+        self?.window?.rootViewController
+          = StoryboardScene.Main.mainNavigationController.instantiate()
+        self?.window?.makeKeyAndVisible()
+        return .empty()
+      })
+      .subscribe(onNext: { [weak self] user in
+        Global.shared.university.onNext(University(rawValue: user.university) ?? .kaist)
+        UserDefaults.standard.set(true, forKey: "fold")
+        let startViewController = StoryboardScene.Start.startNavigationController.instantiate()
+        (startViewController.topViewController as? UniversitySelectionViewController)?.reactor
+          = UniversitySelectionViewReactor()
+        self?.window?.rootViewController = startViewController
+        self?.window?.makeKeyAndVisible()
+      })
+      .disposed(by: disposeBag)
     return true
   }
   
-  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+  func application(_ application: UIApplication,
+                   didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
     // 언제 호출되는지 모르겠다
     if let messageID = userInfo[gcmMessageIDKey] {
       print("Message ID: \(messageID)")
@@ -183,10 +195,10 @@ extension AppDelegate {
 
 // MARK: - Fabric User Logging
 
-extension AppDelegate {
-
-  func logUser() {
-    Crashlytics.sharedInstance()
-      .setObjectValue(UniversityModel.shared.universityModel.name, forKey: "university")
-  }
-}
+//extension AppDelegate {
+//
+//  func logUser() {
+//    Crashlytics.sharedInstance()
+//      .setObjectValue(UniversityModel.shared.universityModel.name, forKey: "university")
+//  }
+//}

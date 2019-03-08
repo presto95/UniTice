@@ -47,9 +47,6 @@ protocol UniversityType {
   
   /// 검색 쿼리 문자열.
   func searchQuery(_ text: String) -> String
-  
-  /// 모바일 리다이렉트되는 URL 변경
-  func changeURLForMobile(_ baseURL: String, _ link: String) -> String
 }
 
 // MARK: - UniversityType 프로토콜 초기 구현
@@ -69,30 +66,13 @@ extension UniversityType {
       .appending(categoryQuery(category))
       .appending(pageQuery(page))
       .appending(searchQuery(text))
-    guard let url = URL(string: urlString) else { return nil }
-    return url
+    return URL(string: urlString)
   }
   
   /// 게시물 URL 초기 구현.
   ///
   /// `Base URL` - `게시물 링크`로 구성됨.
   func postURL(inCategory category: Category, uri link: String) -> URL? {
-    let changedURL = changeURLForMobile(baseURL, link)
-    guard let url = URL(string: changedURL) else { return nil }
-    return url
-  }
-  
-  func changeURLForMobile(_ baseURL: String, _ link: String) -> String {
-    let user = User.fetch() ?? User()
-    let university = University(rawValue: user.university) ?? .seoultech
-    switch university {
-    case .mju:
-      let mjuLink = link.replacingOccurrences(of: "view", with: "view_mobile")
-      let mjuBaseURL = baseURL.replacingOccurrences(of: "mjukr", with: "mjumob")
-      let fullLink = "\(mjuBaseURL)\(mjuLink.percentEncoding)"
-      return fullLink
-    default:
-      return "\(baseURL)\(link.percentEncoding)"
-    }
+    return URL(string: "\(baseURL)\(link.percentEncoding)")
   }
 }
