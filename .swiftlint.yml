@@ -2,12 +2,13 @@ disabled_rules:
 - leading_whitespace
 - trailing_whitespace
 - cyclomatic_complexity
+- force_try
 
 excluded:
   - Pods/
-  - UniTice/Models/University
+  - UniTice/Sources/Models/University
   - UniTice/Utils/SwiftGen
-  - UniTice/Supporting Files/AppDelegate.swift
+  - UniTice/Sources/AppDelegate.swift
 
 line_length:
   warning: 99

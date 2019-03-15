@@ -30,7 +30,7 @@ struct 서울과학기술대학교: UniversityType {
   }
   
   func postURL(inCategory category: Category, uri link: String) -> URL? {
-    guard let url = URL(string: "\(baseURL)\(category.identifier)\(link.percentEncoding)") else {
+    guard let url = URL(string: "\(baseURL)\(category.identifier)\(link.percentEncoded)") else {
       return nil
     }
     return url
@@ -102,6 +102,6 @@ extension 서울과학기술대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchtype=1&searchtext=\(text.percentEncoding)"
+    return "&searchtype=1&searchtext=\(text.percentEncoded)"
   }
 }

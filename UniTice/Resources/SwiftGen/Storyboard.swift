@@ -29,6 +29,8 @@ internal enum StoryboardScene {
     internal static let mainNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Main.self, identifier: "MainNavigationController")
 
     internal static let searchViewController = SceneType<SearchViewController>(storyboard: Main.self, identifier: "SearchViewController")
+
+    internal static let settingTableViewController = SceneType<SettingTableViewController>(storyboard: Main.self, identifier: "SettingTableViewController")
   }
   internal enum Setting: StoryboardType {
     internal static let storyboardName = "Setting"

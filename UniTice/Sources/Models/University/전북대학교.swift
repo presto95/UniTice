@@ -70,7 +70,7 @@ extension 전북대학교 {
   }
   
   func categoryQuery(_ category: Category) -> String {
-    return "&category=\(category.identifier.percentEncoding)"
+    return "&category=\(category.identifier.percentEncoded)"
   }
   
   func pageQuery(_ page: Int) -> String {
@@ -78,6 +78,6 @@ extension 전북대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&sfv=subject&subject=\(text.percentEncoding)"
+    return "&sfv=subject&subject=\(text.percentEncoded)"
   }
 }

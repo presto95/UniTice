@@ -82,6 +82,6 @@ extension 광운대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&srSearchKey=article_title&srSearchVal=\(text.percentEncoding)"
+    return "&srSearchKey=article_title&srSearchVal=\(text.percentEncoded)"
   }
 }

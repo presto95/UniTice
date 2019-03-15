@@ -28,7 +28,7 @@ struct 명지대학교: UniversityType {
   func postURL(inCategory category: Category, uri link: String) -> URL? {
     let mjuLink = link.replacingOccurrences(of: "view", with: "view_mobile")
     let mjuBaseURL = baseURL.replacingOccurrences(of: "mjukr", with: "mjumob")
-    let fullLink = "\(mjuBaseURL)\(mjuLink.percentEncoding)"
+    let fullLink = "\(mjuBaseURL)\(mjuLink.percentEncoded)"
     return URL(string: fullLink)
   }
   
@@ -90,6 +90,6 @@ extension 명지대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&search=\(text.percentEncoding)"
+    return "&search=\(text.percentEncoded)"
   }
 }

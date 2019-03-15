@@ -74,6 +74,6 @@ extension 이화여자대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&search=\(text.percentEncoding)"
+    return "&search=\(text.percentEncoded)"
   }
 }

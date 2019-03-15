@@ -72,7 +72,7 @@ extension 홍익대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchValue=\(text.percentEncoding)"
+    return "&searchValue=\(text.percentEncoded)"
   }
   
 }

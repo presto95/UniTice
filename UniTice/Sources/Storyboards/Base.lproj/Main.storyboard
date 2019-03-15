@@ -152,7 +152,7 @@
         <!--Setting Table View Controller-->
         <scene sceneID="5aR-DK-yuv">
             <objects>
-                <tableViewController id="aYK-Cs-m6d" customClass="SettingTableViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aYK-Cs-m6d" customClass="SettingTableViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="t9d-dP-Heh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

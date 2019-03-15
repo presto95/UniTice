@@ -78,7 +78,7 @@ extension 서울여자대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchField=D.TITLE&searchValue=\(text.percentEncoding)"
+    return "&searchField=D.TITLE&searchValue=\(text.percentEncoded)"
   }
   
   private func commonQueriesForPost(_ category: Category) -> String {

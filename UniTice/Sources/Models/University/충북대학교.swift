@@ -77,6 +77,6 @@ extension 충북대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchKeyword=\(text.percentEncoding)"
+    return "&searchKeyword=\(text.percentEncoded)"
   }
 }

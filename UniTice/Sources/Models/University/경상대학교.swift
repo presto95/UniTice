@@ -88,6 +88,6 @@ extension 경상대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchType=&category=&type=&searchString=\(text.percentEncoding)"
+    return "&searchType=&category=&type=&searchString=\(text.percentEncoded)"
   }
 }

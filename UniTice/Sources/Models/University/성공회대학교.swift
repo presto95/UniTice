@@ -72,6 +72,6 @@ extension 성공회대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchWord=\(text.percentEncoding)"
+    return "&searchWord=\(text.percentEncoded)"
   }
 }

@@ -79,6 +79,6 @@ extension 한국외국어대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&search=\(text.percentEncoding)"
+    return "&search=\(text.percentEncoded)"
   }
 }

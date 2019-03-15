@@ -88,6 +88,6 @@ extension 한성대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&_EXT_BBS_sKeyword=\(text.percentEncoding)"
+    return "&_EXT_BBS_sKeyword=\(text.percentEncoded)"
   }
 }

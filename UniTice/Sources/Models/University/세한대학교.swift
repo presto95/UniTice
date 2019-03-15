@@ -72,6 +72,6 @@ extension 세한대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchType=title&searchText=\(text.percentEncoding)"
+    return "&searchType=title&searchText=\(text.percentEncoded)"
   }
 }

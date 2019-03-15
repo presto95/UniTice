@@ -67,6 +67,6 @@ extension 서울대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&bt=t&bq=\(text.percentEncoding)"
+    return "&bt=t&bq=\(text.percentEncoded)"
   }
 }

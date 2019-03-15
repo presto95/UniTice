@@ -75,7 +75,7 @@ extension 고려대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&findType=SUBJECT&findWord=\(text.percentEncoding)"
+    return "&findType=SUBJECT&findWord=\(text.percentEncoded)"
   }
 }
 

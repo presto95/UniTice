@@ -9,8 +9,6 @@
 import UIKit
 import UserNotifications
 
-import Crashlytics
-import Fabric
 import Firebase
 import RxSwift
 
@@ -35,15 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     application.registerForRemoteNotifications()
     // 파이어베이스 등록 토큰 접근. 메세지 델리게이트 설정
     Messaging.messaging().delegate = self
-    // Fabric 설정
-    Fabric.with([Crashlytics.self])
-    // logUser()
     // 첫 화면 설정
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.tintColor = .main
     persistenceService.fetchUser()
       .observeOn(MainScheduler.instance)
-      .ifEmpty(switchTo: Observable<User>.empty().flatMap { [weak self] _ -> Observable<User> in
+      .ifEmpty(switchTo: Observable<Void>.just(Void()).flatMap { [weak self] _ -> Observable<User> in
         self?.addShortcut(to: application)
         self?.window?.rootViewController
           = StoryboardScene.Main.mainNavigationController.instantiate()
@@ -92,11 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     print("APNs token retrieved: \(deviceToken)")
   }
-  
-  func applicationWillResignActive(_ application: UIApplication) { }
-  
-  func applicationDidEnterBackground(_ application: UIApplication) { }
-  
+
   func applicationWillEnterForeground(_ application: UIApplication) {
     UNUserNotificationCenter.current().getNotificationSettings { settings in
       let hasNotificationGranted = settings.authorizationStatus == .authorized ? true : false
@@ -105,10 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                       userInfo: ["hasNotificationGranted": hasNotificationGranted])
     }
   }
-  
-  func applicationDidBecomeActive(_ application: UIApplication) { }
-  
-  func applicationWillTerminate(_ application: UIApplication) { }
 }
 
 // MARK: - User Notification
@@ -192,13 +179,3 @@ extension AppDelegate {
     application.shortcutItems = [bookmarkShortcut]
   }
 }
-
-// MARK: - Fabric User Logging
-
-//extension AppDelegate {
-//
-//  func logUser() {
-//    Crashlytics.sharedInstance()
-//      .setObjectValue(UniversityModel.shared.universityModel.name, forKey: "university")
-//  }
-//}

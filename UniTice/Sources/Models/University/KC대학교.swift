@@ -30,12 +30,12 @@ struct KC대학교: UniversityType {
   func postURL(inCategory category: Category, uri link: String) -> URL {
     switch category.identifier {
     case "EC0101":
-      guard let url = URL(string: link.percentEncoding) else {
+      guard let url = URL(string: link.percentEncoded) else {
         fatalError()
       }
       return url
     default:
-      guard let url = URL(string: "\(baseURL)\(link.percentEncoding)") else {
+      guard let url = URL(string: "\(baseURL)\(link.percentEncoded)") else {
         fatalError()
       }
       return url
@@ -96,6 +96,6 @@ extension KC대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchCode=2&searchKey=\(text.percentEncoding)"
+    return "&searchCode=2&searchKey=\(text.percentEncoded)"
   }
 }

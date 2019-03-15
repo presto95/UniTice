@@ -76,7 +76,7 @@ extension 서울교육대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&srchKey=\(text.percentEncoding)"
+    return "&srchKey=\(text.percentEncoded)"
   }
   
   private var commonQueriesForPost: String {

@@ -71,6 +71,6 @@ extension 우석대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&paramKeyword=\(text.percentEncoding)"
+    return "&paramKeyword=\(text.percentEncoded)"
   }
 }

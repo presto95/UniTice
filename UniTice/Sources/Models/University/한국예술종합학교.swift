@@ -71,7 +71,7 @@ extension 한국예술종합학교 {
   }
   
   func categoryQuery(_ category: Category) -> String {
-    return "&searchType=\(category.identifier.percentEncoding)"
+    return "&searchType=\(category.identifier.percentEncoded)"
   }
   
   func pageQuery(_ page: Int) -> String {
@@ -79,6 +79,6 @@ extension 한국예술종합학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchKeyword=\(text.percentEncoding)"
+    return "&searchKeyword=\(text.percentEncoded)"
   }
 }

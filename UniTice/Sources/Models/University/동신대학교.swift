@@ -71,6 +71,6 @@ extension 동신대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&skey=\(text.percentEncoding)"
+    return "&skey=\(text.percentEncoded)"
   }
 }

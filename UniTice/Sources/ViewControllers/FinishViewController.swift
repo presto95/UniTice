@@ -18,9 +18,9 @@ final class FinishViewController: UIViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  @IBOutlet weak var universityLabel: UILabel!
+  @IBOutlet private weak var universityLabel: UILabel!
   
-  @IBOutlet weak var keywordLabel: UILabel!
+  @IBOutlet private weak var keywordLabel: UILabel!
   
   @IBOutlet private weak var confirmButton: UTButton!
   

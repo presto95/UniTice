@@ -73,6 +73,6 @@ extension 경북대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&input_search_text=\(text.percentEncoding)&btin.search_text=\(text.percentEncoding)"
+    return "&input_search_text=\(text.percentEncoded)&btin.search_text=\(text.percentEncoded)"
   }
 }

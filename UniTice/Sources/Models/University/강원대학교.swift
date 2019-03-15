@@ -73,6 +73,6 @@ extension 강원대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchKrwd=\(text.percentEncoding)"
+    return "&searchKrwd=\(text.percentEncoded)"
   }
 }

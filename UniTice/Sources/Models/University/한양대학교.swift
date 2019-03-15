@@ -90,7 +90,7 @@ extension 한양대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&_viewNotice_WAR_noticeportlet_action=view&_viewNotice_WAR_noticeportlet_sKeyType=title&_viewNotice_WAR_noticeportlet_sKeyword=\(text.percentEncoding)"
+    return "&_viewNotice_WAR_noticeportlet_action=view&_viewNotice_WAR_noticeportlet_sKeyType=title&_viewNotice_WAR_noticeportlet_sKeyword=\(text.percentEncoded)"
   }
   
   private func messageIdForPost(_ text: String) -> String {

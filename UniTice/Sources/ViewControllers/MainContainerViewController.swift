@@ -21,17 +21,15 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   var disposeBag: DisposeBag = DisposeBag()
   
-//  private var universityModel: UniversityType = UniversityModel.shared.universityModel {
-//    didSet {
-//      (navigationItem.leftBarButtonItem?.customView as? UILabel)?.text = universityModel.name
-//    }
-//  }
+  private let universityModel = Global.shared.universityModel
   
   @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
   
   @IBOutlet private weak var searchButtonItem: UIBarButtonItem!
   
   @IBOutlet private weak var bookmarkButtonItem: UIBarButtonItem!
+  
+  var contentViewControllers: [MainContentTableViewController] = []
   
   override func viewDidLoad() {
     setupButtonBar()
@@ -40,7 +38,6 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    universityModel = UniversityModel.shared.universityModel
     reloadPagerTabStripView()
   }
   
@@ -51,16 +48,8 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   override func viewControllers(
     for pagerTabStripController: PagerTabStripViewController
-  ) -> [UIViewController] {
-    var viewControllers: [UITableViewController] = []
-    universityModel.categories.indices.forEach { index in
-      let contentViewController = MainContentTableViewController().then {
-        $0.categoryIndex = index
-        $0.universityModel = universityModel
-      }
-      viewControllers.append(contentViewController)
-    }
-    return viewControllers
+    ) -> [UIViewController] {
+    return contentViewControllers
   }
   
   func bind(reactor: Reactor) {
@@ -71,15 +60,7 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   private func setup() {
     registerLocalNotification()
-    setupUniversityLabel()
   }
-//
-//  @IBAction private func searchButtonDidTap(_ sender: UIBarButtonItem) {
-//    let next = StoryboardScene.Main.searchViewController.instantiate()
-//    next.category
-//      = (viewControllers(for: self)[currentIndex] as? MainContentTableViewController)?.category
-//    navigationController?.pushViewController(next, animated: true)
-//  }
 }
 
 // MARK: - Reactor Binding
@@ -102,32 +83,66 @@ private extension MainContainerViewController {
   }
   
   func bindState(_ reactor: Reactor) {
-    
+    reactor.state.map { $0.isSettingButtonTapped }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        let controller = StoryboardScene.Main.settingTableViewController.instantiate()
+        self?.navigationController?.pushViewController(controller, animated: true)
+      })
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isSearchButtonTapped }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        let controller = StoryboardScene.Main.searchViewController.instantiate()
+        self?.navigationController?.pushViewController(controller, animated: true)
+      })
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isBookmarkButtonTapped }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        let controller = StoryboardScene.Main.bookmarkViewController.instantiate()
+        self?.navigationController?.pushViewController(controller, animated: true)
+      })
+      .disposed(by: disposeBag)
   }
   
   func bindUI() {
-    
+    let university = Global.shared.universityModel
+    university
+      .map { $0.name }
+      .subscribe(onNext: { [weak self] name in
+        let universityLabel = UILabel().then {
+          $0.text = name
+          $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+          $0.sizeToFit()
+        }
+        let barButtonItem = UIBarButtonItem().then {
+          $0.customView = universityLabel
+        }
+        self?.navigationItem.setLeftBarButton(barButtonItem, animated: false)
+      })
+      .disposed(by: disposeBag)
+    university.subscribe(onNext: { [weak self] university in
+      guard let self = self else { return }
+      self.contentViewControllers.removeAll()
+      university.categories.indices.forEach { index in
+        let contentViewController = MainContentTableViewController().then {
+          $0.reactor = MainContentTableViewReactor(page: index)
+        }
+        self.contentViewControllers.append(contentViewController)
+      }
+      self.reloadPagerTabStripView()
+    })
+      .disposed(by: disposeBag)
   }
 }
 
 // MARK: - Private Method
 
 private extension MainContainerViewController {
-  
-  func setupUniversityLabel() {
-    let label = makeUniversityLabel()
-    let barButtonItem = UIBarButtonItem()
-    barButtonItem.customView = label
-    navigationItem.setLeftBarButton(barButtonItem, animated: false)
-  }
-  
-  func makeUniversityLabel() -> UILabel {
-    return UILabel().then {
-      $0.text = universityModel.name
-      $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-      $0.sizeToFit()
-    }
-  }
   
   func setupButtonBar() {
     settings.style.selectedBarHeight = 5
@@ -144,12 +159,13 @@ private extension MainContainerViewController {
       .requestAuthorization(options: authOptions) { isGranted, error in
         if let error = error {
           errorLog(error.localizedDescription)
-          // fatalError(error.localizedDescription)
+          return
         }
         if !UserDefaults.standard.bool(forKey: "showsAlertIfPermissionDenied") {
-          let content = UNMutableNotificationContent()
-          content.title = ""
-          content.body = "오늘은 무슨 공지사항이 새로 올라왔을까요? 확인해 보세요."
+          let content = UNMutableNotificationContent().then {
+            $0.title = ""
+            $0.body = "오늘은 무슨 공지사항이 새로 올라왔을까요? 확인해 보세요."
+          }
           var dateComponents = DateComponents()
           dateComponents.hour = 9
           dateComponents.minute = 0
@@ -158,7 +174,7 @@ private extension MainContainerViewController {
                                               content: content,
                                               trigger: trigger)
           UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            print(error?.localizedDescription ?? "")
+            errorLog(error?.localizedDescription ?? "")
           })
           if !isGranted {
             UIAlertController

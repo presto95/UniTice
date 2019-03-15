@@ -71,6 +71,6 @@ extension 숙명여자대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&srchWrd=\(text.percentEncoding)"
+    return "&srchWrd=\(text.percentEncoded)"
   }
 }

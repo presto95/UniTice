@@ -70,6 +70,6 @@ extension 목포대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&keyword=\(text.percentEncoding)"
+    return "&keyword=\(text.percentEncoded)"
   }
 }

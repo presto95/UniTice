@@ -121,12 +121,11 @@ private extension UniversitySelectionViewController {
   
   /// 메일 작성 뷰 컨트롤러 만들기.
   func makeMailComposeViewController() -> UIViewController {
-    let mailComposer = MFMailComposeViewController().then {
+    return MFMailComposeViewController().then {
       $0.mailComposeDelegate = self
       $0.setToRecipients(["yoohan95@gmail.com"])
       $0.setSubject("[다연결] 우리 학교가 목록에 없어요.")
       $0.setMessageBody("\n\n\n\n\n\n피드백 감사합니다.", isHTML: false)
     }
-    return mailComposer
   }
 }

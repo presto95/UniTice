@@ -73,6 +73,6 @@ extension 경희대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&condition=title&keyword=\(text.percentEncoding)"
+    return "&condition=title&keyword=\(text.percentEncoded)"
   }
 }

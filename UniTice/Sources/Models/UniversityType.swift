@@ -73,6 +73,6 @@ extension UniversityType {
   ///
   /// `Base URL` - `게시물 링크`로 구성됨.
   func postURL(inCategory category: Category, uri link: String) -> URL? {
-    return URL(string: "\(baseURL)\(link.percentEncoding)")
+    return URL(string: "\(baseURL)\(link.percentEncoded)")
   }
 }

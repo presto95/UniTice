@@ -118,13 +118,13 @@ private extension SearchViewController {
         self?.searchBar.becomeFirstResponder()
       })
       .disposed(by: disposeBag)
-    reactor.state.map { $0.posts }
-      .map { posts -> [UTSectionData] in
-        return posts.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-      }
-      .map { UTSection(items: $0) }
-      .bind(to: tableView.rx.items(dataSource: dataSource))
-      .disposed(by: disposeBag)
+//    reactor.state.map { $0.posts }
+//      .map { posts -> [UTSectionData] in
+//        return posts.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
+//      }
+//      .map { UTSection(items: $0) }
+//      .bind(to: tableView.rx.items(dataSource: dataSource))
+//      .disposed(by: disposeBag)
     
   }
   
@@ -173,14 +173,14 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
   
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
-    if let indexPath = tableView.indexPathForRow(at: location) {
-      let post = reactor?.currentState.posts[indexPath.row]
-      let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-      let fullLinkString = fullLink.absoluteString
-      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-      User.insertBookmark(bookmark)
-      return safariViewController(url: fullLink)
-    }
+//    if let indexPath = tableView.indexPathForRow(at: location) {
+//      let post = reactor?.currentState.posts[indexPath.row]
+//      let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+//      let fullLinkString = fullLink.absoluteString
+//      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+//      User.insertBookmark(bookmark)
+//      return safariViewController(url: fullLink)
+//    }
     return nil
   }
   
@@ -193,13 +193,13 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
 extension SearchViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    DispatchQueue.main.async {
-      self.searchController.isActive = false
-    }
-    posts.removeAll()
-    searchButtonHasClicked = true
-    searchText = searchBar.text ?? ""
-    requestPosts(searchText: searchText)
+//    DispatchQueue.main.async {
+//      self.searchController.isActive = false
+//    }
+//    posts.removeAll()
+//    searchButtonHasClicked = true
+//    searchText = searchBar.text ?? ""
+//    requestPosts(searchText: searchText)
   }
 }
 

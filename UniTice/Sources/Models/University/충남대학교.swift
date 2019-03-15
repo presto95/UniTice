@@ -72,6 +72,6 @@ extension 충남대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&skey=title&sval=\(text.percentEncoding)"
+    return "&skey=title&sval=\(text.percentEncoded)"
   }
 }

@@ -85,7 +85,7 @@ extension 강남대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchType=ttl&searchValue=\(text.percentEncoding)"
+    return "&searchType=ttl&searchValue=\(text.percentEncoded)"
   }
   
   private var commonQueriesForPost: String {

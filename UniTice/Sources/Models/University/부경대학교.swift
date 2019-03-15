@@ -72,6 +72,6 @@ extension 부경대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&p_skey=title&p_stext=\(text.percentEncoding)"
+    return "&p_skey=title&p_stext=\(text.percentEncoded)"
   }
 }

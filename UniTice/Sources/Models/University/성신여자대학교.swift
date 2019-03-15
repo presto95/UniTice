@@ -85,6 +85,6 @@ extension 성신여자대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&_EXT_BBS_sTitle=\(text.percentEncoding)&_EXT_BBS_sKeyword=\(text.percentEncoding)"
+    return "&_EXT_BBS_sTitle=\(text.percentEncoded)&_EXT_BBS_sKeyword=\(text.percentEncoded)"
   }
 }

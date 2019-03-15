@@ -67,6 +67,6 @@ extension 부산대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchID=title&searchKeyword=\(text.percentEncoding)"
+    return "&searchID=title&searchKeyword=\(text.percentEncoded)"
   }
 }

@@ -14,7 +14,7 @@ protocol GlobalType: class {
   
   var university: ReplaySubject<University> { get }
   
-  var universityType: Maybe<UniversityType> { get }
+  var universityModel: Observable<UniversityType> { get }
 }
 
 final class Global: GlobalType {
@@ -25,7 +25,7 @@ final class Global: GlobalType {
   
   var university: ReplaySubject<University> = ReplaySubject<University>.create(bufferSize: 1)
   
-  var universityType: Maybe<UniversityType> {
-    return university.map { $0.model }.asMaybe()
+  var universityModel: Observable<UniversityType> {
+    return university.map { $0.model }
   }
 }

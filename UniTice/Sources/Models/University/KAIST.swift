@@ -69,6 +69,6 @@ extension KAIST {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&skey=title&sval=\(text.percentEncoding)"
+    return "&skey=title&sval=\(text.percentEncoded)"
   }
 }

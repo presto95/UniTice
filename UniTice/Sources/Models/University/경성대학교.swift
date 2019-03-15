@@ -72,6 +72,6 @@ extension 경성대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchKeyword=\(text.percentEncoding)"
+    return "&searchKeyword=\(text.percentEncoded)"
   }
 }

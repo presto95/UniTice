@@ -78,6 +78,6 @@ extension 동덕여자대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&searchField=TITLE&searchValue=\(text.percentEncoding)"
+    return "&searchField=TITLE&searchValue=\(text.percentEncoded)"
   }
 }

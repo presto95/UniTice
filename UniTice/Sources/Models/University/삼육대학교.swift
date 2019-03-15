@@ -69,7 +69,7 @@ extension 삼육대학교 {
   }
   
   func categoryQuery(_ category: Category) -> String {
-    return "&t=\(category.identifier.percentEncoding)"
+    return "&t=\(category.identifier.percentEncoded)"
   }
   
   func pageQuery(_ page: Int) -> String {
@@ -77,6 +77,6 @@ extension 삼육대학교 {
   }
   
   func searchQuery(_ text: String) -> String {
-    return "&k=\(text.percentEncoding)"
+    return "&k=\(text.percentEncoded)"
   }
 }
