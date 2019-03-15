@@ -31,7 +31,7 @@ final class UniversitySelectionViewReactor: Reactor {
     case setUniversity(University)
     
     /// 다음 화면 보이기.
-    case presentNext
+    case presentNext(Bool)
     
     /// 메일 화면 보이기.
     case presentMailComposer(Bool)
@@ -57,7 +57,10 @@ final class UniversitySelectionViewReactor: Reactor {
     case let .selectUniversity(university):
       return Observable.just(Mutation.setUniversity(university))
     case .confirm:
-      return Observable.just(Mutation.presentNext)
+      return Observable.concat([
+        Observable.just(Mutation.presentNext(true)),
+        Observable.just(Mutation.presentNext(false))
+        ])
     case .inquiry:
       return Observable.concat([
         Observable.just(Mutation.presentMailComposer(true)),
@@ -71,8 +74,8 @@ final class UniversitySelectionViewReactor: Reactor {
     switch mutation {
     case let .setUniversity(university):
       state.university = university
-    case .presentNext:
-      state.isNextScenePresented = true
+    case let .presentNext(isSelected):
+      state.isNextScenePresented = isSelected
     case let .presentMailComposer(isSelected):
       state.isInquiryButtonSelected = isSelected
     }

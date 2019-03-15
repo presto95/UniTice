@@ -78,9 +78,9 @@ final class SettingTableViewReactor: Reactor {
   /// 데이터 보존 서비스.
   let persistenceService: PersistenceServiceType
   
-  init(persistenceService: PersistenceServiceType,
-       isNotificationGranted: Bool,
-       isUpperPostFolded: Bool) {
+  init(isNotificationGranted: Bool,
+       isUpperPostFolded: Bool,
+       persistenceService: PersistenceServiceType = PersistenceService.shared) {
     self.persistenceService = persistenceService
     initialState = State(isUpperPostFolded: isUpperPostFolded,
                          isNotificationGranted: isNotificationGranted)

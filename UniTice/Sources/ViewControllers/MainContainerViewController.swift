@@ -87,24 +87,33 @@ private extension MainContainerViewController {
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
         let controller = StoryboardScene.Main.settingTableViewController.instantiate()
-        self?.navigationController?.pushViewController(controller, animated: true)
+        let isUpperPostFolded = PersistenceService.shared.isUpperPostFolded
+        let isNotificationGranted =
+          controller.reactor = SettingTableViewReactor(isNotificationGranted: false,
+                                                       isUpperPostFolded: false)
+        controller.push(at: self)
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isSearchButtonTapped }
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
         let controller = StoryboardScene.Main.searchViewController.instantiate()
-        self?.navigationController?.pushViewController(controller, animated: true)
+        controller.reactor = SearchViewReactor()
+        controller.push(at: self)
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isBookmarkButtonTapped }
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
         let controller = StoryboardScene.Main.bookmarkViewController.instantiate()
-        self?.navigationController?.pushViewController(controller, animated: true)
+        controller.reactor = BookmarkViewReactor()
+        controller.push(at: self)
       })
       .disposed(by: disposeBag)
   }
@@ -114,28 +123,21 @@ private extension MainContainerViewController {
     university
       .map { $0.name }
       .subscribe(onNext: { [weak self] name in
-        let universityLabel = UILabel().then {
-          $0.text = name
-          $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-          $0.sizeToFit()
-        }
-        let barButtonItem = UIBarButtonItem().then {
-          $0.customView = universityLabel
-        }
+        let barButtonItem = self?.makeUniversityBarButtonItem(self?.makeUniversityLabel(name))
         self?.navigationItem.setLeftBarButton(barButtonItem, animated: false)
       })
       .disposed(by: disposeBag)
-    university.subscribe(onNext: { [weak self] university in
-      guard let self = self else { return }
-      self.contentViewControllers.removeAll()
-      university.categories.indices.forEach { index in
-        let contentViewController = MainContentTableViewController().then {
-          $0.reactor = MainContentTableViewReactor(page: index)
+    university
+      .subscribe(onNext: { [weak self] university in
+        guard let self = self else { return }
+        self.contentViewControllers.removeAll()
+        university.categories.indices.forEach { index in
+          let contentViewController = MainContentTableViewController().then {
+            $0.reactor = MainContentTableViewReactor(page: index)
+          }
+          self.contentViewControllers.append(contentViewController)
         }
-        self.contentViewControllers.append(contentViewController)
-      }
-      self.reloadPagerTabStripView()
-    })
+      })
       .disposed(by: disposeBag)
   }
 }
@@ -143,6 +145,20 @@ private extension MainContainerViewController {
 // MARK: - Private Method
 
 private extension MainContainerViewController {
+  
+  func makeUniversityLabel(_ name: String?) -> UILabel? {
+    return UILabel().then {
+      $0.text = name
+      $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+      $0.sizeToFit()
+    }
+  }
+  
+  func makeUniversityBarButtonItem(_ label: UILabel?) -> UIBarButtonItem? {
+    return UIBarButtonItem().then {
+      $0.customView = label
+    }
+  }
   
   func setupButtonBar() {
     settings.style.selectedBarHeight = 5

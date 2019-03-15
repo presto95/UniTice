@@ -22,9 +22,14 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  var dataSource: RxTableViewSectionedReloadDataSource<SectionModel<Void, String>>!
+  private let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<Void, String>>
+    .init(configureCell: { dataSource, tableView, indexPath, keyword in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      cell.textLabel?.text = keyword
+      return cell
+    })
   
-  let registerButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+  private let registerButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
   
   @IBOutlet private weak var tableView: UITableView!
   
@@ -34,9 +39,9 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
   }
   
   func bind(reactor: Reactor) {
+    bindDataSource()
     bindAction(reactor)
     bindState(reactor)
-    bindDataSource()
     bindUI()
   }
   
@@ -72,12 +77,6 @@ private extension KeywordSettingViewController {
   }
   
   func bindDataSource() {
-    dataSource = RxTableViewSectionedReloadDataSource<SectionModel<Void, String>>
-      .init(configureCell: { dataSource, tableView, indexPath, keyword in
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = keyword
-        return cell
-      })
     dataSource.canEditRowAtIndexPath = { _, _ in true }
   }
   

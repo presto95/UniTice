@@ -36,23 +36,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // 첫 화면 설정
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.tintColor = .main
+    
     persistenceService.fetchUser()
       .observeOn(MainScheduler.instance)
-      .ifEmpty(switchTo: Observable<Void>.just(Void()).flatMap { [weak self] _ -> Observable<User> in
-        self?.addShortcut(to: application)
-        self?.window?.rootViewController
-          = StoryboardScene.Main.mainNavigationController.instantiate()
-        self?.window?.makeKeyAndVisible()
-        return .empty()
-      })
+      .ifEmpty(default: User())
       .subscribe(onNext: { [weak self] user in
-        Global.shared.university.onNext(University(rawValue: user.university) ?? .kaist)
-        UserDefaults.standard.set(true, forKey: "fold")
-        let startViewController = StoryboardScene.Start.startNavigationController.instantiate()
-        (startViewController.topViewController as? UniversitySelectionViewController)?.reactor
-          = UniversitySelectionViewReactor()
-        self?.window?.rootViewController = startViewController
-        self?.window?.makeKeyAndVisible()
+        if !user.university.isEmpty {
+          Global.shared.university.onNext(University(rawValue: user.university) ?? .kaist)
+          UserDefaults.standard.set(true, forKey: "fold")
+          let controller = StoryboardScene.Main.mainNavigationController.instantiate()
+          (controller.topViewController as? MainContainerViewController)?.reactor
+             = MainContainerViewReactor()
+          self?.window?.rootViewController = controller
+          self?.window?.makeKeyAndVisible()
+        } else {
+          self?.addShortcut(to: application)
+          let controller = StoryboardScene.Start.startNavigationController.instantiate()
+          (controller.topViewController as? UniversitySelectionViewController)?.reactor
+            = UniversitySelectionViewReactor()
+          self?.window?.rootViewController = controller
+          self?.window?.makeKeyAndVisible()
+        }
       })
       .disposed(by: disposeBag)
     return true
@@ -87,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     print("APNs token retrieved: \(deviceToken)")
   }
-
+  
   func applicationWillEnterForeground(_ application: UIApplication) {
     UNUserNotificationCenter.current().getNotificationSettings { settings in
       let hasNotificationGranted = settings.authorizationStatus == .authorized ? true : false

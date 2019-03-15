@@ -33,6 +33,7 @@ final class KeywordRegisterViewController: UIViewController, StoryboardView {
   }
   
   func bind(reactor: KeywordRegisterViewReactor) {
+    bindDataSource()
     bindAction(reactor)
     bindState(reactor)
     bindUI()
@@ -80,10 +81,9 @@ private extension KeywordRegisterViewController {
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         InitialInfo.shared.keywords.onNext(reactor.currentState.keywords.compactMap { $0 })
-        let finishViewController = StoryboardScene.Start.startFinishViewController.instantiate().then {
-          $0.reactor = FinishViewReactor()
-        }
-        finishViewController.push(at: self)
+        let controller = StoryboardScene.Start.startFinishViewController.instantiate()
+        controller.reactor = FinishViewReactor()
+        controller.push(at: self)
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isBackButtonSelected }

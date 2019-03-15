@@ -71,8 +71,9 @@ private extension UniversitySelectionViewController {
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let keywordRegisterViewController
-          = StoryboardScene.Start.startKeywordRegisterViewController.instantiate()
-        keywordRegisterViewController.reactor = KeywordRegisterViewReactor()
+          = StoryboardScene.Start.startKeywordRegisterViewController.instantiate().then {
+            $0.reactor = KeywordRegisterViewReactor()
+        }
         keywordRegisterViewController.push(at: self)
       })
       .disposed(by: disposeBag)

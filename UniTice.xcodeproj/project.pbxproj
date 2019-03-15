@@ -298,29 +298,6 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		ED5BC53DBE06B2469082B0DC69D129B1 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				0EC42AB8FDA43BEDAEE0A997072F19B7 /* NSObject+.swift */,
-				42910599E355EFFDFEF389D3C496F571 /* Notification.Name+.swift */,
-				0E8129A49E2DCB0EFB051ED85C5CC65C /* String+.swift */,
-				9CFCC3FED416CCF0725E210DFD542A7A /* String.Encoding+.swift */,
-				C36FF4332F86E3EFF55D55B49D245AD0 /* UIAlertController+.swift */,
-				C7300EA145A777B62034E83C9B86FD85 /* UIColor+.swift */,
-				D0ABF2317C2C1FE43B82F1EDDDD22948 /* UIView+.swift */,
-				A4D5462962C1A1FFA5EE65CD32DBD8A6 /* UIViewController+.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		2FC89726D7B3930D4D994EB9E8F79ACD /* Rx */ = {
-			isa = PBXGroup;
-			children = (
-				E34551B0F220772FE7B233819E445955 /* UTSection.swift */,
-			);
-			path = Rx;
-			sourceTree = "<group>";
-		};
 		27D53100EFA20153E5941C62CA58B4B6 /* University */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +352,14 @@
 			path = University;
 			sourceTree = "<group>";
 		};
+		2FC89726D7B3930D4D994EB9E8F79ACD /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				E34551B0F220772FE7B233819E445955 /* UTSection.swift */,
+			);
+			path = Rx;
+			sourceTree = "<group>";
+		};
 		31C897C2CA96708BA3547819DEE919CC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +407,14 @@
 				B46EBD4056A515AF03DC14D413ABD98F /* .swiftlint.yml */,
 				8B1D407C1561CFFD3DC9A07B24382AEF /* swiftgen.yml */,
 			);
+			sourceTree = "<group>";
+		};
+		98CDC7ED5591DC0BD533A8DA82A1DE03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5BBD521EF0470ADE4890AE3575C3C91 /* Pods_UniTice.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		564568C48819A9255CF8570EB8DE738A /* Views */ = {
@@ -481,14 +474,6 @@
 				3A15558527362FB63188651A092FF198 /* User.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		98CDC7ED5591DC0BD533A8DA82A1DE03 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A5BBD521EF0470ADE4890AE3575C3C91 /* Pods_UniTice.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C77B496A79E78B9DDD92588201BA16F4 /* Pods */ = {
@@ -559,6 +544,21 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		ED5BC53DBE06B2469082B0DC69D129B1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0EC42AB8FDA43BEDAEE0A997072F19B7 /* NSObject+.swift */,
+				42910599E355EFFDFEF389D3C496F571 /* Notification.Name+.swift */,
+				0E8129A49E2DCB0EFB051ED85C5CC65C /* String+.swift */,
+				9CFCC3FED416CCF0725E210DFD542A7A /* String.Encoding+.swift */,
+				C36FF4332F86E3EFF55D55B49D245AD0 /* UIAlertController+.swift */,
+				C7300EA145A777B62034E83C9B86FD85 /* UIColor+.swift */,
+				D0ABF2317C2C1FE43B82F1EDDDD22948 /* UIView+.swift */,
+				A4D5462962C1A1FFA5EE65CD32DBD8A6 /* UIViewController+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -589,7 +589,6 @@
 				3163DFB45A7EF99E33F1A2A3196F5A92 /* Frameworks */,
 				E9FB81C6FA20B9FBBC516C41E98EFAF0 /* Resources */,
 				60854F566723294CC23BE2EA13C1C314 /* SwiftLint */,
-				6620E7ADB210E47A65D103B0950093E0 /* Fabric */,
 				855D54511307EC1BCB8547BA8EF9EB99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -713,25 +712,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		6620E7ADB210E47A65D103B0950093E0 /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"",
-			);
-			name = Fabric;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 5c684550614d2f7ba2dbfc8d40b27e36dcda7389 27243f8078eefeb11c1e1a0606dd8aabbfa0f7dcc0a7c59b08251c648be3f237\n";
 		};
 		855D54511307EC1BCB8547BA8EF9EB99 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

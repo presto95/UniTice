@@ -22,18 +22,18 @@ final class FinishViewReactor: Reactor {
   
   enum Mutation {
     
-    case confirm
+    case confirm(Bool)
     
-    case back
+    case back(Bool)
     
     case saveInitialData
   }
   
   struct State {
     
-    var isConfirmButtonSelected: Bool = false
+    var isConfirmButtonTapped: Bool = false
     
-    var isBackButtonSelected: Bool = false
+    var isBackButtonTapped: Bool = false
   }
   
   let initialState: State = State()
@@ -49,20 +49,24 @@ final class FinishViewReactor: Reactor {
     case .confirm:
       return Observable.concat([
         saveUser(),
-        Observable.just(Mutation.confirm)
+        Observable.just(Mutation.confirm(true)),
+        Observable.just(Mutation.confirm(false))
         ])
     case .back:
-      return Observable.just(Mutation.back)
+      return Observable.concat([
+        Observable.just(Mutation.back(true)),
+        Observable.just(Mutation.back(false))
+        ])
     }
   }
   
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-    case .confirm:
-      state.isConfirmButtonSelected = true
-    case .back:
-      state.isBackButtonSelected = true
+    case let .confirm(isTapped):
+      state.isConfirmButtonTapped = isTapped
+    case let .back(isTapped):
+      state.isBackButtonTapped = isTapped
     case .saveInitialData:
       break
     }
@@ -78,11 +82,14 @@ private extension FinishViewReactor {
     return Observable
       .zip(InitialInfo.shared.university,
            InitialInfo.shared.keywords) { [weak self] university, keywords in
-            let user = User()
-            user.university = university.rawValue
-            user.keywords.append(objectsIn: keywords)
+            let user = User().then {
+              $0.university = university.rawValue
+              $0.keywords.append(objectsIn: keywords)
+            }
             self?.persistenceService.addUser(user)
+            Global.shared.university.onNext(university)
             return Mutation.saveInitialData
     }
+    .take(1)
   }
 }

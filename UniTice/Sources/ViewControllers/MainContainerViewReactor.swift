@@ -46,19 +46,19 @@ final class MainContainerViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .setting:
-      return Observable.concat([
-        Observable.just(Mutation.presentSetting(true)),
-        Observable.just(Mutation.presentSetting(false)),
+      return .concat([
+        .just(.presentSetting(true)),
+        .just(.presentSetting(false))
         ])
     case .search:
-      return Observable.concat([
-        Observable.just(Mutation.presentSearch(true)),
-        Observable.just(Mutation.presentSearch(false)),
+      return .concat([
+        .just(.presentSearch(true)),
+        .just(.presentSearch(false))
         ])
     case .bookmark:
-      return Observable.concat([
-        Observable.just(Mutation.presentBookmark(true)),
-        Observable.just(Mutation.presentBookmark(false)),
+      return .concat([
+        .just(.presentBookmark(true)),
+        .just(.presentBookmark(false))
         ])
     }
   }

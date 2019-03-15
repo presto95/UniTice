@@ -28,8 +28,16 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
   // MARK: Life Cycle
   
   override func viewDidLoad() {
+    tableView.delegate = nil
+    tableView.dataSource = nil
     super.viewDidLoad()
     setup()
+  }
+  
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindUI()
   }
   
   private func setup() {
@@ -53,12 +61,6 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
       $0.dismissButtonStyle = .close
     }
     return viewController
-  }
-  
-  func bind(reactor: Reactor) {
-    bindAction(reactor)
-    bindState(reactor)
-    bindUI()
   }
 }
 
@@ -189,6 +191,7 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
 extension MainContentTableViewController: IndicatorInfoProvider {
   
   func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    debugLog(reactor?.currentState.category.description)
     return IndicatorInfo(title: reactor?.currentState.category.description)
   }
 }

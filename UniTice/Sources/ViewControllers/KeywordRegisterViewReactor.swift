@@ -27,9 +27,9 @@ final class KeywordRegisterViewReactor: Reactor {
   
   enum Mutation {
     
-    case confirm
+    case confirm(Bool)
     
-    case back
+    case back(Bool)
     
     case setKeyword(String?)
     
@@ -54,9 +54,15 @@ final class KeywordRegisterViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .confirm:
-      return Observable.just(Mutation.confirm)
+      return Observable.concat([
+        Observable.just(Mutation.confirm(true)),
+        Observable.just(Mutation.confirm(false))
+        ])
     case .back:
-      return Observable.just(Mutation.back)
+      return Observable.concat([
+        Observable.just(Mutation.back(true)),
+        Observable.just(Mutation.back(false))
+        ])
     case let .inputKeyword(keyword):
       return Observable.just(Mutation.setKeyword(keyword))
     case .addKeyword:
@@ -68,10 +74,10 @@ final class KeywordRegisterViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-    case .confirm:
-      state.isConfirmButtonSelected = true
-    case .back:
-      state.isBackButtonSelected = true
+    case let .confirm(isSelected):
+      state.isConfirmButtonSelected = isSelected
+    case let .back(isSelected):
+      state.isBackButtonSelected = isSelected
     case let .setKeyword(keyword):
       state.currentKeyword = keyword
     case .addKeyword:

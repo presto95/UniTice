@@ -75,17 +75,10 @@ final class PersistenceService: PersistenceServiceType {
   }
   
   func addUser(_ user: User) -> Observable<User> {
-    let newUser = user
-    return fetchUser().flatMap { _ in Observable.empty() }
-      .ifEmpty(switchTo: Observable<User>.create { [weak self] observer in
-        guard let self = self else { return Disposables.create() }
-        try! self.realm.write {
-          self.realm.add(newUser)
-          observer.onNext(user)
-          observer.onCompleted()
-        }
-        return Disposables.create()
-      })
+    try! realm.write {
+      realm.add(user)
+    }
+    return Observable.just(user)
   }
   
   func addBookmark(_ post: Post) -> Observable<Bookmark> {

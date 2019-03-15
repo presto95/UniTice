@@ -24,12 +24,31 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  var dataSource: RxTableViewSectionedReloadDataSource<SettingTableViewSection>!
+  let asdf = RxTableViewSectionedReloadDataSource<SettingTableViewSection>
+    .init(configureCell: { dataSource, tableView, indexPath, title in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      cell.textLabel?.text = title
+      if indexPath.section == 0 {
+        cell.accessoryView =
+      }
+    })
+  
+  let dataSource = RxTableViewSectionedReloadDataSource<SettingTableViewSection>
+    .init(configureCell: { dataSource, tableView, indexPath, title in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      cell.textLabel?.text = title
+      if indexPath.section == 0 {
+        cell.accessoryView = self.upperPostFoldingSwitch
+      }
+      return cell
+    })
   
   /// 상단 고정 게시물 스위치.
   private let upperPostFoldingSwitch = UISwitch()
   
   override func viewDidLoad() {
+    tableView.delegate = nil
+    tableView.dataSource = nil
     super.viewDidLoad()
     setup()
   }
@@ -37,7 +56,6 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
   func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
-    bindDataSource()
     bindUI()
   }
   
@@ -92,19 +110,6 @@ private extension SettingTableViewController {
       .disposed(by: disposeBag)
   }
   
-  func bindDataSource() {
-    dataSource
-      = RxTableViewSectionedReloadDataSource<SettingTableViewSection>
-        .init(configureCell: { [weak self] dataSource, tableView, indexPath, title in
-          let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-          cell.textLabel?.text = title
-          if indexPath.section == 0 {
-            cell.accessoryView = self?.upperPostFoldingSwitch
-          }
-          return cell
-        })
-  }
-  
   func bindUI() {
     tableView.rx.itemSelected
       .subscribe(onNext: { [weak self] indexPath in
@@ -113,22 +118,28 @@ private extension SettingTableViewController {
         let row = indexPath.row
         switch indexPath.section {
         case 1 where row == 0:
-          StoryboardScene.Setting.changeUniversityViewController.instantiate().push(at: self)
+          let controller = StoryboardScene.Setting.universityChangeViewController.instantiate()
+          controller.reactor = UniversityChangeViewReactor()
+          controller.push(at: self)
         case 1 where row == 1:
-          StoryboardScene.Setting.keywordSettingViewController.instantiate().push(at: self)
+          let controller = StoryboardScene.Setting.keywordSettingViewController.instantiate()
+          controller.reactor = KeywordSettingViewReactor()
+          controller.push(at: self)
         case 1 where row == 2:
           if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
           }
         case 2 where row == 0:
           if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients(["yoohan95@gmail.com"])
+            let mail = MFMailComposeViewController().then {
+              $0.mailComposeDelegate = self
+              $0.setToRecipients(["yoohan95@gmail.com"])
+            }
             self.present(mail, animated: true)
           }
         case 2 where row == 1:
-          guard let url = URL(string: "itms-apps://itunes.apple.com/app/1447871519") else { return }
+          guard let url = URL(string: "itms-apps://itunes.apple.com/app/1447871519")
+            else { return }
           UIApplication.shared.open(url, options: [:], completionHandler: nil)
         default:
           break

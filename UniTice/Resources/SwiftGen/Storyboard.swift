@@ -35,9 +35,9 @@ internal enum StoryboardScene {
   internal enum Setting: StoryboardType {
     internal static let storyboardName = "Setting"
 
-    internal static let changeUniversityViewController = SceneType<UniversityChangeViewController>(storyboard: Setting.self, identifier: "ChangeUniversityViewController")
-
     internal static let keywordSettingViewController = SceneType<KeywordSettingViewController>(storyboard: Setting.self, identifier: "KeywordSettingViewController")
+
+    internal static let universityChangeViewController = SceneType<UniversityChangeViewController>(storyboard: Setting.self, identifier: "UniversityChangeViewController")
   }
   internal enum Start: StoryboardType {
     internal static let storyboardName = "Start"

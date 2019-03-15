@@ -13,27 +13,31 @@
         <!--University Change View Controller-->
         <scene sceneID="lVh-fR-uIg">
             <objects>
-                <viewController storyboardIdentifier="ChangeUniversityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U6C-iM-iar" customClass="UniversityChangeViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UniversityChangeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U6C-iM-iar" customClass="UniversityChangeViewController" customModule="UniTice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aK1-23-rhY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FWp-p7-Gyp">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FWp-p7-Gyp">
                                 <rect key="frame" x="0.0" y="289.66666666666669" width="375" height="233.00000000000006"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7Y-2e-Mq0">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                        <rect key="frame" x="27.666666666666657" y="0.0" width="320" height="216"/>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학교 변경시 저장된 키워드 및 북마크 정보가 초기화됩니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Hv2-PY-6Ba">
-                                        <rect key="frame" x="0.0" y="216" width="375" height="17"/>
+                                        <rect key="frame" x="16" y="216" width="343" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <color key="textColor" red="0.98039215690000003" green="0.36078431370000003" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Hv2-PY-6Ba" secondAttribute="trailing" constant="16" id="4Xf-gN-aaG"/>
+                                    <constraint firstItem="Hv2-PY-6Ba" firstAttribute="leading" secondItem="FWp-p7-Gyp" secondAttribute="leading" constant="16" id="nbU-vP-2hO"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tO-8D-7T7" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
-                                <rect key="frame" x="32" y="622.66666666666663" width="311" height="40"/>
+                                <rect key="frame" x="16" y="622.66666666666663" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8bH-9q-AfZ"/>
                                 </constraints>
@@ -44,12 +48,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FWp-p7-Gyp" firstAttribute="centerX" secondItem="aK1-23-rhY" secondAttribute="centerX" id="20g-Gz-ap7"/>
-                            <constraint firstItem="D03-Nb-XAw" firstAttribute="trailing" secondItem="5tO-8D-7T7" secondAttribute="trailing" constant="32" id="FrY-P3-olt"/>
+                            <constraint firstItem="D03-Nb-XAw" firstAttribute="trailing" secondItem="5tO-8D-7T7" secondAttribute="trailing" constant="16" id="FrY-P3-olt"/>
                             <constraint firstItem="5tO-8D-7T7" firstAttribute="top" secondItem="FWp-p7-Gyp" secondAttribute="bottom" constant="100" id="OmE-ub-GFM"/>
                             <constraint firstItem="D03-Nb-XAw" firstAttribute="trailing" secondItem="FWp-p7-Gyp" secondAttribute="trailing" id="aWs-KT-cd9"/>
                             <constraint firstItem="FWp-p7-Gyp" firstAttribute="centerY" secondItem="aK1-23-rhY" secondAttribute="centerY" id="ieD-aU-tCk"/>
                             <constraint firstItem="FWp-p7-Gyp" firstAttribute="leading" secondItem="D03-Nb-XAw" secondAttribute="leading" id="kV4-KG-Dno"/>
-                            <constraint firstItem="5tO-8D-7T7" firstAttribute="leading" secondItem="D03-Nb-XAw" secondAttribute="leading" constant="32" id="olb-ah-nRR"/>
+                            <constraint firstItem="5tO-8D-7T7" firstAttribute="leading" secondItem="D03-Nb-XAw" secondAttribute="leading" constant="16" id="olb-ah-nRR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D03-Nb-XAw"/>
                     </view>

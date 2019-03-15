@@ -93,11 +93,7 @@
                                     <segue destination="JR4-4h-2fV" kind="show" id="qf1-9G-nV4"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="검색" id="R24-Z8-hF6">
-                                <connections>
-                                    <action selector="searchButtonDidTap:" destination="Kps-ix-Omz" id="bof-36-gRi"/>
-                                </connections>
-                            </barButtonItem>
+                            <barButtonItem title="검색" id="R24-Z8-hF6"/>
                             <barButtonItem title="설정" id="vs6-F7-N0u">
                                 <connections>
                                     <segue destination="aYK-Cs-m6d" kind="show" id="fzD-Ej-XLU"/>

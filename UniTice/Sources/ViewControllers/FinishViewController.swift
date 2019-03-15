@@ -16,6 +16,8 @@ import RxViewController
 /// 초기 설정 완료 뷰 컨트롤러.
 final class FinishViewController: UIViewController, StoryboardView {
   
+  typealias Reactor = FinishViewReactor
+  
   var disposeBag: DisposeBag = DisposeBag()
   
   @IBOutlet private weak var universityLabel: UILabel!
@@ -31,7 +33,7 @@ final class FinishViewController: UIViewController, StoryboardView {
     setup()
   }
   
-  func bind(reactor: FinishViewReactor) {
+  func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
     bindUI()
@@ -51,7 +53,7 @@ final class FinishViewController: UIViewController, StoryboardView {
 
 private extension FinishViewController {
   
-  func bindAction(_ reactor: FinishViewReactor) {
+  func bindAction(_ reactor: Reactor) {
     confirmButton.rx.tap
       .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
@@ -62,21 +64,25 @@ private extension FinishViewController {
       .disposed(by: disposeBag)
   }
   
-  func bindState(_ reactor: FinishViewReactor) {
-    reactor.state.map { $0.isConfirmButtonSelected }
+  func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.isConfirmButtonTapped }
       .distinctUntilChanged()
       .filter { $0 }
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let mainViewController = StoryboardScene.Main.mainNavigationController.instantiate().then {
+          let mainContainerViewController = $0.topViewController as? MainContainerViewController
+          mainContainerViewController?.reactor = MainContainerViewReactor()
           $0.modalTransitionStyle = .flipHorizontal
         }
         mainViewController.present(to: self)
       })
       .disposed(by: disposeBag)
-    reactor.state.map { $0.isBackButtonSelected }
+    reactor.state.map { $0.isBackButtonTapped }
       .distinctUntilChanged()
       .filter { $0 }
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         self?.navigationController?.popViewController(animated: true)
       })
