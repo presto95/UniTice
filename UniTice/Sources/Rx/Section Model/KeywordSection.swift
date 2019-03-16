@@ -10,20 +10,17 @@ import Foundation
 
 import RxDataSources
 
-struct KeywordSectionData {
-  
-  var keyword: String
-}
-
 struct KeywordSection {
+  
+  var footer: String
   
   var items: [Item]
 }
 
 extension KeywordSection: SectionModelType {
   
-  typealias Item = KeywordSectionData
-  
+  typealias Item = String
+
   init(original: KeywordSection, items: [Item]) {
     self = original
     self.items = items
