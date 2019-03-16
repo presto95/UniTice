@@ -89,6 +89,5 @@ private extension UniversityChangeViewReactor {
                      realmService.removeAllBookmarks()) { _, _, _ in
                       return Mutation.confirm
     }
-    
   }
 }

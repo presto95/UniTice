@@ -16,6 +16,12 @@ import SnapKit
 /// 설정 대학교 변경 뷰 컨트롤러.
 final class UniversityChangeViewController: UIViewController, StoryboardView {
   
+  // MARK: Typealias
+  
+  typealias Reactor = UniversityChangeViewReactor
+  
+  // MARK: Property
+  
   var disposeBag: DisposeBag = DisposeBag()
   
   @IBOutlet private weak var pickerView: UIPickerView!
@@ -27,7 +33,7 @@ final class UniversityChangeViewController: UIViewController, StoryboardView {
     setup()
   }
   
-  func bind(reactor: UniversityChangeViewReactor) {
+  func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
     bindUI()
@@ -43,7 +49,7 @@ final class UniversityChangeViewController: UIViewController, StoryboardView {
 
 private extension UniversityChangeViewController {
   
-  func bindAction(_ reactor: UniversityChangeViewReactor) {
+  func bindAction(_ reactor: Reactor) {
     confirmButton.rx.tap
       .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
@@ -57,7 +63,7 @@ private extension UniversityChangeViewController {
       .disposed(by: disposeBag)
   }
   
-  func bindState(_ reactor: UniversityChangeViewReactor) {
+  func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.isConfirmButtonSelected }
       .distinctUntilChanged()
       .filter { $0 }
@@ -67,13 +73,16 @@ private extension UniversityChangeViewController {
       })
       .disposed(by: disposeBag)
   }
+}
+
+// MARK: - Private Method
+
+private extension UniversityChangeViewController {
   
   func bindUI() {
     Observable
       .just(University.allCases)
-      .bind(to: pickerView.rx.itemTitles) { _, element in
-        return element.rawValue
-      }
+      .bind(to: pickerView.rx.itemTitles) { _, element in element.rawValue }
       .disposed(by: disposeBag)
   }
 }
