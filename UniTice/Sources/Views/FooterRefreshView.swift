@@ -39,14 +39,8 @@ final class FooterRefreshView: UIView, View {
   }
   
   func bind(reactor: Reactor) {
-    reactor.state.map { $0.isRefreshing }
-      .distinctUntilChanged()
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [weak self] isRefreshing in
-        guard let self = self else { return }
-        self.reloadSubviews(isRefreshing)
-      })
-      .disposed(by: disposeBag)
+    bindAction(reactor)
+    bindState(reactor)
   }
   
   private func setup() {
@@ -57,14 +51,33 @@ final class FooterRefreshView: UIView, View {
   }
 }
 
+// MARK: - Reactor Binding
+
+private extension FooterRefreshView {
+  
+  func bindAction(_ reactor: Reactor) {
+    
+  }
+  
+  func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.isLoading }
+      .distinctUntilChanged()
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] isLoading in
+        self?.reloadSubviews(isLoading)
+      })
+      .disposed(by: disposeBag)
+  }
+}
+
 // MARK: - Private Method
 
 private extension FooterRefreshView {
   
-  func reloadSubviews(_ isRefreshing: Bool) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = isRefreshing
-    textLabel.isHighlighted = isRefreshing
-    if isRefreshing {
+  func reloadSubviews(_ isLoading: Bool) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = isLoading
+    textLabel.isHighlighted = isLoading
+    if isLoading {
       activityIndicator.startAnimating()
     } else {
       activityIndicator.stopAnimating()

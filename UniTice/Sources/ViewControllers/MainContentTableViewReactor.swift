@@ -45,9 +45,13 @@ final class MainContentTableViewReactor: Reactor {
     case setPosts([Post])
     
     case appendPosts([Post])
+    
+    case setLoading(Bool)
   }
   
   struct State {
+    
+    var university: UniversityType
     
     var category: Category
     
@@ -64,20 +68,21 @@ final class MainContentTableViewReactor: Reactor {
     var fixedPosts: [Post] {
       return posts.filter { $0.number == 0 }
     }
-    
+
     var standardPosts: [Post] {
       return posts.filter { $0.number != 0 }
     }
     
-    init(category: Category) {
+    init(universityType: UniversityType, category: Category) {
+      self.universityType = universityType
       self.category = category
     }
   }
   
   let initialState: State
   
-  init(category: Category) {
-    initialState = State(category: category)
+  init(universityType: UniversityType, category: Category) {
+    initialState = State(universityType: universityType, category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -104,6 +109,8 @@ final class MainContentTableViewReactor: Reactor {
     case let .appendPosts(posts):
       state.posts.append(contentsOf: posts)
       state.page += 1
+    case let .setLoading(isLoading):
+      state.isLoading = isLoading
     }
     return state
   }
@@ -114,7 +121,7 @@ final class MainContentTableViewReactor: Reactor {
 private extension MainContentTableViewReactor {
   
   func requestPosts(_ type: PostRequstType) -> Observable<Mutation> {
-    return Global.shared.universityModel
+    let requestObservable = Global.shared.universityModel
       .flatMap { universityType -> Observable<[Post]> in
         return universityType.requestPosts(inCategory: self.currentState.category,
                                            inPage: self.currentState.page,
@@ -128,5 +135,10 @@ private extension MainContentTableViewReactor {
           return Mutation.appendPosts($0)
         }
     }
+    return Observable.concat([
+      Observable.just(Mutation.setLoading(true)),
+      requestPosts,
+      Observable.just(Mutation.setLoading(false))
+      ])
   }
 }

@@ -101,7 +101,7 @@ private extension SearchViewController {
       .disposed(by: disposeBag)
     tableView.rx.contentOffset.asObservable()
       .skipUntil(reactor.state.map { $0.isSearching }.filter { $0 })
-      .skipUntil(footerRefreshView.reactor?.state.map { $0.isRefreshing }.filter { !$0 } ?? .empty())
+      .skipUntil(footerRefreshView.reactor?.state.map { $0.isLoading }.filter { !$0 } ?? .empty())
       .filter { [weak self] offset in
         guard let self = self else { return false }
         return offset.y > self.tableView.contentSize.height - self.tableView.bounds.height

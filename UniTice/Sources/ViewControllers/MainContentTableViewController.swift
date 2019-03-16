@@ -31,8 +31,18 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
   
   private var dataSource: RxTableViewSectionedReloadDataSource<UTSection>!
   
-  private lazy var footerRefreshView
-    = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
+  private let headerView
+    = (UIView.instantiate(fromXib: MainNoticeHeaderView.name) as? MainNoticeHeaderView)?.then {
+      $0.reactor = MainNoticeHeaderViewReactor()
+  }
+  
+  private let footerRefreshView
+    = FooterRefreshView(frame: CGRect(x: 0,
+                                      y: 0,
+                                      width: UIScreen.main.bounds.width,
+                                      height: 32)).then {
+                                        $0.reactor = FooterRefreshViewReactor()
+  }
   
   private let cellIdentifier = "postCell"
   
@@ -73,7 +83,7 @@ private extension MainContentTableViewController {
       .map { Reactor.Action.refresh }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    tableView.rx.contentOffset.asObservable()
+    tableView.rx.contentOffset
       .filter { [weak self] offset in
         guard let self = self else { return false }
         let offsetY = offset.y
@@ -82,6 +92,11 @@ private extension MainContentTableViewController {
       }
       .filter { _ in !reactor.currentState.isLoading }
       .map { _ in Reactor.Action.scroll }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    headerView?.reactor?.state.map { $0.isUpperPostFolded }
+      .distinctUntilChanged()
+      .map { Reactor.Action.toggleFolding($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -95,9 +110,14 @@ private extension MainContentTableViewController {
         let standardPosts = posts
           .filter { $0.number != 0 }
           .map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-        return [UTSection(items: fixedPosts), UTSection(items: standardPosts)]
+        return [.init(items: fixedPosts), .init(items: standardPosts)]
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isLoading }
+      .distinctUntilChanged()
+      .map { FooterRefreshViewReactor.Action.loading($0) }
+      .bind(to: footerRefreshView.reactor!.action)
       .disposed(by: disposeBag)
   }
 }
@@ -117,49 +137,38 @@ private extension MainContentTableViewController {
   
   func bindUI() {
     tableView.rx.setDelegate(self).disposed(by: disposeBag)
+    
   }
 }
 
 extension MainContentTableViewController {
-//  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//    let offsetY = scrollView.contentOffset.y
-//    let contentHeight = scrollView.contentSize.height
-//    if offsetY > contentHeight - scrollView.bounds.height {
-//      if !footerRefreshView.isLoading {
-//        footerRefreshView.activate()
-//        page += 1
-//      }
-//    }
+  //  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+  //    let offsetY = scrollView.contentOffset.y
+  //    let contentHeight = scrollView.contentSize.height
+  //    if offsetY > contentHeight - scrollView.bounds.height {
+  //      if !footerRefreshView.isLoading {
+  //        footerRefreshView.activate()
+  //        page += 1
+  //      }
+  //    }
   
 }
 
 extension MainContentTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    tableView.deselectRow(at: indexPath, animated: true)
-//    let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-//    let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-//    let fullLinkString = fullLink.absoluteString
-//    let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-//    User.insertBookmark(bookmark)
-//    present(safariViewController(url: fullLink), animated: true)
+    //    tableView.deselectRow(at: indexPath, animated: true)
+    //    let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
+    //    let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+    //    let fullLinkString = fullLink.absoluteString
+    //    let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+    //    User.insertBookmark(bookmark)
+    //    present(safariViewController(url: fullLink), animated: true)
   }
   
   override func tableView(_ tableView: UITableView,
                           viewForHeaderInSection section: Int) -> UIView? {
-    if section == 0 {
-      guard let headerView = UIView
-        .instantiate(fromXib: MainNoticeHeaderView.name) as? MainNoticeHeaderView
-        else { return nil }
-      headerView.reactor = MainNoticeHeaderViewReactor()
-//      headerView.reactor?.state.map { $0.isUpperPostFolded }
-//        .distinctUntilChanged()
-//        .map { Reactor.Action.toggleFolding($0) }
-//        .bind(to: reactor.action)
-//        .disposed(by: disposeBag)
-      return headerView
-    }
-    return nil
+    return section == 0 ? headerView : nil
   }
   
   override func tableView(_ tableView: UITableView,
@@ -187,15 +196,19 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
   
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
-//    if let indexPath = tableView.indexPathForRow(at: location) {
-//      let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-//      let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-//      let fullLinkString = fullLink.absoluteString
-//      print(fullLinkString)
-//      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-//      User.insertBookmark(bookmark)
-//      return safariViewController(url: fullLink)
-//    }
+    if let indexPath = tableView.indexPathForRow(at: location) {
+      let currentState = reactor?.currentState
+      let post = indexPath.section == 0
+        ? currentState?.fixedPosts[indexPath.item]
+        : currentState?.standardPosts[indexPath.item]
+      let university = currentState?.university
+      let category = currentState?.category
+      let fullLink = university?.postURL(inCategory: category, uri: post.link)
+      let fullLinkString = fullLink.absoluteString
+      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+      User.insertBookmark(bookmark)
+      return safariViewController(url: fullLink)
+    }
     return nil
   }
   

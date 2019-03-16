@@ -29,6 +29,8 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   
   private var dataSource: DataSource!
   
+  private let cellIdentifier = "postCell"
+  
   @IBOutlet private weak var tableView: UITableView!
   
   override func viewDidLoad() {
@@ -46,7 +48,7 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   private func setup() {
     title = "북마크"
     registerForPreviewing(with: self, sourceView: tableView)
-    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+    tableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
   }
 }
 
@@ -68,9 +70,7 @@ private extension BookmarkViewController {
   func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.bookmarks }
       .map { bookmarks in
-        let items = bookmarks.map {
-          return UTSectionData(title: $0.title, date: $0.date, link: $0.link)
-        }
+        let items = bookmarks.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
         return [UTSection(items: items)]
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
@@ -84,9 +84,10 @@ extension BookmarkViewController: UIViewControllerPreviewingDelegate {
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
     if let indexPath = tableView.indexPathForRow(at: location) {
-      let url = URL(string: "")!
-      return makeSafariViewController(url: url)
-      //return makeSafariViewController(at: indexPath.row)
+      let bookmark = reactor?.currentState.bookmarks[indexPath.item]
+      if let url = URL(string: bookmark?.link ?? "") {
+        return makeSafariViewController(url: url)
+      }
     }
     return nil
   }
@@ -102,9 +103,10 @@ extension BookmarkViewController: UIViewControllerPreviewingDelegate {
 private extension BookmarkViewController {
   
   func bindDataSource() {
+    let keywords = reactor?.currentState.keywords ?? []
     dataSource = DataSource(configureCell: { _, tableView, indexPath, bookmark in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-      cell.textLabel?.attributedText = .init(string: bookmark.title)
+      let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
+      cell.textLabel?.attributedText = bookmark.title.highlightKeywords(keywords)
       cell.detailTextLabel?.text = bookmark.date
       return cell
     })
@@ -113,31 +115,16 @@ private extension BookmarkViewController {
   
   func bindUI() {
     tableView.rx.itemSelected
-      .subscribe(onNext: { [weak self] indexPath in
-        guard let self = self else { return }
+      .subscribe(onNext: { [weak self, weak reactor] indexPath in
+        guard let self = self, let reactor = reactor else { return }
         self.tableView.deselectRow(at: indexPath, animated: true)
-        let url = URL(string: "")!
-        self.makeSafariViewController(url: url).present(to: self)
-        //self.makeSafariViewController(at: indexPath.row).present(to: self)
+        let bookmark = reactor.currentState.bookmarks[indexPath.item]
+        if let url = URL(string: bookmark.link) {
+          self.makeSafariViewController(url: url).present(to: self)
+        }
       })
       .disposed(by: disposeBag)
   }
-//
-//  func makeSafariViewController(at row: Int) -> SFSafariViewController {
-//    let bookmark = reactor?.currentState.bookmarks[row]
-//    guard let url = URL(string: bookmark?.link ?? "") else {
-//      fatalError("invalid url format")
-//    }
-//    let config = SFSafariViewController.Configuration().then {
-//      $0.barCollapsingEnabled = true
-//      $0.entersReaderIfAvailable = true
-//    }
-//    let viewController = SFSafariViewController(url: url, configuration: config).then {
-//      $0.preferredControlTintColor = .main
-//      $0.dismissButtonStyle = .close
-//    }
-//    return viewController
-//  }
 }
 
 extension BookmarkViewController: SafariViewControllerPresentable { }

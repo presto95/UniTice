@@ -15,21 +15,20 @@ import RxCocoa
 import RxSwift
 import XLPagerTabStrip
 
+/// The main container view controller.
 final class MainContainerViewController: ButtonBarPagerTabStripViewController, StoryboardView {
   
   typealias Reactor = MainContainerViewReactor
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  private let universityModel = Global.shared.universityModel
+  private var contentViewControllers: [MainContentTableViewController] = []
   
   @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
   
   @IBOutlet private weak var searchButtonItem: UIBarButtonItem!
   
   @IBOutlet private weak var bookmarkButtonItem: UIBarButtonItem!
-  
-  var contentViewControllers: [MainContentTableViewController] = []
   
   override func viewDidLoad() {
     setupButtonBar()
@@ -130,7 +129,8 @@ private extension MainContainerViewController {
         self.contentViewControllers.removeAll()
         university.categories.forEach { category in
           let contentViewController = MainContentTableViewController().then {
-            $0.reactor = MainContentTableViewReactor(category: category)
+            $0.reactor = MainContentTableViewReactor(universityType: university,
+                                                     category: category)
           }
           self.contentViewControllers.append(contentViewController)
         }
