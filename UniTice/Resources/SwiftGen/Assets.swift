@@ -22,6 +22,7 @@ internal enum Asset {
   internal static let arrowDown = ImageAsset(name: "arrow_down")
   internal static let arrowUp = ImageAsset(name: "arrow_up")
   internal static let logo = ImageAsset(name: "logo")
+  internal static let main = ColorAsset(name: "main")
   internal static let setting = ImageAsset(name: "setting")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

@@ -20,14 +20,14 @@ final class BookmarkViewReactor: Reactor {
     
     case viewDidLoad
     
-    case deleteBookmark(Int)
+    case deleteBookmark(index: Int)
   }
   
   enum Mutation {
     
     case initialize([Bookmark], [String])
     
-    case deleteBookmark(Int)
+    case deleteBookmark(index: Int)
   }
   
   struct State {
@@ -52,7 +52,7 @@ final class BookmarkViewReactor: Reactor {
         .zip(realmService.fetchBookmarks(),
              realmService.fetchKeywords()) { Mutation.initialize($0, $1) }
     case let .deleteBookmark(item):
-      return realmService.removeBookmark(at: item).map { Mutation.deleteBookmark(item) }
+      return realmService.removeBookmark(at: item).map { Mutation.deleteBookmark(index: item) }
     }
   }
   

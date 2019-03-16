@@ -9,23 +9,25 @@
 import SafariServices
 import UIKit
 
-import DZNEmptyDataSet
 import ReactorKit
 import RxCocoa
 import RxDataSources
 import RxSwift
-import RxViewController
 
-/// 북마크 뷰 컨트롤러.
+/// The bookmark view controller.
 final class BookmarkViewController: UIViewController, StoryboardView {
+  
+  // MARK: Typealias
   
   typealias Reactor = BookmarkViewReactor
   
   typealias DataSource = RxTableViewSectionedReloadDataSource<UTSection>
   
+  // MARK: Property
+  
   var disposeBag: DisposeBag = DisposeBag()
   
-  var dataSource: DataSource!
+  private var dataSource: DataSource!
   
   @IBOutlet private weak var tableView: UITableView!
   
@@ -44,7 +46,6 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   private func setup() {
     title = "북마크"
     registerForPreviewing(with: self, sourceView: tableView)
-    tableView.emptyDataSetSource = self
     tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
   }
 }
@@ -54,12 +55,12 @@ final class BookmarkViewController: UIViewController, StoryboardView {
 private extension BookmarkViewController {
   
   func bindAction(_ reactor: Reactor) {
-    rx.viewDidLoad
+    Observable.just(Void())
       .map { Reactor.Action.viewDidLoad }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    tableView.rx.itemDeleted.asObservable()
-      .map { Reactor.Action.deleteBookmark($0.item) }
+    tableView.rx.itemDeleted
+      .map { Reactor.Action.deleteBookmark(index: $0.item) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -73,31 +74,6 @@ private extension BookmarkViewController {
         return [UTSection(items: items)]
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
-      .disposed(by: disposeBag)
-  }
-}
-
-// MARK: - Private Method
-
-private extension BookmarkViewController {
-  
-  func bindDataSource() {
-    dataSource = DataSource(configureCell: { dataSource, tableView, indexPath, data in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-      cell.textLabel?.attributedText = NSAttributedString(string: data.title)
-      cell.detailTextLabel?.text = data.date
-      return cell
-    })
-    dataSource.canEditRowAtIndexPath = { _, _ in true }
-  }
-  
-  func bindUI() {
-    tableView.rx.itemSelected
-      .subscribe(onNext: { [weak self] indexPath in
-        guard let self = self else { return }
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        self.makeSafariViewController(at: indexPath.row).present(to: self)
-      })
       .disposed(by: disposeBag)
   }
 }
@@ -119,18 +95,29 @@ extension BookmarkViewController: UIViewControllerPreviewingDelegate {
   }
 }
 
-// MARK: - DZNEmptyDataSetSource 구현
-
-extension BookmarkViewController: DZNEmptyDataSetSource {
-  
-  func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-    return NSAttributedString(string: "기록 없음")
-  }
-}
-
 // MARK: - Private Method
 
 private extension BookmarkViewController {
+  
+  func bindDataSource() {
+    dataSource = DataSource(configureCell: { _, tableView, indexPath, bookmark in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+      cell.textLabel?.attributedText = .init(string: bookmark.title)
+      cell.detailTextLabel?.text = bookmark.date
+      return cell
+    })
+    dataSource.canEditRowAtIndexPath = { _, _ in true }
+  }
+  
+  func bindUI() {
+    tableView.rx.itemSelected
+      .subscribe(onNext: { [weak self] indexPath in
+        guard let self = self else { return }
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.makeSafariViewController(at: indexPath.row).present(to: self)
+      })
+      .disposed(by: disposeBag)
+  }
   
   func makeSafariViewController(at row: Int) -> SFSafariViewController {
     let bookmark = reactor?.currentState.bookmarks[row]

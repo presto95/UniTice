@@ -51,7 +51,6 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
 
 private extension UniversitySelectionViewController {
   
-  /// 리액터 액션 바인딩.
   func bindAction(_ reactor: Reactor) {
     confirmButton.rx.tap
       .map { Reactor.Action.confirm }
@@ -63,7 +62,6 @@ private extension UniversitySelectionViewController {
       .disposed(by: disposeBag)
   }
   
-  /// 리액터 상태 바인딩.
   func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.isNextScenePresented }
       .distinctUntilChanged()
@@ -87,23 +85,6 @@ private extension UniversitySelectionViewController {
       })
       .disposed(by: disposeBag)
   }
-  
-  /// UI 바인딩.
-  func bindUI() {
-    Observable.just(University.allCases)
-      .bind(to: pickerView.rx.itemTitles) { _, element in
-        return element.rawValue
-      }
-      .disposed(by: disposeBag)
-    pickerView.rx.modelSelected(University.self)
-      .map { $0.first }
-      .subscribe(onNext: { university in
-        if let university = university {
-          InitialInfo.shared.university.onNext(university)
-        }
-      })
-      .disposed(by: disposeBag)
-  }
 }
 
 // MARK: - MFMailComposeViewControllerDelegate 구현
@@ -120,7 +101,21 @@ extension UniversitySelectionViewController: MFMailComposeViewControllerDelegate
 
 private extension UniversitySelectionViewController {
   
-  /// 메일 작성 뷰 컨트롤러 만들기.
+  func bindUI() {
+    Observable.just(University.allCases)
+      .bind(to: pickerView.rx.itemTitles) { _, element in element.rawValue }
+      .disposed(by: disposeBag)
+    pickerView.rx.modelSelected(University.self)
+      .map { $0.first }
+      .subscribe(onNext: { university in
+        if let university = university {
+          InitialInfo.shared.university.onNext(university)
+        }
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  /// Creates the mail compose view controller.
   func makeMailComposeViewController() -> UIViewController {
     return MFMailComposeViewController().then {
       $0.mailComposeDelegate = self

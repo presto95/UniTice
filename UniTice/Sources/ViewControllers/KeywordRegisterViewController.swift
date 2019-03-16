@@ -17,9 +17,17 @@ import SnapKit
 
 final class KeywordRegisterViewController: UIViewController, StoryboardView {
   
+  // MARK: Typealias
+  
+  typealias Reactor = KeywordRegisterViewReactor
+  
+  typealias DataSource = RxTableViewSectionedReloadDataSource<SectionModel<Void, KeywordCellReactor>>
+  
+  // MARK: Property
+  
   var disposeBag = DisposeBag()
   
-  var dataSource: RxTableViewSectionedReloadDataSource<SectionModel<Void, KeywordCellReactor>>!
+  private var dataSource: DataSource!
   
   @IBOutlet private weak var tableView: UITableView!
   
@@ -32,11 +40,11 @@ final class KeywordRegisterViewController: UIViewController, StoryboardView {
     setup()
   }
   
-  func bind(reactor: KeywordRegisterViewReactor) {
+  func bind(reactor: Reactor) {
     bindDataSource()
+    bindUI()
     bindAction(reactor)
     bindState(reactor)
-    bindUI()
   }
   
   private func setup() {
@@ -51,7 +59,7 @@ final class KeywordRegisterViewController: UIViewController, StoryboardView {
 
 private extension KeywordRegisterViewController {
   
-  func bindAction(_ reactor: KeywordRegisterViewReactor) {
+  func bindAction(_ reactor: Reactor) {
     tableView.rx.itemDeleted
       .map { Reactor.Action.removeKeyword(index: $0.item) }
       .bind(to: reactor.action)
@@ -66,7 +74,7 @@ private extension KeywordRegisterViewController {
       .disposed(by: disposeBag)
   }
   
-  func bindState(_ reactor: KeywordRegisterViewReactor) {
+  func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.keywords }
       .map { keywords -> [SectionModel<Void, KeywordCellReactor>] in
         let items = keywords.map { KeywordCellReactor(keyword: $0) }
@@ -95,16 +103,20 @@ private extension KeywordRegisterViewController {
       })
       .disposed(by: disposeBag)
   }
+}
+
+// MARK: - Private Method
+
+private extension KeywordRegisterViewController {
   
   func bindDataSource() {
-    dataSource = RxTableViewSectionedReloadDataSource<SectionModel<Void, KeywordCellReactor>>
-      .init(configureCell: { dataSource, tableView, indexPath, reactor in
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        if let keywordCell = cell as? KeywordCell {
-          keywordCell.reactor = reactor
-        }
-        return cell
-      })
+    dataSource = .init(configureCell: { dataSource, tableView, indexPath, reactor in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      if let keywordCell = cell as? KeywordCell {
+        keywordCell.reactor = reactor
+      }
+      return cell
+    })
     dataSource.canEditRowAtIndexPath = { _, _ in true }
   }
   
@@ -116,15 +128,22 @@ private extension KeywordRegisterViewController {
         self.view.endEditing(true)
       })
       .disposed(by: disposeBag)
+    tableView.rx.itemDeleted
+      .subscribe(onNext: { indexPath in
+        
+      })
+      .disposed(by: disposeBag)
     tableView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
+
+// MARK: - Conforming UITableViewDelegate
 
 extension KeywordRegisterViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     if let headerView: KeywordRegisterHeaderView
-      = UIView.instantiate(fromXib: KeywordRegisterHeaderView.classNameToString) {
+      = UIView.instantiate(fromXib: KeywordRegisterHeaderView.name) {
       headerView.reactor = KeywordRegisterHeaderViewReactor()
       return headerView
     }

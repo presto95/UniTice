@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnd-o7-FEG">
-                                <rect key="frame" x="0.0" y="225.5" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="175" width="375" height="317"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDT-Jb-lz7" customClass="UTButton" customModule="UniTice" customModuleProvider="target">
                                 <rect key="frame" x="16" y="595" width="343" height="40"/>
@@ -77,6 +78,7 @@
                             <constraint firstItem="uMw-OY-eep" firstAttribute="top" secondItem="qWL-cZ-gg1" secondAttribute="bottom" multiplier="0.1" id="KjS-YV-LVc"/>
                             <constraint firstItem="QDT-Jb-lz7" firstAttribute="leading" secondItem="qWL-cZ-gg1" secondAttribute="leading" constant="16" id="SM5-i3-4sb"/>
                             <constraint firstItem="uMw-OY-eep" firstAttribute="leading" secondItem="qWL-cZ-gg1" secondAttribute="leading" constant="16" id="gky-Bg-FA8"/>
+                            <constraint firstItem="tnd-o7-FEG" firstAttribute="top" secondItem="uMw-OY-eep" secondAttribute="bottom" constant="16" id="rTj-HW-oJq"/>
                             <constraint firstItem="qWL-cZ-gg1" firstAttribute="bottom" secondItem="QDT-Jb-lz7" secondAttribute="bottom" constant="32" id="x2C-KG-ogq"/>
                             <constraint firstItem="qWL-cZ-gg1" firstAttribute="trailing" secondItem="uMw-OY-eep" secondAttribute="trailing" constant="16" id="z8E-NS-uFm"/>
                             <constraint firstItem="tnd-o7-FEG" firstAttribute="centerX" secondItem="yqP-xy-Ifw" secondAttribute="centerX" id="zQn-m5-lxu"/>
@@ -140,7 +142,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4L-jF-F5c">
                                                     <rect key="frame" x="112.5" y="8" width="150" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                    <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="main"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -233,58 +235,59 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTQ-zS-SIk">
-                                <rect key="frame" x="16" y="293" width="60" height="20.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="UkI-r0-dsy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키워드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn0-st-Cs3">
-                                <rect key="frame" x="16" y="353.5" width="60" height="20.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="esg-JE-00H"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울과학기술대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P24-DV-KYi">
-                                <rect key="frame" x="92" y="293" width="267" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="없음" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2x-ri-SdP">
-                                <rect key="frame" x="92" y="353.5" width="267" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="AXP-3V-Q4j">
+                                <rect key="frame" x="109.5" y="245.5" width="156" height="176"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jBX-5V-bAT">
+                                        <rect key="frame" x="0.0" y="0.0" width="156" height="68"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTQ-zS-SIk">
+                                                <rect key="frame" x="60.5" y="0.0" width="35" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울과학기술대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P24-DV-KYi">
+                                                <rect key="frame" x="0.0" y="44" width="156" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mVD-lF-yvq">
+                                        <rect key="frame" x="52" y="108" width="52" height="68"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키워드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn0-st-Cs3">
+                                                <rect key="frame" x="0.0" y="0.0" width="52" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="없음" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2x-ri-SdP">
+                                                <rect key="frame" x="8.5" y="44" width="35" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="O2x-ri-SdP" firstAttribute="leading" secondItem="zn0-st-Cs3" secondAttribute="trailing" constant="16" id="2CY-cv-eXN"/>
+                            <constraint firstItem="AXP-3V-Q4j" firstAttribute="centerY" secondItem="Mwd-6T-FSe" secondAttribute="centerY" id="7x2-ZI-KHW"/>
                             <constraint firstItem="TGD-yD-gat" firstAttribute="trailing" secondItem="GCn-kl-VaB" secondAttribute="trailing" constant="16" id="KUv-Mb-iSi"/>
-                            <constraint firstItem="JTQ-zS-SIk" firstAttribute="bottom" secondItem="Mwd-6T-FSe" secondAttribute="centerY" constant="-20" id="RYo-Ee-J9u"/>
+                            <constraint firstItem="AXP-3V-Q4j" firstAttribute="centerX" secondItem="Mwd-6T-FSe" secondAttribute="centerX" id="Ntf-tg-zyj"/>
                             <constraint firstItem="GCn-kl-VaB" firstAttribute="top" secondItem="TGD-yD-gat" secondAttribute="bottom" multiplier="0.1" id="SKd-Kt-y3P"/>
                             <constraint firstItem="mKE-dc-1YR" firstAttribute="leading" secondItem="nJI-Cx-czQ" secondAttribute="trailing" constant="16" id="TU9-mV-DOv"/>
                             <constraint firstItem="mKE-dc-1YR" firstAttribute="width" secondItem="Mwd-6T-FSe" secondAttribute="width" multiplier="0.6" id="WgA-zW-Cnw"/>
-                            <constraint firstItem="O2x-ri-SdP" firstAttribute="top" secondItem="zn0-st-Cs3" secondAttribute="top" id="Y7b-8L-MSy"/>
-                            <constraint firstItem="TGD-yD-gat" firstAttribute="trailing" secondItem="P24-DV-KYi" secondAttribute="trailing" constant="16" id="ZaG-pW-dgC"/>
                             <constraint firstItem="GCn-kl-VaB" firstAttribute="leading" secondItem="TGD-yD-gat" secondAttribute="leading" constant="16" id="ch5-tf-g4h"/>
-                            <constraint firstItem="zn0-st-Cs3" firstAttribute="top" secondItem="Mwd-6T-FSe" secondAttribute="centerY" constant="20" id="fXK-pP-u7U"/>
                             <constraint firstItem="TGD-yD-gat" firstAttribute="bottom" secondItem="mKE-dc-1YR" secondAttribute="bottom" constant="32" id="iVc-ZX-yhY"/>
                             <constraint firstItem="TGD-yD-gat" firstAttribute="trailing" secondItem="mKE-dc-1YR" secondAttribute="trailing" constant="16" id="luh-OO-Ba3"/>
-                            <constraint firstItem="P24-DV-KYi" firstAttribute="centerY" secondItem="JTQ-zS-SIk" secondAttribute="centerY" id="nEy-l6-QaN"/>
                             <constraint firstItem="nJI-Cx-czQ" firstAttribute="leading" secondItem="TGD-yD-gat" secondAttribute="leading" constant="16" id="oqk-36-hrl"/>
-                            <constraint firstItem="P24-DV-KYi" firstAttribute="leading" secondItem="JTQ-zS-SIk" secondAttribute="trailing" constant="16" id="uEa-NO-wwt"/>
-                            <constraint firstItem="TGD-yD-gat" firstAttribute="trailing" secondItem="O2x-ri-SdP" secondAttribute="trailing" constant="16" id="w3S-vy-Nl7"/>
                             <constraint firstItem="TGD-yD-gat" firstAttribute="bottom" secondItem="nJI-Cx-czQ" secondAttribute="bottom" constant="32" id="xeD-aI-5zy"/>
-                            <constraint firstItem="JTQ-zS-SIk" firstAttribute="leading" secondItem="TGD-yD-gat" secondAttribute="leading" constant="16" id="yPP-LD-VAb"/>
-                            <constraint firstItem="zn0-st-Cs3" firstAttribute="leading" secondItem="TGD-yD-gat" secondAttribute="leading" constant="16" id="z8l-E5-bUp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TGD-yD-gat"/>
                     </view>
@@ -317,4 +320,9 @@
             <point key="canvasLocation" x="298" y="105"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="main">
+            <color red="0.72941176470588232" green="0.23137254901960785" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

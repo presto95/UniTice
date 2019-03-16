@@ -11,7 +11,6 @@ import UIKit
 import ReactorKit
 import RxCocoa
 import RxSwift
-import RxViewController
 
 /// 초기 설정 완료 뷰 컨트롤러.
 final class FinishViewController: UIViewController, StoryboardView {
@@ -40,10 +39,6 @@ final class FinishViewController: UIViewController, StoryboardView {
   }
   
   private func setup() {
-    InitialInfo.shared.university
-      .map { $0.rawValue }
-      .bind(to: universityLabel.rx.text)
-      .disposed(by: disposeBag)
     confirmButton.type = .next
     backButton.type = .back
   }
@@ -76,7 +71,7 @@ private extension FinishViewController {
           mainContainerViewController?.reactor = MainContainerViewReactor()
           $0.modalTransitionStyle = .flipHorizontal
         }
-        mainViewController.present(to: self)
+        self.present(mainViewController, animated: true, completion: nil)
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isBackButtonTapped }
@@ -90,7 +85,12 @@ private extension FinishViewController {
   }
   
   func bindUI() {
-    InitialInfo.shared.keywords
+    let sharedInfo = InitialInfo.shared
+    sharedInfo.university
+      .map { $0.rawValue }
+      .bind(to: universityLabel.rx.text)
+      .disposed(by: disposeBag)
+    sharedInfo.keywords
       .reduce("") { "\($0), \($1)" }
       .map { $0.components(separatedBy: ",") }
       .skip(1)

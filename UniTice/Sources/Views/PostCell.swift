@@ -14,6 +14,13 @@ import RxSwift
 
 final class PostCell: UITableViewCell, View {
   
+  private enum Font {
+    
+    static let text = UIFont.systemFont(ofSize: 15, weight: .semibold)
+    
+    static let detailText = UIFont.systemFont(ofSize: 13, weight: .light)
+  }
+  
   var disposeBag: DisposeBag = DisposeBag()
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -32,7 +39,7 @@ final class PostCell: UITableViewCell, View {
   
   private func setup() {
     textLabel?.numberOfLines = 0
-    textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-    detailTextLabel?.font = UIFont.systemFont(ofSize: 13, weight: .light)
+    textLabel?.font = Font.text
+    detailTextLabel?.font = Font.detailText
   }
 }

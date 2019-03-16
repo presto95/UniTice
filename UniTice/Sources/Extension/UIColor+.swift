@@ -18,5 +18,5 @@ extension UIColor {
     self.init(red: rgb, green: rgb, blue: rgb)
   }
   
-  static let main = UIColor(red: 17, green: 39, blue: 72)
+  static let main = Asset.main.color
 }

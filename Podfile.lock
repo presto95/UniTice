@@ -1,6 +1,5 @@
 PODS:
   - Differentiator (3.1.0)
-  - DZNEmptyDataSet (1.8.1)
   - Firebase/Core (5.18.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.7.0)
@@ -86,15 +85,11 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.2):
     - RxAtomic (>= 4.4.2, ~> 4.4)
-  - RxViewController (0.4.1):
-    - RxCocoa (>= 4.0.0)
-    - RxSwift (>= 4.0.0)
   - SnapKit (4.2.0)
   - Then (2.4.0)
   - XLPagerTabStrip (8.1.1)
 
 DEPENDENCIES:
-  - DZNEmptyDataSet
   - Firebase/Core
   - Firebase/Messaging
   - Kanna
@@ -105,7 +100,6 @@ DEPENDENCIES:
   - RxGesture
   - RxOptional
   - RxSwift
-  - RxViewController
   - SnapKit
   - Then
   - XLPagerTabStrip
@@ -113,7 +107,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Differentiator
-    - DZNEmptyDataSet
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -134,14 +127,12 @@ SPEC REPOS:
     - RxGesture
     - RxOptional
     - RxSwift
-    - RxViewController
     - SnapKit
     - Then
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 02f3281965c075426141a0ce1277e9de6649cab9
   FirebaseAnalytics: 23851fe602c872130a2c5c55040b302120346cc2
   FirebaseAnalyticsInterop: efbe45c8385ec626e29f9525e5ebd38520dfb6c1
@@ -162,11 +153,10 @@ SPEC CHECKSUMS:
   RxGesture: 7f6dfb45dbde06e618c24442d38493e3144f2c95
   RxOptional: 80426a0ddbd092573e4c482d8cc13302078c4d5e
   RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
-  RxViewController: e93e7c233d5b5b62c32231d69726d55f54081bc6
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 8664cee361d73a42ceb8a13a15293234c62a192f
+PODFILE CHECKSUM: 5807bd0fda088354c974b3fa3c40d3db7462c129
 
 COCOAPODS: 1.6.0
