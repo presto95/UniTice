@@ -11,8 +11,8 @@ import Foundation
 import RealmSwift
 import RxSwift
 
-/// 데이터 보존 서비스 타입.
-protocol PersistenceServiceType: class {
+/// Realm 서비스 타입.
+protocol RealmServiceType: class {
   
   /// Realm 인스턴스.
   var realm: Realm { get }
@@ -60,15 +60,13 @@ protocol PersistenceServiceType: class {
   /// 모든 키워드 삭제하기.
   @discardableResult
   func removeAllKeywords() -> Observable<Void>
-  
-  var isUpperPostFolded: Bool { get set }
 }
 
-/// 데이터 보존 서비스.
-final class PersistenceService: PersistenceServiceType {
+/// Realm 서비스.
+final class RealmService: RealmServiceType {
   
-  /// PersistenceService Singleton Object.
-  static let shared = PersistenceService()
+  /// RealmService Singleton Object.
+  static let shared = RealmService()
   
   var realm: Realm {
     return try! Realm()
@@ -186,16 +184,5 @@ final class PersistenceService: PersistenceServiceType {
       }
       return .just(Void())
     }
-  }
-  
-  var isUpperPostFolded: Bool {
-    get {
-      return UserDefaults.standard.value(forKey: "fold") as? Bool ?? false
-    }
-    set {
-      UserDefaults.standard.set(newValue, forKey: "fold")
-      UserDefaults.standard.synchronize()
-    }
-    
   }
 }

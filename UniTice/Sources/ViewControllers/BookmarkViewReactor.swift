@@ -39,20 +39,20 @@ final class BookmarkViewReactor: Reactor {
   
   let initialState: State = State()
   
-  let persistenceService: PersistenceServiceType
+  let realmService: RealmServiceType
   
-  init(persistenceService: PersistenceServiceType = PersistenceService.shared) {
-    self.persistenceService = persistenceService
+  init(realmService: RealmServiceType = RealmService.shared) {
+    self.realmService = realmService
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .viewDidLoad:
       return Observable
-        .zip(persistenceService.fetchBookmarks(),
-             persistenceService.fetchKeywords()) { Mutation.initialize($0, $1) }
+        .zip(realmService.fetchBookmarks(),
+             realmService.fetchKeywords()) { Mutation.initialize($0, $1) }
     case let .deleteBookmark(item):
-      return persistenceService.removeBookmark(at: item).map { Mutation.deleteBookmark(item) }
+      return realmService.removeBookmark(at: item).map { Mutation.deleteBookmark(item) }
     }
   }
   

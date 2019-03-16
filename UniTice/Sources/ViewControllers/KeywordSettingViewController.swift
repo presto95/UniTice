@@ -20,15 +20,12 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
   
   typealias Reactor = KeywordSettingViewReactor
   
+  typealias DataSource = RxTableViewSectionedReloadDataSource<KeywordSection>
+  
   var disposeBag: DisposeBag = DisposeBag()
   
-  private let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<Void, String>>
-    .init(configureCell: { dataSource, tableView, indexPath, keyword in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-      cell.textLabel?.text = keyword
-      return cell
-    })
-  
+  private var dataSource: DataSource! 
+
   private let registerButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
   
   @IBOutlet private weak var tableView: UITableView!
@@ -69,25 +66,30 @@ private extension KeywordSettingViewController {
   
   func bindState(_ reactor: Reactor) {  
     reactor.state.map { $0.keywords }
-      .map { keywords -> [SectionModel<Void, String>] in
-        return [SectionModel(model: Void(), items: keywords)]
+      .map { keywords -> [KeywordSection] in
+        return [KeywordSection(items: keywords.map { KeywordSectionData(keyword: $0) })]
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
-  }
-  
-  func bindDataSource() {
-    dataSource.canEditRowAtIndexPath = { _, _ in true }
-  }
-  
-  func bindUI() {
-    
   }
 }
 
 // MARK: - Private Method
 
 private extension KeywordSettingViewController {
+  
+  func bindDataSource() {
+    dataSource = DataSource(configureCell: { dataSource, tableView, indexPath, keyword in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      cell.textLabel?.text = keyword.keyword
+      return cell
+    })
+    dataSource.canEditRowAtIndexPath = { _, _ in true }
+  }
+  
+  func bindUI() {
+    
+  }
   
   func presentKeywordSettingAlertController() {
     UIAlertController

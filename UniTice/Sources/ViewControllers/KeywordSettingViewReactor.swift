@@ -58,25 +58,25 @@ final class KeywordSettingViewReactor: Reactor {
   
   let initialState: State = State()
   
-  let persistenceService: PersistenceServiceType
+  let realmService: RealmServiceType
   
-  init(persistenceService: PersistenceServiceType = PersistenceService.shared) {
-    self.persistenceService = persistenceService
+  init(realmService: RealmServiceType = RealmService.shared) {
+    self.realmService = realmService
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .didPresent:
-      return persistenceService.fetchKeywords().map { Mutation.setKeywords($0) }
+      return realmService.fetchKeywords().map { Mutation.setKeywords($0) }
     case .register:
       return Observable.just(Mutation.presentAlert)
     case let .alertConfirm(keyword):
-      return persistenceService.addKeyword(keyword)
+      return realmService.addKeyword(keyword)
         .map { Mutation.addKeyword($0) }
     case .alertCancel:
       return Observable.just(Mutation.dismissAlert)
     case let .deleteKeyword(index):
-      return persistenceService.removeKeyword(at: index).map { Mutation.deleteKeyword(at: index) }
+      return realmService.removeKeyword(at: index).map { Mutation.deleteKeyword(at: index) }
     }
   }
   

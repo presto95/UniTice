@@ -46,10 +46,10 @@ final class UniversityChangeViewReactor: Reactor {
   let initialState: State = State()
   
   /// 데이터 보존 서비스.
-  let persistenceService: PersistenceServiceType
+  let realmService: RealmServiceType
   
-  init(persistenceService: PersistenceServiceType = PersistenceService.shared) {
-    self.persistenceService = persistenceService
+  init(realmService: RealmServiceType = RealmService.shared) {
+    self.realmService = realmService
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -84,9 +84,9 @@ private extension UniversityChangeViewReactor {
     let university = currentState.university ?? .kaist
     Global.shared.university.onNext(university)
     return Observable
-      .combineLatest(persistenceService.updateUniversity(university),
-                     persistenceService.removeAllKeywords(),
-                     persistenceService.removeAllBookmarks()) { _, _, _ in
+      .combineLatest(realmService.updateUniversity(university),
+                     realmService.removeAllKeywords(),
+                     realmService.removeAllBookmarks()) { _, _, _ in
                       return Mutation.confirm
     }
     

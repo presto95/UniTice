@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   let gcmMessageIDKey = "gcm.message_id"
   
-  let persistenceService: PersistenceServiceType = PersistenceService()
+  let realmService: RealmServiceType = RealmService()
   
   let disposeBag = DisposeBag()
   
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.tintColor = .main
     
-    persistenceService.fetchUser()
+    realmService.fetchUser()
       .observeOn(MainScheduler.instance)
       .ifEmpty(default: User())
       .subscribe(onNext: { [weak self] user in

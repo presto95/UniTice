@@ -10,84 +10,73 @@ import Foundation
 
 import ReactorKit
 import RxCocoa
-import RxDataSources
 import RxSwift
 
-struct SettingTableViewSection {
-  
-  var footer: String?
-  
-  var items: [Item]
-}
-
-extension SettingTableViewSection: SectionModelType {
-  
-  typealias Item = String
-  
-  init(original: SettingTableViewSection, items: [Item]) {
-    self = original
-    self.items = items
-  }
-}
-
-/// 설정 테이블 뷰 리액터.
+/// The `Reactor` of `SettingTableViewController`.
 final class SettingTableViewReactor: Reactor {
   
   enum Action {
     
-    /// 알림 권한 상태 가져오기.
+    case viewDidLoad
+    
+    /// The action that the user fetches user notification status.
     case fetchNotificationStatus(Bool)
     
-    /// 상단 고정 게시물 스위치 토글.
+    /// The action that the user toggles switch describing the upper post folding status.
     case toggleUpperPostFoldSwitch
   }
   
   enum Mutation {
     
-    /// 알림 권한 상태 설정.
+    /// The mutation that setting initial footer string value.
+    case setInitialFooter(Bool, Bool)
+    
+    /// The mutation that setting notification status.
     case setNotificationStatus(Bool)
     
-    /// 상단 고정 게시물 스위치 토글.
+    /// The mutation that toggling upper post folding switch control.
     case toggleUpperPostFoldSwitch
   }
   
   struct State {
     
-    /// 섹션 모델.
+    /// The section models.
     var sections: [SettingTableViewSection] = [
-      SettingTableViewSection(footer: nil, items: ["상단 고정 게시물 펼치기"]),
-      SettingTableViewSection(footer: nil, items: ["학교 변경", "키워드 설정", "알림 설정"]),
-      SettingTableViewSection(footer: nil, items: ["문의하기", "앱 평가하기"])
+      .init(footer: nil, items: ["상단 고정 게시물 펼치기"]),
+      .init(footer: nil, items: ["학교 변경", "키워드 설정", "알림 설정"]),
+      .init(footer: nil, items: ["문의하기", "앱 평가하기"])
     ]
     
-    /// 상단 고정 게시물이 펼쳐져 있는 상태인가.
-    var isUpperPostFolded: Bool
+    /// The boolean value indicating whether the upper post is unfolded.
+    var isUpperPostUnfolded: Bool = false
     
-    /// 알림 권한이 허용된 상태인가.
-    var isNotificationGranted: Bool
-    
-    init(isUpperPostFolded: Bool, isNotificationGranted: Bool) {
-      self.isUpperPostFolded = isUpperPostFolded
-      self.isNotificationGranted = isNotificationGranted
-    }
+    /// The boolean value indicating whether the user notification permission is granted.
+    var isNotificationGranted: Bool = false
   }
   
-  /// 초기 상태.
-  let initialState: State
+  let initialState: State = State()
   
-  /// 데이터 보존 서비스.
-  let persistenceService: PersistenceServiceType
+  /// The realm service.
+  let realmService: RealmServiceType
   
-  init(isNotificationGranted: Bool,
-       isUpperPostFolded: Bool,
-       persistenceService: PersistenceServiceType = PersistenceService.shared) {
-    self.persistenceService = persistenceService
-    initialState = State(isUpperPostFolded: isUpperPostFolded,
-                         isNotificationGranted: isNotificationGranted)
+  /// The user defaults service.
+  let userDefaultsService: UserDefaultsServiceType
+  
+  /// The user notification service.
+  let userNotificationService: UserNotificationServiceType
+  
+  init(realmService: RealmServiceType = RealmService.shared,
+       userDefaultsService: UserDefaultsServiceType = UserDefaultsService.shared,
+       userNotificationService: UserNotificationServiceType = UserNotificationService.shared) {
+    self.realmService = realmService
+    self.userDefaultsService = userDefaultsService
+    self.userNotificationService = userNotificationService
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+    case .viewDidLoad:
+      return setInitialState()
     case let .fetchNotificationStatus(isGranted):
       return Observable.just(Mutation.setNotificationStatus(isGranted))
     case .toggleUpperPostFoldSwitch:
@@ -98,15 +87,52 @@ final class SettingTableViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case let .setInitialFooter(isUpperPostFolded, isNotifictionGranted):
+      state.isUpperPostUnfolded = isUpperPostFolded
+      state.isNotificationGranted = isNotifictionGranted
+      setSections(state: &state,
+                  isUpperPostFolded: isUpperPostFolded,
+                  isNotificationGranted: isNotifictionGranted)
     case let .setNotificationStatus(isGranted):
       state.isNotificationGranted = isGranted
-      state.sections[1].footer = isGranted ? "알림이 활성화되어 있습니다." : "알림이 비활성화되어 있습니다."
+      setSections(state: &state,
+                  isUpperPostFolded: currentState.isUpperPostUnfolded,
+                  isNotificationGranted: isGranted)
     case .toggleUpperPostFoldSwitch:
-      state.isUpperPostFolded.toggle()
-      state.sections[0].footer
-        = state.isUpperPostFolded ? "상단 고정 게시물이 펼쳐진 상태입니다." : "상단 고정 게시물이 접혀진 상태입니다."
-      persistenceService.isUpperPostFolded = state.isUpperPostFolded
+      let changingUpperPostFoldedState = currentState.isUpperPostUnfolded ? false : true
+      state.isUpperPostUnfolded.toggle()
+      setSections(state: &state,
+                  isUpperPostFolded: changingUpperPostFoldedState,
+                  isNotificationGranted: currentState.isNotificationGranted)
+      userDefaultsService.isUpperPostFolded = state.isUpperPostUnfolded
     }
     return state
+  }
+}
+
+// MARK: - Private Method
+
+private extension SettingTableViewReactor {
+  
+  func setInitialState() -> Observable<Mutation> {
+    let isUpperPostFolded = Observable.just(userDefaultsService.isUpperPostFolded)
+    let isNotificatinGranted = userNotificationService.requestUserNotificationIsAuthorized()
+    return Observable
+      .combineLatest(isUpperPostFolded, isNotificatinGranted) { ($0, $1) }
+      .map { Mutation.setInitialFooter($0.0, $0.1) }
+  }
+  
+  func setSections(state: inout State, isUpperPostFolded: Bool, isNotificationGranted: Bool) {
+    let upperPostFooter = isUpperPostFolded
+      ? "상단 고정 게시물이 펼쳐진 상태입니다."
+      : "상단 고정 게시물이 접혀진 상태입니다."
+    let notificationFooter = isNotificationGranted
+      ? "알림이 활성화되어 있습니다."
+      : "알림이 비활성화되어 있습니다."
+    state.sections = [
+      .init(footer: upperPostFooter, items: ["상단 고정 게시물 펼치기"]),
+      .init(footer: notificationFooter, items: ["학교 변경", "키워드 설정", "알림 설정"]),
+      .init(footer: nil, items: ["문의하기", "앱 평가하기"])
+    ]
   }
 }

@@ -21,9 +21,11 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   
   typealias Reactor = BookmarkViewReactor
   
+  typealias DataSource = RxTableViewSectionedReloadDataSource<UTSection>
+  
   var disposeBag: DisposeBag = DisposeBag()
   
-  var dataSource: RxTableViewSectionedReloadDataSource<UTSection>!
+  var dataSource: DataSource!
   
   @IBOutlet private weak var tableView: UITableView!
   
@@ -33,10 +35,10 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   }
   
   func bind(reactor: Reactor) {
+    bindDataSource()
+    bindUI()
     bindAction(reactor)
     bindState(reactor)
-    bindDataSource(reactor)
-    bindUI()
   }
   
   private func setup() {
@@ -73,16 +75,19 @@ private extension BookmarkViewController {
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
   }
+}
+
+// MARK: - Private Method
+
+private extension BookmarkViewController {
   
-  func bindDataSource(_ reactor: Reactor) {
-    dataSource = RxTableViewSectionedReloadDataSource<UTSection>
-      .init(configureCell: { dataSource, tableView, indexPath, data in
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-        cell.textLabel?.attributedText
-          = data.title.highlightKeywords(reactor.currentState.keywords)
-        cell.detailTextLabel?.text = data.date
-        return cell
-      })
+  func bindDataSource() {
+    dataSource = DataSource(configureCell: { dataSource, tableView, indexPath, data in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+      cell.textLabel?.attributedText = NSAttributedString(string: data.title)
+      cell.detailTextLabel?.text = data.date
+      return cell
+    })
     dataSource.canEditRowAtIndexPath = { _, _ in true }
   }
   

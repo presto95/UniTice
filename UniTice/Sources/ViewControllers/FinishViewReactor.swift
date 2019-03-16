@@ -38,10 +38,10 @@ final class FinishViewReactor: Reactor {
   
   let initialState: State = State()
   
-  let persistenceService: PersistenceServiceType
+  let realmService: RealmServiceType
   
-  init(persistenceService: PersistenceServiceType = PersistenceService.shared) {
-    self.persistenceService = persistenceService
+  init(realmService: RealmServiceType = RealmService.shared) {
+    self.realmService = realmService
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -86,7 +86,7 @@ private extension FinishViewReactor {
               $0.university = university.rawValue
               $0.keywords.append(objectsIn: keywords)
             }
-            self?.persistenceService.addUser(user)
+            self?.realmService.addUser(user)
             Global.shared.university.onNext(university)
             return Mutation.saveInitialData
     }

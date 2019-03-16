@@ -89,10 +89,7 @@ private extension MainContainerViewController {
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let controller = StoryboardScene.Main.settingTableViewController.instantiate()
-        let isUpperPostFolded = PersistenceService.shared.isUpperPostFolded
-        let isNotificationGranted =
-          controller.reactor = SettingTableViewReactor(isNotificationGranted: false,
-                                                       isUpperPostFolded: false)
+        controller.reactor = SettingTableViewReactor()
         controller.push(at: self)
       })
       .disposed(by: disposeBag)

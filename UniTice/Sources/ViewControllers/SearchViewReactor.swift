@@ -69,10 +69,10 @@ final class SearchViewReactor: Reactor {
   /// 초기 상태.
   let initialState: State = State()
   
-  let persistenceService: PersistenceServiceType
+  let realmService: RealmServiceType
   
-  init(persistenceService: PersistenceServiceType = PersistenceService.shared) {
-    self.persistenceService = persistenceService
+  init(realmService: RealmServiceType = RealmService.shared) {
+    self.realmService = realmService
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -109,7 +109,7 @@ final class SearchViewReactor: Reactor {
 private extension SearchViewReactor {
   
   func requestPosts() -> Observable<[Post]> {
-    return persistenceService.fetchUniversity()
+    return realmService.fetchUniversity()
       .map { $0.model }
       .flatMap { [weak self] universityModel -> Observable<[Post]> in
         guard let self = self else { return .empty() }

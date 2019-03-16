@@ -15,35 +15,21 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-/// 설정 테이블 뷰.
+/// The setting table view controller.
 final class SettingTableViewController: UITableViewController, StoryboardView {
   
+  // MARK: Typealias
+  
   typealias Reactor = SettingTableViewReactor
+  
+  typealias DataSource = RxTableViewSectionedReloadDataSource<SettingTableViewSection>
   
   // MARK: Property
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  let asdf = RxTableViewSectionedReloadDataSource<SettingTableViewSection>
-    .init(configureCell: { dataSource, tableView, indexPath, title in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-      cell.textLabel?.text = title
-      if indexPath.section == 0 {
-        cell.accessoryView =
-      }
-    })
+  private var dataSource: DataSource!
   
-  let dataSource = RxTableViewSectionedReloadDataSource<SettingTableViewSection>
-    .init(configureCell: { dataSource, tableView, indexPath, title in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-      cell.textLabel?.text = title
-      if indexPath.section == 0 {
-        cell.accessoryView = self.upperPostFoldingSwitch
-      }
-      return cell
-    })
-  
-  /// 상단 고정 게시물 스위치.
   private let upperPostFoldingSwitch = UISwitch()
   
   override func viewDidLoad() {
@@ -54,6 +40,7 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
   }
   
   func bind(reactor: Reactor) {
+    bindDataSource()
     bindAction(reactor)
     bindState(reactor)
     bindUI()
@@ -69,19 +56,12 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
 private extension SettingTableViewController {
   
   func bindAction(_ reactor: Reactor) {
-    Observable<Bool>
-      .create { observer in
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-          observer.onNext(settings.authorizationStatus == .authorized)
-          observer.onCompleted()
-        }
-        return Disposables.create()
-      }
-      .map { Reactor.Action.fetchNotificationStatus($0) }
+    Observable.just(Void())
+      .map { Reactor.Action.viewDidLoad }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     NotificationCenter.default.rx.notification(.willEnterForeground)
-      .map { $0.userInfo?["notificationHasGranted"] as? Bool ?? false }
+      .map { $0.userInfo?["hasNotificationGranted"] as? Bool ?? false }
       .map { Reactor.Action.fetchNotificationStatus($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -95,19 +75,26 @@ private extension SettingTableViewController {
     reactor.state.map { $0.sections }
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
-    reactor.state.map { $0.isUpperPostFolded }
-      .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] isUpperPostFolded in
-        self?.upperPostFoldingSwitch.setOn(isUpperPostFolded, animated: true)
-        self?.tableView.reloadData()
-      })
+    reactor.state.map { $0.isUpperPostUnfolded }
+      .bind(to: upperPostFoldingSwitch.rx.isOn)
       .disposed(by: disposeBag)
-    reactor.state.map { $0.isNotificationGranted }
-      .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] _ in
-        self?.tableView.reloadData()
-      })
-      .disposed(by: disposeBag)
+  }
+}
+
+private extension SettingTableViewController {
+  
+  func bindDataSource() {
+    dataSource = .init(configureCell: { [weak self] _, tableView, indexPath, title in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      cell.textLabel?.text = title
+      if indexPath.section == 0 {
+        cell.accessoryView = self?.upperPostFoldingSwitch
+      }
+      return cell
+    })
+    dataSource.titleForFooterInSection = { dataSource, index in
+      return dataSource[index].footer
+    }
   }
   
   func bindUI() {
