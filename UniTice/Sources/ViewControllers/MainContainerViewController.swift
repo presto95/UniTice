@@ -129,7 +129,7 @@ private extension MainContainerViewController {
         self.contentViewControllers.removeAll()
         university.categories.forEach { category in
           let contentViewController = MainContentTableViewController().then {
-            $0.reactor = MainContentTableViewReactor(universityType: university,
+            $0.reactor = MainContentTableViewReactor(university: university,
                                                      category: category)
           }
           self.contentViewControllers.append(contentViewController)

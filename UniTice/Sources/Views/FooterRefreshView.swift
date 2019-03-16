@@ -82,5 +82,7 @@ private extension FooterRefreshView {
     } else {
       activityIndicator.stopAnimating()
     }
+    activityIndicator.isHidden = !isLoading
+    textLabel.isHidden = isLoading
   }
 }

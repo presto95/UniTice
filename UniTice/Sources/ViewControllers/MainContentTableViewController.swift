@@ -132,7 +132,25 @@ private extension MainContentTableViewController {
       }
       return cell
     })
-    
+    tableView.rx.itemSelected
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self, weak reactor] indexPath in
+        guard let self = self, let reactor = reactor else { return }
+        let currentState = reactor.currentState
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        let post = indexPath.section == 0
+          ? currentState.fixedPosts[indexPath.item]
+          : currentState.standardPosts[indexPath.item]
+        let university = currentState.university
+        let category = currentState.category
+        if let fullLink = university.postURL(inCategory: category, uri: post.link) {
+          let fullLinkString = fullLink.absoluteString
+          let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+          //User.insertBookmark(bookmark)
+          self.makeSafariViewController(url: fullLink).present(to: self)
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
   func bindUI() {
@@ -155,16 +173,6 @@ extension MainContentTableViewController {
 }
 
 extension MainContentTableViewController {
-  
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //    tableView.deselectRow(at: indexPath, animated: true)
-    //    let post = indexPath.section == 0 ? fixedPosts[indexPath.row] : standardPosts[indexPath.row]
-    //    let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-    //    let fullLinkString = fullLink.absoluteString
-    //    let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-    //    User.insertBookmark(bookmark)
-    //    present(safariViewController(url: fullLink), animated: true)
-  }
   
   override func tableView(_ tableView: UITableView,
                           viewForHeaderInSection section: Int) -> UIView? {
@@ -196,18 +204,19 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
   
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
-    if let indexPath = tableView.indexPathForRow(at: location) {
-      let currentState = reactor?.currentState
+    if let indexPath = tableView.indexPathForRow(at: location),
+      let currentState = reactor?.currentState {
       let post = indexPath.section == 0
-        ? currentState?.fixedPosts[indexPath.item]
-        : currentState?.standardPosts[indexPath.item]
-      let university = currentState?.university
-      let category = currentState?.category
-      let fullLink = university?.postURL(inCategory: category, uri: post.link)
-      let fullLinkString = fullLink.absoluteString
-      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-      User.insertBookmark(bookmark)
-      return safariViewController(url: fullLink)
+        ? currentState.fixedPosts[indexPath.item]
+        : currentState.standardPosts[indexPath.item]
+      let university = currentState.university
+      let category = currentState.category
+      if let fullLink = university.postURL(inCategory: category, uri: post.link) {
+        let fullLinkString = fullLink.absoluteString
+        let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+        //User.insertBookmark(bookmark)
+        return makeSafariViewController(url: fullLink)
+      }
     }
     return nil
   }

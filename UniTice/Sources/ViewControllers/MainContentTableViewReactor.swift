@@ -63,26 +63,26 @@ final class MainContentTableViewReactor: Reactor {
     
     var isFixedNoticeFolded: Bool = false
     
-    var isLoading: Bool = true
+    var isLoading: Bool = false
     
     var fixedPosts: [Post] {
       return posts.filter { $0.number == 0 }
     }
-
+    
     var standardPosts: [Post] {
       return posts.filter { $0.number != 0 }
     }
     
-    init(universityType: UniversityType, category: Category) {
-      self.universityType = universityType
+    init(university: UniversityType, category: Category) {
+      self.university = university
       self.category = category
     }
   }
   
   let initialState: State
   
-  init(universityType: UniversityType, category: Category) {
-    initialState = State(universityType: universityType, category: category)
+  init(university: UniversityType, category: Category) {
+    initialState = State(university: university, category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -90,11 +90,23 @@ final class MainContentTableViewReactor: Reactor {
     case let .toggleFolding(isFolded):
       return Observable.just(Mutation.toggleFolding(isFolded))
     case .viewDidLoad:
-      return requestPosts(.set)
+      return Observable.concat([
+        Observable.just(Mutation.setLoading(true)),
+        requestPosts(.set),
+        Observable.just(Mutation.setLoading(false))
+        ])
     case .scroll:
-      return requestPosts(.append)
+      return Observable.concat([
+        Observable.just(Mutation.setLoading(true)),
+        requestPosts(.append),
+        Observable.just(Mutation.setLoading(false))
+        ])
     case .refresh:
-      return requestPosts(.set)
+      return Observable.concat([
+        Observable.just(Mutation.setLoading(true)),
+        requestPosts(.set),
+        Observable.just(Mutation.setLoading(false))
+        ])
     }
   }
   
@@ -121,11 +133,11 @@ final class MainContentTableViewReactor: Reactor {
 private extension MainContentTableViewReactor {
   
   func requestPosts(_ type: PostRequstType) -> Observable<Mutation> {
-    let requestObservable = Global.shared.universityModel
-      .flatMap { universityType -> Observable<[Post]> in
-        return universityType.requestPosts(inCategory: self.currentState.category,
-                                           inPage: self.currentState.page,
-                                           searchText: "")
+    return Global.shared.universityModel
+      .flatMap { university -> Observable<[Post]> in
+        return university.requestPosts(inCategory: self.currentState.category,
+                                       inPage: self.currentState.page,
+                                       searchText: "")
       }
       .map {
         switch type {
@@ -135,10 +147,5 @@ private extension MainContentTableViewReactor {
           return Mutation.appendPosts($0)
         }
     }
-    return Observable.concat([
-      Observable.just(Mutation.setLoading(true)),
-      requestPosts,
-      Observable.just(Mutation.setLoading(false))
-      ])
   }
 }
