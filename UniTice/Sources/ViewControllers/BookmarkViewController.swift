@@ -84,7 +84,9 @@ extension BookmarkViewController: UIViewControllerPreviewingDelegate {
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
     if let indexPath = tableView.indexPathForRow(at: location) {
-      return makeSafariViewController(at: indexPath.row)
+      let url = URL(string: "")!
+      return makeSafariViewController(url: url)
+      //return makeSafariViewController(at: indexPath.row)
     }
     return nil
   }
@@ -114,24 +116,28 @@ private extension BookmarkViewController {
       .subscribe(onNext: { [weak self] indexPath in
         guard let self = self else { return }
         self.tableView.deselectRow(at: indexPath, animated: true)
-        self.makeSafariViewController(at: indexPath.row).present(to: self)
+        let url = URL(string: "")!
+        self.makeSafariViewController(url: url).present(to: self)
+        //self.makeSafariViewController(at: indexPath.row).present(to: self)
       })
       .disposed(by: disposeBag)
   }
-  
-  func makeSafariViewController(at row: Int) -> SFSafariViewController {
-    let bookmark = reactor?.currentState.bookmarks[row]
-    guard let url = URL(string: bookmark?.link ?? "") else {
-      fatalError("invalid url format")
-    }
-    let config = SFSafariViewController.Configuration().then {
-      $0.barCollapsingEnabled = true
-      $0.entersReaderIfAvailable = true
-    }
-    let viewController = SFSafariViewController(url: url, configuration: config).then {
-      $0.preferredControlTintColor = .main
-      $0.dismissButtonStyle = .close
-    }
-    return viewController
-  }
+//
+//  func makeSafariViewController(at row: Int) -> SFSafariViewController {
+//    let bookmark = reactor?.currentState.bookmarks[row]
+//    guard let url = URL(string: bookmark?.link ?? "") else {
+//      fatalError("invalid url format")
+//    }
+//    let config = SFSafariViewController.Configuration().then {
+//      $0.barCollapsingEnabled = true
+//      $0.entersReaderIfAvailable = true
+//    }
+//    let viewController = SFSafariViewController(url: url, configuration: config).then {
+//      $0.preferredControlTintColor = .main
+//      $0.dismissButtonStyle = .close
+//    }
+//    return viewController
+//  }
 }
+
+extension BookmarkViewController: SafariViewControllerPresentable { }

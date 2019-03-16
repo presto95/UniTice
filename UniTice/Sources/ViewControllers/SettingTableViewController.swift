@@ -10,6 +10,7 @@ import MessageUI
 import UIKit
 import UserNotifications
 
+import Carte
 import ReactorKit
 import RxCocoa
 import RxDataSources
@@ -128,6 +129,8 @@ private extension SettingTableViewController {
           guard let url = URL(string: "itms-apps://itunes.apple.com/app/1447871519")
             else { return }
           UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        case 3 where row == 0:
+          CarteViewController().push(at: self)
         default:
           break
         }

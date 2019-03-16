@@ -19,7 +19,7 @@ final class SearchViewReactor: Reactor {
   enum Action {
     
     /// 표시됨.
-    case didPresent
+    case viewDidLoad
     
     /// 검색 텍스트 갱신.
     case updateSearchText(String?)
@@ -33,7 +33,7 @@ final class SearchViewReactor: Reactor {
   
   enum Mutation {
     
-    case didPresent
+    case viewDidLoad
     
     /// 검색 텍스트 설정.
     case setSearchText(String?)
@@ -77,8 +77,8 @@ final class SearchViewReactor: Reactor {
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case .didPresent:
-      return Observable.just(Mutation.didPresent)
+    case .viewDidLoad:
+      return Observable.just(Mutation.viewDidLoad)
     case let .updateSearchText(text):
       return Observable.just(Mutation.setSearchText(text))
     case .search:
@@ -91,7 +91,7 @@ final class SearchViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-    case .didPresent:
+    case .viewDidLoad:
       state.isPresented = true
     case let .setSearchText(text):
       state.searchText = text ?? ""

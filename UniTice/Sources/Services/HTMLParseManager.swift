@@ -24,12 +24,14 @@ final class HTMLParseManager: HTMLParseManagerType {
   
   func request(_ url: URL, encoding: String.Encoding = .utf8) -> Observable<HTMLDocument> {
     return Observable.create { observer in
-      do {
-        let document = try HTML(url: url, encoding: encoding)
-        observer.onNext(document)
-        observer.onCompleted()
-      } catch {
-        observer.onError(error)
+      DispatchQueue.global(qos: .utility).async {
+        do {
+          let document = try HTML(url: url, encoding: encoding)
+          observer.onNext(document)
+          observer.onCompleted()
+        } catch {
+          observer.onError(error)
+        }
       }
       return Disposables.create()
     }

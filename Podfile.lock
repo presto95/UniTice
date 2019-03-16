@@ -1,4 +1,5 @@
 PODS:
+  - Carte (2.1.6)
   - Differentiator (3.1.0)
   - Firebase/Core (5.18.0):
     - Firebase/CoreOnly
@@ -90,6 +91,7 @@ PODS:
   - XLPagerTabStrip (8.1.1)
 
 DEPENDENCIES:
+  - Carte
   - Firebase/Core
   - Firebase/Messaging
   - Kanna
@@ -106,6 +108,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Carte
     - Differentiator
     - Firebase
     - FirebaseAnalytics
@@ -132,6 +135,7 @@ SPEC REPOS:
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
+  Carte: c8200bfb59b77336aa2f02e84cc4ac0fa820034d
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Firebase: 02f3281965c075426141a0ce1277e9de6649cab9
   FirebaseAnalytics: 23851fe602c872130a2c5c55040b302120346cc2
@@ -157,6 +161,6 @@ SPEC CHECKSUMS:
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 5807bd0fda088354c974b3fa3c40d3db7462c129
+PODFILE CHECKSUM: df9ee131090a9117dc123d4e8e14e3e06e4d9dd2
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,7 +24,6 @@
 		F14AEA7BC9E3F7AEBBAF359603D1AA91 /* InitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF778DC9E30615FEB74E5BEA7438ABC7 /* InitialInfo.swift */; };
 		196772F4D9557518EEB45A2635D04A99 /* KAIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6293BDADFC5B65302A8752BCCB5C1371 /* KAIST.swift */; };
 		066E20DE0157BF04F807014DEF69CB6D /* KC대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DBAA78F5C624D970DE7F0F72C9A96B /* KC대학교.swift */; };
-		E39C2742DFCB900446DBB5411A6E2603 /* KannaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005E1A8B19CBD9F7DBBDE48998640D /* KannaTest.swift */; };
 		F24617A77992AF6B682F199AFB5D275C /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEEE4B12520EABF8121BC9E98CC9CD0 /* KeywordCell.swift */; };
 		CC0A8E81C537E8E88164C34BA924FBB2 /* KeywordCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3873B2E3BD50C810436C147913E688A /* KeywordCellReactor.swift */; };
 		5E6E0D61CFA1A6DDA7E9F6EDF45A2F42 /* KeywordRegisterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF65B4A97D6579E0D8FD3C269CEC1416 /* KeywordRegisterHeaderView.swift */; };
@@ -52,6 +51,7 @@
 		17896B715811B5132A703FC7F2BAACB8 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFF6616EB1488F1B4D8F2CD44501081 /* PostCell.swift */; };
 		DC648C4FB6B24F40AC0DC73C6CA39F4D /* PostCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02AF592ADE5DD93B0D75F9CAB47B12 /* PostCellReactor.swift */; };
 		9C4F657CB6B233A92FC99373E6E8B8FD /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF31896B63593E7BEEB70AE0620FFBE /* RealmService.swift */; };
+		AFC0167BA534831DFAD3D8BFB45EFB0D /* SafariViewControllerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264B6EED8AAA0C5D75DA6DD25D870D0 /* SafariViewControllerPresentable.swift */; };
 		9B18C8B5F95A0FE040AC6FAF04EA1AC5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E689ECAF5504FAA5C8533CEDCEDF63 /* SearchViewController.swift */; };
 		35C6520C017D6F9F20124E8A30EC377D /* SearchViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA96230FA183B3F4B9713A551BFAB18 /* SearchViewReactor.swift */; };
 		5C8CB865689B6E02BC6950A909ED85EE /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 324F4596B47D982888C025B5D8CE296E /* Setting.storyboard */; };
@@ -160,7 +160,6 @@
 		AF778DC9E30615FEB74E5BEA7438ABC7 /* InitialInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfo.swift; sourceTree = "<group>"; };
 		6293BDADFC5B65302A8752BCCB5C1371 /* KAIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KAIST.swift; sourceTree = "<group>"; };
 		00DBAA78F5C624D970DE7F0F72C9A96B /* KC대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KC대학교.swift"; sourceTree = "<group>"; };
-		45005E1A8B19CBD9F7DBBDE48998640D /* KannaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KannaTest.swift; sourceTree = "<group>"; };
 		AFEEE4B12520EABF8121BC9E98CC9CD0 /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		A3873B2E3BD50C810436C147913E688A /* KeywordCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCellReactor.swift; sourceTree = "<group>"; };
 		FF65B4A97D6579E0D8FD3C269CEC1416 /* KeywordRegisterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterHeaderView.swift; sourceTree = "<group>"; };
@@ -188,6 +187,7 @@
 		FBFF6616EB1488F1B4D8F2CD44501081 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		ED02AF592ADE5DD93B0D75F9CAB47B12 /* PostCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellReactor.swift; sourceTree = "<group>"; };
 		DDF31896B63593E7BEEB70AE0620FFBE /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		3264B6EED8AAA0C5D75DA6DD25D870D0 /* SafariViewControllerPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewControllerPresentable.swift; sourceTree = "<group>"; };
 		76E689ECAF5504FAA5C8533CEDCEDF63 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7FA96230FA183B3F4B9713A551BFAB18 /* SearchViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewReactor.swift; sourceTree = "<group>"; };
 		324F4596B47D982888C025B5D8CE296E /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
@@ -291,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				CD153036B09D8C08D31F2525F8627A51 /* Info.plist */,
-				45005E1A8B19CBD9F7DBBDE48998640D /* KannaTest.swift */,
 			);
 			path = UniTiceTests;
 			sourceTree = "<group>";
@@ -314,6 +313,14 @@
 				02E3A573D7E9A756CD48BECE39EC4AE4 /* UTSection.swift */,
 			);
 			path = "Section Model";
+			sourceTree = "<group>";
+		};
+		ABE51405A0DDC07E814814FB61F72B4D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3264B6EED8AAA0C5D75DA6DD25D870D0 /* SafariViewControllerPresentable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		27D53100EFA20153E5941C62CA58B4B6 /* University */ = {
@@ -428,6 +435,7 @@
 				8B1D407C1561CFFD3DC9A07B24382AEF /* swiftgen.yml */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		564568C48819A9255CF8570EB8DE738A /* Views */ = {
 			isa = PBXGroup;
@@ -553,6 +561,7 @@
 				CD5186E880ACE42E03FE332949021ABC /* Common */,
 				ED5BC53DBE06B2469082B0DC69D129B1 /* Extension */,
 				A5E89637364D57690B1D7606700B2861 /* Models */,
+				ABE51405A0DDC07E814814FB61F72B4D /* Protocols */,
 				2FC89726D7B3930D4D994EB9E8F79ACD /* Rx */,
 				331D283B5F3BD1A4FF08F6BF636EE5BC /* Services */,
 				0E9FCD19E69574EB84B9DE198A50079D /* Storyboards */,
@@ -607,7 +616,9 @@
 				BB45DCF999269EA8AB63DFC51B25EE84 /* [CP] Check Pods Manifest.lock */,
 				2B88ABAFD3730068228527E80BD3FBCD /* Sources */,
 				3163DFB45A7EF99E33F1A2A3196F5A92 /* Frameworks */,
+				CCA50837ABD04E04C26FDF157D950F33 /* [Carte] Pre Script */,
 				E9FB81C6FA20B9FBBC516C41E98EFAF0 /* Resources */,
+				31FB0282BAA0F05E76CFE4A3C67C697F /* [Carte] Post Script */,
 				60854F566723294CC23BE2EA13C1C314 /* SwiftLint */,
 				855D54511307EC1BCB8547BA8EF9EB99 /* [CP] Embed Pods Frameworks */,
 			);
@@ -632,10 +643,12 @@
 				TargetAttributes = {
 					0DEF1593B4961B190EFC211DC4888648 = {
 						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 56C774E71F804B442063AA91B3C3BF3A;
 					};
 					56C774E71F804B442063AA91B3C3BF3A = {
 						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -648,7 +661,7 @@
 				};
 			};
 			buildConfigurationList = 751AD67C84D21F97AF141D86162EB2E8 /* Build configuration list for PBXProject "UniTice" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -698,28 +711,38 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = SwiftLint;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		31FB0282BAA0F05E76CFE4A3C67C697F /* [Carte] Post Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[Carte] Post Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post";
+			showEnvVarsInLog = 0;
+		};
 		855D54511307EC1BCB8547BA8EF9EB99 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UniTice/Pods-UniTice-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Carte/Carte.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
@@ -739,9 +762,8 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Carte.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
@@ -770,21 +792,32 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-UniTice-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCA50837ABD04E04C26FDF157D950F33 /* [Carte] Pre Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[Carte] Pre Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -830,6 +863,7 @@
 				17896B715811B5132A703FC7F2BAACB8 /* PostCell.swift in Sources */,
 				DC648C4FB6B24F40AC0DC73C6CA39F4D /* PostCellReactor.swift in Sources */,
 				9C4F657CB6B233A92FC99373E6E8B8FD /* RealmService.swift in Sources */,
+				AFC0167BA534831DFAD3D8BFB45EFB0D /* SafariViewControllerPresentable.swift in Sources */,
 				9B18C8B5F95A0FE040AC6FAF04EA1AC5 /* SearchViewController.swift in Sources */,
 				35C6520C017D6F9F20124E8A30EC377D /* SearchViewReactor.swift in Sources */,
 				C128D15B72187903A03D05F74F609F69 /* SettingTableViewController.swift in Sources */,
@@ -908,7 +942,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E39C2742DFCB900446DBB5411A6E2603 /* KannaTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,10 +987,7 @@
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = "$(SRCROOT)/UniTice/Supports/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.presto.UniTice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -978,10 +1008,7 @@
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = "$(SRCROOT)/UniTice/Supports/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.presto.UniTice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1039,8 +1066,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1057,11 +1083,7 @@
 				);
 				INFOPLIST_FILE = UniTiceTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.presto.UniTiceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1143,11 +1165,7 @@
 				);
 				INFOPLIST_FILE = UniTiceTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.presto.UniTiceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

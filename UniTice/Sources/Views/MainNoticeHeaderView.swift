@@ -18,7 +18,7 @@ final class MainNoticeHeaderView: UIView, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
 
-  @IBOutlet weak var foldButton: UIButton!
+  @IBOutlet private weak var foldButton: UIButton!
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -48,14 +48,11 @@ private extension MainNoticeHeaderView {
   }
   
   func bindState(_ reactor: Reactor) {
-    reactor.state.map { $0.isFolding }
+    reactor.state.map { $0.isUpperPostFolded }
       .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] isFolding in
-        guard let self = self else { return }
-        let image = isFolding ? UIImage(named: "arrow_down") : UIImage(named: "arrow_up")
-        self.foldButton
-          .setImage(image, for: [])
-        // 상단 고정 게시물 펼치기 또는 숨기기 설정
+      .subscribe(onNext: { [weak self] isFolded in
+        let image = isFolded ? Asset.arrowDown.image : Asset.arrowUp.image
+        self?.foldButton.setImage(image, for: [])
       })
       .disposed(by: disposeBag)
   }

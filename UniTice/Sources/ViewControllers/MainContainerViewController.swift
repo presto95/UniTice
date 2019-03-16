@@ -128,9 +128,9 @@ private extension MainContainerViewController {
       .subscribe(onNext: { [weak self] university in
         guard let self = self else { return }
         self.contentViewControllers.removeAll()
-        university.categories.indices.forEach { index in
+        university.categories.forEach { category in
           let contentViewController = MainContentTableViewController().then {
-            $0.reactor = MainContentTableViewReactor(page: index)
+            $0.reactor = MainContentTableViewReactor(category: category)
           }
           self.contentViewControllers.append(contentViewController)
         }

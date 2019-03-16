@@ -16,14 +16,25 @@ import RxSwift
 import SnapKit
 import XLPagerTabStrip
 
+/// The main content table view controller.
 final class MainContentTableViewController: UITableViewController, StoryboardView {
+  
+  // MARK: Typealias
   
   typealias Reactor = MainContentTableViewReactor
   
+  typealias DataSource = RxTableViewSectionedReloadDataSource<UTSection>
+  
+  // MARK: Property
+  
   var disposeBag: DisposeBag = DisposeBag()
+  
+  private var dataSource: RxTableViewSectionedReloadDataSource<UTSection>!
   
   private lazy var footerRefreshView
     = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
+  
+  private let cellIdentifier = "postCell"
   
   // MARK: Life Cycle
   
@@ -35,9 +46,10 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
   }
   
   func bind(reactor: Reactor) {
+    bindDataSource()
+    bindUI()
     bindAction(reactor)
     bindState(reactor)
-    bindUI()
   }
   
   private func setup() {
@@ -47,20 +59,8 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
     tableView.backgroundColor = .groupTableViewBackground
     tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
     tableView.separatorColor = .main
-    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+    tableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
     refreshControl = UIRefreshControl()
-  }
-  
-  private func makeSafariViewController(url: URL) -> SFSafariViewController {
-    let config = SFSafariViewController.Configuration().then {
-      $0.barCollapsingEnabled = true
-      $0.entersReaderIfAvailable = true
-    }
-    let viewController = SFSafariViewController(url: url, configuration: config).then {
-      $0.preferredControlTintColor = .main
-      $0.dismissButtonStyle = .close
-    }
-    return viewController
   }
 }
 
@@ -80,6 +80,7 @@ private extension MainContentTableViewController {
         let contentHeight = self.tableView.contentSize.height
         return offsetY > contentHeight - self.tableView.bounds.height
       }
+      .filter { _ in !reactor.currentState.isLoading }
       .map { _ in Reactor.Action.scroll }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -87,14 +88,35 @@ private extension MainContentTableViewController {
   
   func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.posts }
-      .bind(to: tableView.rx.items(cellIdentifier: "postCell", cellType: PostCell.self)) { row, post, cell in
-        
+      .map { posts -> [UTSection] in
+        let fixedPosts = posts
+          .filter { $0.number == 0 }
+          .map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
+        let standardPosts = posts
+          .filter { $0.number != 0 }
+          .map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
+        return [UTSection(items: fixedPosts), UTSection(items: standardPosts)]
       }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
+  }
+}
+
+private extension MainContentTableViewController {
+  
+  func bindDataSource() {
+    dataSource = .init(configureCell: { dataSource, tableView, indexPath, sectionData in
+      let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
+      if case let postCell as PostCell = cell {
+        postCell.reactor = PostCellReactor(post: sectionData)
+      }
+      return cell
+    })
+    
   }
   
   func bindUI() {
-    
+    tableView.rx.setDelegate(self).disposed(by: disposeBag)
   }
 }
 
@@ -125,44 +147,39 @@ extension MainContentTableViewController {
   
   override func tableView(_ tableView: UITableView,
                           viewForHeaderInSection section: Int) -> UIView? {
-//    if section == 0 {
-//      guard let headerView = UIView
-//        .instantiate(fromXib: MainNoticeHeaderView.classNameToString) as? MainNoticeHeaderView
-//        else { return nil }
-//      headerView.state = isFixedNoticeFolded
-//      headerView.foldingHandler = {
-//        self.isFixedNoticeFolded = !self.isFixedNoticeFolded
-//        self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
-//      }
-//      return headerView
-//    }
+    if section == 0 {
+      guard let headerView = UIView
+        .instantiate(fromXib: MainNoticeHeaderView.name) as? MainNoticeHeaderView
+        else { return nil }
+      headerView.reactor = MainNoticeHeaderViewReactor()
+//      headerView.reactor?.state.map { $0.isUpperPostFolded }
+//        .distinctUntilChanged()
+//        .map { Reactor.Action.toggleFolding($0) }
+//        .bind(to: reactor.action)
+//        .disposed(by: disposeBag)
+      return headerView
+    }
     return nil
   }
   
   override func tableView(_ tableView: UITableView,
                           viewForFooterInSection section: Int) -> UIView? {
     if section == 0 {
-      let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 5))
-      footerView.backgroundColor = .main
-      return footerView
+      return UIView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 5)).then {
+        $0.backgroundColor = .main
+      }
     }
     return nil
   }
   
   override func tableView(_ tableView: UITableView,
                           heightForHeaderInSection section: Int) -> CGFloat {
-    if section == 0 {
-      return 48
-    }
-    return .leastNonzeroMagnitude
+    return section == 0 ? 48 : .leastNonzeroMagnitude
   }
   
   override func tableView(_ tableView: UITableView,
                           heightForFooterInSection section: Int) -> CGFloat {
-    if section == 0 {
-      return 5
-    }
-    return .leastNonzeroMagnitude
+    return section == 0 ? 5 : .leastNonzeroMagnitude
   }
 }
 
@@ -191,7 +208,8 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
 extension MainContentTableViewController: IndicatorInfoProvider {
   
   func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    debugLog(reactor?.currentState.category.description)
     return IndicatorInfo(title: reactor?.currentState.category.description)
   }
 }
+
+extension MainContentTableViewController: SafariViewControllerPresentable { }

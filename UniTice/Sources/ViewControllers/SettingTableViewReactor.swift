@@ -44,7 +44,8 @@ final class SettingTableViewReactor: Reactor {
     var sections: [SettingTableViewSection] = [
       .init(footer: nil, items: ["상단 고정 게시물 펼치기"]),
       .init(footer: nil, items: ["학교 변경", "키워드 설정", "알림 설정"]),
-      .init(footer: nil, items: ["문의하기", "앱 평가하기"])
+      .init(footer: nil, items: ["문의하기", "앱 평가하기"]),
+      .init(footer: nil, items: ["오픈 소스 라이센스"])
     ]
     
     /// The boolean value indicating whether the upper post is unfolded.
@@ -132,7 +133,8 @@ private extension SettingTableViewReactor {
     state.sections = [
       .init(footer: upperPostFooter, items: ["상단 고정 게시물 펼치기"]),
       .init(footer: notificationFooter, items: ["학교 변경", "키워드 설정", "알림 설정"]),
-      .init(footer: nil, items: ["문의하기", "앱 평가하기"])
+      .init(footer: nil, items: ["문의하기", "앱 평가하기"]),
+      .init(footer: nil, items: ["오픈 소스 라이센스"])
     ]
   }
 }

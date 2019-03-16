@@ -26,13 +26,17 @@ final class MainNoticeHeaderViewReactor: Reactor {
   
   struct State {
     
-    var isFolding: Bool
+    /// The boolean value indicating whether the upper posts are folded.
+    var isUpperPostFolded: Bool
   }
   
   let initialState: State
   
-  init(isFolding: Bool) {
-    initialState = State(isFolding: isFolding)
+  let userDefaultsService: UserDefaultsServiceType
+  
+  init(userDefaultsService: UserDefaultsServiceType = UserDefaultsService.shared) {
+    self.userDefaultsService = userDefaultsService
+    initialState = State(isUpperPostFolded: userDefaultsService.isUpperPostFolded)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -46,7 +50,7 @@ final class MainNoticeHeaderViewReactor: Reactor {
     var state = state
     switch mutation {
     case .toggleFolding:
-      state.isFolding.toggle()
+      state.isUpperPostFolded.toggle()
     }
     return state
   }

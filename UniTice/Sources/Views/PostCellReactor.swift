@@ -18,9 +18,9 @@ final class PostCellReactor: Reactor {
   
   typealias Mutation = NoMutation
   
-  let initialState: Post
+  let initialState: UTSectionData
   
-  init(post: Post) {
+  init(post: UTSectionData) {
     self.initialState = post
   }
 }

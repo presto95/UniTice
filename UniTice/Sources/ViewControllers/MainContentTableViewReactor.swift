@@ -20,18 +20,27 @@ enum PostRequstType {
   case append
 }
 
+/// The `Reactor` for `MainContentTableViewController`.
 final class MainContentTableViewReactor: Reactor {
   
   enum Action {
     
+    /// The action that the view is loaded in memory.
     case viewDidLoad
     
+    /// The action that the user scrolls the table view to load more posts.
     case scroll
     
+    /// The action that the user swipes the table view to reload posts.
     case refresh
+    
+    /// The action that the user taps the arrow button to fold or unfold the upper posts.
+    case toggleFolding(Bool)
   }
   
   enum Mutation {
+    
+    case toggleFolding(Bool)
     
     case setPosts([Post])
     
@@ -40,9 +49,7 @@ final class MainContentTableViewReactor: Reactor {
   
   struct State {
     
-    var category: Category = ("", "")
-    
-    var categoryIndex: Int!
+    var category: Category
     
     var page: Int = 1
     
@@ -52,6 +59,8 @@ final class MainContentTableViewReactor: Reactor {
     
     var isFixedNoticeFolded: Bool = false
     
+    var isLoading: Bool = true
+    
     var fixedPosts: [Post] {
       return posts.filter { $0.number == 0 }
     }
@@ -59,18 +68,22 @@ final class MainContentTableViewReactor: Reactor {
     var standardPosts: [Post] {
       return posts.filter { $0.number != 0 }
     }
+    
+    init(category: Category) {
+      self.category = category
+    }
   }
   
   let initialState: State
   
-  init(page: Int) {
-    var state = State()
-    state.page = page
-    initialState = state
+  init(category: Category) {
+    initialState = State(category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+    case let .toggleFolding(isFolded):
+      return Observable.just(Mutation.toggleFolding(isFolded))
     case .viewDidLoad:
       return requestPosts(.set)
     case .scroll:
@@ -83,10 +96,14 @@ final class MainContentTableViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case let .toggleFolding(isFolded):
+      state.isFixedNoticeFolded = isFolded
     case let .setPosts(posts):
       state.posts = posts
+      state.page += 1
     case let .appendPosts(posts):
       state.posts.append(contentsOf: posts)
+      state.page += 1
     }
     return state
   }

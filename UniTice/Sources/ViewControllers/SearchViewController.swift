@@ -20,9 +20,11 @@ final class SearchViewController: UIViewController, StoryboardView {
   
   typealias Reactor = SearchViewReactor
   
+  typealias DataSource = RxTableViewSectionedReloadDataSource<UTSection>
+  
   var disposeBag: DisposeBag = DisposeBag()
   
-  var dataSource: RxTableViewSectionedReloadDataSource<UTSection>!
+  var dataSource: DataSource!
   
   private lazy var footerRefreshView
     = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
@@ -32,13 +34,13 @@ final class SearchViewController: UIViewController, StoryboardView {
     $0.hidesNavigationBarDuringPresentation = false
   }
   
-  var searchBar: UISearchBar {
+  private var searchBar: UISearchBar {
     return searchController.searchBar
   }
   
-  @IBOutlet private weak var tableView: UITableView!
+  private let headerView = UIView()
   
-  let headerView = UIView()
+  @IBOutlet private weak var tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -90,7 +92,7 @@ private extension SearchViewController {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     searchController.rx.didPresent
-      .map { Reactor.Action.didPresent }
+      .map { Reactor.Action.viewDidLoad }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     searchBar.rx.searchButtonClicked
@@ -118,24 +120,23 @@ private extension SearchViewController {
         self?.searchBar.becomeFirstResponder()
       })
       .disposed(by: disposeBag)
-//    reactor.state.map { $0.posts }
-//      .map { posts -> [UTSectionData] in
-//        return posts.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-//      }
-//      .map { UTSection(items: $0) }
-//      .bind(to: tableView.rx.items(dataSource: dataSource))
-//      .disposed(by: disposeBag)
+    //    reactor.state.map { $0.posts }
+    //      .map { posts -> [UTSectionData] in
+    //        return posts.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
+    //      }
+    //      .map { UTSection(items: $0) }
+    //      .bind(to: tableView.rx.items(dataSource: dataSource))
+    //      .disposed(by: disposeBag)
     
   }
   
   func bindDataSource() {
-    dataSource = RxTableViewSectionedReloadDataSource<UTSection>
-      .init(configureCell: { dataSource, tableView, indexPath, data in
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-        cell.textLabel?.text = data.title
-        cell.detailTextLabel?.text = data.date
-        return cell
-      })
+    dataSource = .init(configureCell: { _, tableView, indexPath, data in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+      cell.textLabel?.text = data.title
+      cell.detailTextLabel?.text = data.date
+      return cell
+    })
   }
   
   func bindUI() {
@@ -173,14 +174,14 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
   
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
-//    if let indexPath = tableView.indexPathForRow(at: location) {
-//      let post = reactor?.currentState.posts[indexPath.row]
-//      let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-//      let fullLinkString = fullLink.absoluteString
-//      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-//      User.insertBookmark(bookmark)
-//      return safariViewController(url: fullLink)
-//    }
+    //    if let indexPath = tableView.indexPathForRow(at: location) {
+    //      let post = reactor?.currentState.posts[indexPath.row]
+    //      let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
+    //      let fullLinkString = fullLink.absoluteString
+    //      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+    //      User.insertBookmark(bookmark)
+    //      return safariViewController(url: fullLink)
+    //    }
     return nil
   }
   
@@ -193,13 +194,13 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
 extension SearchViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//    DispatchQueue.main.async {
-//      self.searchController.isActive = false
-//    }
-//    posts.removeAll()
-//    searchButtonHasClicked = true
-//    searchText = searchBar.text ?? ""
-//    requestPosts(searchText: searchText)
+    //    DispatchQueue.main.async {
+    //      self.searchController.isActive = false
+    //    }
+    //    posts.removeAll()
+    //    searchButtonHasClicked = true
+    //    searchText = searchBar.text ?? ""
+    //    requestPosts(searchText: searchText)
   }
 }
 
@@ -208,15 +209,17 @@ extension SearchViewController: UISearchBarDelegate {
 private extension SearchViewController {
   
   /// 사파리 뷰 컨트롤러 초기화.
-  private func makeSafariViewController(url: URL) -> SFSafariViewController {
-    let config = SFSafariViewController.Configuration().then {
-      $0.barCollapsingEnabled = true
-      $0.entersReaderIfAvailable = true
-    }
-    let viewController = SFSafariViewController(url: url, configuration: config).then {
-      $0.preferredBarTintColor = .main
-      $0.dismissButtonStyle = .close
-    }
-    return viewController
-  }
+//  private func makeSafariViewController(url: URL) -> SFSafariViewController {
+//    let config = SFSafariViewController.Configuration().then {
+//      $0.barCollapsingEnabled = true
+//      $0.entersReaderIfAvailable = true
+//    }
+//    let viewController = SFSafariViewController(url: url, configuration: config).then {
+//      $0.preferredBarTintColor = .main
+//      $0.dismissButtonStyle = .close
+//    }
+//    return viewController
+//  }
 }
+
+extension SearchViewController: SafariViewControllerPresentable { }
