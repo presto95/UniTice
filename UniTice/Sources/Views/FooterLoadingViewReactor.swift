@@ -38,7 +38,7 @@ final class FooterLoadingViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .loading(isLoading):
-      return .just(.setLoading(isLoading))
+      return Observable.just(Mutation.setLoading(isLoading))
     }
   }
   

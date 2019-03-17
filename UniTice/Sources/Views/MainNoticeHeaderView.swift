@@ -12,13 +12,20 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
+/// The main notice header view.
 final class MainNoticeHeaderView: UIView, StoryboardView {
   
+  // MARK: Typealias
+  
   typealias Reactor = MainNoticeHeaderViewReactor
+  
+  // MARK: Property
   
   var disposeBag: DisposeBag = DisposeBag()
 
   @IBOutlet private weak var foldButton: UIButton!
+  
+  // MARK: Method
   
   override func awakeFromNib() {
     super.awakeFromNib()

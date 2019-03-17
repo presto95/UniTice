@@ -1,13 +1,40 @@
-# UniTice
+![logo](./images/logo.png)
 
 ![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 
-## 대학교 공지사항 알리미
+## 다연결 | 대학교 공지사항 알리미
 
-UNDER DEVELOPMENT👩🏻‍💻👩🏻‍💻👨🏻‍💻
+### 프로젝트 기간
 
----
+2018.12 ~ 현재
+
+### 제공하는 기능
+
+- 학교별 공지 확인
+- 키워드 하이라이팅
+- ~~키워드 푸시 알림~~ 준비중
+
+### 사용하는 라이브러리
+
+#### Rx
+
+- ReactorKit
+- RxCocoa
+- RxDataSources
+- RxGesture
+- RxOptional
+- RxSwift
+
+#### 기타
+
+- Carte
+- Firebase/Core
+- Firebase/Messaging
+- Kanna
+- SnapKit
+- Then
+- XLPagerTabStrip
 
 ### 지원 대학교
 
@@ -134,38 +161,3 @@ KC대학교
 한양대학교
 
 홍익대학교
-
----
-
-### 제공하는 기능
-
-- 학교별 공지 확인
-- ~~키워드 푸시 알림~~
-
-### 사용하는 라이브러리
-
-- Kanna
-- RealmSwift
-- XLPagerTabStrip
-- Firebase/Core
-- Firebase/Messaing
-- SnapKit
-- DZNEmptyDataSet
-
----
-
-### 성능 관련
-
-#### 메모리 누수
-
-![image](./images/1.png)
-
-- 일단 메모리 누수는 일어나지 않는다고 봐도 괜찮을 것 같다.
-- 하지만 학교 변경시 지속적으로 메모리 사용량이 증가한다. 해결해보자.
-
-#### 에너지 임팩트
-
-- HTML 파싱하는 부분을 `DispatchQueue.global(qos: .background).async` 안에 감싸서 앱이 멈춘 것처럼 보이는 현상은 해결하였다.
-  - `.userInitiated`로는 해결하지 못했음.  Quality Of Service에 대해서 이해하고 적절하게 사용해야 할 필요가 있다.
-- 네트워킹시 Overhead가 심각한데 원래 네트워킹시에는 오버헤드가 일어나는 것이 정상인 것 같다.
-

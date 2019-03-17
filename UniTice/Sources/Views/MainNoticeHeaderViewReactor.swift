@@ -12,6 +12,7 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
+/// The `Reactor` for `MainNoticeHeaderView`.
 final class MainNoticeHeaderViewReactor: Reactor {
   
   enum Action {

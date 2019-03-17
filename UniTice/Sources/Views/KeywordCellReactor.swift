@@ -12,6 +12,7 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
+/// The `Reactor` for `KeywordCell`.
 final class KeywordCellReactor: Reactor {
   
   typealias Action = NoAction
