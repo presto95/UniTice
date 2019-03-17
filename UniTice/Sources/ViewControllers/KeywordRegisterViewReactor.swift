@@ -11,18 +11,21 @@ import Foundation
 import ReactorKit
 import RxSwift
 
+/// The `Reactor` for `KeywordRegisterView`.
 final class KeywordRegisterViewReactor: Reactor {
   
   enum Action {
     
+    /// The action that the user taps the confirm button.
     case confirm
     
+    /// The action that the user taps the back button.
     case back
     
-    case inputKeyword(String?)
+    /// The action that the user returns the keyboard.
+    case returnKeyboard(String)
     
-    case addKeyword
-    
+    /// The action that the user removes the `index`th keyword.
     case removeKeyword(index: Int)
   }
   
@@ -32,16 +35,12 @@ final class KeywordRegisterViewReactor: Reactor {
     
     case back(Bool)
     
-    case setKeyword(String?)
+    case addKeyword(String)
     
-    case addKeyword
-    
-    case removeKeyword(at: Int)
+    case removeKeyword(index: Int)
   }
   
   struct State {
-    
-    var currentKeyword: String?
     
     var keywords: [String] = []
     
@@ -64,13 +63,12 @@ final class KeywordRegisterViewReactor: Reactor {
         Observable.just(Mutation.back(true)),
         Observable.just(Mutation.back(false))
         ])
-    case let .inputKeyword(keyword):
-      return Observable.just(Mutation.setKeyword(keyword))
-    case .addKeyword:
-      return Observable.just(Mutation.addKeyword)
+    case let .returnKeyboard(keyword):
+      return Observable.just(Mutation.addKeyword(keyword))
     case let .removeKeyword(index):
-      return Observable.just(Mutation.removeKeyword(at: index))
-    }  }
+      return Observable.just(Mutation.removeKeyword(index: index))
+    }
+  }
   
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
@@ -79,10 +77,8 @@ final class KeywordRegisterViewReactor: Reactor {
       state.isConfirmButtonSelected = isSelected
     case let .back(isSelected):
       state.isBackButtonSelected = isSelected
-    case let .setKeyword(keyword):
-      state.currentKeyword = keyword
-    case .addKeyword:
-      state.keywords.insert(state.currentKeyword ?? "", at: 0)
+    case let .addKeyword(keyword):
+      state.keywords.insert(keyword, at: 0)
     case let .removeKeyword(index):
       state.keywords.remove(at: index)
     }

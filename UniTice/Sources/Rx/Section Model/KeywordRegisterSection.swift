@@ -1,8 +1,8 @@
 //
-//  KeywordSection.swift
+//  KeywordRegisterSection.swift
 //  UniTice
 //
-//  Created by Presto on 16/03/2019.
+//  Created by Presto on 17/03/2019.
 //  Copyright © 2019 presto. All rights reserved.
 //
 
@@ -10,18 +10,16 @@ import Foundation
 
 import RxDataSources
 
-struct KeywordSection {
-  
-  var footer: String
+struct KeywordRegisterSection {
   
   var items: [Item]
 }
 
-extension KeywordSection: SectionModelType {
+extension KeywordRegisterSection: SectionModelType {
   
   typealias Item = String
-
-  init(original: KeywordSection, items: [Item]) {
+  
+  init(original: KeywordRegisterSection, items: [Item]) {
     self = original
     self.items = items
   }

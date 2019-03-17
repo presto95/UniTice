@@ -16,41 +16,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3KK-bK-VIS">
-                    <rect key="frame" x="123.5" y="8" width="128" height="44"/>
-                    <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="키워드 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AOv-1l-byy">
-                            <rect key="frame" x="0.0" y="0.0" width="90" height="44"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                        </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1D-Ha-sIa">
-                            <rect key="frame" x="98" y="0.0" width="30" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="eJr-2y-dAO"/>
-                            </constraints>
-                            <state key="normal" image="add"/>
-                        </button>
-                    </subviews>
-                </stackView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="키워드 입력" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AOv-1l-byy">
+                    <rect key="frame" x="32" y="8" width="311" height="44"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="3KK-bK-VIS" secondAttribute="bottom" constant="8" id="amE-Mj-F4f"/>
-                <constraint firstItem="3KK-bK-VIS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="i5B-yN-uBF"/>
-                <constraint firstItem="3KK-bK-VIS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="rQk-Wn-oDh"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="AOv-1l-byy" secondAttribute="bottom" constant="8" id="JMf-cx-5hc"/>
+                <constraint firstItem="AOv-1l-byy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="JQ8-Su-wry"/>
+                <constraint firstItem="AOv-1l-byy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="Nqu-3Z-dO4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="AOv-1l-byy" secondAttribute="trailing" constant="32" id="iGj-Oy-tKw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="addButton" destination="N1D-Ha-sIa" id="iQi-9p-wPf"/>
                 <outlet property="keywordTextField" destination="AOv-1l-byy" id="iGi-oP-cYf"/>
             </connections>
             <point key="canvasLocation" x="168.80000000000001" y="-93.553223388305852"/>
         </view>
     </objects>
-    <resources>
-        <image name="add" width="100" height="100"/>
-    </resources>
 </document>

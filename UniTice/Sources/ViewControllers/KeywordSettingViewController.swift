@@ -21,7 +21,7 @@ final class KeywordSettingViewController: UIViewController, StoryboardView {
   
   typealias Reactor = KeywordSettingViewReactor
   
-  typealias DataSource = RxTableViewSectionedReloadDataSource<KeywordSection>
+  typealias DataSource = RxTableViewSectionedReloadDataSource<KeywordSettingSection>
   
   // MARK: Property
   
@@ -74,7 +74,7 @@ private extension KeywordSettingViewController {
   
   func bindState(_ reactor: Reactor) {  
     reactor.state.map { $0.keywords }
-      .map { keywords -> [KeywordSection] in
+      .map { keywords -> [KeywordSettingSection] in
         let footer = "최대 3개의 키워드를 등록할 수 있습니다. 현재 : \(keywords.count)개"
         return [.init(footer: footer, items: keywords)]
       }

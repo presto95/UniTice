@@ -12,28 +12,22 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
+/// The keyword register header view.
 final class KeywordRegisterHeaderView: UIView, StoryboardView {
+  
+  // MARK: Typealias
   
   typealias Reactor = KeywordRegisterHeaderViewReactor
   
+  // MARK: Property
+  
   var disposeBag: DisposeBag = DisposeBag()
   
-  @IBOutlet private weak var keywordTextField: UITextField!
-  
-  @IBOutlet private weak var addButton: UIButton!
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    setup()
-  }
+  @IBOutlet weak var keywordTextField: UITextField!
   
   func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
-  }
-  
-  private func setup() {
-    addButton.imageView?.contentMode = .scaleAspectFit
   }
 }
 
@@ -41,37 +35,17 @@ final class KeywordRegisterHeaderView: UIView, StoryboardView {
 
 private extension KeywordRegisterHeaderView {
   
-  func bindAction(_ reactor: Reactor) {
-    keywordTextField.rx.controlEvent(.editingDidEndOnExit)
-      .map { Reactor.Action.returnTextField }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-    keywordTextField.rx.tapGesture()
-      .map { _ in Reactor.Action.tapTextField }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-    keywordTextField.rx.text
-      .map { Reactor.Action.input($0) }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-    addButton.rx.tap
-      .map { Reactor.Action.add }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-  }
+  func bindAction(_ reactor: Reactor) { }
   
-  func bindState(_ reactor: Reactor) {
-    reactor.state.map { $0.isTextFieldSelected }
-      .distinctUntilChanged()
-      .filter { !$0 }
-      .subscribe(onNext: { [weak self] _ in
-        self?.keywordTextField.resignFirstResponder()
-      })
-      .disposed(by: disposeBag)
-    
-    reactor.state.map { $0.currentKeyword }
-      .filter { $0 == nil }
-      .bind(to: keywordTextField.rx.text)
-      .disposed(by: disposeBag)
+  func bindState(_ reactor: Reactor) { }
+}
+
+extension Reactive where Base: KeywordRegisterHeaderView {
+  
+  var textFieldDidEndEditing: ControlEvent<String> {
+    let source = base.keywordTextField.rx
+      .controlEvent(.editingDidEndOnExit)
+      .withLatestFrom(base.keywordTextField.rx.text.orEmpty)
+    return ControlEvent(events: source)
   }
 }

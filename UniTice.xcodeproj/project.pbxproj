@@ -29,9 +29,10 @@
 		5E6E0D61CFA1A6DDA7E9F6EDF45A2F42 /* KeywordRegisterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF65B4A97D6579E0D8FD3C269CEC1416 /* KeywordRegisterHeaderView.swift */; };
 		FDEDBE8615E788B6F1114843271DD062 /* KeywordRegisterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C04FB01723387C6B0B4591187696E141 /* KeywordRegisterHeaderView.xib */; };
 		8D9B12CD25A1114D8B54C0FCDEF08CE9 /* KeywordRegisterHeaderViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16769A2C9730F85F55D53BFAAA7E437 /* KeywordRegisterHeaderViewReactor.swift */; };
+		756215F63F6D32D35ECEB1FEDCB249AA /* KeywordRegisterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674CE50573A686198F94E71C5F439DF8 /* KeywordRegisterSection.swift */; };
 		63592F74B4889B03DAC260F11498046B /* KeywordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEEC725494F91D5E96633ECF3D4AB27 /* KeywordRegisterViewController.swift */; };
 		6B30E3574954397CF4A688F79F42FE85 /* KeywordRegisterViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665F7E1EE6E1ACDF85EBCBDB4FDF08D /* KeywordRegisterViewReactor.swift */; };
-		7D09B21A37A853BCDED3903F3D70A86E /* KeywordSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F0BFFE17A68F7AFC3C5C91F864648 /* KeywordSection.swift */; };
+		96BEF24D097A8C1921D615A27ECB45D6 /* KeywordSettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3678470F59B8D5C837B81D37119E88AC /* KeywordSettingSection.swift */; };
 		10466383D9F745D0F90AAB171ADB5154 /* KeywordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A748A085D9043CB46EEA8B2E39E15A92 /* KeywordSettingViewController.swift */; };
 		88EDB5FCB2A4B49DD7A61FCB09A4EEA5 /* KeywordSettingViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8403B3C695E57B8443B814983A1E25 /* KeywordSettingViewReactor.swift */; };
 		D6C87EDB09A09BB489175DD16B4FF20F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 079F4B800BEF0C729F1CB06CE28E6137 /* LaunchScreen.storyboard */; };
@@ -166,9 +167,10 @@
 		FF65B4A97D6579E0D8FD3C269CEC1416 /* KeywordRegisterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterHeaderView.swift; sourceTree = "<group>"; };
 		C04FB01723387C6B0B4591187696E141 /* KeywordRegisterHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordRegisterHeaderView.xib; sourceTree = "<group>"; };
 		C16769A2C9730F85F55D53BFAAA7E437 /* KeywordRegisterHeaderViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterHeaderViewReactor.swift; sourceTree = "<group>"; };
+		674CE50573A686198F94E71C5F439DF8 /* KeywordRegisterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterSection.swift; sourceTree = "<group>"; };
 		EDEEC725494F91D5E96633ECF3D4AB27 /* KeywordRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterViewController.swift; sourceTree = "<group>"; };
 		D665F7E1EE6E1ACDF85EBCBDB4FDF08D /* KeywordRegisterViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterViewReactor.swift; sourceTree = "<group>"; };
-		826F0BFFE17A68F7AFC3C5C91F864648 /* KeywordSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSection.swift; sourceTree = "<group>"; };
+		3678470F59B8D5C837B81D37119E88AC /* KeywordSettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSettingSection.swift; sourceTree = "<group>"; };
 		A748A085D9043CB46EEA8B2E39E15A92 /* KeywordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSettingViewController.swift; sourceTree = "<group>"; };
 		5D8403B3C695E57B8443B814983A1E25 /* KeywordSettingViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSettingViewReactor.swift; sourceTree = "<group>"; };
 		8455CFF840691B1A99C42279E176F442 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -310,18 +312,12 @@
 		14B6B7A3EC99FE3B9E2A7A196C3733CB /* Section Model */ = {
 			isa = PBXGroup;
 			children = (
-				826F0BFFE17A68F7AFC3C5C91F864648 /* KeywordSection.swift */,
+				674CE50573A686198F94E71C5F439DF8 /* KeywordRegisterSection.swift */,
+				3678470F59B8D5C837B81D37119E88AC /* KeywordSettingSection.swift */,
 				AB6E9BCDC89477C4495A375450BC4E94 /* SettingTableViewSection.swift */,
 				02E3A573D7E9A756CD48BECE39EC4AE4 /* UTSection.swift */,
 			);
 			path = "Section Model";
-			sourceTree = "<group>";
-		};
-		6B1A0EB903806FDAA7E62C432B9DD1D0 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		27D53100EFA20153E5941C62CA58B4B6 /* University */ = {
@@ -464,6 +460,13 @@
 				7FA2ACD17CA5CFF0B5F051C5F6E8921E /* Info.plist */,
 			);
 			path = Supports;
+			sourceTree = "<group>";
+		};
+		6B1A0EB903806FDAA7E62C432B9DD1D0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		6D6A28A9AFD66B11BB9AE47542B85C46 /* Products */ = {
@@ -848,9 +851,10 @@
 				CC0A8E81C537E8E88164C34BA924FBB2 /* KeywordCellReactor.swift in Sources */,
 				5E6E0D61CFA1A6DDA7E9F6EDF45A2F42 /* KeywordRegisterHeaderView.swift in Sources */,
 				8D9B12CD25A1114D8B54C0FCDEF08CE9 /* KeywordRegisterHeaderViewReactor.swift in Sources */,
+				756215F63F6D32D35ECEB1FEDCB249AA /* KeywordRegisterSection.swift in Sources */,
 				63592F74B4889B03DAC260F11498046B /* KeywordRegisterViewController.swift in Sources */,
 				6B30E3574954397CF4A688F79F42FE85 /* KeywordRegisterViewReactor.swift in Sources */,
-				7D09B21A37A853BCDED3903F3D70A86E /* KeywordSection.swift in Sources */,
+				96BEF24D097A8C1921D615A27ECB45D6 /* KeywordSettingSection.swift in Sources */,
 				10466383D9F745D0F90AAB171ADB5154 /* KeywordSettingViewController.swift in Sources */,
 				88EDB5FCB2A4B49DD7A61FCB09A4EEA5 /* KeywordSettingViewReactor.swift in Sources */,
 				C40C562E30943DD3AB3C419D95B59B9C /* Log.swift in Sources */,
