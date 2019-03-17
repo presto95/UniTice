@@ -13,33 +13,40 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-/// 북마크 뷰 리액터.
+/// The `Reactor` for `BookmarkViewController`.
 final class BookmarkViewReactor: Reactor {
   
   enum Action {
     
+    /// The action that the view is loaded in memory.
     case viewDidLoad
     
+    /// The action that the user provokes deleting the bookmark at `index`.
     case deleteBookmark(index: Int)
   }
   
   enum Mutation {
     
+    /// The mutation to initialize bookmarks and keywords.
     case initialize([Bookmark], [String])
     
+    /// The mutation to delete bookmark at `index`.
     case deleteBookmark(index: Int)
   }
   
   struct State {
     
+    /// The keyword string values.
     var keywords: [String] = []
     
+    /// The bookmark objects.
     var bookmarks: [Bookmark] = []
   }
   
   let initialState: State = State()
   
-  let realmService: RealmServiceType
+  /// The realm service.
+  private let realmService: RealmServiceType
   
   init(realmService: RealmServiceType = RealmService.shared) {
     self.realmService = realmService
@@ -48,9 +55,9 @@ final class BookmarkViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .viewDidLoad:
-      return Observable
-        .zip(realmService.fetchBookmarks(),
-             realmService.fetchKeywords()) { Mutation.initialize($0, $1) }
+      return Observable.zip(realmService.fetchBookmarks(), realmService.fetchKeywords()) {
+        Mutation.initialize($0, $1)
+      }
     case let .deleteBookmark(item):
       return realmService.removeBookmark(at: item).map { Mutation.deleteBookmark(index: item) }
     }
@@ -60,8 +67,7 @@ final class BookmarkViewReactor: Reactor {
     var state = state
     switch mutation {
     case let .initialize(bookmarks, keywords):
-      state.bookmarks = bookmarks
-      state.keywords = keywords
+      (state.bookmarks, state.keywords) = (bookmarks, keywords)
     case let .deleteBookmark(item):
       state.bookmarks.remove(at: item)
     }

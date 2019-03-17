@@ -10,35 +10,43 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-/// 초기 설정 완료 뷰 리액터.
+/// The `Reactor` for `FinishViewController`.
 final class FinishViewReactor: Reactor {
   
   enum Action {
     
+    /// The action that the user taps the confirm button.
     case confirm
     
+    /// The action that the user taps the back button.
     case back
   }
   
   enum Mutation {
     
+    /// The mutation to set the tapping status of the confirm button.
     case confirm(Bool)
     
+    /// The mutation to set the tapping status of the back button.
     case back(Bool)
     
+    /// The mutation to save initial data to realm.
     case saveInitialData
   }
   
   struct State {
     
+    /// The boolean value indicating whether the confirm button is tapped.
     var isConfirmButtonTapped: Bool = false
     
+    /// The boolean value indicating whether the back button is tapped.
     var isBackButtonTapped: Bool = false
   }
   
   let initialState: State = State()
   
-  let realmService: RealmServiceType
+  /// The realm service.
+  private let realmService: RealmServiceType
   
   init(realmService: RealmServiceType = RealmService.shared) {
     self.realmService = realmService
@@ -79,17 +87,18 @@ final class FinishViewReactor: Reactor {
 private extension FinishViewReactor {
   
   func saveUser() -> Observable<Mutation> {
+    let university = InitialInfo.shared.university
+    let keywords = InitialInfo.shared.keywords
     return Observable
-      .zip(InitialInfo.shared.university,
-           InitialInfo.shared.keywords) { [weak self] university, keywords in
-            let user = User().then {
-              $0.university = university.rawValue
-              $0.keywords.append(objectsIn: keywords)
-            }
-            self?.realmService.addUser(user)
-            Global.shared.university.onNext(university)
-            return Mutation.saveInitialData
-    }
-    .take(1)
+      .zip(university, keywords) { [weak self] university, keywords in
+        let user = User().then {
+          $0.university = university.rawValue
+          $0.keywords.append(objectsIn: keywords)
+        }
+        self?.realmService.addUser(user)
+        Global.shared.university.onNext(university)
+        return Mutation.saveInitialData
+      }
+      .take(1)
   }
 }

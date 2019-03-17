@@ -8,6 +8,4 @@
 
 import Foundation
 
-enum UTError: Error {
-
-}
+enum UTError: Error { }

@@ -12,10 +12,14 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-/// 초기 설정 완료 뷰 컨트롤러.
+/// The finish view controller.
 final class FinishViewController: UIViewController, StoryboardView {
   
+  // MARK: Typealias
+  
   typealias Reactor = FinishViewReactor
+  
+  // MARK: Property
   
   var disposeBag: DisposeBag = DisposeBag()
   
@@ -27,15 +31,17 @@ final class FinishViewController: UIViewController, StoryboardView {
   
   @IBOutlet private weak var backButton: UTButton!
   
+  // MARK: Method
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
   }
   
   func bind(reactor: Reactor) {
+    bindUI()
     bindAction(reactor)
     bindState(reactor)
-    bindUI()
   }
   
   private func setup() {

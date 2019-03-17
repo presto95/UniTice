@@ -17,6 +17,8 @@ final class MainContainerViewReactor: Reactor {
   
   enum Action {
     
+    case viewWillAppear
+    
     /// The action that the user taps the setting bar button item.
     case setting
     
@@ -28,6 +30,8 @@ final class MainContainerViewReactor: Reactor {
   }
   
   enum Mutation {
+    
+    case reloadData
     
     /// The mutation that sets up whether the setting scene is presented.
     case presentSetting(Bool)
@@ -55,20 +59,22 @@ final class MainContainerViewReactor: Reactor {
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+    case .viewWillAppear:
+      return Observable.just(Mutation.reloadData)
     case .setting:
-      return .concat([
-        .just(.presentSetting(true)),
-        .just(.presentSetting(false))
+      return Observable.concat([
+        Observable.just(Mutation.presentSetting(true)),
+        Observable.just(Mutation.presentSetting(false))
         ])
     case .search:
-      return .concat([
-        .just(.presentSearch(true)),
-        .just(.presentSearch(false))
+      return Observable.concat([
+        Observable.just(Mutation.presentSearch(true)),
+        Observable.just(Mutation.presentSearch(false))
         ])
     case .bookmark:
-      return .concat([
-        .just(.presentBookmark(true)),
-        .just(.presentBookmark(false))
+      return Observable.concat([
+        Observable.just(Mutation.presentBookmark(true)),
+        Observable.just(Mutation.presentBookmark(false))
         ])
     }
   }
@@ -76,6 +82,8 @@ final class MainContainerViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case .reloadData:
+      break
     case let .presentSetting(isTapped):
       state.isSettingButtonTapped = isTapped
     case let .presentSearch(isTapped):

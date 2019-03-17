@@ -11,61 +11,61 @@ import Foundation
 import RealmSwift
 import RxSwift
 
-/// Realm 서비스 타입.
+/// The `protocol` that defines the realm service.
 protocol RealmServiceType: class {
   
-  /// Realm 인스턴스.
+  /// The `Realm` instance.
   var realm: Realm { get }
   
-  /// 사용자 추가.
+  /// Adds the `user`.
   @discardableResult
   func addUser(_ user: User) -> Observable<User>
   
-  /// 북마크 추가.
+  /// Adds the `post` to bookmark.
   @discardableResult
   func addBookmark(_ post: Post) -> Observable<Bookmark>
   
-  /// 키워드 추가.
+  /// Adds the `keyword`.
   @discardableResult
   func addKeyword(_ keyword: String?) -> Observable<String?>
   
-  /// 사용자 가져오기.
+  /// Fetches user.
   func fetchUser() -> Observable<User>
   
-  /// 모든 북마크 가져오기.
+  /// Fetches all bookmarks.
   func fetchBookmarks() -> Observable<[Bookmark]>
   
-  /// 모든 키워드 가져오기.
+  /// Fetches all keywords.
   func fetchKeywords() -> Observable<[String]>
   
-  /// 대학교 가져오기.
+  /// Fetches the university.
   func fetchUniversity() -> Observable<University>
   
-  /// 대학교 갱신하기.
+  /// Updates the `university`.
   @discardableResult
   func updateUniversity(_ university: University) -> Observable<University>
   
-  /// 북마크 삭제하기.
+  /// Removes the `index`th bookmark.
   @discardableResult
   func removeBookmark(at index: Int) -> Observable<Void>
   
-  /// 모든 북마크 삭제하기.
+  /// Removes all bookmarks.
   @discardableResult
   func removeAllBookmarks() -> Observable<Void>
   
-  /// 키워드 삭제하기.
+  /// Removes the `index`th keyword.
   @discardableResult
   func removeKeyword(at index: Int) -> Observable<Void>
   
-  /// 모든 키워드 삭제하기.
+  /// Removes all keywords.
   @discardableResult
   func removeAllKeywords() -> Observable<Void>
 }
 
-/// Realm 서비스.
+/// The `class` that defines the realm service.
 final class RealmService: RealmServiceType {
   
-  /// RealmService Singleton Object.
+  /// The singleton object of `RealmService`.
   static let shared = RealmService()
   
   var realm: Realm {

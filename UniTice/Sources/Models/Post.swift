@@ -43,7 +43,3 @@ extension Post: CustomStringConvertible {
     """
   }
 }
-
-// MARK: - Then 준수
-
-extension Post: Then { }

@@ -15,7 +15,9 @@ import RxDataSources
 import RxSwift
 
 /// The bookmark view controller.
-final class BookmarkViewController: UIViewController, StoryboardView {
+final class BookmarkViewController: UIViewController,
+                                    StoryboardView,
+                                    SafariViewControllerPresentable {
   
   // MARK: Typealias
   
@@ -33,6 +35,8 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   
   @IBOutlet private weak var tableView: UITableView!
   
+  // MARK: Method
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -48,10 +52,12 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   private func setup() {
     title = "북마크"
     registerForPreviewing(with: self, sourceView: tableView)
-    tableView.backgroundColor = .groupTableViewBackground
-    tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
-    tableView.separatorColor = .main
-    tableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
+    tableView.do {
+      $0.backgroundColor = .groupTableViewBackground
+      $0.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+      $0.separatorColor = .main
+      $0.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
+    }
   }
 }
 
@@ -84,11 +90,13 @@ private extension BookmarkViewController {
 // MARK: - UIViewControllerPreviewDelegate 구현
 
 extension BookmarkViewController: UIViewControllerPreviewingDelegate {
+  
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
+    guard let reactor = reactor else { return nil }
     if let indexPath = tableView.indexPathForRow(at: location) {
-      let bookmark = reactor?.currentState.bookmarks[indexPath.item]
-      if let url = URL(string: bookmark?.link ?? "") {
+      let bookmark = reactor.currentState.bookmarks[indexPath.item]
+      if let url = URL(string: bookmark.link) {
         return makeSafariViewController(url: url)
       }
     }
@@ -108,10 +116,11 @@ private extension BookmarkViewController {
   func bindDataSource() {
     let keywords = reactor?.currentState.keywords ?? []
     dataSource = DataSource(configureCell: { _, tableView, indexPath, bookmark in
-      let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
-      cell.textLabel?.attributedText = bookmark.title.highlightKeywords(keywords)
-      cell.detailTextLabel?.text = bookmark.date
-      return cell
+      return tableView
+        .dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath).then {
+          $0.textLabel?.attributedText = bookmark.title.highlightKeywords(keywords)
+          $0.detailTextLabel?.text = bookmark.date
+      }
     })
     dataSource.canEditRowAtIndexPath = { _, _ in true }
   }
@@ -129,5 +138,3 @@ private extension BookmarkViewController {
       .disposed(by: disposeBag)
   }
 }
-
-extension BookmarkViewController: SafariViewControllerPresentable { }

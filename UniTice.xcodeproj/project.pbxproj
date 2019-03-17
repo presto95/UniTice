@@ -317,6 +317,13 @@
 			path = "Section Model";
 			sourceTree = "<group>";
 		};
+		6B1A0EB903806FDAA7E62C432B9DD1D0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		27D53100EFA20153E5941C62CA58B4B6 /* University */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,13 +464,6 @@
 				7FA2ACD17CA5CFF0B5F051C5F6E8921E /* Info.plist */,
 			);
 			path = Supports;
-			sourceTree = "<group>";
-		};
-		6B1A0EB903806FDAA7E62C432B9DD1D0 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		6D6A28A9AFD66B11BB9AE47542B85C46 /* Products */ = {

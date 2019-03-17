@@ -12,52 +12,58 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-/// 설정 키워드 설정 뷰 리액터.
+/// The `Reactor` for `KeywordSettingViewController`.
 final class KeywordSettingViewReactor: Reactor {
   
   enum Action {
     
-    /// 뷰가 화면에 나타남.
+    /// The action that the view is loaded in memory.
     case viewDidLoad
     
-    /// 뷰에서 키워드 추가 버튼 누름.
+    /// The action that the user taps the register bar button item.
     case register
     
-    /// 얼러트에서 확인 버튼 누름.
+    /// The action that the user taps the confirm button in the alert controller.
     case alertConfirm(String?)
     
+    /// The action that the user taps the cancel button in the alert controller.
     case alertCancel
-
-    /// 뷰에서 키워드 삭제.
+    
+    /// The action that the user provokes deleting the keyword at `index`.
     case deleteKeyword(index: Int)
   }
   
   enum Mutation {
     
+    /// The mutation to present the alert controller.
     case presentAlert
     
+    /// The mutation to dismiss the alert controller.
     case dismissAlert
     
-    /// 초기 키워드 설정.
+    /// The mutation to set keywords.
     case setKeywords([String])
     
-    /// 키워드 추가.
+    /// The mutation to add the keyword.
     case addKeyword(String?)
     
-    /// 키워드 삭제.
+    /// The mutation to delete the keyword at `index`.
     case deleteKeyword(index: Int)
   }
   
   struct State {
     
+    /// The keyword string values.
     var keywords: [String] = []
     
+    /// The boolean value indicating whether the alert controller is presenting.
     var isAlertPresenting: Bool = false
   }
   
   let initialState: State = State()
   
-  let realmService: RealmServiceType
+  /// The realm service.
+  private let realmService: RealmServiceType
   
   init(realmService: RealmServiceType = RealmService.shared) {
     self.realmService = realmService
@@ -68,11 +74,14 @@ final class KeywordSettingViewReactor: Reactor {
     case .viewDidLoad:
       return realmService.fetchKeywords().map { Mutation.setKeywords($0) }
     case .register:
-      return Observable.just(Mutation.presentAlert)
+      return Observable.just(.presentAlert)
     case let .alertConfirm(keyword):
-      return realmService.addKeyword(keyword).map { Mutation.addKeyword($0) }
+      return Observable.concat([
+        realmService.addKeyword(keyword).map { Mutation.addKeyword($0) },
+        Observable.just(Mutation.dismissAlert)
+        ])
     case .alertCancel:
-      return Observable.just(Mutation.dismissAlert)
+      return Observable.just(.dismissAlert)
     case let .deleteKeyword(index):
       return realmService.removeKeyword(at: index).map { Mutation.deleteKeyword(index: index) }
     }
@@ -89,7 +98,6 @@ final class KeywordSettingViewReactor: Reactor {
       state.keywords = keywords
     case let .addKeyword(keyword):
       state.keywords.insert(keyword ?? "", at: 0)
-      state.isAlertPresenting = false
     case let .deleteKeyword(index):
       state.keywords.remove(at: index)
     }

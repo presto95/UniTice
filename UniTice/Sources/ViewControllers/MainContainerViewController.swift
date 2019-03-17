@@ -18,7 +18,11 @@ import XLPagerTabStrip
 /// The main container view controller.
 final class MainContainerViewController: ButtonBarPagerTabStripViewController, StoryboardView {
   
+  // MARK: Typealias
+  
   typealias Reactor = MainContainerViewReactor
+  
+  // MARK: Property
   
   var disposeBag: DisposeBag = DisposeBag()
   
@@ -30,6 +34,8 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   @IBOutlet private weak var bookmarkButtonItem: UIBarButtonItem!
   
+  // MARK: Method
+  
   override func viewDidLoad() {
     setupButtonBar()
     super.viewDidLoad()
@@ -38,6 +44,11 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   override func viewWillAppear(_ animated: Bool) {
     reloadPagerTabStripView()
+    guard let reactor = reactor else { return }
+    Observable.just(Void())
+      .map { Reactor.Action.viewWillAppear }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -52,9 +63,9 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   }
   
   func bind(reactor: Reactor) {
+    bindUI()
     bindAction(reactor)
     bindState(reactor)
-    bindUI()
   }
   
   private func setup() {

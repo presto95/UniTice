@@ -14,17 +14,21 @@ import RxDataSources
 import RxSwift
 import SnapKit
 
-/// 설정 키워드 설정 뷰 컨트롤러.
+/// The keyword setting view controller.
 final class KeywordSettingViewController: UIViewController, StoryboardView {
+  
+  // MARK: Typealias
   
   typealias Reactor = KeywordSettingViewReactor
   
   typealias DataSource = RxTableViewSectionedReloadDataSource<KeywordSection>
   
+  // MARK: Property
+  
   var disposeBag: DisposeBag = DisposeBag()
   
   private var dataSource: DataSource! 
-
+  
   private let registerButtonItem
     = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
   
@@ -72,16 +76,19 @@ private extension KeywordSettingViewController {
     reactor.state.map { $0.keywords }
       .map { keywords -> [KeywordSection] in
         let footer = "최대 3개의 키워드를 등록할 수 있습니다. 현재 : \(keywords.count)개"
-        return [KeywordSection(footer: footer, items: keywords)]
+        return [.init(footer: footer, items: keywords)]
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     reactor.state.map { $0.isAlertPresenting }
       .distinctUntilChanged()
       .filter { $0 }
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        self.makeKeywordSettingAlertController().present(to: self)
+        self.makeKeywordSettingAlertController()
+          .bind(to: reactor.action)
+          .disposed(by: self.disposeBag)
       })
       .disposed(by: disposeBag)
   }
@@ -92,7 +99,7 @@ private extension KeywordSettingViewController {
 private extension KeywordSettingViewController {
   
   func bindDataSource() {
-    dataSource = .init(configureCell: { dataSource, tableView, indexPath, keyword in
+    dataSource = .init(configureCell: { _, tableView, indexPath, keyword in
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
       cell.textLabel?.text = keyword
       return cell
@@ -109,22 +116,25 @@ private extension KeywordSettingViewController {
       .disposed(by: disposeBag)
   }
   
-  func makeKeywordSettingAlertController() -> UIAlertController {
-    return UIAlertController
-      .alert(title: "", message: "등록할 키워드를 입력하세요.")
-      .textField { $0.placeholder = "키워드" }
-      .action(title: "확인", style: .default) { [weak self, weak reactor] _, textFields in
-        guard let self = self, let reactor = reactor else { return }
-        let text = textFields?.first?.text
-        Observable.just(text).map { Reactor.Action.alertConfirm($0) }
-          .bind(to: reactor.action)
-          .disposed(by: self.disposeBag)
+  /// Creates the alert controller for registering a keyword.
+  func makeKeywordSettingAlertController() -> Observable<Reactor.Action> {
+    return Observable<Reactor.Action>.create { [weak self] observer in
+      let alert = UIAlertController
+        .alert(title: "", message: "등록할 키워드를 입력하세요.")
+        .textField { $0.placeholder = "키워드" }
+        .action(title: "확인") { _, textFields in
+          let text = textFields?.first?.text
+          observer.onNext(Reactor.Action.alertConfirm(text))
+          observer.onCompleted()
+        }
+        .action(title: "취소", style: .cancel) { _, _ in
+          observer.onNext(Reactor.Action.alertCancel)
+          observer.onCompleted()
       }
-      .action(title: "취소", style: .cancel) { [weak self, weak reactor] _, _ in
-        guard let self = self, let reactor = reactor else { return }
-        Observable.just(Void()).map { Reactor.Action.alertCancel }
-          .bind(to: reactor.action)
-          .disposed(by: self.disposeBag)
+      self?.present(alert, animated: true, completion: nil)
+      return Disposables.create {
+        alert.dismiss(animated: true, completion: nil)
+      }
     }
   }
 }
