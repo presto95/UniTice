@@ -18,9 +18,16 @@ final class PostCellReactor: Reactor {
   
   typealias Mutation = NoMutation
   
-  let initialState: UTSectionData
+  struct State {
+    
+    var sectionData: UTSectionData
+    
+    var keywords: [String]
+  }
   
-  init(post: UTSectionData) {
-    self.initialState = post
+  let initialState: State
+  
+  init(sectionData: UTSectionData, keywords: [String]) {
+    initialState = State(sectionData: sectionData, keywords: keywords)
   }
 }

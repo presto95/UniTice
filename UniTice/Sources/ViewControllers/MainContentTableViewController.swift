@@ -88,7 +88,7 @@ private extension MainContentTableViewController {
         guard let self = self else { return false }
         let offsetY = offset.y
         let contentHeight = self.tableView.contentSize.height
-        return offsetY > contentHeight - self.tableView.bounds.height
+        return offsetY > contentHeight - self.tableView.bounds.height + 32
       }
       .filter { _ in !reactor.currentState.isLoading }
       .map { _ in Reactor.Action.scroll }
@@ -110,7 +110,10 @@ private extension MainContentTableViewController {
         let standardPosts = posts
           .filter { $0.number != 0 }
           .map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-        return [.init(items: fixedPosts), .init(items: standardPosts)]
+        let upperPostSectionItems: [UTSectionData] = reactor.currentState.isFixedNoticeFolded
+          ? []
+        : fixedPosts
+        return [.init(items: upperPostSectionItems), .init(items: standardPosts)]
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
@@ -128,7 +131,9 @@ private extension MainContentTableViewController {
     dataSource = .init(configureCell: { dataSource, tableView, indexPath, sectionData in
       let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
       if case let postCell as PostCell = cell {
-        postCell.reactor = PostCellReactor(post: sectionData)
+        postCell.reactor
+          = PostCellReactor(sectionData: sectionData,
+                            keywords: self.reactor?.currentState.keywords ?? [])
       }
       return cell
     })
@@ -146,7 +151,9 @@ private extension MainContentTableViewController {
         if let fullLink = university.postURL(inCategory: category, uri: post.link) {
           let fullLinkString = fullLink.absoluteString
           let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-          //User.insertBookmark(bookmark)
+          Observable.just(Void()).map { Reactor.Action.interactWithCell(bookmark) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
           self.makeSafariViewController(url: fullLink).present(to: self)
         }
       })
@@ -155,21 +162,7 @@ private extension MainContentTableViewController {
   
   func bindUI() {
     tableView.rx.setDelegate(self).disposed(by: disposeBag)
-    
   }
-}
-
-extension MainContentTableViewController {
-  //  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-  //    let offsetY = scrollView.contentOffset.y
-  //    let contentHeight = scrollView.contentSize.height
-  //    if offsetY > contentHeight - scrollView.bounds.height {
-  //      if !footerRefreshView.isLoading {
-  //        footerRefreshView.activate()
-  //        page += 1
-  //      }
-  //    }
-  
 }
 
 extension MainContentTableViewController {
@@ -204,8 +197,9 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
   
   func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                          viewControllerForLocation location: CGPoint) -> UIViewController? {
-    if let indexPath = tableView.indexPathForRow(at: location),
-      let currentState = reactor?.currentState {
+    guard let reactor = reactor else { return nil }
+    if let indexPath = tableView.indexPathForRow(at: location) {
+      let currentState = reactor.currentState
       let post = indexPath.section == 0
         ? currentState.fixedPosts[indexPath.item]
         : currentState.standardPosts[indexPath.item]
@@ -214,7 +208,10 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
       if let fullLink = university.postURL(inCategory: category, uri: post.link) {
         let fullLinkString = fullLink.absoluteString
         let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-        //User.insertBookmark(bookmark)
+        Observable.just(Void())
+          .map { Reactor.Action.interactWithCell(bookmark) }
+          .bind(to: reactor.action)
+          .disposed(by: disposeBag)
         return makeSafariViewController(url: fullLink)
       }
     }

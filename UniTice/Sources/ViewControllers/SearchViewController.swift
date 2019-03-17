@@ -74,9 +74,12 @@ final class SearchViewController: UIViewController, StoryboardView {
     }
     headerView.addSubview(headerLabel)
     headerLabel.snp.makeConstraints { $0.center.equalToSuperview() }
-    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+    tableView.backgroundColor = .groupTableViewBackground
+    tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+    tableView.separatorColor = .main
     tableView.tableHeaderView = headerView
     tableView.tableFooterView = footerRefreshView
+    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
     definesPresentationContext = true
     navigationItem.titleView = searchController.searchBar
   }

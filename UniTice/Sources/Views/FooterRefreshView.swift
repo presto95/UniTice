@@ -76,7 +76,6 @@ private extension FooterRefreshView {
   
   func reloadSubviews(_ isLoading: Bool) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = isLoading
-    textLabel.isHighlighted = isLoading
     if isLoading {
       activityIndicator.startAnimating()
     } else {

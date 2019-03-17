@@ -14,6 +14,8 @@ import RxSwift
 
 final class PostCell: UITableViewCell, View {
   
+  typealias Reactor = PostCellReactor
+  
   private enum Font {
     
     static let text = UIFont.systemFont(ofSize: 15, weight: .semibold)
@@ -32,9 +34,10 @@ final class PostCell: UITableViewCell, View {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func bind(reactor: PostCellReactor) {
-    textLabel?.text = reactor.currentState.title
-    detailTextLabel?.text = reactor.currentState.date
+  func bind(reactor: Reactor) {
+    textLabel?.attributedText
+      = reactor.currentState.sectionData.title.highlightKeywords(reactor.currentState.keywords)
+    detailTextLabel?.text = reactor.currentState.sectionData.date
   }
   
   private func setup() {

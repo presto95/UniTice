@@ -48,6 +48,9 @@ final class BookmarkViewController: UIViewController, StoryboardView {
   private func setup() {
     title = "북마크"
     registerForPreviewing(with: self, sourceView: tableView)
+    tableView.backgroundColor = .groupTableViewBackground
+    tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+    tableView.separatorColor = .main
     tableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
   }
 }

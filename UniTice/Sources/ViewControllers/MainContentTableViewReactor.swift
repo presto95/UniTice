@@ -36,6 +36,8 @@ final class MainContentTableViewReactor: Reactor {
     
     /// The action that the user taps the arrow button to fold or unfold the upper posts.
     case toggleFolding(Bool)
+    
+    case interactWithCell(Post)
   }
   
   enum Mutation {
@@ -47,6 +49,8 @@ final class MainContentTableViewReactor: Reactor {
     case appendPosts([Post])
     
     case setLoading(Bool)
+    
+    case saveBookmark(Post)
   }
   
   struct State {
@@ -81,12 +85,19 @@ final class MainContentTableViewReactor: Reactor {
   
   let initialState: State
   
-  init(university: UniversityType, category: Category) {
+  let realmService: RealmServiceType
+  
+  init(realmService: RealmServiceType = RealmService.shared,
+       university: UniversityType,
+       category: Category) {
+    self.realmService = realmService
     initialState = State(university: university, category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+    case let .interactWithCell(post):
+      return saveBookmark(post)
     case let .toggleFolding(isFolded):
       return Observable.just(Mutation.toggleFolding(isFolded))
     case .viewDidLoad:
@@ -123,6 +134,8 @@ final class MainContentTableViewReactor: Reactor {
       state.page += 1
     case let .setLoading(isLoading):
       state.isLoading = isLoading
+    case .saveBookmark:
+      break
     }
     return state
   }
@@ -135,9 +148,16 @@ private extension MainContentTableViewReactor {
   func requestPosts(_ type: PostRequstType) -> Observable<Mutation> {
     return Global.shared.universityModel
       .flatMap { university -> Observable<[Post]> in
-        return university.requestPosts(inCategory: self.currentState.category,
-                                       inPage: self.currentState.page,
-                                       searchText: "")
+        return university
+          .requestPosts(inCategory: self.currentState.category,
+                        inPage: self.currentState.page,
+                        searchText: "")
+      }
+      .map { posts -> [Post] in
+        if posts.first?.title == self.currentState.posts.first?.title {
+          return posts.filter { $0.number != 0 }
+        }
+        return posts
       }
       .map {
         switch type {
@@ -146,6 +166,12 @@ private extension MainContentTableViewReactor {
         case .append:
           return Mutation.appendPosts($0)
         }
-    }
+      }
+      .take(1)
+  }
+  
+  func saveBookmark(_ bookmark: Post) -> Observable<Mutation> {
+    return realmService.addBookmark(bookmark)
+      .map { _ in Mutation.saveBookmark(bookmark) }
   }
 }
