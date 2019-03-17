@@ -29,7 +29,7 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
   
   var disposeBag: DisposeBag = DisposeBag()
   
-  private var dataSource: RxTableViewSectionedReloadDataSource<UTSection>!
+  private var dataSource: DataSource!
   
   private let headerView
     = (UIView.instantiate(fromXib: MainNoticeHeaderView.name) as? MainNoticeHeaderView)?.then {
@@ -37,11 +37,11 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
   }
   
   private let footerRefreshView
-    = FooterRefreshView(frame: CGRect(x: 0,
+    = FooterLoadingView(frame: CGRect(x: 0,
                                       y: 0,
                                       width: UIScreen.main.bounds.width,
                                       height: 32)).then {
-                                        $0.reactor = FooterRefreshViewReactor()
+                                        $0.reactor = FooterLoadingViewReactor()
   }
   
   private let cellIdentifier = "postCell"
@@ -65,11 +65,13 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
   private func setup() {
     title = reactor?.currentState.category.description
     registerForPreviewing(with: self, sourceView: tableView)
-    tableView.tableFooterView = footerRefreshView
-    tableView.backgroundColor = .groupTableViewBackground
-    tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
-    tableView.separatorColor = .main
-    tableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
+    tableView.do {
+      $0.tableFooterView = footerRefreshView
+      $0.backgroundColor = .groupTableViewBackground
+      $0.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+      $0.separatorColor = .main
+      $0.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
+    }
     refreshControl = UIRefreshControl()
   }
 }
@@ -110,7 +112,7 @@ private extension MainContentTableViewController {
         let standardPosts = posts
           .filter { $0.number != 0 }
           .map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-        let upperPostSectionItems: [UTSectionData] = reactor.currentState.isFixedNoticeFolded
+        let upperPostSectionItems: [UTSectionData] = reactor.currentState.isUpperPostFolded
           ? []
         : fixedPosts
         return [.init(items: upperPostSectionItems), .init(items: standardPosts)]
@@ -119,16 +121,18 @@ private extension MainContentTableViewController {
       .disposed(by: disposeBag)
     reactor.state.map { $0.isLoading }
       .distinctUntilChanged()
-      .map { FooterRefreshViewReactor.Action.loading($0) }
+      .map { FooterLoadingViewReactor.Action.loading($0) }
       .bind(to: footerRefreshView.reactor!.action)
       .disposed(by: disposeBag)
   }
 }
 
+// MARK: - Private Method
+
 private extension MainContentTableViewController {
   
   func bindDataSource() {
-    dataSource = .init(configureCell: { dataSource, tableView, indexPath, sectionData in
+    dataSource = .init(configureCell: { _, tableView, indexPath, sectionData in
       let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
       if case let postCell as PostCell = cell {
         postCell.reactor
@@ -144,7 +148,7 @@ private extension MainContentTableViewController {
         let currentState = reactor.currentState
         self.tableView.deselectRow(at: indexPath, animated: true)
         let post = indexPath.section == 0
-          ? currentState.fixedPosts[indexPath.item]
+          ? currentState.upperPosts[indexPath.item]
           : currentState.standardPosts[indexPath.item]
         let university = currentState.university
         let category = currentState.category
@@ -201,7 +205,7 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     if let indexPath = tableView.indexPathForRow(at: location) {
       let currentState = reactor.currentState
       let post = indexPath.section == 0
-        ? currentState.fixedPosts[indexPath.item]
+        ? currentState.upperPosts[indexPath.item]
         : currentState.standardPosts[indexPath.item]
       let university = currentState.university
       let category = currentState.category

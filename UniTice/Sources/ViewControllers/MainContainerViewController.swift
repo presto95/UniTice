@@ -98,7 +98,13 @@ private extension MainContainerViewController {
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let controller = StoryboardScene.Main.searchViewController.instantiate()
-        controller.reactor = SearchViewReactor()
+        guard let currentContentViewController
+          = self.viewControllers[self.currentIndex] as? MainContentTableViewController,
+          let currentContentViewReactor = currentContentViewController.reactor
+          else { return }
+        let currentCategory = currentContentViewReactor.currentState.category
+        let university = currentContentViewReactor.currentState.university
+        controller.reactor = SearchViewReactor(university: university, category: currentCategory)
         controller.push(at: self)
       })
       .disposed(by: disposeBag)

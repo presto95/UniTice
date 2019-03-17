@@ -16,8 +16,8 @@
 		6CB01428FF06D410D6892619FF8C6C14 /* BookmarkViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24DD7D36CED7FB8BE04BBF298389F5A /* BookmarkViewReactor.swift */; };
 		3FCBA46593018FDE55141B635B5EE3BA /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063DC11F816ED6C41CD4753EE4FA71A1 /* FinishViewController.swift */; };
 		256C95C915D9622708D32678401F0185 /* FinishViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A457D9F8ACA6910694C8B79E623483 /* FinishViewReactor.swift */; };
-		8EC1F3D66E7385857624EC8AB6469DA6 /* FooterRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE01FEDE5E2D0CA6E15D429E79F915FF /* FooterRefreshView.swift */; };
-		17B6C087CD479AE77D76238D70BE7127 /* FooterRefreshViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1907767E6F7ACDA586066B8CAC0DC /* FooterRefreshViewReactor.swift */; };
+		2E7234BA9ADDCB29F397CDA43303DCF9 /* FooterLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734EB6245AFA2C5BD9514859DFAE6AB4 /* FooterLoadingView.swift */; };
+		419D7898DD816AA76E7391A5549357B2 /* FooterLoadingViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE6AAF5F5657C82BEDD0E6D911F15D /* FooterLoadingViewReactor.swift */; };
 		3B40F60C1F1164A499D3AC00B14B9A4A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6115C8E6BD08859FF7BDE967AFE25CD /* Global.swift */; };
 		E0F64030D67283BF31BD36A1CDD15271 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DA37DBF97A3A7EA7A027E2A352F9A70 /* GoogleService-Info.plist */; };
 		1A77BB0ECA9590106DFBC4DE48C7C240 /* HTMLParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8674D0379CEF9C25566ED57C909A9E9 /* HTMLParseManager.swift */; };
@@ -50,6 +50,7 @@
 		659BE41A9537BC60950E998B992EE6FD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32283192B8271AE4240D335EBC31B5B5 /* Post.swift */; };
 		17896B715811B5132A703FC7F2BAACB8 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFF6616EB1488F1B4D8F2CD44501081 /* PostCell.swift */; };
 		DC648C4FB6B24F40AC0DC73C6CA39F4D /* PostCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02AF592ADE5DD93B0D75F9CAB47B12 /* PostCellReactor.swift */; };
+		D9DFC946E0F808F66657B420AFDC1FD8 /* PostRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7BB19193C7AC5D94C331C1BA38E3 /* PostRequestType.swift */; };
 		9C4F657CB6B233A92FC99373E6E8B8FD /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF31896B63593E7BEEB70AE0620FFBE /* RealmService.swift */; };
 		AFC0167BA534831DFAD3D8BFB45EFB0D /* SafariViewControllerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264B6EED8AAA0C5D75DA6DD25D870D0 /* SafariViewControllerPresentable.swift */; };
 		9B18C8B5F95A0FE040AC6FAF04EA1AC5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E689ECAF5504FAA5C8533CEDCEDF63 /* SearchViewController.swift */; };
@@ -150,8 +151,8 @@
 		F24DD7D36CED7FB8BE04BBF298389F5A /* BookmarkViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewReactor.swift; sourceTree = "<group>"; };
 		063DC11F816ED6C41CD4753EE4FA71A1 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
 		96A457D9F8ACA6910694C8B79E623483 /* FinishViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewReactor.swift; sourceTree = "<group>"; };
-		AE01FEDE5E2D0CA6E15D429E79F915FF /* FooterRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterRefreshView.swift; sourceTree = "<group>"; };
-		E7D1907767E6F7ACDA586066B8CAC0DC /* FooterRefreshViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterRefreshViewReactor.swift; sourceTree = "<group>"; };
+		734EB6245AFA2C5BD9514859DFAE6AB4 /* FooterLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLoadingView.swift; sourceTree = "<group>"; };
+		5CFE6AAF5F5657C82BEDD0E6D911F15D /* FooterLoadingViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLoadingViewReactor.swift; sourceTree = "<group>"; };
 		E6115C8E6BD08859FF7BDE967AFE25CD /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		5DA37DBF97A3A7EA7A027E2A352F9A70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8674D0379CEF9C25566ED57C909A9E9 /* HTMLParseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParseManager.swift; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 		32283192B8271AE4240D335EBC31B5B5 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FBFF6616EB1488F1B4D8F2CD44501081 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		ED02AF592ADE5DD93B0D75F9CAB47B12 /* PostCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellReactor.swift; sourceTree = "<group>"; };
+		3AFD7BB19193C7AC5D94C331C1BA38E3 /* PostRequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequestType.swift; sourceTree = "<group>"; };
 		DDF31896B63593E7BEEB70AE0620FFBE /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		3264B6EED8AAA0C5D75DA6DD25D870D0 /* SafariViewControllerPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewControllerPresentable.swift; sourceTree = "<group>"; };
 		76E689ECAF5504FAA5C8533CEDCEDF63 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -315,14 +317,6 @@
 			path = "Section Model";
 			sourceTree = "<group>";
 		};
-		ABE51405A0DDC07E814814FB61F72B4D /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				3264B6EED8AAA0C5D75DA6DD25D870D0 /* SafariViewControllerPresentable.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		27D53100EFA20153E5941C62CA58B4B6 /* University */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,8 +434,8 @@
 		564568C48819A9255CF8570EB8DE738A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AE01FEDE5E2D0CA6E15D429E79F915FF /* FooterRefreshView.swift */,
-				E7D1907767E6F7ACDA586066B8CAC0DC /* FooterRefreshViewReactor.swift */,
+				734EB6245AFA2C5BD9514859DFAE6AB4 /* FooterLoadingView.swift */,
+				5CFE6AAF5F5657C82BEDD0E6D911F15D /* FooterLoadingViewReactor.swift */,
 				AFEEE4B12520EABF8121BC9E98CC9CD0 /* KeywordCell.swift */,
 				A3873B2E3BD50C810436C147913E688A /* KeywordCellReactor.swift */,
 				FF65B4A97D6579E0D8FD3C269CEC1416 /* KeywordRegisterHeaderView.swift */,
@@ -504,6 +498,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		ABE51405A0DDC07E814814FB61F72B4D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3264B6EED8AAA0C5D75DA6DD25D870D0 /* SafariViewControllerPresentable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		C77B496A79E78B9DDD92588201BA16F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +519,7 @@
 			isa = PBXGroup;
 			children = (
 				8455CFF840691B1A99C42279E176F442 /* Log.swift */,
+				3AFD7BB19193C7AC5D94C331C1BA38E3 /* PostRequestType.swift */,
 				BB4C00C1433730AD22837BD964589933 /* Typealias.swift */,
 				65F03DA342EB30A955E63E1102B20907 /* UTButton.swift */,
 				252046F9A169D80EB2208A0914EE0F89 /* UTButtonType.swift */,
@@ -706,20 +709,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		60854F566723294CC23BE2EA13C1C314 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 		31FB0282BAA0F05E76CFE4A3C67C697F /* [Carte] Post Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -734,6 +723,20 @@
 			shellPath = /bin/sh;
 			shellScript = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post";
 			showEnvVarsInLog = 0;
+		};
+		60854F566723294CC23BE2EA13C1C314 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		855D54511307EC1BCB8547BA8EF9EB99 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -834,8 +837,8 @@
 				6CB01428FF06D410D6892619FF8C6C14 /* BookmarkViewReactor.swift in Sources */,
 				3FCBA46593018FDE55141B635B5EE3BA /* FinishViewController.swift in Sources */,
 				256C95C915D9622708D32678401F0185 /* FinishViewReactor.swift in Sources */,
-				8EC1F3D66E7385857624EC8AB6469DA6 /* FooterRefreshView.swift in Sources */,
-				17B6C087CD479AE77D76238D70BE7127 /* FooterRefreshViewReactor.swift in Sources */,
+				2E7234BA9ADDCB29F397CDA43303DCF9 /* FooterLoadingView.swift in Sources */,
+				419D7898DD816AA76E7391A5549357B2 /* FooterLoadingViewReactor.swift in Sources */,
 				3B40F60C1F1164A499D3AC00B14B9A4A /* Global.swift in Sources */,
 				1A77BB0ECA9590106DFBC4DE48C7C240 /* HTMLParseManager.swift in Sources */,
 				F14AEA7BC9E3F7AEBBAF359603D1AA91 /* InitialInfo.swift in Sources */,
@@ -862,6 +865,7 @@
 				659BE41A9537BC60950E998B992EE6FD /* Post.swift in Sources */,
 				17896B715811B5132A703FC7F2BAACB8 /* PostCell.swift in Sources */,
 				DC648C4FB6B24F40AC0DC73C6CA39F4D /* PostCellReactor.swift in Sources */,
+				D9DFC946E0F808F66657B420AFDC1FD8 /* PostRequestType.swift in Sources */,
 				9C4F657CB6B233A92FC99373E6E8B8FD /* RealmService.swift in Sources */,
 				AFC0167BA534831DFAD3D8BFB45EFB0D /* SafariViewControllerPresentable.swift in Sources */,
 				9B18C8B5F95A0FE040AC6FAF04EA1AC5 /* SearchViewController.swift in Sources */,

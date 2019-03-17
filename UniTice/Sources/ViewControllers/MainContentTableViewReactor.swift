@@ -13,13 +13,6 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-enum PostRequstType {
-  
-  case set
-  
-  case append
-}
-
 /// The `Reactor` for `MainContentTableViewController`.
 final class MainContentTableViewReactor: Reactor {
   
@@ -37,45 +30,58 @@ final class MainContentTableViewReactor: Reactor {
     /// The action that the user taps the arrow button to fold or unfold the upper posts.
     case toggleFolding(Bool)
     
+    /// The action that the user interacts with the cell to check more information about the post.
     case interactWithCell(Post)
   }
   
   enum Mutation {
     
+    /// The mutation to toggle the upper post folding status.
     case toggleFolding(Bool)
     
+    /// The mutation to set posts.
     case setPosts([Post])
     
+    /// The mutation to append posts.
     case appendPosts([Post])
     
+    /// The mutation to set the loading status.
     case setLoading(Bool)
     
+    /// The mutation to save bookmark to realm.
     case saveBookmark(Post)
+    
+    case resetPage
   }
   
   struct State {
     
+    /// The university.
     var university: UniversityType
     
+    /// The category of the content view.
     var category: Category
     
+    /// The current page.
     var page: Int = 1
     
+    /// The keywords to highlight the interested post.
     var keywords: [String] = []
     
+    /// The posts.
     var posts: [Post] = []
     
-    var isFixedNoticeFolded: Bool = false
+    /// The boolean value indicating whether the upper post is folded.
+    var isUpperPostFolded: Bool = false
     
+    /// The boolean value indicating whether the post request task is in progress.
     var isLoading: Bool = false
     
-    var fixedPosts: [Post] {
-      return posts.filter { $0.number == 0 }
-    }
+    /// The upper posts.
+    var upperPosts: [Post] { return posts.filter { $0.number == 0 } }
     
-    var standardPosts: [Post] {
-      return posts.filter { $0.number != 0 }
-    }
+    /// The standard posts.
+    var standardPosts: [Post] { return posts.filter { $0.number != 0 } }
     
     init(university: UniversityType, category: Category) {
       self.university = university
@@ -85,6 +91,7 @@ final class MainContentTableViewReactor: Reactor {
   
   let initialState: State
   
+  /// The realm service.
   let realmService: RealmServiceType
   
   init(realmService: RealmServiceType = RealmService.shared,
@@ -114,6 +121,7 @@ final class MainContentTableViewReactor: Reactor {
         ])
     case .refresh:
       return Observable.concat([
+        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setLoading(true)),
         requestPosts(.set),
         Observable.just(Mutation.setLoading(false))
@@ -124,8 +132,10 @@ final class MainContentTableViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case .resetPage:
+      state.page = 1
     case let .toggleFolding(isFolded):
-      state.isFixedNoticeFolded = isFolded
+      state.isUpperPostFolded = isFolded
     case let .setPosts(posts):
       state.posts = posts
       state.page += 1
@@ -146,13 +156,10 @@ final class MainContentTableViewReactor: Reactor {
 private extension MainContentTableViewReactor {
   
   func requestPosts(_ type: PostRequstType) -> Observable<Mutation> {
-    return Global.shared.universityModel
-      .flatMap { university -> Observable<[Post]> in
-        return university
-          .requestPosts(inCategory: self.currentState.category,
-                        inPage: self.currentState.page,
-                        searchText: "")
-      }
+    return currentState.university
+      .requestPosts(inCategory: currentState.category,
+                    inPage: currentState.page,
+                    searchText: "")
       .map { posts -> [Post] in
         if posts.first?.title == self.currentState.posts.first?.title {
           return posts.filter { $0.number != 0 }
@@ -166,12 +173,10 @@ private extension MainContentTableViewReactor {
         case .append:
           return Mutation.appendPosts($0)
         }
-      }
-      .take(1)
+    }
   }
   
   func saveBookmark(_ bookmark: Post) -> Observable<Mutation> {
-    return realmService.addBookmark(bookmark)
-      .map { _ in Mutation.saveBookmark(bookmark) }
+    return realmService.addBookmark(bookmark).map { _ in Mutation.saveBookmark(bookmark) }
   }
 }

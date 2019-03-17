@@ -13,92 +13,134 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-/// 검색 뷰 리액터.
+/// The `Reactor` for `SearchViewController`.
 final class SearchViewReactor: Reactor {
   
   enum Action {
     
-    /// 표시됨.
+    /// The action that the view is loaded in memory.
     case viewDidLoad
     
-    /// 검색 텍스트 갱신.
+    /// The action that the user updates the text for searching.
     case updateSearchText(String?)
     
-    /// 검색.
+    /// The action that the user provokes searching.
     case search
     
-    /// 스크롤.
+    /// The action that the user scrolls the table view to load more posts.
     case scroll
+    
+    /// The action that the user interacts with the cell to check more information about the post.
+    case interactWithCell(Post)
   }
   
   enum Mutation {
     
     case viewDidLoad
     
-    /// 검색 텍스트 설정.
+    /// The mutation to set the search text.
     case setSearchText(String?)
     
-    /// 게시물 설정.
+    /// The mutation to set posts.
     case setPosts([Post])
     
-    /// 게시물 추가.
+    /// The mutation to append posts.
     case appendPosts([Post])
+    
+    /// The mutation to set the loading status.
+    case setLoading(Bool)
+    
+    /// The mutation to save bookmark to realm.
+    case saveBookmark(Post)
+    
+    case resetPage
   }
   
   struct State {
     
-    /// 카테고리.
-    var category: Category = ("", "")
+    /// The university.
+    var university: UniversityType
     
-    /// 모든 게시물.
+    /// The category for searching.
+    var category: Category
+    
+    /// The posts.
     var posts: [Post] = []
     
-    /// 현재 페이지.
-    var currentPage: Int = 1
+    /// The current page.
+    var page: Int = 1
     
-    /// 검색 텍스트.
+    /// The text for searching.
     var searchText: String = ""
     
-    /// 씬이 표시된 상태인가.
+    /// The boolean value indicating whether the post request task is in progress.
+    var isLoading: Bool = false
+    
     var isPresented: Bool = false
     
-    /// 검색 상태에 있는가.
-    var isSearching: Bool = false
+    var hasSearched: Bool = false
+    
+    init(university: UniversityType, category: Category) {
+      self.university = university
+      self.category = category
+    }
   }
   
-  /// 초기 상태.
-  let initialState: State = State()
+  let initialState: State
   
   let realmService: RealmServiceType
   
-  init(realmService: RealmServiceType = RealmService.shared) {
+  init(realmService: RealmServiceType = RealmService.shared,
+       university: UniversityType,
+       category: Category) {
     self.realmService = realmService
+    initialState = State(university: university, category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .viewDidLoad:
       return Observable.just(Mutation.viewDidLoad)
+    case let .interactWithCell(post):
+      return saveBookmark(post)
     case let .updateSearchText(text):
       return Observable.just(Mutation.setSearchText(text))
     case .search:
-      return requestPosts().map { Mutation.setPosts($0) }
+      return Observable.concat([
+        Observable.just(Mutation.resetPage),
+        Observable.just(Mutation.setLoading(true)),
+        requestPosts(.set),
+        Observable.just(Mutation.setLoading(false))
+        ])
     case .scroll:
-      return requestPosts().map { Mutation.appendPosts($0) }
+      return Observable.concat([
+        Observable.just(Mutation.setLoading(true)),
+        requestPosts(.append),
+        Observable.just(Mutation.setLoading(false))
+        ])
     }
   }
   
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case .resetPage:
+      state.page = 1
     case .viewDidLoad:
       state.isPresented = true
     case let .setSearchText(text):
       state.searchText = text ?? ""
     case let .setPosts(posts):
       state.posts = posts
+      state.page += 1
+      state.hasSearched = true
     case let .appendPosts(posts):
       state.posts.append(contentsOf: posts)
+      state.page += 1
+    case let .setLoading(isLoading):
+      state.isLoading = isLoading
+    case .saveBookmark:
+      break
     }
     return state
   }
@@ -108,18 +150,23 @@ final class SearchViewReactor: Reactor {
 
 private extension SearchViewReactor {
   
-  func requestPosts() -> Observable<[Post]> {
-    return realmService.fetchUniversity()
-      .map { $0.model }
-      .flatMap { [weak self] universityModel -> Observable<[Post]> in
-        guard let self = self else { return .empty() }
-        return universityModel
-          .requestPosts(inCategory: self.currentState.category,
-                        inPage: self.currentState.currentPage,
-                        searchText: self.currentState.searchText)
-          .map { posts -> [Post] in
-            return posts.filter { $0.number != 0 }
+  func requestPosts(_ type: PostRequstType) -> Observable<Mutation> {
+    return currentState.university
+      .requestPosts(inCategory: currentState.category,
+                    inPage: currentState.page,
+                    searchText: currentState.searchText)
+      .map { $0.filter { $0.number != 0} }
+      .map {
+        switch type {
+        case .set:
+          return Mutation.setPosts($0)
+        case .append:
+          return Mutation.appendPosts($0)
         }
     }
+  }
+  
+  func saveBookmark(_ bookmark: Post) -> Observable<Mutation> {
+    return realmService.addBookmark(bookmark).map { _ in Mutation.saveBookmark(bookmark) }
   }
 }

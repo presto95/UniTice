@@ -15,19 +15,32 @@ import RxDataSources
 import RxSwift
 import SnapKit
 
-/// 검색 뷰 컨트롤러.
+/// The search view controller.
 final class SearchViewController: UIViewController, StoryboardView {
+  
+  // MARK: Typealias
   
   typealias Reactor = SearchViewReactor
   
   typealias DataSource = RxTableViewSectionedReloadDataSource<UTSection>
   
+  // MARK: Property
+  
   var disposeBag: DisposeBag = DisposeBag()
   
-  var dataSource: DataSource!
+  private var dataSource: DataSource!
   
-  private lazy var footerRefreshView
-    = FooterRefreshView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 32))
+  private let cellIdentifier = "postCell"
+  
+  private let headerView = UIView()
+  
+  private let footerRefreshView
+    = FooterLoadingView(frame: CGRect(x: 0,
+                                      y: 0,
+                                      width: UIScreen.main.bounds.width,
+                                      height: 32)).then {
+                                        $0.reactor = FooterLoadingViewReactor()
+  }
   
   private lazy var searchController = UISearchController(searchResultsController: nil).then {
     $0.searchBar.placeholder = "제목"
@@ -38,9 +51,9 @@ final class SearchViewController: UIViewController, StoryboardView {
     return searchController.searchBar
   }
   
-  private let headerView = UIView()
-  
   @IBOutlet private weak var tableView: UITableView!
+  
+  // MARK: Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,33 +66,31 @@ final class SearchViewController: UIViewController, StoryboardView {
   }
   
   func bind(reactor: Reactor) {
-    bindAction(reactor)
-    bindState(reactor)
     bindDataSource()
     bindUI()
-    
-    searchBar.rx.searchButtonClicked
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [weak self] _ in
-        self?.searchController.isActive = false
-      })
-      .disposed(by: disposeBag)
+    bindAction(reactor)
+    bindState(reactor)
   }
   
   private func setup() {
+    guard let reactor = reactor else { return }
+    let currentCategory = reactor.currentState.category
     registerForPreviewing(with: self, sourceView: tableView)
     headerView.bounds.size.height = 48
     let headerLabel = UILabel().then {
       $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+      $0.text = "🔍검색 카테고리 : \(currentCategory.description)"
     }
     headerView.addSubview(headerLabel)
     headerLabel.snp.makeConstraints { $0.center.equalToSuperview() }
-    tableView.backgroundColor = .groupTableViewBackground
-    tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
-    tableView.separatorColor = .main
-    tableView.tableHeaderView = headerView
-    tableView.tableFooterView = footerRefreshView
-    tableView.register(PostCell.self, forCellReuseIdentifier: "postCell")
+    tableView.do {
+      $0.backgroundColor = .groupTableViewBackground
+      $0.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+      $0.separatorColor = .main
+      $0.tableHeaderView = headerView
+      $0.tableFooterView = footerRefreshView
+      $0.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
+    }
     definesPresentationContext = true
     navigationItem.titleView = searchController.searchBar
   }
@@ -102,19 +113,28 @@ private extension SearchViewController {
       .map { Reactor.Action.search }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    tableView.rx.contentOffset.asObservable()
-      .skipUntil(reactor.state.map { $0.isSearching }.filter { $0 })
-      .skipUntil(footerRefreshView.reactor?.state.map { $0.isLoading }.filter { !$0 } ?? .empty())
+    tableView.rx.contentOffset
       .filter { [weak self] offset in
         guard let self = self else { return false }
-        return offset.y > self.tableView.contentSize.height - self.tableView.bounds.height
+        let offsetY = offset.y
+        let contentHeight = self.tableView.contentSize.height
+        return offsetY > contentHeight - self.tableView.bounds.height + 32
       }
+      .filter { _ in reactor.currentState.hasSearched }
+      .filter { _ in !reactor.currentState.isLoading }
       .map { _ in Reactor.Action.scroll }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
   
   func bindState(_ reactor: Reactor) {
+    reactor.state.map { $0.posts }
+      .map { posts -> [UTSection] in
+        let items = posts.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
+        return [.init(items: items)]
+      }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
     reactor.state.map { $0.isPresented }
       .distinctUntilChanged()
       .filter { $0 }
@@ -123,87 +143,11 @@ private extension SearchViewController {
         self?.searchBar.becomeFirstResponder()
       })
       .disposed(by: disposeBag)
-    //    reactor.state.map { $0.posts }
-    //      .map { posts -> [UTSectionData] in
-    //        return posts.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-    //      }
-    //      .map { UTSection(items: $0) }
-    //      .bind(to: tableView.rx.items(dataSource: dataSource))
-    //      .disposed(by: disposeBag)
-    
-  }
-  
-  func bindDataSource() {
-    dataSource = .init(configureCell: { _, tableView, indexPath, data in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-      cell.textLabel?.text = data.title
-      cell.detailTextLabel?.text = data.date
-      return cell
-    })
-  }
-  
-  func bindUI() {
-    tableView.rx.itemSelected
-      .subscribe(onNext: { [weak self] indexPath in
-        self?.tableView.deselectRow(at: indexPath, animated: true)
-      })
+    reactor.state.map { $0.isLoading }
+      .distinctUntilChanged()
+      .map { FooterLoadingViewReactor.Action.loading($0) }
+      .bind(to: footerRefreshView.reactor!.action)
       .disposed(by: disposeBag)
-    tableView.rx.modelSelected(UTSectionData.self)
-      .subscribe(onNext: { [weak self] sectionData in
-        guard let self = self else { return }
-        
-        
-      })
-      .disposed(by: disposeBag)
-  }
-}
-
-//extension SearchViewController: UITableViewDelegate {
-//
-//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    tableView.deselectRow(at: indexPath, animated: true)
-//    let post = posts[indexPath.row]
-//    let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-//    let fullLinkString = fullLink.absoluteString
-//    let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-//    User.insertBookmark(bookmark)
-//    present(safariViewController(url: fullLink), animated: true)
-//  }
-//}
-
-// MARK: - UIViewControllerPreviewingDelegate 구현
-
-extension SearchViewController: UIViewControllerPreviewingDelegate {
-  
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                         viewControllerForLocation location: CGPoint) -> UIViewController? {
-    //    if let indexPath = tableView.indexPathForRow(at: location) {
-    //      let post = reactor?.currentState.posts[indexPath.row]
-    //      let fullLink = universityModel.postURL(inCategory: category, uri: post.link)
-    //      let fullLinkString = fullLink.absoluteString
-    //      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-    //      User.insertBookmark(bookmark)
-    //      return safariViewController(url: fullLink)
-    //    }
-    return nil
-  }
-  
-  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                         commit viewControllerToCommit: UIViewController) {
-    present(viewControllerToCommit, animated: true, completion: nil)
-  }
-}
-
-extension SearchViewController: UISearchBarDelegate {
-  
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    //    DispatchQueue.main.async {
-    //      self.searchController.isActive = false
-    //    }
-    //    posts.removeAll()
-    //    searchButtonHasClicked = true
-    //    searchText = searchBar.text ?? ""
-    //    requestPosts(searchText: searchText)
   }
 }
 
@@ -211,18 +155,87 @@ extension SearchViewController: UISearchBarDelegate {
 
 private extension SearchViewController {
   
-  /// 사파리 뷰 컨트롤러 초기화.
-//  private func makeSafariViewController(url: URL) -> SFSafariViewController {
-//    let config = SFSafariViewController.Configuration().then {
-//      $0.barCollapsingEnabled = true
-//      $0.entersReaderIfAvailable = true
-//    }
-//    let viewController = SFSafariViewController(url: url, configuration: config).then {
-//      $0.preferredBarTintColor = .main
-//      $0.dismissButtonStyle = .close
-//    }
-//    return viewController
-//  }
+  func bindDataSource() {
+    dataSource = .init(configureCell: { _, tableView, indexPath, sectionData in
+      let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
+      if case let postCell as PostCell = cell {
+        postCell.reactor = PostCellReactor(sectionData: sectionData,
+                                           keywords: [])
+      }
+      return cell
+    })
+    tableView.rx.itemSelected
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self, weak reactor] indexPath in
+        guard let self = self, let reactor = reactor else { return }
+        let currentState = reactor.currentState
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        let post = currentState.posts[indexPath.item]
+        let university = currentState.university
+        let category = currentState.category
+        if let fullLink = university.postURL(inCategory: category, uri: post.link) {
+          let fullLinkString = fullLink.absoluteString
+          let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+          Observable.just(Void()).map { Reactor.Action.interactWithCell(bookmark) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+          self.makeSafariViewController(url: fullLink).present(to: self)
+        }
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  func bindUI() {
+    searchBar.rx.searchButtonClicked
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self, weak reactor] _ in
+        guard let self = self, let reactor = reactor else { return }
+        self.searchController.isActive = false
+        let text = reactor.currentState.searchText
+        self.searchBar.text = text
+        Observable.just(text)
+          .map { Reactor.Action.updateSearchText($0) }
+          .bind(to: reactor.action)
+          .disposed(by: self.disposeBag)
+      })
+      .disposed(by: disposeBag)
+    tableView.rx.itemSelected
+      .subscribe(onNext: { [weak self] indexPath in
+        self?.tableView.deselectRow(at: indexPath, animated: true)
+      })
+      .disposed(by: disposeBag)
+  }
+}
+
+// MARK: - UIViewControllerPreviewingDelegate 구현
+
+extension SearchViewController: UIViewControllerPreviewingDelegate {
+  
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         viewControllerForLocation location: CGPoint) -> UIViewController? {
+    guard let reactor = reactor else { return nil }
+    if let indexPath = tableView.indexPathForRow(at: location) {
+      let currentState = reactor.currentState
+      let post = currentState.posts[indexPath.item]
+      let university = currentState.university
+      let category = currentState.category
+      if let fullLink = university.postURL(inCategory: category, uri: post.link) {
+        let fullLinkString = fullLink.absoluteString
+        let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+        Observable.just(Void())
+          .map { Reactor.Action.interactWithCell(bookmark) }
+          .bind(to: reactor.action)
+          .disposed(by: disposeBag)
+        return makeSafariViewController(url: fullLink)
+      }
+    }
+    return nil
+  }
+  
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                         commit viewControllerToCommit: UIViewController) {
+    present(viewControllerToCommit, animated: true, completion: nil)
+  }
 }
 
 extension SearchViewController: SafariViewControllerPresentable { }

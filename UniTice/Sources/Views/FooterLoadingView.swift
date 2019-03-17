@@ -12,17 +12,24 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-final class FooterRefreshView: UIView, View {
+/// The footer loading view used in `MainContentTableViewController` and `SearchViewController`.
+final class FooterLoadingView: UIView, View {
   
-  typealias Reactor = FooterRefreshViewReactor
+  // MARK: Typealias
+  
+  typealias Reactor = FooterLoadingViewReactor
+  
+  // MARK: Property
   
   var disposeBag: DisposeBag = DisposeBag()
   
+  /// The activity indicator appeared if it is in loading.
   private let activityIndicator = UIActivityIndicatorView().then {
     $0.color = .main
     $0.hidesWhenStopped = true
   }
   
+  /// The label appeared if it is not in loading.
   private let textLabel = UILabel().then {
     $0.text = "👆위로 스와이프하여 더 많은 게시물 가져오기✨"
     $0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
@@ -39,7 +46,6 @@ final class FooterRefreshView: UIView, View {
   }
   
   func bind(reactor: Reactor) {
-    bindAction(reactor)
     bindState(reactor)
   }
   
@@ -53,18 +59,14 @@ final class FooterRefreshView: UIView, View {
 
 // MARK: - Reactor Binding
 
-private extension FooterRefreshView {
-  
-  func bindAction(_ reactor: Reactor) {
-    
-  }
-  
+private extension FooterLoadingView {
+
   func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.isLoading }
       .distinctUntilChanged()
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] isLoading in
-        self?.reloadSubviews(isLoading)
+        self?.reloadSubviews(isLoading: isLoading)
       })
       .disposed(by: disposeBag)
   }
@@ -72,16 +74,19 @@ private extension FooterRefreshView {
 
 // MARK: - Private Method
 
-private extension FooterRefreshView {
+private extension FooterLoadingView {
   
-  func reloadSubviews(_ isLoading: Bool) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = isLoading
-    if isLoading {
+  /// Reloads subviews by `loading` status.
+  ///
+  /// - Parameter loading: The boolean value indicating whether the view is in loading.
+  func reloadSubviews(isLoading loading: Bool) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = loading
+    if loading {
       activityIndicator.startAnimating()
     } else {
       activityIndicator.stopAnimating()
     }
-    activityIndicator.isHidden = !isLoading
-    textLabel.isHidden = isLoading
+    activityIndicator.isHidden = !loading
+    textLabel.isHidden = loading
   }
 }

@@ -12,20 +12,24 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-final class FooterRefreshViewReactor: Reactor {
+/// The `Reactor` for `FooterLoadingView`.
+final class FooterLoadingViewReactor: Reactor {
   
   enum Action {
     
+    /// The action that the content table view is in loading.
     case loading(Bool)
   }
   
   enum Mutation {
     
+    /// The mutation to set the loading status.
     case setLoading(Bool)
   }
     
   struct State {
     
+    /// The boolean value indicating whether the content view is loading.
     var isLoading: Bool = false
   }
   
@@ -34,7 +38,7 @@ final class FooterRefreshViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .loading(isLoading):
-      return Observable.just(Mutation.setLoading(isLoading))
+      return .just(.setLoading(isLoading))
     }
   }
   

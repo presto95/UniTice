@@ -12,7 +12,7 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-/// The `Reactor` used by `MainContainerViewController`.
+/// The `Reactor` for `MainContainerViewController`.
 final class MainContainerViewReactor: Reactor {
   
   enum Action {
