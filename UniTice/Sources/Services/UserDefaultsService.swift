@@ -10,6 +10,8 @@ import Foundation
 
 protocol UserDefaultsServiceType: class {
   
+  var defaults: UserDefaults { get }
+  
   var isUpperPostFolded: Bool { get set }
 }
 
@@ -17,13 +19,17 @@ final class UserDefaultsService: UserDefaultsServiceType {
   
   static let shared = UserDefaultsService()
   
+  var defaults: UserDefaults {
+    return UserDefaults.standard
+  }
+  
   var isUpperPostFolded: Bool {
     get {
-      return UserDefaults.standard.value(forKey: "fold") as? Bool ?? false
+      return defaults.value(forKey: "fold") as? Bool ?? false
     }
     set {
-      UserDefaults.standard.set(newValue, forKey: "fold")
-      UserDefaults.standard.synchronize()
+      defaults.set(newValue, forKey: "fold")
+      defaults.synchronize()
     } 
   }
 }

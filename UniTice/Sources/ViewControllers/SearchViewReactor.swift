@@ -153,7 +153,7 @@ private extension SearchViewReactor {
       .requestPosts(inCategory: currentState.category,
                     inPage: currentState.page,
                     searchText: currentState.searchText)
-      .map { $0.filter { $0.number != 0} }
+      .map { $0.filter { $0.number != 0 } }
       .map {
         switch type {
         case .set:

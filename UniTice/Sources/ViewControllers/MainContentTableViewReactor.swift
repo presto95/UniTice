@@ -43,17 +43,22 @@ final class MainContentTableViewReactor: Reactor {
     /// The mutation to append posts.
     case appendPosts([Post])
     
+    /// The mutation to set the refreshing status.
     case setRefreshing(Bool)
     
     /// The mutation to set the loading status.
     case setLoading(Bool)
     
+    /// The mutation to set keywords.
     case setKeywords([String])
     
+    /// The mutation to set the upper post folding status.
     case setUpperPostFoldingStatus(Bool)
     
+    /// The mutation to reset the page.
     case resetPage
     
+    /// The mutation to increment the page.
     case incrementPage
   }
   
@@ -75,8 +80,9 @@ final class MainContentTableViewReactor: Reactor {
     var posts: [Post] = []
     
     /// The boolean value indicating whether the upper post is folded.
-    var isUpperPostFolded: Bool = false
+    var isUpperPostFolded: Bool?
     
+    /// The boolean value indicating whether the table view is refreshing.
     var isRefreshing: Bool = false
     
     /// The boolean value indicating whether the post request task is in progress.
@@ -107,15 +113,12 @@ final class MainContentTableViewReactor: Reactor {
        category: Category) {
     self.realmService = realmService
     self.userDefaultsService = userDefaultsService
-    initialState = .init(university: university, category: category)
+    initialState = .init(university: university,
+                         category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case let .interactWithCell(post):
-      return saveBookmark(post)
-    case let .toggleFolding(isFolded):
-      return Observable.just(Mutation.toggleFolding(isFolded))
     case .viewDidLoad:
       return Observable.concat([
         fetchKeywords(),
@@ -141,6 +144,10 @@ final class MainContentTableViewReactor: Reactor {
         Observable.just(Mutation.incrementPage),
         Observable.just(Mutation.setRefreshing(false))
         ])
+    case let .toggleFolding(isFolded):
+      return Observable.just(Mutation.toggleFolding(isFolded))
+    case let .interactWithCell(post):
+      return saveBookmark(post)
     }
   }
   
@@ -180,7 +187,7 @@ private extension MainContentTableViewReactor {
                     inPage: currentState.page,
                     searchText: "")
       .map { posts -> [Post] in
-        if posts.first?.title == self.currentState.posts.first?.title {
+        if posts.first?.title == self.currentState.upperPosts.first?.title {
           return posts.filter { $0.number != 0 }
         }
         return posts
@@ -205,9 +212,6 @@ private extension MainContentTableViewReactor {
   }
   
   func saveBookmark(_ bookmark: Post) -> Observable<Mutation> {
-    return realmService.addBookmark(bookmark)
-      .flatMap { bookmark -> Observable<Mutation> in
-        return Observable.empty()
-    }
+    return realmService.addBookmark(bookmark).flatMap { _ in Observable.empty() }
   }
 }

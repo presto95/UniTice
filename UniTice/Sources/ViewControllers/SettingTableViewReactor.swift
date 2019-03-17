@@ -22,7 +22,7 @@ final class SettingTableViewReactor: Reactor {
     case fetchNotificationStatus(Bool)
     
     /// The action that the user toggles switch describing the upper post folding status.
-    case toggleUpperPostFoldSwitch
+    case toggleUpperPostFoldingSwitch
   }
   
   enum Mutation {
@@ -34,21 +34,21 @@ final class SettingTableViewReactor: Reactor {
     case setNotificationStatus(Bool)
     
     /// The mutation that toggling upper post folding switch control.
-    case toggleUpperPostFoldSwitch
+    case setUpperPostFoldingStatus
   }
   
   struct State {
     
     /// The section models.
     var sections: [SettingTableViewSection] = [
-      .init(footer: nil, items: ["상단 고정 게시물 펼치기"]),
+      .init(footer: nil, items: ["상단 고정 게시물 접기"]),
       .init(footer: nil, items: ["학교 변경", "키워드 설정", "알림 설정"]),
       .init(footer: nil, items: ["문의하기", "앱 평가하기"]),
       .init(footer: nil, items: ["오픈 소스 라이센스"])
     ]
     
-    /// The boolean value indicating whether the upper post is unfolded.
-    var isUpperPostUnfolded: Bool = false
+    /// The boolean value indicating whether the upper post is folded.
+    var isUpperPostFolded: Bool = false
     
     /// The boolean value indicating whether the user notification permission is granted.
     var isNotificationGranted: Bool = false
@@ -57,13 +57,13 @@ final class SettingTableViewReactor: Reactor {
   let initialState: State = .init()
   
   /// The realm service.
-  let realmService: RealmServiceType
+  private let realmService: RealmServiceType
   
   /// The user defaults service.
-  let userDefaultsService: UserDefaultsServiceType
+  private let userDefaultsService: UserDefaultsServiceType
   
   /// The user notification service.
-  let userNotificationService: UserNotificationServiceType
+  private let userNotificationService: UserNotificationServiceType
   
   init(realmService: RealmServiceType = RealmService.shared,
        userDefaultsService: UserDefaultsServiceType = UserDefaultsService.shared,
@@ -79,8 +79,8 @@ final class SettingTableViewReactor: Reactor {
       return setInitialState()
     case let .fetchNotificationStatus(isGranted):
       return Observable.just(Mutation.setNotificationStatus(isGranted))
-    case .toggleUpperPostFoldSwitch:
-      return Observable.just(Mutation.toggleUpperPostFoldSwitch)
+    case .toggleUpperPostFoldingSwitch:
+      return Observable.just(Mutation.setUpperPostFoldingStatus)
     }
   }
   
@@ -88,7 +88,7 @@ final class SettingTableViewReactor: Reactor {
     var state = state
     switch mutation {
     case let .setInitialFooter(isUpperPostFolded, isNotifictionGranted):
-      state.isUpperPostUnfolded = isUpperPostFolded
+      state.isUpperPostFolded = isUpperPostFolded
       state.isNotificationGranted = isNotifictionGranted
       setSections(state: &state,
                   isUpperPostFolded: isUpperPostFolded,
@@ -96,15 +96,14 @@ final class SettingTableViewReactor: Reactor {
     case let .setNotificationStatus(isGranted):
       state.isNotificationGranted = isGranted
       setSections(state: &state,
-                  isUpperPostFolded: currentState.isUpperPostUnfolded,
+                  isUpperPostFolded: currentState.isUpperPostFolded,
                   isNotificationGranted: isGranted)
-    case .toggleUpperPostFoldSwitch:
-      let changingUpperPostFoldedState = currentState.isUpperPostUnfolded ? false : true
-      state.isUpperPostUnfolded.toggle()
+    case .setUpperPostFoldingStatus:
+      state.isUpperPostFolded.toggle()
       setSections(state: &state,
-                  isUpperPostFolded: changingUpperPostFoldedState,
+                  isUpperPostFolded: state.isUpperPostFolded,
                   isNotificationGranted: currentState.isNotificationGranted)
-      userDefaultsService.isUpperPostFolded = state.isUpperPostUnfolded
+      userDefaultsService.isUpperPostFolded = state.isUpperPostFolded
     }
     return state
   }
@@ -124,13 +123,13 @@ private extension SettingTableViewReactor {
   
   func setSections(state: inout State, isUpperPostFolded: Bool, isNotificationGranted: Bool) {
     let upperPostFooter = isUpperPostFolded
-      ? "상단 고정 게시물이 펼쳐진 상태입니다."
-      : "상단 고정 게시물이 접혀진 상태입니다."
+      ? "상단 고정 게시물이 접혀진 상태입니다."
+      : "상단 고정 게시물이 펼쳐진 상태입니다."
     let notificationFooter = isNotificationGranted
       ? "알림이 활성화되어 있습니다."
       : "알림이 비활성화되어 있습니다."
     state.sections = [
-      .init(footer: upperPostFooter, items: ["상단 고정 게시물 펼치기"]),
+      .init(footer: upperPostFooter, items: ["상단 고정 게시물 접기"]),
       .init(footer: notificationFooter, items: ["학교 변경", "키워드 설정", "알림 설정"]),
       .init(footer: nil, items: ["문의하기", "앱 평가하기"]),
       .init(footer: nil, items: ["오픈 소스 라이센스"])

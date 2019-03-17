@@ -81,6 +81,10 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
 private extension MainContentTableViewController {
   
   func bindAction(_ reactor: Reactor) {
+    Observable.just(Void())
+      .map { Reactor.Action.viewDidLoad }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
     refreshControl?.rx.controlEvent(.valueChanged)
       .map { Reactor.Action.refresh }
       .bind(to: reactor.action)
@@ -104,20 +108,24 @@ private extension MainContentTableViewController {
   }
   
   func bindState(_ reactor: Reactor) {
-    reactor.state.map { $0.posts }
-      .map { posts -> [UTSection] in
-        let fixedPosts = posts
-          .filter { $0.number == 0 }
-          .map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-        let standardPosts = posts
-          .filter { $0.number != 0 }
-          .map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
-        let upperPostSectionItems: [UTSectionData] = reactor.currentState.isUpperPostFolded
-          ? []
-        : fixedPosts
-        return [.init(items: upperPostSectionItems), .init(items: standardPosts)]
+    let upperPosts = reactor.state.map { $0.upperPosts }
+    let standardPosts = reactor.state.map { $0.standardPosts }
+    Observable.combineLatest(upperPosts, standardPosts) { first, second -> [UTSection] in
+      let upperSectionData
+        = first.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
+      let standardSectionData
+        = second.map { UTSectionData(title: $0.title, date: $0.date, link: $0.link) }
+      let isFolded = reactor.currentState.isUpperPostFolded ?? false
+      let upperPostSectionItems: [UTSectionData] = isFolded ? [] : upperSectionData
+      return [.init(items: upperPostSectionItems), .init(items: standardSectionData)]
       }
       .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isUpperPostFolded }
+      .distinctUntilChanged()
+      .filterNil()
+      .map { Reactor.Action.toggleFolding($0) }
+      .bind(to: reactor.action)
       .disposed(by: disposeBag)
     reactor.state.map { $0.isLoading }
       .distinctUntilChanged()
@@ -127,6 +135,19 @@ private extension MainContentTableViewController {
     reactor.state.map { $0.isRefreshing }
       .distinctUntilChanged()
       .bind(to: refreshControl!.rx.isRefreshing)
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.keywords }
+      .subscribe(onNext: { [weak self] keywords in
+        guard let self = self else { return }
+        self.dataSource = .init(configureCell: { _, tableView, indexPath, sectionData in
+          let cell
+            = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
+          if case let postCell as PostCell = cell {
+            postCell.reactor = PostCellReactor(sectionData: sectionData, keywords: keywords)
+          }
+          return cell
+        })
+      })
       .disposed(by: disposeBag)
   }
 }

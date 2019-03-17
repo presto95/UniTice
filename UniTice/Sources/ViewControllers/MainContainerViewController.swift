@@ -142,6 +142,35 @@ private extension MainContainerViewController {
         self?.present(alert, animated: true, completion: nil)
       })
       .disposed(by: disposeBag)
+    reactor.state.map { $0.isViewReloaded }
+      .distinctUntilChanged()
+      .filter { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        let university = Global.shared.universityModel
+        university
+          .map { $0.name }
+          .subscribe(onNext: { [weak self] name in
+            let barButtonItem = self?.makeUniversityBarButtonItem(self?.makeUniversityLabel(name))
+            self?.navigationItem.setLeftBarButton(barButtonItem, animated: false)
+          })
+          .disposed(by: self.disposeBag)
+        university
+          .subscribe(onNext: { [weak self] university in
+            guard let self = self else { return }
+            self.contentViewControllers.removeAll()
+            university.categories.forEach { category in
+              let contentViewController = MainContentTableViewController().then {
+                $0.reactor
+                  = MainContentTableViewReactor(university: university, category: category)
+              }
+              self.contentViewControllers.append(contentViewController)
+            }
+            self.reloadPagerTabStripView()
+          })
+          .disposed(by: self.disposeBag)
+      })
+      .disposed(by: disposeBag)
   }
   
   func bindUI() {

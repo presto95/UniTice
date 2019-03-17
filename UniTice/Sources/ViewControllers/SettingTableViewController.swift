@@ -42,9 +42,9 @@ final class SettingTableViewController: UITableViewController, StoryboardView {
   
   func bind(reactor: Reactor) {
     bindDataSource()
+    bindUI()
     bindAction(reactor)
     bindState(reactor)
-    bindUI()
   }
   
   private func setup() {
@@ -67,7 +67,7 @@ private extension SettingTableViewController {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     upperPostFoldingSwitch.rx.controlEvent(.valueChanged)
-      .map { Reactor.Action.toggleUpperPostFoldSwitch }
+      .map { Reactor.Action.toggleUpperPostFoldingSwitch }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -76,7 +76,8 @@ private extension SettingTableViewController {
     reactor.state.map { $0.sections }
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
-    reactor.state.map { $0.isUpperPostUnfolded }
+    reactor.state.map { $0.isUpperPostFolded }
+      .distinctUntilChanged()
       .bind(to: upperPostFoldingSwitch.rx.isOn)
       .disposed(by: disposeBag)
   }
@@ -93,9 +94,7 @@ private extension SettingTableViewController {
       }
       return cell
     })
-    dataSource.titleForFooterInSection = { dataSource, index in
-      return dataSource[index].footer
-    }
+    dataSource.titleForFooterInSection = { dataSource, index in dataSource[index].footer }
   }
   
   func bindUI() {

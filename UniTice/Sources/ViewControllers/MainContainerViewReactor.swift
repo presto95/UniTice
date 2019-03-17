@@ -38,10 +38,10 @@ final class MainContainerViewReactor: Reactor {
   
   enum Mutation {
     
+    case reloadView(Bool)
+    
     /// The mutation that registers the user notification.
     case registerUserNotification(Bool)
-    
-    case reloadData
     
     /// The mutation that sets up whether the setting scene is presented.
     case presentSetting(Bool)
@@ -54,6 +54,8 @@ final class MainContainerViewReactor: Reactor {
   }
   
   struct State {
+    
+    var isViewReloaded: Bool = false
     
     /// The boolean value indicating whether the user notification has registered.
     var isUserNotificationRegistered: Bool?
@@ -83,7 +85,10 @@ final class MainContainerViewReactor: Reactor {
         .registerUserNotification()
         .map { Mutation.registerUserNotification($0) }
     case .viewWillAppear:
-      return Observable.just(Mutation.reloadData)
+      return Observable.concat([
+        Observable.just(Mutation.reloadView(true)),
+        Observable.just(Mutation.reloadView(false))
+        ])
     case .viewDidAppear:
       return presentRatingAlertInRandom()
     case .setting:
@@ -107,10 +112,10 @@ final class MainContainerViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case let .reloadView(isReloaded):
+      state.isViewReloaded = isReloaded
     case let .registerUserNotification(isRegistered):
       state.isUserNotificationRegistered = isRegistered
-    case .reloadData:
-      break
     case let .presentSetting(isTapped):
       state.isSettingButtonTapped = isTapped
     case let .presentSearch(isTapped):

@@ -40,9 +40,9 @@ final class PostCell: UITableViewCell, View {
   }
 
   func bind(reactor: Reactor) {
-    textLabel?.attributedText
-      = reactor.currentState.sectionData.title.highlightKeywords(reactor.currentState.keywords)
-    detailTextLabel?.text = reactor.currentState.sectionData.date
+    let sectionData = reactor.currentState.sectionData
+    textLabel?.attributedText = sectionData.title.highlightKeywords(reactor.currentState.keywords)
+    detailTextLabel?.text = sectionData.date
   }
   
   private func setup() {
