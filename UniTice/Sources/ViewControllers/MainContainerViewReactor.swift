@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import StoreKit
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// The `Reactor` for `MainContainerViewController`.
@@ -22,6 +22,9 @@ final class MainContainerViewReactor: Reactor {
     
     /// The action that the view will appear.
     case viewWillAppear
+    
+    /// The action that the view has appeared.
+    case viewDidAppear
     
     /// The action that the user taps the setting bar button item.
     case setting
@@ -65,7 +68,7 @@ final class MainContainerViewReactor: Reactor {
     var isBookmarkButtonTapped: Bool = false
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   private let userNotificationService: UserNotificationServiceType
   
@@ -81,6 +84,8 @@ final class MainContainerViewReactor: Reactor {
         .map { Mutation.registerUserNotification($0) }
     case .viewWillAppear:
       return Observable.just(Mutation.reloadData)
+    case .viewDidAppear:
+      return presentRatingAlertInRandom()
     case .setting:
       return Observable.concat([
         Observable.just(Mutation.presentSetting(true)),
@@ -114,5 +119,17 @@ final class MainContainerViewReactor: Reactor {
       state.isBookmarkButtonTapped = isTapped
     }
     return state
+  }
+}
+
+// MARK: - Private Method
+
+private extension MainContainerViewReactor {
+  
+  func presentRatingAlertInRandom() -> Observable<Mutation> {
+    if Int.random(in: 1...10) == 1 {
+      SKStoreReviewController.requestReview()
+    }
+    return Observable.empty()
   }
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// The `Reactor` for `KeywordSettingViewController`.
@@ -60,7 +59,7 @@ final class KeywordSettingViewReactor: Reactor {
     var isAlertPresenting: Bool = false
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   /// The realm service.
   private let realmService: RealmServiceType

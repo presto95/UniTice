@@ -9,8 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
-import RxDataSources
 import RxSwift
 
 /// The `Reactor` for `MainContentTableViewController`.
@@ -45,17 +43,18 @@ final class MainContentTableViewReactor: Reactor {
     /// The mutation to append posts.
     case appendPosts([Post])
     
+    case setRefreshing(Bool)
+    
     /// The mutation to set the loading status.
     case setLoading(Bool)
-    
-    /// The mutation to save bookmark to realm.
-    case saveBookmark(Post)
     
     case setKeywords([String])
     
     case setUpperPostFoldingStatus(Bool)
     
     case resetPage
+    
+    case incrementPage
   }
   
   struct State {
@@ -77,6 +76,8 @@ final class MainContentTableViewReactor: Reactor {
     
     /// The boolean value indicating whether the upper post is folded.
     var isUpperPostFolded: Bool = false
+    
+    var isRefreshing: Bool = false
     
     /// The boolean value indicating whether the post request task is in progress.
     var isLoading: Bool = false
@@ -106,7 +107,7 @@ final class MainContentTableViewReactor: Reactor {
        category: Category) {
     self.realmService = realmService
     self.userDefaultsService = userDefaultsService
-    initialState = State(university: university, category: category)
+    initialState = .init(university: university, category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -119,22 +120,26 @@ final class MainContentTableViewReactor: Reactor {
       return Observable.concat([
         fetchKeywords(),
         fetchUpperPostFoldingStatus(),
+        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setLoading(true)),
         requestPosts(.set),
+        Observable.just(Mutation.incrementPage),
         Observable.just(Mutation.setLoading(false))
         ])
     case .scroll:
       return Observable.concat([
         Observable.just(Mutation.setLoading(true)),
         requestPosts(.append),
+        Observable.just(Mutation.incrementPage),
         Observable.just(Mutation.setLoading(false))
         ])
     case .refresh:
       return Observable.concat([
         Observable.just(Mutation.resetPage),
-        Observable.just(Mutation.setLoading(true)),
+        Observable.just(Mutation.setRefreshing(true)),
         requestPosts(.set),
-        Observable.just(Mutation.setLoading(false))
+        Observable.just(Mutation.incrementPage),
+        Observable.just(Mutation.setRefreshing(false))
         ])
     }
   }
@@ -142,24 +147,24 @@ final class MainContentTableViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case let .setRefreshing(isRefreshing):
+      state.isRefreshing = isRefreshing
     case .resetPage:
       state.page = 1
+    case .incrementPage:
+      state.page += 1
     case let .toggleFolding(isFolded):
       state.isUpperPostFolded = isFolded
     case let .setPosts(posts):
       state.posts = posts
-      state.page += 1
     case let .appendPosts(posts):
       state.posts.append(contentsOf: posts)
-      state.page += 1
     case let .setLoading(isLoading):
       state.isLoading = isLoading
     case let .setKeywords(keywords):
       state.keywords = keywords
     case let .setUpperPostFoldingStatus(isFolded):
       state.isUpperPostFolded = isFolded
-    case .saveBookmark:
-      break
     }
     return state
   }
@@ -200,6 +205,9 @@ private extension MainContentTableViewReactor {
   }
   
   func saveBookmark(_ bookmark: Post) -> Observable<Mutation> {
-    return realmService.addBookmark(bookmark).map { _ in Mutation.saveBookmark(bookmark) }
+    return realmService.addBookmark(bookmark)
+      .flatMap { bookmark -> Observable<Mutation> in
+        return Observable.empty()
+    }
   }
 }

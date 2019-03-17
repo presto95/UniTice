@@ -6,7 +6,6 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
-import SafariServices
 import UIKit
 
 import ReactorKit

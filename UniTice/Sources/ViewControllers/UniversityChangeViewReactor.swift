@@ -9,10 +9,9 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
-/// 설정 대학교 변경 뷰 리액터.
+/// The `Reactor` for `UniversityChangeViewController`.
 final class UniversityChangeViewReactor: Reactor {
   
   enum Action {
@@ -43,7 +42,7 @@ final class UniversityChangeViewReactor: Reactor {
   }
   
   /// 초기 상태.
-  let initialState: State = State()
+  let initialState: State = .init()
   
   /// 데이터 보존 서비스.
   let realmService: RealmServiceType

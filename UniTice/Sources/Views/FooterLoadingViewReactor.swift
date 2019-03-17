@@ -9,7 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// The `Reactor` for `FooterLoadingView`.
@@ -33,7 +32,7 @@ final class FooterLoadingViewReactor: Reactor {
     var isLoading: Bool = false
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {

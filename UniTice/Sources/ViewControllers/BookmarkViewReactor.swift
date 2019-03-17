@@ -9,8 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
-import RxDataSources
 import RxSwift
 
 /// The `Reactor` for `BookmarkViewController`.
@@ -43,7 +41,7 @@ final class BookmarkViewReactor: Reactor {
     var bookmarks: [Bookmark] = []
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   /// The realm service.
   private let realmService: RealmServiceType
@@ -55,8 +53,9 @@ final class BookmarkViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .viewDidLoad:
-      return Observable.zip(realmService.fetchBookmarks(), realmService.fetchKeywords()) {
-        Mutation.initialize($0, $1)
+      return Observable
+        .combineLatest(realmService.fetchBookmarks(), realmService.fetchKeywords()) {
+          Mutation.initialize($0, $1)
       }
     case let .deleteBookmark(item):
       return realmService.removeBookmark(at: item).map { Mutation.deleteBookmark(index: item) }
@@ -67,7 +66,8 @@ final class BookmarkViewReactor: Reactor {
     var state = state
     switch mutation {
     case let .initialize(bookmarks, keywords):
-      (state.bookmarks, state.keywords) = (bookmarks, keywords)
+      state.bookmarks = bookmarks
+      state.keywords = keywords
     case let .deleteBookmark(item):
       state.bookmarks.remove(at: item)
     }

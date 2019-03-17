@@ -6,8 +6,9 @@
 //  Copyright © 2019 presto. All rights reserved.
 //
 
+import Foundation
+
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 final class KeywordRegisterViewReactor: Reactor {
@@ -49,7 +50,7 @@ final class KeywordRegisterViewReactor: Reactor {
     var isBackButtonSelected: Bool = false
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {

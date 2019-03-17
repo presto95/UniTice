@@ -6,8 +6,9 @@
 //  Copyright © 2019 presto. All rights reserved.
 //
 
+import Foundation
+
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// The `Reactor` for `FinishViewController`.
@@ -43,7 +44,7 @@ final class FinishViewReactor: Reactor {
     var isBackButtonTapped: Bool = false
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   /// The realm service.
   private let realmService: RealmServiceType

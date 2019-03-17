@@ -9,8 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
-import RxDataSources
 import RxSwift
 
 /// The `Reactor` for `SearchViewController`.
@@ -94,7 +92,7 @@ final class SearchViewReactor: Reactor {
        university: UniversityType,
        category: Category) {
     self.realmService = realmService
-    initialState = State(university: university, category: category)
+    initialState = .init(university: university, category: category)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {

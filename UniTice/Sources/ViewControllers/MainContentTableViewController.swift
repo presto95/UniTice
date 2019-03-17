@@ -6,7 +6,6 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
-import SafariServices
 import UIKit
 
 import ReactorKit
@@ -51,8 +50,9 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
   override func viewDidLoad() {
     tableView.delegate = nil
     tableView.dataSource = nil
-    super.viewDidLoad()
     setup()
+    super.viewDidLoad()
+    //setup()
   }
   
   func bind(reactor: Reactor) {
@@ -123,6 +123,10 @@ private extension MainContentTableViewController {
       .distinctUntilChanged()
       .map { FooterLoadingViewReactor.Action.loading($0) }
       .bind(to: footerRefreshView.reactor!.action)
+      .disposed(by: disposeBag)
+    reactor.state.map { $0.isRefreshing }
+      .distinctUntilChanged()
+      .bind(to: refreshControl!.rx.isRefreshing)
       .disposed(by: disposeBag)
   }
 }

@@ -9,9 +9,9 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
+/// The `Reactor` for `PostCell`.
 final class PostCellReactor: Reactor {
   
   typealias Action = NoAction
@@ -20,14 +20,16 @@ final class PostCellReactor: Reactor {
   
   struct State {
     
+    /// The section data to present.
     var sectionData: UTSectionData
     
+    /// The keywords.
     var keywords: [String]
   }
   
   let initialState: State
   
   init(sectionData: UTSectionData, keywords: [String]) {
-    initialState = State(sectionData: sectionData, keywords: keywords)
+    initialState = .init(sectionData: sectionData, keywords: keywords)
   }
 }

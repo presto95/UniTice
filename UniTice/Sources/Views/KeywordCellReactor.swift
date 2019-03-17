@@ -9,7 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// The `Reactor` for `KeywordCell`.

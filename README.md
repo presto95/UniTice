@@ -3,21 +3,21 @@
 ![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 
-## 다연결 | 대학교 공지사항 알리미
+# 다연결 | 대학교 공지사항 알리미
 
-### 프로젝트 기간
+## 프로젝트 기간
 
 2018.12 ~ 현재
 
-### 제공하는 기능
+## 제공하는 기능
 
 - 학교별 공지 확인
 - 키워드 하이라이팅
 - ~~키워드 푸시 알림~~ 준비중
 
-### 사용하는 라이브러리
+## 사용하는 라이브러리
 
-#### Rx
+### Rx
 
 - ReactorKit
 - RxCocoa
@@ -26,7 +26,7 @@
 - RxOptional
 - RxSwift
 
-#### 기타
+### 기타
 
 - Carte
 - Firebase/Core
@@ -36,7 +36,7 @@
 - Then
 - XLPagerTabStrip
 
-### 지원 대학교
+## 지원 대학교
 
 **A**
 

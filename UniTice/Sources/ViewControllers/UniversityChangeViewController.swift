@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-/// 설정 대학교 변경 뷰 컨트롤러.
+/// The university change view controller.
 final class UniversityChangeViewController: UIViewController, StoryboardView {
   
   // MARK: Typealias
@@ -27,6 +27,8 @@ final class UniversityChangeViewController: UIViewController, StoryboardView {
   @IBOutlet private weak var pickerView: UIPickerView!
   
   @IBOutlet private weak var confirmButton: UTButton!
+  
+  // MARK: Method
   
   override func viewDidLoad() {
     super.viewDidLoad()

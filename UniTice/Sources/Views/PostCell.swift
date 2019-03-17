@@ -12,7 +12,10 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
+/// The post cell.
 final class PostCell: UITableViewCell, View {
+  
+  // MARK: Typealias
   
   typealias Reactor = PostCellReactor
   
@@ -22,6 +25,8 @@ final class PostCell: UITableViewCell, View {
     
     static let detailText = UIFont.systemFont(ofSize: 13, weight: .light)
   }
+  
+  // MARK: Property
   
   var disposeBag: DisposeBag = DisposeBag()
 

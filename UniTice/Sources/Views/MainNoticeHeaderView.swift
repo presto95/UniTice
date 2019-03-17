@@ -38,8 +38,10 @@ final class MainNoticeHeaderView: UIView, StoryboardView {
   }
   
   private func setup() {
-    foldButton.setTitle(nil, for: [])
-    foldButton.imageView?.contentMode = .scaleAspectFit
+    foldButton.do {
+      $0.setTitle(nil, for: [])
+      $0.imageView?.contentMode = .scaleAspectFit
+    }
   }
 }
 
@@ -57,10 +59,8 @@ private extension MainNoticeHeaderView {
   func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.isUpperPostFolded }
       .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] isFolded in
-        let image = isFolded ? Asset.arrowDown.image : Asset.arrowUp.image
-        self?.foldButton.setImage(image, for: [])
-      })
+      .map { $0 ? Asset.arrowDown.image : Asset.arrowUp.image }
+      .bind(to: foldButton.rx.image())
       .disposed(by: disposeBag)
   }
 }

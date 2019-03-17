@@ -9,7 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxOptional
 import RxSwift
 
@@ -44,7 +43,7 @@ final class KeywordRegisterHeaderViewReactor: Reactor {
     var keywords: [String] = []
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {

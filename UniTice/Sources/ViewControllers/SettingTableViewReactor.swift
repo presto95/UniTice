@@ -9,7 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// The `Reactor` of `SettingTableViewController`.
@@ -55,7 +54,7 @@ final class SettingTableViewReactor: Reactor {
     var isNotificationGranted: Bool = false
   }
   
-  let initialState: State = State()
+  let initialState: State = .init()
   
   /// The realm service.
   let realmService: RealmServiceType

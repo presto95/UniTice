@@ -6,9 +6,7 @@
 //  Copyright © 2018 presto. All rights reserved.
 //
 
-import StoreKit
 import UIKit
-import UserNotifications
 
 import ReactorKit
 import RxCocoa
@@ -53,7 +51,11 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    presentRatingAlertInRandom()
+    guard let reactor = reactor else { return }
+    Observable.just(Void())
+      .map { Reactor.Action.viewDidAppear }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
   
   override func viewControllers(
@@ -191,12 +193,6 @@ private extension MainContainerViewController {
   func makeUniversityBarButtonItem(_ label: UILabel?) -> UIBarButtonItem? {
     return UIBarButtonItem().then {
       $0.customView = label
-    }
-  }
-  
-  func presentRatingAlertInRandom() {
-    if Int.random(in: 1...10) == 5 {
-      SKStoreReviewController.requestReview()
     }
   }
 }

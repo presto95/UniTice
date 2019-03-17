@@ -6,8 +6,9 @@
 //  Copyright © 2019 presto. All rights reserved.
 //
 
+import Foundation
+
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// 초기 대학교 설정 뷰 리액터.
@@ -50,7 +51,7 @@ final class UniversitySelectionViewReactor: Reactor {
   }
   
   /// 초기 상태.
-  let initialState: State = State()
+  let initialState: State = .init()
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {

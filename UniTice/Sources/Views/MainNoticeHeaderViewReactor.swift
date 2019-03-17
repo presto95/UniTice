@@ -9,7 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxCocoa
 import RxSwift
 
 /// The `Reactor` for `MainNoticeHeaderView`.
@@ -17,11 +16,13 @@ final class MainNoticeHeaderViewReactor: Reactor {
   
   enum Action {
     
+    /// The action that the user toggles the fold button.
     case toggleFolding
   }
   
   enum Mutation {
     
+    /// The mutation to toggle the folding status.
     case toggleFolding
   }
   
@@ -33,11 +34,12 @@ final class MainNoticeHeaderViewReactor: Reactor {
   
   let initialState: State
   
-  let userDefaultsService: UserDefaultsServiceType
+  /// The user defaults service.
+  private let userDefaultsService: UserDefaultsServiceType
   
   init(userDefaultsService: UserDefaultsServiceType = UserDefaultsService.shared) {
     self.userDefaultsService = userDefaultsService
-    initialState = State(isUpperPostFolded: userDefaultsService.isUpperPostFolded)
+    initialState = .init(isUpperPostFolded: userDefaultsService.isUpperPostFolded)
   }
   
   func mutate(action: Action) -> Observable<Mutation> {
