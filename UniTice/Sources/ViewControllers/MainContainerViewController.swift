@@ -12,6 +12,7 @@ import UserNotifications
 
 import ReactorKit
 import RxCocoa
+import RxOptional
 import RxSwift
 import XLPagerTabStrip
 
@@ -39,7 +40,6 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   override func viewDidLoad() {
     setupButtonBar()
     super.viewDidLoad()
-    setup()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -67,10 +67,6 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
     bindAction(reactor)
     bindState(reactor)
   }
-  
-  private func setup() {
-    registerLocalNotification()
-  }
 }
 
 // MARK: - Reactor Binding
@@ -78,6 +74,10 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
 private extension MainContainerViewController {
   
   func bindAction(_ reactor: Reactor) {
+    Observable.just(Void())
+      .map { Reactor.Action.viewDidLoad }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
     settingButtonItem.rx.tap
       .map { Reactor.Action.setting }
       .bind(to: reactor.action)
@@ -129,6 +129,17 @@ private extension MainContainerViewController {
         controller.push(at: self)
       })
       .disposed(by: disposeBag)
+    reactor.state.map { $0.isUserNotificationRegistered }
+      .distinctUntilChanged()
+      .filterNil()
+      .filter { !$0 }
+      .subscribe(onNext: { [weak self] _ in
+        let alert = UIAlertController
+          .alert(title: "", message: "알림을 받을 수 없습니다.\n설정에서 알림 권한을 설정할 수 있습니다.")
+          .action(title: "확인")
+        self?.present(alert, animated: true, completion: nil)
+      })
+      .disposed(by: disposeBag)
   }
   
   func bindUI() {
@@ -160,6 +171,15 @@ private extension MainContainerViewController {
 
 private extension MainContainerViewController {
   
+  func setupButtonBar() {
+    settings.style.selectedBarHeight = 5
+    settings.style.selectedBarBackgroundColor = .main
+    settings.style.buttonBarBackgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+    settings.style.buttonBarItemBackgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+    settings.style.buttonBarItemTitleColor = .black
+    settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
+  }
+  
   func makeUniversityLabel(_ name: String?) -> UILabel? {
     return UILabel().then {
       $0.text = name
@@ -171,49 +191,6 @@ private extension MainContainerViewController {
   func makeUniversityBarButtonItem(_ label: UILabel?) -> UIBarButtonItem? {
     return UIBarButtonItem().then {
       $0.customView = label
-    }
-  }
-  
-  func setupButtonBar() {
-    settings.style.selectedBarHeight = 5
-    settings.style.selectedBarBackgroundColor = .main
-    settings.style.buttonBarBackgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
-    settings.style.buttonBarItemBackgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
-    settings.style.buttonBarItemTitleColor = .black
-    settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
-  }
-  
-  func registerLocalNotification() {
-    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-    UNUserNotificationCenter.current()
-      .requestAuthorization(options: authOptions) { isGranted, error in
-        if let error = error {
-          errorLog(error.localizedDescription)
-          return
-        }
-        if !UserDefaults.standard.bool(forKey: "showsAlertIfPermissionDenied") {
-          let content = UNMutableNotificationContent().then {
-            $0.title = ""
-            $0.body = "오늘은 무슨 공지사항이 새로 올라왔을까요? 확인해 보세요."
-          }
-          var dateComponents = DateComponents()
-          dateComponents.hour = 9
-          dateComponents.minute = 0
-          let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-          let request = UNNotificationRequest(identifier: "localNotification",
-                                              content: content,
-                                              trigger: trigger)
-          UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            errorLog(error?.localizedDescription ?? "")
-          })
-          if !isGranted {
-            UIAlertController
-              .alert(title: "", message: "알림을 받을 수 없습니다.\n설정에서 알림 권한을 설정할 수 있습니다.")
-              .action(title: "확인")
-              .present(to: self)
-          }
-        }
-        UserDefaults.standard.set(true, forKey: "showsAlertIfPermissionDenied")
     }
   }
   

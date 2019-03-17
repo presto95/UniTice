@@ -51,6 +51,10 @@ final class MainContentTableViewReactor: Reactor {
     /// The mutation to save bookmark to realm.
     case saveBookmark(Post)
     
+    case setKeywords([String])
+    
+    case setUpperPostFoldingStatus(Bool)
+    
     case resetPage
   }
   
@@ -94,10 +98,14 @@ final class MainContentTableViewReactor: Reactor {
   /// The realm service.
   let realmService: RealmServiceType
   
+  let userDefaultsService: UserDefaultsServiceType
+  
   init(realmService: RealmServiceType = RealmService.shared,
+       userDefaultsService: UserDefaultsServiceType = UserDefaultsService.shared,
        university: UniversityType,
        category: Category) {
     self.realmService = realmService
+    self.userDefaultsService = userDefaultsService
     initialState = State(university: university, category: category)
   }
   
@@ -109,6 +117,8 @@ final class MainContentTableViewReactor: Reactor {
       return Observable.just(Mutation.toggleFolding(isFolded))
     case .viewDidLoad:
       return Observable.concat([
+        fetchKeywords(),
+        fetchUpperPostFoldingStatus(),
         Observable.just(Mutation.setLoading(true)),
         requestPosts(.set),
         Observable.just(Mutation.setLoading(false))
@@ -144,6 +154,10 @@ final class MainContentTableViewReactor: Reactor {
       state.page += 1
     case let .setLoading(isLoading):
       state.isLoading = isLoading
+    case let .setKeywords(keywords):
+      state.keywords = keywords
+    case let .setUpperPostFoldingStatus(isFolded):
+      state.isUpperPostFolded = isFolded
     case .saveBookmark:
       break
     }
@@ -174,6 +188,15 @@ private extension MainContentTableViewReactor {
           return Mutation.appendPosts($0)
         }
     }
+  }
+  
+  func fetchKeywords() -> Observable<Mutation> {
+    return realmService.fetchKeywords().map { Mutation.setKeywords($0) }
+  }
+  
+  func fetchUpperPostFoldingStatus() -> Observable<Mutation> {
+    return Observable
+      .just(Mutation.setUpperPostFoldingStatus(userDefaultsService.isUpperPostFolded))
   }
   
   func saveBookmark(_ bookmark: Post) -> Observable<Mutation> {

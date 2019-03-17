@@ -17,6 +17,10 @@ final class MainContainerViewReactor: Reactor {
   
   enum Action {
     
+    /// The action that the view is loaded in memory.
+    case viewDidLoad
+    
+    /// The action that the view will appear.
     case viewWillAppear
     
     /// The action that the user taps the setting bar button item.
@@ -30,6 +34,9 @@ final class MainContainerViewReactor: Reactor {
   }
   
   enum Mutation {
+    
+    /// The mutation that registers the user notification.
+    case registerUserNotification(Bool)
     
     case reloadData
     
@@ -45,20 +52,33 @@ final class MainContainerViewReactor: Reactor {
   
   struct State {
     
+    /// The boolean value indicating whether the user notification has registered.
+    var isUserNotificationRegistered: Bool?
+    
     /// The boolean value indicating whether the setting bar button item is tapped.
-    var isSettingButtonTapped = false
+    var isSettingButtonTapped: Bool = false
     
     /// The boolean value indicating whether the search bar button item is tapped.
-    var isSearchButtonTapped = false
+    var isSearchButtonTapped: Bool = false
     
     /// The boolean value indicating whether the bookmark bar button item is tapped.
-    var isBookmarkButtonTapped = false
+    var isBookmarkButtonTapped: Bool = false
   }
   
   let initialState: State = State()
   
+  private let userNotificationService: UserNotificationServiceType
+  
+  init(userNotificationService: UserNotificationServiceType = UserNotificationService.shared) {
+    self.userNotificationService = userNotificationService
+  }
+  
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+    case .viewDidLoad:
+      return userNotificationService
+        .registerUserNotification()
+        .map { Mutation.registerUserNotification($0) }
     case .viewWillAppear:
       return Observable.just(Mutation.reloadData)
     case .setting:
@@ -82,6 +102,8 @@ final class MainContainerViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
+    case let .registerUserNotification(isRegistered):
+      state.isUserNotificationRegistered = isRegistered
     case .reloadData:
       break
     case let .presentSetting(isTapped):
