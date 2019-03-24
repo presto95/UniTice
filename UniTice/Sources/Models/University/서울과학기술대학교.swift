@@ -39,7 +39,6 @@ struct 서울과학기술대학교: UniversityType {
   func requestPosts(inCategory category: Category, inPage page: Int, searchText text: String) -> Observable<[Post]> {
     guard let url = pageURL(inCategory: category, inPage: page, searchText: text)
       else { return .empty() }
-    debugLog(url.absoluteString)
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in

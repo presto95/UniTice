@@ -25,7 +25,7 @@ extension String {
               ], range: match.range)
           }
         } catch {
-          print(error.localizedDescription)
+          errorLog(error.localizedDescription)
         }
       }
     }
