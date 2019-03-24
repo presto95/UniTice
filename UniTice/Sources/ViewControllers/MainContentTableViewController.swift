@@ -52,7 +52,6 @@ final class MainContentTableViewController: UITableViewController, StoryboardVie
     tableView.dataSource = nil
     setup()
     super.viewDidLoad()
-    //setup()
   }
   
   func bind(reactor: Reactor) {
@@ -85,19 +84,19 @@ private extension MainContentTableViewController {
       .map { Reactor.Action.viewDidLoad }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    refreshControl?.rx.controlEvent(.valueChanged)
-      .map { Reactor.Action.refresh }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-    tableView.rx.contentOffset
+    tableView.rx.swipeGesture(.up)
+      .withLatestFrom(tableView.rx.contentOffset)
       .filter { [weak self] offset in
         guard let self = self else { return false }
         let offsetY = offset.y
         let contentHeight = self.tableView.contentSize.height
-        return offsetY > contentHeight - self.tableView.bounds.height + 32
+        return offsetY > contentHeight - self.tableView.bounds.height
       }
-      .filter { _ in !reactor.currentState.isLoading }
       .map { _ in Reactor.Action.scroll }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    refreshControl?.rx.controlEvent(.valueChanged)
+      .map { Reactor.Action.refresh }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     headerView?.reactor?.state.map { $0.isUpperPostFolded }

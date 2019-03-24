@@ -88,13 +88,13 @@
                     <navigationItem key="navigationItem" id="RO6-cF-u9F">
                         <barButtonItem key="backBarButtonItem" title=" " id="MWm-im-XVR"/>
                         <rightBarButtonItems>
-                            <barButtonItem title="북마크" id="LlO-HG-yCY">
+                            <barButtonItem systemItem="bookmarks" id="LlO-HG-yCY">
                                 <connections>
                                     <segue destination="JR4-4h-2fV" kind="show" id="qf1-9G-nV4"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="검색" id="R24-Z8-hF6"/>
-                            <barButtonItem title="설정" id="vs6-F7-N0u">
+                            <barButtonItem systemItem="search" id="R24-Z8-hF6"/>
+                            <barButtonItem image="setting" id="vs6-F7-N0u">
                                 <connections>
                                     <segue destination="aYK-Cs-m6d" kind="show" id="fzD-Ej-XLU"/>
                                 </connections>
@@ -202,4 +202,7 @@
             <point key="canvasLocation" x="2784.8000000000002" y="133.00492610837438"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="setting" width="50" height="50"/>
+    </resources>
 </document>

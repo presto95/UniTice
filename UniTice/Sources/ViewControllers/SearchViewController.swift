@@ -112,12 +112,13 @@ private extension SearchViewController {
       .map { Reactor.Action.search }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    tableView.rx.contentOffset
+    tableView.rx.swipeGesture(.up)
+      .withLatestFrom(tableView.rx.contentOffset)
       .filter { [weak self] offset in
         guard let self = self else { return false }
         let offsetY = offset.y
         let contentHeight = self.tableView.contentSize.height
-        return offsetY > contentHeight - self.tableView.bounds.height + 32
+        return offsetY > contentHeight - self.tableView.bounds.height
       }
       .filter { _ in reactor.currentState.hasSearched }
       .filter { _ in !reactor.currentState.isLoading }

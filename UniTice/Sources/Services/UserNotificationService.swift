@@ -53,7 +53,7 @@ final class UserNotificationService: UserNotificationServiceType {
               $0.body = "오늘은 무슨 공지사항이 새로 올라왔을까요? 확인해 보세요."
             }
             var dateComponents = DateComponents()
-            dateComponents.hour = 0
+            dateComponents.hour = 9
             dateComponents.minute = 0
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents,
                                                         repeats: true)

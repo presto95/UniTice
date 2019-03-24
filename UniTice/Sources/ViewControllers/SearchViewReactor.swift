@@ -34,6 +34,7 @@ final class SearchViewReactor: Reactor {
   
   enum Mutation {
     
+    /// The mutation to set the initial state.
     case viewDidLoad
     
     /// The mutation to set the search text.
@@ -51,7 +52,11 @@ final class SearchViewReactor: Reactor {
     /// The mutation to save bookmark to realm.
     case saveBookmark(Post)
     
+    /// The mutation to reset the page.
     case resetPage
+    
+    /// The mutation to increment the page.
+    case incrementPage
   }
   
   struct State {
@@ -74,6 +79,7 @@ final class SearchViewReactor: Reactor {
     /// The boolean value indicating whether the post request task is in progress.
     var isLoading: Bool = false
     
+    /// The boolean value indicating whether the view is presented.
     var isPresented: Bool = false
     
     var hasSearched: Bool = false
@@ -86,6 +92,7 @@ final class SearchViewReactor: Reactor {
   
   let initialState: State
   
+  /// The realm service.
   let realmService: RealmServiceType
   
   init(realmService: RealmServiceType = RealmService.shared,
@@ -105,15 +112,16 @@ final class SearchViewReactor: Reactor {
       return Observable.just(Mutation.setSearchText(text))
     case .search:
       return Observable.concat([
-        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setLoading(true)),
-        requestPosts(.set),
+        requestPosts(byType: .set, inPage: 1),
+        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setLoading(false))
         ])
     case .scroll:
       return Observable.concat([
         Observable.just(Mutation.setLoading(true)),
-        requestPosts(.append),
+        requestPosts(byType: .append, inPage: currentState.page + 1),
+        Observable.just(Mutation.incrementPage),
         Observable.just(Mutation.setLoading(false))
         ])
     }
@@ -124,17 +132,17 @@ final class SearchViewReactor: Reactor {
     switch mutation {
     case .resetPage:
       state.page = 1
+    case .incrementPage:
+      state.page += 1
     case .viewDidLoad:
       state.isPresented = true
     case let .setSearchText(text):
       state.searchText = text ?? ""
     case let .setPosts(posts):
       state.posts = posts
-      state.page += 1
       state.hasSearched = true
     case let .appendPosts(posts):
       state.posts.append(contentsOf: posts)
-      state.page += 1
     case let .setLoading(isLoading):
       state.isLoading = isLoading
     case .saveBookmark:
@@ -148,10 +156,10 @@ final class SearchViewReactor: Reactor {
 
 private extension SearchViewReactor {
   
-  func requestPosts(_ type: PostRequstType) -> Observable<Mutation> {
+  func requestPosts(byType type: PostRequstType, inPage page: Int) -> Observable<Mutation> {
     return currentState.university
       .requestPosts(inCategory: currentState.category,
-                    inPage: currentState.page,
+                    inPage: page,
                     searchText: currentState.searchText)
       .map { $0.filter { $0.number != 0 } }
       .map {

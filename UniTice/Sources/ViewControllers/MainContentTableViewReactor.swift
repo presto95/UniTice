@@ -89,10 +89,14 @@ final class MainContentTableViewReactor: Reactor {
     var isLoading: Bool = false
     
     /// The upper posts.
-    var upperPosts: [Post] { return posts.filter { $0.number == 0 } }
+    var upperPosts: [Post] {
+      return posts.filter { $0.number == 0 }
+    }
     
     /// The standard posts.
-    var standardPosts: [Post] { return posts.filter { $0.number != 0 } }
+    var standardPosts: [Post] {
+      return posts.filter { $0.number != 0 }
+    }
     
     init(university: UniversityType, category: Category) {
       self.university = university
@@ -123,25 +127,23 @@ final class MainContentTableViewReactor: Reactor {
       return Observable.concat([
         fetchKeywords(),
         fetchUpperPostFoldingStatus(),
-        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setLoading(true)),
-        requestPosts(.set),
-        Observable.just(Mutation.incrementPage),
+        requestPosts(byType: .set, inPage: 1),
+        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setLoading(false))
         ])
     case .scroll:
       return Observable.concat([
         Observable.just(Mutation.setLoading(true)),
-        requestPosts(.append),
+        requestPosts(byType: .append, inPage: currentState.page + 1),
         Observable.just(Mutation.incrementPage),
         Observable.just(Mutation.setLoading(false))
         ])
     case .refresh:
       return Observable.concat([
-        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setRefreshing(true)),
-        requestPosts(.set),
-        Observable.just(Mutation.incrementPage),
+        requestPosts(byType: .set, inPage: 1),
+        Observable.just(Mutation.resetPage),
         Observable.just(Mutation.setRefreshing(false))
         ])
     case let .toggleFolding(isFolded):
@@ -181,23 +183,22 @@ final class MainContentTableViewReactor: Reactor {
 
 private extension MainContentTableViewReactor {
   
-  func requestPosts(_ type: PostRequstType) -> Observable<Mutation> {
+  func requestPosts(byType type: PostRequstType, inPage page: Int) -> Observable<Mutation> {
     return currentState.university
       .requestPosts(inCategory: currentState.category,
-                    inPage: currentState.page,
+                    inPage: page,
                     searchText: "")
       .map { posts -> [Post] in
-        if posts.first?.title == self.currentState.upperPosts.first?.title {
+        if case .append = type,
+          posts.first?.title == self.currentState.upperPosts.first?.title {
           return posts.filter { $0.number != 0 }
         }
         return posts
       }
       .map {
         switch type {
-        case .set:
-          return Mutation.setPosts($0)
-        case .append:
-          return Mutation.appendPosts($0)
+        case .set: return Mutation.setPosts($0)
+        case .append: return Mutation.appendPosts($0)
         }
     }
   }
