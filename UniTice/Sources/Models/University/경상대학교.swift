@@ -35,7 +35,6 @@ struct 경상대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .eucKR)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//tbody[@class='tb']//td")
         let links = document.xpath("//tbody[@class='tb']//td[@class='subject']//a[1]/@href")
         let realRows = Array(rows.dropFirst(rows.count % links.count))
@@ -52,7 +51,7 @@ struct 경상대학교: UniversityType {
           divisor = 6
           dateIndexIncrement = 4
         }
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * divisor
           let titleIndex = index * divisor + 1
           let dateIndex = index * divisor + dateIndexIncrement
@@ -60,10 +59,8 @@ struct 경상대학교: UniversityType {
           let title = realRows[titleIndex].text?.trimmed ?? "?"
           let date = realRows[dateIndex].text?.trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

@@ -35,10 +35,9 @@ struct 한국산업기술대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .eucKR)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//tbody//tr//td")
         let links = document.xpath("//tbody//tr//td[2]//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let (numberIndex, titleIndex, dateIndex): (Int, Int, Int)
           if category.identifier == "494" {
             numberIndex = index * 7
@@ -53,10 +52,8 @@ struct 한국산업기술대학교: UniversityType {
           let title = rows[titleIndex].text?.trimmed ?? "?"
           let date = rows[dateIndex].text?.trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

@@ -32,10 +32,9 @@ struct 충남대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//div[@class='board_list']//tbody//td")
         let links = document.xpath("//div[@class='board_list']//tbody//td[@class='title']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * 6
           let titleIndex = index * 6 + 1
           let dateIndex = index * 6 + 3
@@ -44,10 +43,8 @@ struct 충남대학교: UniversityType {
           let date = rows[dateIndex].text?.trimmed ?? "?"
           var realLink = element.text?.trimmed ?? "?"
           realLink.removeFirst()
-          let post = Post(number: number, title: title, date: date, link: realLink)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: realLink)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

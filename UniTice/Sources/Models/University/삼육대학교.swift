@@ -39,20 +39,17 @@ struct 삼육대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let numbers = document.xpath("//tbody//tr//th")
         let titles = document.xpath("//tbody//tr//td[@class='step2']//span[@class='tit']")
         let dates = document.xpath("//tbody//tr//td[@class='step4']")
         let links = document.xpath("//tbody//tr//td[@class='step2']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let number = Int(numbers[index].text?.trimmed ?? "") ?? 0
           let title = titles[index].text?.trimmed ?? "?"
           let date = dates[index].text?.trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

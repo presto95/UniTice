@@ -42,20 +42,17 @@ struct 성균관대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let numbers = document.xpath("//table[@class='board_list']//tbody//td[1]")
         let titles = document.xpath("//table[@class='board_list']//tbody//td[@class='left']//a")
         let dates = document.xpath("//table[@class='board_list']//tbody//td[3]")
         let links = document.xpath("//table[@class='board_list']//tbody//td[@class='left']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let number = Int(numbers[index].text?.trimmed ?? "") ?? 0
           let title = titles[index].text?.trimmed ?? "?"
           let date = dates[index].text?.trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

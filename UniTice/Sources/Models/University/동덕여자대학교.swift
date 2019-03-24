@@ -40,20 +40,17 @@ struct 동덕여자대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts = [Post]()
         let numbers = document.xpath("//tbody//td[@class='td-01']")
         let titles = document.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a")
         let links = document.xpath("//tbody//td[@class='td-03']//h6[@class='subject']//a/@href")
         let dates = document.xpath("//tbody//td[@class='td-05']")
-        titles.enumerated().forEach { index, element in
+        return titles.enumerated().map { index, element in
           let number = Int(numbers[index].text ?? "") ?? 0
           let title = element.text?.trimmed ?? "?"
           let link = links[index].text?.trimmed ?? "?"
           let date = dates[index].text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

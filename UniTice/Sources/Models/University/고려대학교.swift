@@ -37,20 +37,17 @@ struct 고려대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let titles = document.xpath("//div[@class='summary']//a[@class='sbj']")
         let rows = document.xpath("//div[@class='summary']//li")
         let links = document.xpath("//div[@class='summary']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let dateIndex = index * 3 + 2
           let number = 1
           let title = titles[index].text?.trimmed ?? "?"
           let date = rows[dateIndex].text?.trimmed ?? "?"
           let link = element.text?.trimmed.filter { Int($0.description) != nil } ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

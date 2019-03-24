@@ -42,10 +42,9 @@ struct 제주대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//table[@class='table border_top_blue list']//tbody//td")
         let links = document.xpath("//table[@class='table border_top_blue list']//tbody//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * 5
           let titleIndex = index * 5 + 1
           let dateIndex = index * 5 + 3
@@ -53,10 +52,8 @@ struct 제주대학교: UniversityType {
           let title = rows[titleIndex].text?.trimmed ?? "?"
           let date = rows[dateIndex].text?.trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

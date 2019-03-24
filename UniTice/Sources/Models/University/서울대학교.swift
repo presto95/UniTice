@@ -28,10 +28,9 @@ struct 서울대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//table[@class='table01n_list']//tbody//td")
         let links = document.xpath("//table[@class='table01n_list']//tbody//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * 4
           let titleIndex = index * 4 + 1
           let dateIndex = index * 4 + 2
@@ -39,10 +38,8 @@ struct 서울대학교: UniversityType {
           let title = rows[titleIndex].text?.trimmed ?? "?"
           let date = rows[dateIndex].text?.trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

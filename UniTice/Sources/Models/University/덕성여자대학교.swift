@@ -41,10 +41,9 @@ struct 덕성여자대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .eucKR)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//tbody//tr//td")
         let links = document.xpath("//tbody//tr//td[@class='title']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * 7
           let titleIndex = index * 7 + 2
           let dateIndex = index * 7 + 5
@@ -58,10 +57,8 @@ struct 덕성여자대학교: UniversityType {
               link += "\(digit)"
             }
           }
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

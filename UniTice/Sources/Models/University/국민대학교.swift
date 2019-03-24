@@ -42,21 +42,18 @@ struct 국민대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let fixedCount = document.xpath("//tbody//tr[@class='hot ']").count
         let numbers = document.xpath("//tbody//tr//td[1]")
         let titles = document.xpath("//tbody//tr//td[2]")
         let dates = document.xpath("//tbody//tr//td[4]")
         let links = document.xpath("//tbody//tr//td[2]//a/@href")
-        numbers.enumerated().forEach { index, element in
+        return numbers.enumerated().map { index, element in
           let number = Int(element.text?.trimmed ?? "") ?? 0
           let title = titles[index].text?.trimmed ?? "?"
           let link = links[index].text?.trimmed.dropFirst().description ?? "?"
           let date = number == 0 ? "" : dates[index - fixedCount].text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

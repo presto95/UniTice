@@ -36,14 +36,13 @@ struct 광운대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         var descriptions = self.categories.map { "[\($0.description)]" }
         descriptions.append(contentsOf: ["신규게시글", "Attachment"])
         let numbers = document.xpath("//div[@class='board-list-box']//li//span[1]")
         let titles = document.xpath("//div[@class='board-list-box']//div[@class='board-text']//a")
         let dates = document.xpath("//div[@class='board-list-box']//p[@class='info']")
         let links = document.xpath("//div[@class='board-list-box']//div[@class='board-text']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let number = Int(numbers[index].text?.trimmed ?? "") ?? 0
           var tempTitle = titles[index].text?.trimmed ?? "?"
           for description in descriptions {
@@ -54,10 +53,8 @@ struct 광운대학교: UniversityType {
           let title = tempTitle.trimmed
           let date = dates[index].text?.trimmed.components(separatedBy: "|")[1].trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

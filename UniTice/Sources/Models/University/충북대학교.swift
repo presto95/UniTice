@@ -30,7 +30,6 @@ struct 충북대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//table[@class='basic']//tbody[@class='tb']//td")
         let links = document.xpath("//table[@class='basic']//tbody[@class='tb']//td[@class='subject']//a/@href")
         let divisor: Int
@@ -40,7 +39,7 @@ struct 충북대학교: UniversityType {
         default:
           divisor = 4
         }
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * divisor
           let titleIndex = index * divisor + 1
           let dateIndex = index * divisor + divisor - 1
@@ -49,10 +48,8 @@ struct 충북대학교: UniversityType {
           let date = rows[dateIndex].text?.trimmed ?? "?"
           var link = element.text?.trimmed ?? "?"
           link.removeFirst()
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

@@ -38,20 +38,17 @@ struct 서울교육대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let numbers = document.xpath("//td[@class='td1']")
         let titles = document.xpath("//td[@class='td2']")
         let dates = document.xpath("//td[@class='td4']")
         let links = document.xpath("//tr/@onclick")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let number = Int(numbers[index].text?.trimmed ?? "") ?? 0
           let title = titles[index].text?.trimmed ?? "?"
           let date = dates[index].text?.trimmed ?? "?"
           let link = element.text?.trimmed.filter { Int("\($0)") != nil } ?? "?"
-          let post = Post(number: number, title: title, date: date, link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

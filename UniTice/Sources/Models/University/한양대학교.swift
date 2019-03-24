@@ -43,11 +43,10 @@ struct 한양대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let titles = document.xpath("//tbody//tr//p[@class='title']")
         let dates = document.xpath("//tbody//tr//td//div[@class='notice-date']")
         let links = document.xpath("//tbody//tr//td//p[@class='title']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let mappedTitles = titles[index].text?.trimmed.components(separatedBy: "\r\n").map { $0.trimmed }.filter { !$0.isEmpty }
           let number = mappedTitles?.first == "주요알림" ? 0 : 1
           let campus: String
@@ -62,10 +61,8 @@ struct 한양대학교: UniversityType {
           let title = mappedTitles?.last ?? "?"
           let date = dates[index].text?.trimmed ?? "?"
           let link = element.text?.trimmed.filter { Int("\($0)") != nil } ?? "?"
-          let post = Post(number: number, title: title, date: "\(campus) | \(date)", link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: "\(campus) | \(date)", link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

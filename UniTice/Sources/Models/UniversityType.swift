@@ -9,6 +9,7 @@
 import Foundation
 
 import RxSwift
+import Kanna
 
 /// 대학교 프로토콜.
 protocol UniversityType {

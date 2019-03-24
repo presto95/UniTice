@@ -41,10 +41,9 @@ struct 강남대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//div[@class='tbody']//ul//li")
         let links = document.xpath("//div[@class='tbody']//ul//li//a/@data-params")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * 7
           let titleIndex = index * 7 + 2
           let dateIndex = index * 7 + 5
@@ -53,14 +52,14 @@ struct 강남대학교: UniversityType {
           let date = rows[dateIndex].text?.trimmed ?? "?"
           let link = element.text?.trimmed ?? "?"
           let data = Data(link.utf8)
-          guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+          guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {
+            return Post(number: 0, title: "", date: "", link: "")
+          }
           let encMenuSeq = json?["encMenuSeq"] as? String ?? "?"
           let encMenuBoardSeq = json?["encMenuBoardSeq"] as? String ?? "?"
           let combination = "\(encMenuSeq)|\(encMenuBoardSeq)"
-          let post = Post(number: number, title: title, date: date, link: combination)
-          posts.append(post)
+          return Post(number: number, title: title, date: date, link: combination)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }

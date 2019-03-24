@@ -31,10 +31,9 @@ struct 강원대학교: UniversityType {
     return htmlParseManager.request(url, encoding: .utf8)
       .retry(2)
       .map { document in
-        var posts: [Post] = []
         let rows = document.xpath("//table[@class='bbs_default list']//tbody[@class='tb']//td")
         let links = document.xpath("//table[@class='bbs_default list']//tbody[@class='tb']//td[@class='subject']//a/@href")
-        links.enumerated().forEach { index, element in
+        return links.enumerated().map { index, element in
           let numberIndex = index * 7
           let titleIndex = index * 7 + 2
           let dateIndex = index * 7 + 5
@@ -45,10 +44,8 @@ struct 강원대학교: UniversityType {
           var link = element.text?.trimmed ?? "?"
           link.removeFirst()
           let campus = rows[campusIndex].text?.trimmed ?? "?"
-          let post = Post(number: number, title: title, date: "\(date) | \(campus)", link: link)
-          posts.append(post)
+          return Post(number: number, title: title, date: "\(date) | \(campus)", link: link)
         }
-        return posts
       }
       .catchErrorJustReturn([])
   }
