@@ -23,12 +23,16 @@ final class FinishViewController: UIViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
   
+  /// The university label.
   @IBOutlet private weak var universityLabel: UILabel!
   
+  /// The keyword label.
   @IBOutlet private weak var keywordLabel: UILabel!
   
+  /// The confirm button.
   @IBOutlet private weak var confirmButton: UTButton!
   
+  /// The back button.
   @IBOutlet private weak var backButton: UTButton!
   
   // MARK: Method
@@ -44,6 +48,7 @@ final class FinishViewController: UIViewController, StoryboardView {
     bindState(reactor)
   }
   
+  /// Sets up the initial settings.
   private func setup() {
     confirmButton.type = .next
     backButton.type = .back
@@ -72,12 +77,11 @@ private extension FinishViewController {
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let mainViewController = StoryboardScene.Main.mainNavigationController.instantiate().then {
-          let mainContainerViewController = $0.topViewController as? MainContainerViewController
-          mainContainerViewController?.reactor = MainContainerViewReactor()
-          $0.modalTransitionStyle = .flipHorizontal
-        }
-        self.present(mainViewController, animated: true, completion: nil)
+        let controller = StoryboardScene.Main.mainNavigationController.instantiate()
+        controller.modalTransitionStyle = .flipHorizontal
+        let topViewController = controller.topViewController as? MainContainerViewController
+        topViewController?.reactor = MainContainerViewReactor()
+        self.present(controller, animated: true, completion: nil)
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isBackButtonTapped }
@@ -93,14 +97,15 @@ private extension FinishViewController {
   func bindUI() {
     let sharedInfo = InitialInfo.shared
     sharedInfo.university
+      .take(1)
       .map { $0.rawValue }
       .bind(to: universityLabel.rx.text)
       .disposed(by: disposeBag)
     sharedInfo.keywords
-      .reduce("") { "\($0), \($1)" }
-      .map { $0.components(separatedBy: ",") }
-      .skip(1)
+      .take(1)
       .flatMap { Observable.from($0) }
+      .reduce("") { "\($0) | \($1)" }
+      .map { "\($0) |"}
       .bind(to: keywordLabel.rx.text)
       .disposed(by: disposeBag)
   }

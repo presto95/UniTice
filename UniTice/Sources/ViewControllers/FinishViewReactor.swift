@@ -31,16 +31,14 @@ final class FinishViewReactor: Reactor {
     /// The mutation to set the tapping status of the back button.
     case back(Bool)
     
-    /// The mutation to save initial data to realm.
-    case saveInitialData
   }
   
   struct State {
     
-    /// The boolean value indicating whether the confirm button is tapped.
+    /// The boolean value indicating whether the confirm button is selected.
     var isConfirmButtonTapped: Bool = false
     
-    /// The boolean value indicating whether the back button is tapped.
+    /// The boolean value indicating whether the back button is selected.
     var isBackButtonTapped: Bool = false
   }
   
@@ -76,8 +74,6 @@ final class FinishViewReactor: Reactor {
       state.isConfirmButtonTapped = isTapped
     case let .back(isTapped):
       state.isBackButtonTapped = isTapped
-    case .saveInitialData:
-      break
     }
     return state
   }
@@ -91,15 +87,15 @@ private extension FinishViewReactor {
     let university = InitialInfo.shared.university
     let keywords = InitialInfo.shared.keywords
     return Observable
-      .zip(university, keywords) { [weak self] university, keywords in
+      .combineLatest(university, keywords) { [weak self] university, keywords in
         let user = User().then {
           $0.university = university.rawValue
           $0.keywords.append(objectsIn: keywords)
         }
         self?.realmService.addUser(user)
         Global.shared.university.onNext(university)
-        return Mutation.saveInitialData
       }
       .take(1)
+      .flatMap { _ in Observable.empty() }
   }
 }
