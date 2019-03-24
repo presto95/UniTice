@@ -14,21 +14,24 @@ import RxCocoa
 import RxSwift
 import Then
 
-/// 초기 대학교 설정 뷰 컨트롤러.
+/// The University selection view controller.
 final class UniversitySelectionViewController: UIViewController, StoryboardView {
+  
+  // MARK: Typealias
   
   typealias Reactor = UniversitySelectionViewReactor
   
-  /// dispose bag.
+  // MARK: Property
+  
   var disposeBag = DisposeBag()
   
-  /// 대학교 목록을 표시하는 피커 뷰.
+  /// The picker view representing the list of uniersities.
   @IBOutlet private weak var pickerView: UIPickerView!
   
-  /// `우리에게 알려주세요!` 메일 버튼.
-  @IBOutlet private weak var noticeButton: UIButton!
+  /// The notice button for mailing.
+  @IBOutlet private weak var inquiryButton: UIButton!
   
-  /// 확인 버튼.
+  /// The confirm button.
   @IBOutlet private weak var confirmButton: UTButton!
   
   override func viewDidLoad() {
@@ -37,11 +40,12 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
   }
   
   func bind(reactor: Reactor) {
+    bindUI()
     bindAction(reactor)
     bindState(reactor)
-    bindUI()
   }
   
+  /// Sets up the initial settings.
   private func setup() {
     confirmButton.type = .next
   }
@@ -52,18 +56,24 @@ final class UniversitySelectionViewController: UIViewController, StoryboardView 
 private extension UniversitySelectionViewController {
   
   func bindAction(_ reactor: Reactor) {
+    pickerView.rx.modelSelected(University.self)
+      .map { $0.first }
+      .filterNil()
+      .map { Reactor.Action.selectUniversity($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
     confirmButton.rx.tap
       .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    noticeButton.rx.tap
+    inquiryButton.rx.tap
       .map { Reactor.Action.inquiry }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
   
   func bindState(_ reactor: Reactor) {
-    reactor.state.map { $0.isNextScenePresented }
+    reactor.state.map { $0.isConfirmButtonSelected }
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
@@ -87,7 +97,7 @@ private extension UniversitySelectionViewController {
   }
 }
 
-// MARK: - MFMailComposeViewControllerDelegate 구현
+// MARK: - Conforming MFMailComposeViewControllerDelegate
 
 extension UniversitySelectionViewController: MFMailComposeViewControllerDelegate {
   
@@ -104,14 +114,6 @@ private extension UniversitySelectionViewController {
   func bindUI() {
     Observable.just(University.allCases)
       .bind(to: pickerView.rx.itemTitles) { _, element in element.rawValue }
-      .disposed(by: disposeBag)
-    pickerView.rx.modelSelected(University.self)
-      .map { $0.first }
-      .subscribe(onNext: { university in
-        if let university = university {
-          InitialInfo.shared.university.onNext(university)
-        }
-      })
       .disposed(by: disposeBag)
   }
   

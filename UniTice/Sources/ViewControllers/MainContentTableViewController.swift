@@ -16,7 +16,9 @@ import SnapKit
 import XLPagerTabStrip
 
 /// The main content table view controller.
-final class MainContentTableViewController: UITableViewController, StoryboardView {
+final class MainContentTableViewController: UITableViewController,
+                                            StoryboardView,
+                                            SafariPresentable {
   
   // MARK: Typealias
   
@@ -258,5 +260,3 @@ extension MainContentTableViewController: IndicatorInfoProvider {
     return IndicatorInfo(title: reactor?.currentState.category.description)
   }
 }
-
-extension MainContentTableViewController: SafariViewControllerPresentable { }

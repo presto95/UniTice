@@ -31,21 +31,28 @@ final class KeywordRegisterViewReactor: Reactor {
   
   enum Mutation {
     
+    /// The mutation to set the confirm button selection status.
     case confirm(Bool)
     
+    /// The mutation to set the back button selection status.
     case back(Bool)
     
+    /// The mutation to add the keyword.
     case addKeyword(String)
     
+    /// The mutaiton to remove the keyword at `index`.
     case removeKeyword(index: Int)
   }
   
   struct State {
     
+    /// The keywords.
     var keywords: [String] = []
     
+    /// The boolean value indicating whether the confirm button is selected.
     var isConfirmButtonSelected: Bool = false
     
+    /// The boolean value indicating whether the back button is selected.
     var isBackButtonSelected: Bool = false
   }
   
@@ -56,6 +63,7 @@ final class KeywordRegisterViewReactor: Reactor {
     case .confirm:
       return Observable.concat([
         Observable.just(Mutation.confirm(true)),
+        holdKeywords(currentState.keywords),
         Observable.just(Mutation.confirm(false))
         ])
     case .back:
@@ -78,10 +86,22 @@ final class KeywordRegisterViewReactor: Reactor {
     case let .back(isSelected):
       state.isBackButtonSelected = isSelected
     case let .addKeyword(keyword):
+      if state.keywords.count >= 3 { break }
       state.keywords.insert(keyword, at: 0)
     case let .removeKeyword(index):
       state.keywords.remove(at: index)
     }
     return state
+  }
+}
+
+// MARK: - Private Method
+
+private extension KeywordRegisterViewReactor {
+  
+  /// Holds the keywords in the initial singleton object.
+  func holdKeywords(_ keywords: [String]) -> Observable<Mutation> {
+    InitialInfo.shared.keywords.onNext(keywords)
+    return Observable.empty()
   }
 }

@@ -10,12 +10,12 @@ import Foundation
 import SafariServices
 import UIKit
 
-protocol SafariViewControllerPresentable: class {
+protocol SafariPresentable: class {
   
   func makeSafariViewController(url: URL) -> UIViewController
 }
 
-extension SafariViewControllerPresentable where Self: UIViewController {
+extension SafariPresentable where Self: UIViewController {
   
   func makeSafariViewController(url: URL) -> UIViewController {
     let config = SFSafariViewController.Configuration().then {

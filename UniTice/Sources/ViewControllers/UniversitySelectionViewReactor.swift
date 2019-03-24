@@ -11,46 +11,45 @@ import Foundation
 import ReactorKit
 import RxSwift
 
-/// 초기 대학교 설정 뷰 리액터.
+/// The `Reactor` for `UniversitySelectionViewController`.
 final class UniversitySelectionViewReactor: Reactor {
   
   enum Action {
     
-    /// 대학교 선택.
+    /// The action that the user select the university.
     case selectUniversity(University)
     
-    /// 확인.
+    /// The action that the user taps the confirm button.
     case confirm
     
-    /// 문의.
+    /// The action that the user taps the inquiry button.
     case inquiry
   }
   
   enum Mutation {
     
-    /// 대학교 설정.
+    /// The mutation to set the university.
     case setUniversity(University)
     
-    /// 다음 화면 보이기.
-    case presentNext(Bool)
+    /// The mutation to present the next view.
+    case confirm(Bool)
     
-    /// 메일 화면 보이기.
-    case presentMailComposer(Bool)
+    /// The mutation to presetn the mail composer view.
+    case inquiry(Bool)
   }
   
   struct State {
     
-    /// 대학교.
+    /// The selected university.
     var university: University?
     
-    /// 다음 화면을 보여준 상태인가.
-    var isNextScenePresented: Bool = false
+    /// The boolean value indicating whether the confirm button is selected.
+    var isConfirmButtonSelected: Bool = false
     
-    /// 문의 버튼이 선택되어 있는 상태인가.
+    /// The boolean value indicating whether the inquiry button is selected.
     var isInquiryButtonSelected: Bool = false
   }
   
-  /// 초기 상태.
   let initialState: State = .init()
   
   func mutate(action: Action) -> Observable<Mutation> {
@@ -59,13 +58,14 @@ final class UniversitySelectionViewReactor: Reactor {
       return Observable.just(Mutation.setUniversity(university))
     case .confirm:
       return Observable.concat([
-        Observable.just(Mutation.presentNext(true)),
-        Observable.just(Mutation.presentNext(false))
+        Observable.just(Mutation.confirm(true)),
+        holdUniversity(currentState.university ?? .kaist),
+        Observable.just(Mutation.confirm(false))
         ])
     case .inquiry:
       return Observable.concat([
-        Observable.just(Mutation.presentMailComposer(true)),
-        Observable.just(Mutation.presentMailComposer(false))
+        Observable.just(Mutation.inquiry(true)),
+        Observable.just(Mutation.inquiry(false))
         ])
     }
   }
@@ -75,11 +75,22 @@ final class UniversitySelectionViewReactor: Reactor {
     switch mutation {
     case let .setUniversity(university):
       state.university = university
-    case let .presentNext(isSelected):
-      state.isNextScenePresented = isSelected
-    case let .presentMailComposer(isSelected):
+    case let .confirm(isSelected):
+      state.isConfirmButtonSelected = isSelected
+    case let .inquiry(isSelected):
       state.isInquiryButtonSelected = isSelected
     }
     return state
+  }
+}
+
+// MARK: - Private Method
+
+private extension UniversitySelectionViewReactor {
+  
+  /// Holds the university in the initial singleton object.
+  func holdUniversity(_ university: University) -> Observable<Mutation> {
+    InitialInfo.shared.university.onNext(university)
+    return Observable.empty()
   }
 }

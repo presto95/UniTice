@@ -25,27 +25,5 @@ final class KeywordRegisterHeaderView: UIView, StoryboardView {
   
   @IBOutlet weak var keywordTextField: UITextField!
   
-  func bind(reactor: Reactor) {
-    bindAction(reactor)
-    bindState(reactor)
-  }
-}
-
-// MARK: - Reactor Binding
-
-private extension KeywordRegisterHeaderView {
-  
-  func bindAction(_ reactor: Reactor) { }
-  
-  func bindState(_ reactor: Reactor) { }
-}
-
-extension Reactive where Base: KeywordRegisterHeaderView {
-  
-  var textFieldDidEndEditing: ControlEvent<String> {
-    let source = base.keywordTextField.rx
-      .controlEvent(.editingDidEndOnExit)
-      .withLatestFrom(base.keywordTextField.rx.text.orEmpty)
-    return ControlEvent(events: source)
-  }
+  func bind(reactor: Reactor) { }
 }

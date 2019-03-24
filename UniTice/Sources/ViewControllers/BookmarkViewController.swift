@@ -16,7 +16,7 @@ import RxSwift
 /// The bookmark view controller.
 final class BookmarkViewController: UIViewController,
                                     StoryboardView,
-                                    SafariViewControllerPresentable {
+                                    SafariPresentable {
   
   // MARK: Typealias
   

@@ -28,18 +28,26 @@ final class KeywordRegisterViewController: UIViewController, StoryboardView {
   
   var disposeBag = DisposeBag()
   
+  /// The data source object for the table view.
   private var dataSource: DataSource!
   
-  private let headerView
+  /// The keyword register header view.
+  private let headerView: KeywordRegisterHeaderView!
     = (UIView.instantiate(fromXib: KeywordRegisterHeaderView.name) as? KeywordRegisterHeaderView)?
       .then {
         $0.reactor = KeywordRegisterHeaderViewReactor()
   }
   
+  /// The cell identifier.
+  private let cellIdentifier = "cell"
+  
+  /// The table view representing the keywords.
   @IBOutlet private weak var tableView: UITableView!
   
+  /// The confirm button.
   @IBOutlet private weak var confirmButton: UTButton!
   
+  /// The back button.
   @IBOutlet private weak var backButton: UTButton!
   
   override func viewDidLoad() {
@@ -54,6 +62,7 @@ final class KeywordRegisterViewController: UIViewController, StoryboardView {
     bindState(reactor)
   }
   
+  /// Sets up the initial settings.
   private func setup() {
     confirmButton.type = .next
     backButton.type = .back
@@ -75,6 +84,11 @@ private extension KeywordRegisterViewController {
       .map { Reactor.Action.back }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
+    headerView.rx.keywordTextFieldDidReturn
+      .filter { !$0.isEmpty }
+      .map { Reactor.Action.returnKeyboard($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
     tableView.rx.itemDeleted
       .map { Reactor.Action.removeKeyword(index: $0.item) }
       .bind(to: reactor.action)
@@ -82,23 +96,25 @@ private extension KeywordRegisterViewController {
   }
   
   func bindState(_ reactor: Reactor) {
-    headerView?.rx.textFieldDidEndEditing
-      .filter { !$0.isEmpty }
-      .map { Reactor.Action.returnKeyboard($0) }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-    reactor.state.map { $0.keywords }
-      .map { [KeywordRegisterSection(items: $0)] }
+    let keywords = reactor.state.map { $0.keywords }
+    keywords.map { [KeywordRegisterSection(items: $0)] }
       .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    keywords
+      .distinctUntilChanged()
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { _ in
+        self.headerView.keywordTextField.becomeFirstResponder()
+      })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isConfirmButtonSelected }
       .distinctUntilChanged()
       .filter { $0 }
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        InitialInfo.shared.keywords.onNext(reactor.currentState.keywords)
-        let controller = StoryboardScene.Start.startFinishViewController.instantiate()
-        controller.reactor = FinishViewReactor()
+        let controller = StoryboardScene.Start.startFinishViewController.instantiate().then {
+          $0.reactor = FinishViewReactor()
+        }
         controller.push(at: self)
       })
       .disposed(by: disposeBag)
@@ -120,7 +136,7 @@ private extension KeywordRegisterViewController {
   
   func bindDataSource() {
     dataSource = .init(configureCell: { dataSource, tableView, indexPath, keyword in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
       if case let keywordCell as KeywordCell = cell {
         keywordCell.reactor = KeywordCellReactor(keyword: keyword)
       }

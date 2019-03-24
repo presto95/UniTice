@@ -9,8 +9,6 @@
 import Foundation
 
 import ReactorKit
-import RxOptional
-import RxSwift
 
 /// The `Reactor` for `KeywordRegisterHeaderView`.
 final class KeywordRegisterHeaderViewReactor: Reactor {

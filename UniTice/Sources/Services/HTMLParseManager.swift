@@ -9,17 +9,23 @@
 import Kanna
 import RxSwift
 
-/// HTML 파싱 매니저 프로토콜.
+/// The `protocol` for html parse manager.
 protocol HTMLParseManagerType: class {
   
-  /// 해당 `url`의 HTML 도큐먼트 요청.
+  /// Requests the html document of the `url` by specific `encoding`.
+  ///
+  /// - Parameters:
+  ///   - url:      The specific url that parsed.
+  ///   - encoding: The specific string value encoding strategy.
+  ///
+  /// - Returns: The observable that emits `HTMLDocument`.
   func request(_ url: URL, encoding: String.Encoding) -> Observable<HTMLDocument>
 }
 
-/// HTML 파싱 매니저.
+/// The html parse manager.
 final class HTMLParseManager: HTMLParseManagerType {
   
-  /// HTMLParseManager Singleton Object.
+  /// The singleton object of `HTMLParseManager`.
   static let shared = HTMLParseManager()
   
   func request(_ url: URL, encoding: String.Encoding = .utf8) -> Observable<HTMLDocument> {

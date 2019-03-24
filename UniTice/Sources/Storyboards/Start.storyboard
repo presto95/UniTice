@@ -87,7 +87,7 @@
                     <navigationItem key="navigationItem" id="fJg-nk-PGM"/>
                     <connections>
                         <outlet property="confirmButton" destination="QDT-Jb-lz7" id="LTx-XI-Ukk"/>
-                        <outlet property="noticeButton" destination="w1i-KN-Xcw" id="1An-qJ-vPv"/>
+                        <outlet property="inquiryButton" destination="w1i-KN-Xcw" id="1An-qJ-vPv"/>
                         <outlet property="pickerView" destination="tnd-o7-FEG" id="oXo-iD-18v"/>
                     </connections>
                 </viewController>

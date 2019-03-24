@@ -15,7 +15,7 @@ import RxSwift
 import SnapKit
 
 /// The search view controller.
-final class SearchViewController: UIViewController, StoryboardView {
+final class SearchViewController: UIViewController, StoryboardView, SafariPresentable {
   
   // MARK: Typealias
   
@@ -237,5 +237,3 @@ extension SearchViewController: UIViewControllerPreviewingDelegate {
     present(viewControllerToCommit, animated: true, completion: nil)
   }
 }
-
-extension SearchViewController: SafariViewControllerPresentable { }
