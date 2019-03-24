@@ -25,20 +25,20 @@ final class FinishViewReactor: Reactor {
   
   enum Mutation {
     
-    /// The mutation to set the tapping status of the confirm button.
+    /// The mutation to set the tap status of the confirm button.
     case confirm(Bool)
     
-    /// The mutation to set the tapping status of the back button.
+    /// The mutation to set the tap status of the back button.
     case back(Bool)
     
   }
   
   struct State {
     
-    /// The boolean value indicating whether the confirm button is selected.
+    /// The boolean value indicating whether the confirm button is tapped.
     var isConfirmButtonTapped: Bool = false
     
-    /// The boolean value indicating whether the back button is selected.
+    /// The boolean value indicating whether the back button is tapped.
     var isBackButtonTapped: Bool = false
   }
   

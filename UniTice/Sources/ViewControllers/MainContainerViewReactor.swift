@@ -23,7 +23,7 @@ final class MainContainerViewReactor: Reactor {
     /// The action that the view will appear.
     case viewWillAppear
     
-    /// The action that the view has appeared.
+    /// The action that the view is appeared.
     case viewDidAppear
     
     /// The action that the user taps the setting bar button item.
@@ -38,23 +38,25 @@ final class MainContainerViewReactor: Reactor {
   
   enum Mutation {
     
+    /// The mutation to reload view.
     case reloadView(Bool)
     
-    /// The mutation that registers the user notification.
+    /// The mutation to register the user notification.
     case registerUserNotification(Bool)
     
-    /// The mutation that sets up whether the setting scene is presented.
-    case presentSetting(Bool)
+    /// The mutation to set up whether the setting scene is presented.
+    case setting(Bool)
     
-    /// The mutation that sets up whether the search scene is presented.
-    case presentSearch(Bool)
+    /// The mutation to set up whether the search scene is presented.
+    case search(Bool)
     
-    /// The mutation that sets up whether the bookmark scene is presented.
-    case presentBookmark(Bool)
+    /// The mutation to set up whether the bookmark scene is presented.
+    case bookmark(Bool)
   }
   
   struct State {
     
+    /// The boolean value indicating whether the view is reloaded.
     var isViewReloaded: Bool = false
     
     /// The boolean value indicating whether the user notification has registered.
@@ -72,6 +74,7 @@ final class MainContainerViewReactor: Reactor {
   
   let initialState: State = .init()
   
+  /// The user notification service.
   private let userNotificationService: UserNotificationServiceType
   
   init(userNotificationService: UserNotificationServiceType = UserNotificationService.shared) {
@@ -93,18 +96,18 @@ final class MainContainerViewReactor: Reactor {
       return presentRatingAlertInRandom()
     case .setting:
       return Observable.concat([
-        Observable.just(Mutation.presentSetting(true)),
-        Observable.just(Mutation.presentSetting(false))
+        Observable.just(Mutation.setting(true)),
+        Observable.just(Mutation.setting(false))
         ])
     case .search:
       return Observable.concat([
-        Observable.just(Mutation.presentSearch(true)),
-        Observable.just(Mutation.presentSearch(false))
+        Observable.just(Mutation.search(true)),
+        Observable.just(Mutation.search(false))
         ])
     case .bookmark:
       return Observable.concat([
-        Observable.just(Mutation.presentBookmark(true)),
-        Observable.just(Mutation.presentBookmark(false))
+        Observable.just(Mutation.bookmark(true)),
+        Observable.just(Mutation.bookmark(false))
         ])
     }
   }
@@ -116,11 +119,11 @@ final class MainContainerViewReactor: Reactor {
       state.isViewReloaded = isReloaded
     case let .registerUserNotification(isRegistered):
       state.isUserNotificationRegistered = isRegistered
-    case let .presentSetting(isTapped):
+    case let .setting(isTapped):
       state.isSettingButtonTapped = isTapped
-    case let .presentSearch(isTapped):
+    case let .search(isTapped):
       state.isSearchButtonTapped = isTapped
-    case let .presentBookmark(isTapped):
+    case let .bookmark(isTapped):
       state.isBookmarkButtonTapped = isTapped
     }
     return state

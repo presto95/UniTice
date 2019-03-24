@@ -23,6 +23,7 @@ final class MainNoticeHeaderView: UIView, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
 
+  /// The fold button.
   @IBOutlet private weak var foldButton: UIButton!
   
   // MARK: Method
@@ -37,6 +38,7 @@ final class MainNoticeHeaderView: UIView, StoryboardView {
     bindState(reactor)
   }
   
+  /// Sets up the initial settings.
   private func setup() {
     foldButton.do {
       $0.setTitle(nil, for: [])

@@ -43,11 +43,11 @@ final class UniversitySelectionViewReactor: Reactor {
     /// The selected university.
     var university: University?
     
-    /// The boolean value indicating whether the confirm button is selected.
-    var isConfirmButtonSelected: Bool = false
+    /// The boolean value indicating whether the confirm button is tapped.
+    var isConfirmButtonTapped: Bool = false
     
-    /// The boolean value indicating whether the inquiry button is selected.
-    var isInquiryButtonSelected: Bool = false
+    /// The boolean value indicating whether the inquiry button is tapped.
+    var isInquiryButtonTapped: Bool = false
   }
   
   let initialState: State = .init()
@@ -76,9 +76,9 @@ final class UniversitySelectionViewReactor: Reactor {
     case let .setUniversity(university):
       state.university = university
     case let .confirm(isSelected):
-      state.isConfirmButtonSelected = isSelected
+      state.isConfirmButtonTapped = isSelected
     case let .inquiry(isSelected):
-      state.isInquiryButtonSelected = isSelected
+      state.isInquiryButtonTapped = isSelected
     }
     return state
   }

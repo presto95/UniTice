@@ -107,9 +107,8 @@ private extension KeywordRegisterViewController {
         self.headerView.keywordTextField.becomeFirstResponder()
       })
       .disposed(by: disposeBag)
-    reactor.state.map { $0.isConfirmButtonSelected }
-      .distinctUntilChanged()
-      .filter { $0 }
+    reactor.state.map { $0.isConfirmButtonTapped }
+      .distinctUntilChangedTrue()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let controller = StoryboardScene.Start.startFinishViewController.instantiate().then {
@@ -118,9 +117,8 @@ private extension KeywordRegisterViewController {
         controller.push(at: self)
       })
       .disposed(by: disposeBag)
-    reactor.state.map { $0.isBackButtonSelected }
-      .distinctUntilChanged()
-      .filter { $0 }
+    reactor.state.map { $0.isBackButtonTapped }
+      .distinctUntilChangedTrue()
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }

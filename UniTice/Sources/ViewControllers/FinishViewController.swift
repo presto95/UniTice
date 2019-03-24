@@ -72,8 +72,7 @@ private extension FinishViewController {
   
   func bindState(_ reactor: Reactor) {
     reactor.state.map { $0.isConfirmButtonTapped }
-      .distinctUntilChanged()
-      .filter { $0 }
+      .distinctUntilChangedTrue()
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
@@ -85,8 +84,7 @@ private extension FinishViewController {
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isBackButtonTapped }
-      .distinctUntilChanged()
-      .filter { $0 }
+      .distinctUntilChangedTrue()
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         self?.navigationController?.popViewController(animated: true)

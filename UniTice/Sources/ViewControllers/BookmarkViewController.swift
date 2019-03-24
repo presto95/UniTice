@@ -28,10 +28,13 @@ final class BookmarkViewController: UIViewController,
   
   var disposeBag: DisposeBag = DisposeBag()
   
+  /// The data source object for the table view.
   private var dataSource: DataSource!
   
+  /// The cell identifier.
   private let cellIdentifier = "postCell"
   
+  /// The table view.
   @IBOutlet private weak var tableView: UITableView!
   
   // MARK: Method
@@ -70,7 +73,8 @@ private extension BookmarkViewController {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     tableView.rx.itemDeleted
-      .map { Reactor.Action.deleteBookmark(index: $0.item) }
+      .map { $0.item }
+      .map { Reactor.Action.deleteBookmark(index: $0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -86,7 +90,7 @@ private extension BookmarkViewController {
   }
 }
 
-// MARK: - UIViewControllerPreviewDelegate 구현
+// MARK: - Conforming UIViewControllerPreviewingDelegate
 
 extension BookmarkViewController: UIViewControllerPreviewingDelegate {
   

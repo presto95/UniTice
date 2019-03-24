@@ -82,6 +82,7 @@ final class SearchViewReactor: Reactor {
     /// The boolean value indicating whether the view is presented.
     var isPresented: Bool = false
     
+    /// The boolean value indicating whether the searching process go ahead at least once.
     var hasSearched: Bool = false
     
     init(university: UniversityType, category: Category) {

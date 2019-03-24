@@ -31,10 +31,10 @@ final class KeywordRegisterViewReactor: Reactor {
   
   enum Mutation {
     
-    /// The mutation to set the confirm button selection status.
+    /// The mutation to set the tap status of the confirm button.
     case confirm(Bool)
     
-    /// The mutation to set the back button selection status.
+    /// The mutation to set the tap status of the back button.
     case back(Bool)
     
     /// The mutation to add the keyword.
@@ -49,11 +49,11 @@ final class KeywordRegisterViewReactor: Reactor {
     /// The keywords.
     var keywords: [String] = []
     
-    /// The boolean value indicating whether the confirm button is selected.
-    var isConfirmButtonSelected: Bool = false
+    /// The boolean value indicating whether the confirm button is tapped.
+    var isConfirmButtonTapped: Bool = false
     
-    /// The boolean value indicating whether the back button is selected.
-    var isBackButtonSelected: Bool = false
+    /// The boolean value indicating whether the back button is tapped.
+    var isBackButtonTapped: Bool = false
   }
   
   let initialState: State = .init()
@@ -82,9 +82,9 @@ final class KeywordRegisterViewReactor: Reactor {
     var state = state
     switch mutation {
     case let .confirm(isSelected):
-      state.isConfirmButtonSelected = isSelected
+      state.isConfirmButtonTapped = isSelected
     case let .back(isSelected):
-      state.isBackButtonSelected = isSelected
+      state.isBackButtonTapped = isSelected
     case let .addKeyword(keyword):
       if state.keywords.count >= 3 { break }
       state.keywords.insert(keyword, at: 0)

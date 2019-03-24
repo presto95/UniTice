@@ -73,9 +73,8 @@ private extension UniversitySelectionViewController {
   }
   
   func bindState(_ reactor: Reactor) {
-    reactor.state.map { $0.isConfirmButtonSelected }
-      .distinctUntilChanged()
-      .filter { $0 }
+    reactor.state.map { $0.isConfirmButtonTapped }
+      .distinctUntilChangedTrue()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let keywordRegisterViewController
@@ -85,9 +84,8 @@ private extension UniversitySelectionViewController {
         keywordRegisterViewController.push(at: self)
       })
       .disposed(by: disposeBag)
-    reactor.state.map { $0.isInquiryButtonSelected }
-      .distinctUntilChanged()
-      .filter { $0 }
+    reactor.state.map { $0.isInquiryButtonTapped }
+      .distinctUntilChangedTrue()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let mailComposer = self.makeMailComposeViewController()

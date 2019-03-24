@@ -24,8 +24,10 @@ final class UniversityChangeViewController: UIViewController, StoryboardView {
   
   var disposeBag: DisposeBag = DisposeBag()
   
+  /// The picker view representing the list of universities.
   @IBOutlet private weak var pickerView: UIPickerView!
   
+  /// The confirm button.
   @IBOutlet private weak var confirmButton: UTButton!
   
   // MARK: Method
@@ -41,6 +43,7 @@ final class UniversityChangeViewController: UIViewController, StoryboardView {
     bindUI()
   }
   
+  /// Sets up the initial settings.
   private func setup() {
     title = "학교 변경"
     confirmButton.type = .next
@@ -52,23 +55,20 @@ final class UniversityChangeViewController: UIViewController, StoryboardView {
 private extension UniversityChangeViewController {
   
   func bindAction(_ reactor: Reactor) {
-    confirmButton.rx.tap
-      .map { Reactor.Action.confirm }
+    pickerView.rx.itemSelected
+      .map { row, _ in University.allCases[row] }
+      .map { Reactor.Action.changeUniversity($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    pickerView.rx.itemSelected
-      .map { row, _ in
-        let university = University.allCases[row]
-        return Reactor.Action.changeUniversity(university)
-      }
+    confirmButton.rx.tap
+      .map { Reactor.Action.confirm }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
   
   func bindState(_ reactor: Reactor) {
-    reactor.state.map { $0.isConfirmButtonSelected }
-      .distinctUntilChanged()
-      .filter { $0 }
+    reactor.state.map { $0.isConfirmButtonTapped }
+      .distinctUntilChangedTrue()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.navigationController?.popViewController(animated: true)

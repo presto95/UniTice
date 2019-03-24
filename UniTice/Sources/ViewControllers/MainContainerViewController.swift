@@ -12,6 +12,7 @@ import ReactorKit
 import RxCocoa
 import RxOptional
 import RxSwift
+import RxViewController
 import XLPagerTabStrip
 
 /// The main container view controller.
@@ -25,12 +26,16 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   
   var disposeBag: DisposeBag = DisposeBag()
   
+  /// The view controllers for configuring the button bar pager tab strip view controller.
   private var contentViewControllers: [MainContentTableViewController] = []
   
+  /// The setting button item.
   @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
   
+  /// The search button item.
   @IBOutlet private weak var searchButtonItem: UIBarButtonItem!
   
+  /// The bookmark button item.
   @IBOutlet private weak var bookmarkButtonItem: UIBarButtonItem!
   
   // MARK: Method
@@ -40,24 +45,6 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
     super.viewDidLoad()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    reloadPagerTabStripView()
-    guard let reactor = reactor else { return }
-    Observable.just(Void())
-      .map { Reactor.Action.viewWillAppear }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    guard let reactor = reactor else { return }
-    Observable.just(Void())
-      .map { Reactor.Action.viewDidAppear }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
-  }
-  
   override func viewControllers(
     for pagerTabStripController: PagerTabStripViewController
     ) -> [UIViewController] {
@@ -65,9 +52,10 @@ final class MainContainerViewController: ButtonBarPagerTabStripViewController, S
   }
   
   func bind(reactor: Reactor) {
-    bindUI()
+    reloadSubviews(initial: true)
     bindAction(reactor)
-    bindState(reactor)
+    bindTapState(reactor)
+    bindRestState(reactor)
   }
 }
 
@@ -78,6 +66,14 @@ private extension MainContainerViewController {
   func bindAction(_ reactor: Reactor) {
     Observable.just(Void())
       .map { Reactor.Action.viewDidLoad }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    rx.viewWillAppear
+      .map { _ in Reactor.Action.viewWillAppear }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    rx.viewDidAppear
+      .map { _ in Reactor.Action.viewDidAppear }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
     settingButtonItem.rx.tap
@@ -94,10 +90,9 @@ private extension MainContainerViewController {
       .disposed(by: disposeBag)
   }
   
-  func bindState(_ reactor: Reactor) {
+  func bindTapState(_ reactor: Reactor) {
     reactor.state.map { $0.isSettingButtonTapped }
-      .distinctUntilChanged()
-      .filter { $0 }
+      .distinctUntilChangedTrue()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let controller = StoryboardScene.Main.settingTableViewController.instantiate()
@@ -106,8 +101,7 @@ private extension MainContainerViewController {
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isSearchButtonTapped }
-      .distinctUntilChanged()
-      .filter { $0 }
+      .distinctUntilChangedTrue()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let controller = StoryboardScene.Main.searchViewController.instantiate()
@@ -122,8 +116,7 @@ private extension MainContainerViewController {
       })
       .disposed(by: disposeBag)
     reactor.state.map { $0.isBookmarkButtonTapped }
-      .distinctUntilChanged()
-      .filter { $0 }
+      .distinctUntilChangedTrue()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         let controller = StoryboardScene.Main.bookmarkViewController.instantiate()
@@ -131,49 +124,32 @@ private extension MainContainerViewController {
         controller.push(at: self)
       })
       .disposed(by: disposeBag)
+  }
+  
+  func bindRestState(_ reactor: Reactor) {
+    reactor.state.map { $0.isViewReloaded }
+      .distinctUntilChangedTrue()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.reloadSubviews(initial: false)
+      })
+      .disposed(by: disposeBag)
     reactor.state.map { $0.isUserNotificationRegistered }
       .distinctUntilChanged()
       .filterNil()
       .filter { !$0 }
       .subscribe(onNext: { [weak self] _ in
-        let alert = UIAlertController
-          .alert(title: "", message: "알림을 받을 수 없습니다.\n설정에서 알림 권한을 설정할 수 있습니다.")
-          .action(title: "확인")
-        self?.present(alert, animated: true, completion: nil)
-      })
-      .disposed(by: disposeBag)
-    reactor.state.map { $0.isViewReloaded }
-      .distinctUntilChanged()
-      .filter { $0 }
-      .subscribe(onNext: { [weak self] _ in
-        guard let self = self else { return }
-        let university = Global.shared.universityModel
-        university
-          .map { $0.name }
-          .subscribe(onNext: { [weak self] name in
-            let barButtonItem = self?.makeUniversityBarButtonItem(self?.makeUniversityLabel(name))
-            self?.navigationItem.setLeftBarButton(barButtonItem, animated: false)
-          })
-          .disposed(by: self.disposeBag)
-        university
-          .subscribe(onNext: { [weak self] university in
-            guard let self = self else { return }
-            self.contentViewControllers.removeAll()
-            university.categories.forEach { category in
-              let contentViewController = MainContentTableViewController().then {
-                $0.reactor
-                  = MainContentTableViewReactor(university: university, category: category)
-              }
-              self.contentViewControllers.append(contentViewController)
-            }
-            self.reloadPagerTabStripView()
-          })
-          .disposed(by: self.disposeBag)
+        self?.presentNotificationDeniedAlert()
       })
       .disposed(by: disposeBag)
   }
+}
+
+// MARK: - Private Method
+
+private extension MainContainerViewController {
   
-  func bindUI() {
+  func reloadSubviews(initial isInitial: Bool) {
     let university = Global.shared.universityModel
     university
       .map { $0.name }
@@ -193,14 +169,19 @@ private extension MainContainerViewController {
           }
           self.contentViewControllers.append(contentViewController)
         }
+        if !isInitial {
+          self.reloadPagerTabStripView()
+        }
       })
       .disposed(by: disposeBag)
   }
-}
-
-// MARK: - Private Method
-
-private extension MainContainerViewController {
+  
+  func presentNotificationDeniedAlert() {
+    UIAlertController
+      .alert(title: "", message: "알림을 받을 수 없습니다.\n설정에서 알림 권한을 설정할 수 있습니다.")
+      .action(title: "확인")
+      .present(to: self)
+  }
   
   func setupButtonBar() {
     settings.style.selectedBarHeight = 5

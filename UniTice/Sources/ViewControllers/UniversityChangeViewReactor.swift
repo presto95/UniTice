@@ -16,35 +16,34 @@ final class UniversityChangeViewReactor: Reactor {
   
   enum Action {
     
-    /// 대학교 변경.
+    /// The action that the user changes the university.
     case changeUniversity(University)
     
-    /// 확인.
+    /// The action that the user taps the confirm button.
     case confirm
   }
   
   enum Mutation {
     
-    /// 대학교 설정.
+    /// The mutation to set the university.
     case setUniversity(University)
     
-    /// 확인.
+    /// The mutation to set the confirmation status.
     case confirm
   }
   
   struct State {
     
-    /// 대학교.
+    /// The selected university.
     var university: University?
     
-    /// 확인 버튼이 선택된 상태인가.
-    var isConfirmButtonSelected: Bool = false
+    /// The boolean value indicating whether the confirm button is tapped.
+    var isConfirmButtonTapped: Bool = false
   }
   
-  /// 초기 상태.
   let initialState: State = .init()
   
-  /// 데이터 보존 서비스.
+  /// The realm service.
   let realmService: RealmServiceType
   
   init(realmService: RealmServiceType = RealmService.shared) {
@@ -69,7 +68,7 @@ final class UniversityChangeViewReactor: Reactor {
     case let .setUniversity(university):
       state.university = university
     case .confirm:
-      state.isConfirmButtonSelected = true
+      state.isConfirmButtonTapped = true
     }
     return state
   }

@@ -66,7 +66,7 @@ private extension FooterLoadingView {
       .distinctUntilChanged()
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] isLoading in
-        self?.reloadSubviews(isLoading: isLoading)
+        self?.reloadSubviews(loading: isLoading)
       })
       .disposed(by: disposeBag)
   }
@@ -79,14 +79,14 @@ private extension FooterLoadingView {
   /// Reloads subviews by `loading` status.
   ///
   /// - Parameter loading: The boolean value indicating whether the view is in loading.
-  func reloadSubviews(isLoading loading: Bool) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = loading
-    if loading {
+  func reloadSubviews(loading isLoading: Bool) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = isLoading
+    if isLoading {
       activityIndicator.startAnimating()
     } else {
       activityIndicator.stopAnimating()
     }
-    activityIndicator.isHidden = !loading
-    textLabel.isHidden = loading
+    activityIndicator.isHidden = !isLoading
+    textLabel.isHidden = isLoading
   }
 }

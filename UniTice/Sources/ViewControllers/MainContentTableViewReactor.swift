@@ -109,6 +109,7 @@ final class MainContentTableViewReactor: Reactor {
   /// The realm service.
   let realmService: RealmServiceType
   
+  /// The user defaults service.
   let userDefaultsService: UserDefaultsServiceType
   
   init(realmService: RealmServiceType = RealmService.shared,

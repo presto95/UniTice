@@ -38,8 +38,10 @@ final class KeywordCell: UITableViewCell, StoryboardView {
   }
   
   private func configure() {
-    keywordLabel.layer.cornerRadius = keywordLabel.bounds.height / 2
-    keywordLabel.layer.borderColor = UIColor.main.cgColor
-    keywordLabel.layer.borderWidth = 1
+    keywordLabel.layer.do {
+      $0.cornerRadius = $0.bounds.height / 2
+      $0.borderColor = UIColor.main.cgColor
+      $0.borderWidth = 1
+    }
   }
 }

@@ -15,6 +15,7 @@ target 'UniTice' do
   pod 'RxGesture'
   pod 'RxOptional'
   pod 'RxSwift'
+  pod 'RxViewController'
   pod 'SnapKit'
   pod 'Then'
   pod 'XLPagerTabStrip'

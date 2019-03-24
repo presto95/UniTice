@@ -20,3 +20,11 @@ extension Reactive where Base: KeywordRegisterHeaderView {
     return ControlEvent(events: source)
   }
 }
+
+extension Reactive where Base: MainNoticeHeaderView {
+  
+  var isUpperPostFolded: ControlEvent<Bool> {
+    let source = base.reactor!.state.map { $0.isUpperPostFolded }
+    return ControlEvent(events: source)
+  }
+}

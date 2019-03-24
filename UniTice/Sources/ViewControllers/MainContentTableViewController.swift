@@ -32,7 +32,7 @@ final class MainContentTableViewController: UITableViewController,
   
   private var dataSource: DataSource!
   
-  private let headerView
+  private let headerView: MainNoticeHeaderView!
     = (UIView.instantiate(fromXib: MainNoticeHeaderView.name) as? MainNoticeHeaderView)?.then {
       $0.reactor = MainNoticeHeaderViewReactor()
   }
@@ -57,7 +57,7 @@ final class MainContentTableViewController: UITableViewController,
   }
   
   func bind(reactor: Reactor) {
-    bindDataSource()
+    bindDataSource(reactor)
     bindUI()
     bindAction(reactor)
     bindState(reactor)
@@ -101,9 +101,18 @@ private extension MainContentTableViewController {
       .map { Reactor.Action.refresh }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
-    headerView?.reactor?.state.map { $0.isUpperPostFolded }
+    headerView.rx.isUpperPostFolded
       .distinctUntilChanged()
       .map { Reactor.Action.toggleFolding($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    tableView.rx.itemSelected
+      .map { [weak self, weak reactor] indexPath -> Post? in
+        guard let self = self, let reactor = reactor else { return nil }
+        return self.makeBookmark(at: indexPath, state: reactor.currentState)
+      }
+      .filterNil()
+      .map { Reactor.Action.interactWithCell($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -157,7 +166,7 @@ private extension MainContentTableViewController {
 
 private extension MainContentTableViewController {
   
-  func bindDataSource() {
+  func bindDataSource(_ reactor: Reactor) {
     dataSource = .init(configureCell: { _, tableView, indexPath, sectionData in
       let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
       if case let postCell as PostCell = cell {
@@ -168,32 +177,46 @@ private extension MainContentTableViewController {
       return cell
     })
     tableView.rx.itemSelected
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [weak self, weak reactor] indexPath in
-        guard let self = self, let reactor = reactor else { return }
-        let currentState = reactor.currentState
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        let post = indexPath.section == 0
-          ? currentState.upperPosts[indexPath.item]
-          : currentState.standardPosts[indexPath.item]
-        let university = currentState.university
-        let category = currentState.category
-        if let fullLink = university.postURL(inCategory: category, uri: post.link) {
-          let fullLinkString = fullLink.absoluteString
-          let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
-          Observable.just(Void()).map { Reactor.Action.interactWithCell(bookmark) }
-            .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
-          self.makeSafariViewController(url: fullLink).present(to: self)
-        }
+      .map { [weak self, weak reactor] indexPath -> Post? in
+        guard let self = self, let reactor = reactor else { return nil }
+        return self.makeBookmark(at: indexPath, state: reactor.currentState)
+      }
+      .filterNil()
+      .map { $0.link }
+      .map { URL(string: $0) }
+      .filterNil()
+      .subscribe(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.makeSafariViewController(url: $0).present(to: self)
       })
       .disposed(by: disposeBag)
   }
   
   func bindUI() {
+    tableView.rx.itemSelected
+      .subscribe(onNext: { [weak self] indexPath in
+        self?.tableView.deselectRow(at: indexPath, animated: true)
+      })
+      .disposed(by: disposeBag)
     tableView.rx.setDelegate(self).disposed(by: disposeBag)
   }
+  
+  func makeBookmark(at indexPath: IndexPath, state: Reactor.State) -> Post? {
+    let post = indexPath.section == 0
+      ? state.upperPosts[indexPath.item]
+      : state.standardPosts[indexPath.item]
+    let university = state.university
+    let category = state.category
+    if let fullLink = university.postURL(inCategory: category, uri: post.link) {
+      let fullLinkString = fullLink.absoluteString
+      let bookmark = Post(number: 0, title: post.title, date: post.date, link: fullLinkString)
+      return bookmark
+    }
+    return nil
+  }
 }
+
+// MARK: - Configuring UITableView
 
 extension MainContentTableViewController {
   
@@ -222,6 +245,8 @@ extension MainContentTableViewController {
     return section == 0 ? 5 : .leastNonzeroMagnitude
   }
 }
+
+// MARK: - Conforming UIViewControllerPreviewingDelegate
 
 extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
   
@@ -253,6 +278,8 @@ extension MainContentTableViewController: UIViewControllerPreviewingDelegate {
     present(viewControllerToCommit, animated: true, completion: nil)
   }
 }
+
+// MARK: - Conforming IndicatorInfoProvider
 
 extension MainContentTableViewController: IndicatorInfoProvider {
   

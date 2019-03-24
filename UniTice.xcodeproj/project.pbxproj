@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02B72C9E7025E8C50964F3944A8FE1D2 /* 부산대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = B905278D345658FD379B8E62C247E9AF /* 부산대학교.swift */; };
+		049D90E78E0831A021B938DAB36DB1F5 /* ObservableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0BD0051BE45803BC2502A71876272 /* ObservableType.swift */; };
 		061A5744EDA1154C6714246D95F2B318 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F22B3AFF9ED4D4CD6E9FE476CA2D6A /* UserNotificationService.swift */; };
 		066E20DE0157BF04F807014DEF69CB6D /* KC대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DBAA78F5C624D970DE7F0F72C9A96B /* KC대학교.swift */; };
 		07773EA7139674A4FFF8599E88F02292 /* 명지대학교.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4900937637E7A5FE622D1F3BFA71FE48 /* 명지대학교.swift */; };
@@ -178,7 +179,7 @@
 		43640A4AE0F950EFB4FB135EC24DF808 /* 한양대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "한양대학교.swift"; sourceTree = "<group>"; };
 		438D5B16152A4EF1E67895675E05F393 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		446DD24BDE09F622FD3B7B3E0E84CD9F /* 충북대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "충북대학교.swift"; sourceTree = "<group>"; };
-		45A317AD37A469D9A7C80F0CF6817211 /* Pods-UniTice.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniTice/Pods-UniTice.release.xcconfig"; sourceTree = "<group>"; };
+		45A317AD37A469D9A7C80F0CF6817211 /* Pods-UniTice.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.release.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.release.xcconfig"; sourceTree = "<group>"; };
 		463C666BC7581143AD615A933F3D767B /* 덕성여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "덕성여자대학교.swift"; sourceTree = "<group>"; };
 		48022216EC862040E2D05EC737E3C045 /* 성균관대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "성균관대학교.swift"; sourceTree = "<group>"; };
 		4900937637E7A5FE622D1F3BFA71FE48 /* 명지대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "명지대학교.swift"; sourceTree = "<group>"; };
@@ -198,6 +199,7 @@
 		65F03DA342EB30A955E63E1102B20907 /* UTButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTButton.swift; sourceTree = "<group>"; };
 		6653A045BBC8A67C965AB62C5A7A446B /* MainNoticeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNoticeHeaderView.xib; sourceTree = "<group>"; };
 		674CE50573A686198F94E71C5F439DF8 /* KeywordRegisterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordRegisterSection.swift; sourceTree = "<group>"; };
+		6FC0BD0051BE45803BC2502A71876272 /* ObservableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableType.swift; sourceTree = "<group>"; };
 		72F4A4BE8EB4DEC59F1195A57BB1991E /* 대진대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "대진대학교.swift"; sourceTree = "<group>"; };
 		734EB6245AFA2C5BD9514859DFAE6AB4 /* FooterLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLoadingView.swift; sourceTree = "<group>"; };
 		76E689ECAF5504FAA5C8533CEDCEDF63 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -258,7 +260,7 @@
 		D78A3D01ADA47579DEC20237BAD55856 /* MainNoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderView.swift; sourceTree = "<group>"; };
 		D8BACE21D003D89CDFBEF5EDAD813503 /* Start.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
 		D8DDD56918ADF1A97B89237A09646193 /* 서울여자대학교.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "서울여자대학교.swift"; sourceTree = "<group>"; };
-		DB0E30EBB9B143F442C80ABAA434FC0F /* Pods-UniTice.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniTice/Pods-UniTice.debug.xcconfig"; sourceTree = "<group>"; };
+		DB0E30EBB9B143F442C80ABAA434FC0F /* Pods-UniTice.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-UniTice.debug.xcconfig"; path = "Target Support Files/Pods-UniTice/Pods-UniTice.debug.xcconfig"; sourceTree = "<group>"; };
 		DDF31896B63593E7BEEB70AE0620FFBE /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		E6115C8E6BD08859FF7BDE967AFE25CD /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		E63BB5D4B6354374377D4E2C2F8E107B /* MainNoticeHeaderViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeHeaderViewReactor.swift; sourceTree = "<group>"; };
@@ -592,6 +594,7 @@
 			children = (
 				0EC42AB8FDA43BEDAEE0A997072F19B7 /* NSObject+.swift */,
 				42910599E355EFFDFEF389D3C496F571 /* Notification.Name+.swift */,
+				6FC0BD0051BE45803BC2502A71876272 /* ObservableType.swift */,
 				1FF8598554929018A88D5DCC0E01C60A /* Reactive+.swift */,
 				0E8129A49E2DCB0EFB051ED85C5CC65C /* String+.swift */,
 				9CFCC3FED416CCF0725E210DFD542A7A /* String.Encoding+.swift */,
@@ -721,6 +724,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		60854F566723294CC23BE2EA13C1C314 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		31FB0282BAA0F05E76CFE4A3C67C697F /* [Carte] Post Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -735,20 +752,6 @@
 			shellPath = /bin/sh;
 			shellScript = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post";
 			showEnvVarsInLog = 0;
-		};
-		60854F566723294CC23BE2EA13C1C314 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		855D54511307EC1BCB8547BA8EF9EB99 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -771,6 +774,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxViewController/RxViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
@@ -792,6 +796,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
@@ -875,6 +880,7 @@
 				E8EA9DF3F42EE3B08C44B45215277F99 /* MainNoticeHeaderViewReactor.swift in Sources */,
 				6FF40371B294852799E8F4F4BDE37101 /* NSObject+.swift in Sources */,
 				DC60F4A9C40419E978881F5A0EB525A5 /* Notification.Name+.swift in Sources */,
+				049D90E78E0831A021B938DAB36DB1F5 /* ObservableType.swift in Sources */,
 				659BE41A9537BC60950E998B992EE6FD /* Post.swift in Sources */,
 				17896B715811B5132A703FC7F2BAACB8 /* PostCell.swift in Sources */,
 				DC648C4FB6B24F40AC0DC73C6CA39F4D /* PostCellReactor.swift in Sources */,
@@ -996,7 +1002,7 @@
 /* Begin XCBuildConfiguration section */
 		012C0641D932885E4D3D5154D25A7B60 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8031F8FEB72DC0BBEFB4E2FA5CF1545D /* Pods-UniTice.release.xcconfig */;
+			baseConfigurationReference = 45A317AD37A469D9A7C80F0CF6817211 /* Pods-UniTice.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UniTice/UniTice.entitlements;
@@ -1016,7 +1022,7 @@
 		};
 		7FAB48264649B411BA341B3905391946 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 592A7726EC1AC2B1A1E816664F954B1D /* Pods-UniTice.debug.xcconfig */;
+			baseConfigurationReference = DB0E30EBB9B143F442C80ABAA434FC0F /* Pods-UniTice.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UniTice/UniTice.entitlements;
