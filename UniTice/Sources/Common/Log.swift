@@ -50,7 +50,7 @@ struct Log {
     logger(level: .error, message: message, file: file, function: function, line: line)
   }
   
-  func logger(level: LogLevel, message: Any, file: String, function: String, line: Int) {
+  static func logger(level: LogLevel, message: Any, file: String, function: String, line: Int) {
     let fileName = file.split(separator: "/").last ?? ""
     let functionName = function.split(separator: "(").first ?? ""
     print("\(level.rawValue) [\(fileName)] \(functionName)(\(line)): \(message)")
