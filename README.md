@@ -36,6 +36,10 @@
 - Then
 - XLPagerTabStrip
 
+## 대학교 파싱 모델 정의 방법
+
+[Wiki](https://github.com/presto95/UniTice/wiki/%EB%8C%80%ED%95%99%EA%B5%90-%ED%8C%8C%EC%8B%B1-%EB%AA%A8%EB%8D%B8-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0)를 참고해 주세요.
+
 ## 지원 대학교
 
 **A**
