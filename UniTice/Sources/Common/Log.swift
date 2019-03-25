@@ -8,24 +8,52 @@
 
 import UIKit
 
-/// 일반 로그 찍을 때 사용하기.
-func debugLog(_ message: Any,
-              file: String = #file,
-              function: String = #function,
-              line: Int = #line) {
-  #if DEBUG
-  let fileName = file.split(separator: "/").last ?? ""
-  let functionName = function.split(separator: "(").first ?? ""
-  print("👻 [\(fileName)] \(functionName)(\(line)): \(message)")
-  #endif
+enum LogLevel: String {
+  case debug = "👻"
+  case info = "💡"
+  case warning = "🚨"
+  case error = "❌"
 }
 
-/// 에러 로그 찍을 때 사용하기.
-func errorLog(_ message: Any,
-              file: String = #file,
-              function: String = #function,
-              line: Int = #line) {
-  let fileName = file.split(separator: "/").last ?? ""
-  let functionName = function.split(separator: "(").first ?? ""
-  print("❌ [\(fileName)] \(functionName)(\(line)): \(message)")
+struct Log {
+  /// 일반 로그 찍을 때 사용하기.
+  static func debug(_ message: Any,
+                    file: String = #file,
+                    function: String = #function,
+                    line: Int = #line) {
+    #if DEBUG
+    logger(level: .debug, message: message, file: file, function: function, line: line)
+    #endif
+  }
+  
+  /// info 로그 찍을 때 사용하기.
+  static func info(_ message: Any,
+                   file: String = #file,
+                   function: String = #function,
+                   line: Int = #line) {
+    logger(level: .info, message: message, file: file, function: function, line: line)
+  }
+  
+  /// warning 로그 찍을 때 사용하기.
+  static func warning(_ message: Any,
+                      file: String = #file,
+                      function: String = #function,
+                      line: Int = #line) {
+    logger(level: .warning, message: message, file: file, function: function, line: line)
+  }
+  
+  /// 에러 로그 찍을 때 사용하기.
+  static func error(_ message: Any,
+                    file: String = #file,
+                    function: String = #function,
+                    line: Int = #line) {
+    logger(level: .error, message: message, file: file, function: function, line: line)
+  }
+  
+  func logger(level: LogLevel, message: Any, file: String, function: String, line: Int) {
+    let fileName = file.split(separator: "/").last ?? ""
+    let functionName = function.split(separator: "(").first ?? ""
+    print("\(level.rawValue) [\(fileName)] \(functionName)(\(line)): \(message)")
+  }
 }
+
